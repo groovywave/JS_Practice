@@ -2,7 +2,6 @@
 { 
   const li = document.createElement('li');
   li.textContent = "これです。";
-  // const ul = Document.getElementById('target');
-  const ul = document.getElementById("target");
+  const ul = document.querySelector('ul');
   ul.appendChild(li);
 }
