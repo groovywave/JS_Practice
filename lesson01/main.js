@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 { 
-  const li = document.createElement('li');
+  const li = document.createElement("li");
   li.textContent = "これです。";
-  const ul = document.querySelector('ul');
+  const ul = document.getElementById("target");
   ul.appendChild(li);
 }
