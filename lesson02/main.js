@@ -12,6 +12,14 @@ const img = document.createElement("img");
 img.src = "bookmark.png";
 img.alt = "ブックマーク";
 
-a.appendChild(img);
-li.appendChild(a);
-ul.appendChild(li);
+// a.appendChild(img);
+// a.insertBefore(img,a.firstChild);
+// li.appendChild(a);
+// ul.appendChild(li);
+
+// refactoring
+ul.appendChild(li).appendChild(a).insertBefore(img,a.firstChild);
+
+// advanced
+// ul.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
+// https://itosae.com/js_lesson01/#toc7
