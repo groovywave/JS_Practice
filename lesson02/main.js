@@ -12,6 +12,6 @@ a.textContent = "これです";
 img.src = "bookmark.png";
 img.alt = "ブックマーク";
 
-ul.appendChild(li).appendChild(a).insertBefore(img,a.firstChild);
+ul.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
 
 
