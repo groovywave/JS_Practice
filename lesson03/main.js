@@ -1,15 +1,19 @@
 const ul = document.getElementById("js-target");
-const imgSrcs = ["/img/bookmark.png","/img/messege.png"];
+const fragment = document.createDocumentFragment();
+const elements = [
+  { href: "a1.html", src:"/img/bookmark.png",text: "a1"},
+  { href: "a2.html", src:"/img/message.png",text: "a2"}
+];
 
-for (let i=0; i < imgSrcs.length; i++){
+elements.forEach(function(e)){
   const li = document.createElement("li");
   const a = document.createElement("a");
   const img = document.createElement("img");
 
-  a.href = `a${i}.html`;
-  a.textContent = `a${i}`;
-  img.src = imgSrcs[i];
+  a.href = e.href;
+  a.textContent = e.text;
+  img.src = e.src;
 
-  ul.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
+  fragment.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
 }
-
+ul.appendChild(fragment);
