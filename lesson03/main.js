@@ -1,20 +1,15 @@
 const ul = document.getElementById("js-target");
+const imgSrcs = ["/img/bookmark.png","/img/messege.png"];
 
-const li = [];
-const a = [];
-const img = [];
+for (let i=0; i < imgSrcs.length; i++){
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  const img = document.createElement("img");
 
-for (let i=0; i < 2; i++){
-  li[i] = document.createElement("li");
-  a[i] = document.createElement("a");
-  img[i] = document.createElement("img");
+  a.href = `a${i}.html`;
+  a.textContent = `a${i}`;
+  img.src = imgSrcs[i];
 
-  a[i].href = `a${i}.html`;
-  a[i].textContent = `a${i}`;
-
-  ul.appendChild(li[i]).appendChild(a[i]).insertAdjacentElement("beforebegin",img[i]);
+  ul.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
 }
-
-img[0].src = "/img/bookmark.png";
-img[1].src = "/img/messege.png";
 
