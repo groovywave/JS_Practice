@@ -1,10 +1,7 @@
 const ul = document.getElementById("js-target");
+const imgSrcs = ["/img/bookmark.png","/img/messege.png"];
 
-const li = [];
-const a = [];
-const img = [];
-
-for (let i=0; i < 2; i++){
+for (let i=0; i < imgSrcs.length; i++){
   li[i] = document.createElement("li");
   a[i] = document.createElement("a");
   img[i] = document.createElement("img");
