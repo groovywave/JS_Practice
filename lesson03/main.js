@@ -5,7 +5,7 @@ const elements = [
   { href: "a2.html", src:"/img/message.png",text: "a2"}
 ];
 
-elements.forEach(function(e)){
+elements.forEach(function(e){
   const li = document.createElement("li");
   const a = document.createElement("a");
   const img = document.createElement("img");
@@ -15,5 +15,5 @@ elements.forEach(function(e)){
   img.src = e.src;
 
   fragment.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
-}
+});
 ul.appendChild(fragment);
