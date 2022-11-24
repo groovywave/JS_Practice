@@ -6,8 +6,8 @@ for (let i=0; i < imgSrcs.length; i++){
   const a = document.createElement("a");
   const img = document.createElement("img");
 
-  a.href = `a${i}.html`;
-  a.textContent = `a${i}`;
+  a.href = `a${i+1}.html`;
+  a.textContent = `a${i+1}`;
   img.src = imgSrcs[i];
 
   ul.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
