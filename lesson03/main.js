@@ -10,7 +10,7 @@ for (let i=0; i < imgSrcs.length; i++){
   a.textContent = `a${i+1}`;
   img.src = imgSrcs[i];
 
-  ul.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
+  ul.appendChild(li).appendChild(a).insertAdjacentElement("afterbegin",img);
 }
 
 
