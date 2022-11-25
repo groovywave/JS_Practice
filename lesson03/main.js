@@ -14,6 +14,6 @@ elements.forEach(function(e){
   a.textContent = e.text;
   img.src = e.src;
 
-  fragment.appendChild(li).appendChild(a).insertAdjacentElement("beforebegin",img);
+  fragment.appendChild(li).appendChild(a).insertAdjacentElement("afterbegin",img);
 });
 ul.appendChild(fragment);
