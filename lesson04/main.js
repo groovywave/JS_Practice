@@ -15,4 +15,3 @@ elements.forEach(function(element){
   fragment.appendChild(li).appendChild(a).insertAdjacentElement("afterbegin",img); 
 }); 
 ul.appendChild(fragment);
-
