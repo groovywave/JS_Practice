@@ -8,7 +8,7 @@ new Promise((resolve)=> {
 }).then((elements)=> {
   const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
-  elements.forEach((element)=> { 
+  for (const element of elements) { 
     const li = document.createElement("li"); 
     const a = document.createElement("a"); 
     const img = document.createElement("img"); 
@@ -17,6 +17,6 @@ new Promise((resolve)=> {
     img.src = element.img; 
     img.alt = element.alt; 
     fragment.appendChild(li).appendChild(a).insertAdjacentElement("afterbegin",img); 
-  }); 
+  }; 
   ul.appendChild(fragment);
 });
