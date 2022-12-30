@@ -3,11 +3,9 @@ const elements = [
   {to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
 ]; 
 
-let promise =  new Promise((ok)=> {
-  ok(elements);
-});
-
-promise.then((elements)=> {
+new Promise((resolve)=> {
+  resolve(elements);
+}).then((elements)=> {
   const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
   elements.forEach(function(element){ 
