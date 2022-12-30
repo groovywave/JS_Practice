@@ -8,7 +8,7 @@ new Promise((resolve)=> {
 }).then((elements)=> {
   const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
-  elements.forEach(function(element){ 
+  elements.forEach((element)=> { 
     const li = document.createElement("li"); 
     const a = document.createElement("a"); 
     const img = document.createElement("img"); 
