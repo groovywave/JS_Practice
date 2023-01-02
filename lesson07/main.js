@@ -17,7 +17,10 @@ new Promise((resolve)=> {
     a.textContent = element.text; 
     img.src = element.img; 
     img.alt = element.alt; 
-    fragment.appendChild(li).appendChild(a).insertAdjacentElement("afterbegin",img); 
+    fragment
+      .appendChild(li)
+      .appendChild(a)
+      .insertAdjacentElement("afterbegin",img); 
   }; 
   ul.appendChild(fragment);
 });
