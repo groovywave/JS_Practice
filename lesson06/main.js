@@ -6,10 +6,10 @@ new Promise((resolve)=> {
   setTimeout(() => {
     resolve(elements);
   }, 3000);
-}).then((elements)=> {
+}).then((resolvedElements)=> {
   const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
-  for (const element of elements) { 
+  for (const element of resolvedElements) { 
     const li = document.createElement("li"); 
     const a = document.createElement("a"); 
     const img = document.createElement("img"); 
