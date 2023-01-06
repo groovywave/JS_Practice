@@ -1,10 +1,10 @@
 
 function renderCircle(){
   const loadingCircle = document.createElement("img"); 
+  const ul = document.getElementById("js-ul"); 
   loadingCircle.src = "img/loading-circle.gif";
   loadingCircle.alt = "ローディング画像";
   loadingCircle.id = "loading-circle";
-  const ul = document.getElementById("js-ul"); 
   ul.appendChild(loadingCircle);
 }  
 
