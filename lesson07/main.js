@@ -1,14 +1,19 @@
-const ul = document.getElementById("js-ul"); 
-const loadingCircle = document.createElement("img"); 
 
 function renderCircle(){
+  const loadingCircle = document.createElement("img"); 
   loadingCircle.src = "img/loading-circle.gif";
-  loadingCircle.alt = "loading-circle.gif";
+  loadingCircle.alt = "ローディング画像";
+  loadingCircle.id = "loading-circle";
+  const ul = document.getElementById("js-ul"); 
   ul.appendChild(loadingCircle);
 }  
 
-function renderContact(resolvedElements){
-  ul.removeChild(loadingCircle);
+function removeCircle(){
+  document.getElementById("loading-circle").remove();
+}
+
+function renderIcons(resolvedElements){
+  const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
   for (const element of resolvedElements) { 
     const li = document.createElement("li"); 
@@ -26,7 +31,7 @@ function renderContact(resolvedElements){
   ul.appendChild(fragment);
 }
 
-new Promise((resolve)=> {
+const getElements = new Promise((resolve)=> {
   renderCircle();
   const elements = [ 
     {to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
@@ -35,6 +40,9 @@ new Promise((resolve)=> {
   setTimeout(() => {
     resolve(elements);
   }, 3000);
-}).then((resolvedElements)=> {
-  renderContact(resolvedElements);
+})
+
+getElements.then((resolvedElements)=> {
+  removeCircle();
+  renderIcons(resolvedElements);
 });
