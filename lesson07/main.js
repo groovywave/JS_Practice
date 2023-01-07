@@ -12,7 +12,7 @@ function removeCircle(){
   document.getElementById("loading-circle").remove();
 }
 
-function renderIcons(resolvedMenus){
+function renderMenus(resolvedMenus){
   const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
   for (const menu of resolvedMenus) { 
@@ -44,5 +44,5 @@ const getMenus = new Promise((resolve)=> {
 
 getMenus.then((resolvedMenus)=> {
   removeCircle();
-  renderIcons(resolvedMenus);
+  renderMenus(resolvedMenus);
 });
