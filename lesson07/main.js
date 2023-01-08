@@ -12,10 +12,10 @@ function removeCircle(){
   document.getElementById("loading-circle").remove();
 }
 
-function renderMenus(resolvedMenus){
+function renderMenus(menus){
   const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
-  for (const menu of resolvedMenus) { 
+  for (const menu of menus) { 
     const li = document.createElement("li"); 
     const a = document.createElement("a"); 
     const img = document.createElement("img"); 
@@ -42,7 +42,7 @@ const getMenus = new Promise((resolve)=> {
   }, 3000);
 })
 
-getMenus.then((resolvedMenus)=> {
+getMenus.then((menus)=> {
   removeCircle();
-  renderMenus(resolvedMenus);
+  renderMenus(menus);
 });
