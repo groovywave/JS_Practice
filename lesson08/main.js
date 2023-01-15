@@ -38,7 +38,7 @@ const getMenus = new Promise((resolve, reject)=> {
     {to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
   ]; 
   setTimeout(() => {
-    reject(new Error("error"));
+    reject("error");
   }, 3000);
 })
 
@@ -48,6 +48,6 @@ getMenus.then(
   	renderMenus(menus);
 	},
 	(error) => {
-		console.error("error", error.message);
+		console.error("error", error);
 	}
 );
