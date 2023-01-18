@@ -48,6 +48,6 @@ getMenus.then(
   	renderMenus(menus);
 	},
 	(error) => {
-		console.error("error", error);
+		console.error(error);
 	}
 );
