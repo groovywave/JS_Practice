@@ -31,23 +31,25 @@ function renderMenus(menus){
   ul.appendChild(fragment);
 }
 
-const getMenus = new Promise((resolve, reject)=> {
+function getMenus() {
   renderCircle();
   const menus = [ 
     {to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
     {to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
   ]; 
   setTimeout(() => {
-    reject("error");
+		console.log(menus);
+    return menus;
   }, 3000);
-})
+}
 
-getMenus.then(
-	(menus)=> {
-  	removeCircle();
-  	renderMenus(menus);
-	},
-	(error) => {
-		console.error(error);
-	}
-);
+async function men() {
+	 await getMenus();
+	 removeCircle();
+}
+	// await renderMenus(menus);
+let val = men();
+console.log(val);
+val.then((val) =>{
+	renderMenus(val);
+})
