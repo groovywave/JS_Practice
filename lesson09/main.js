@@ -1,7 +1,7 @@
+const ul = document.getElementById("js-ul"); 
 
 function renderCircle(){
-  const loadingCircle = document.createElement("img"); 
-  const ul = document.getElementById("js-ul"); 
+	const loadingCircle = document.createElement("img"); 
   loadingCircle.src = "img/loading-circle.gif";
   loadingCircle.alt = "ローディング画像";
   loadingCircle.id = "loading-circle";
@@ -13,7 +13,6 @@ function removeCircle(){
 }
 
 function renderMenus(menus){
-  const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
   for (const menu of menus) { 
     const li = document.createElement("li"); 
