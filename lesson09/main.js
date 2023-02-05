@@ -30,19 +30,21 @@ function renderMenus(menus){
   ul.appendChild(fragment);
 }
 
-const getMenus = new Promise((resolve)=> {
-	renderCircle();
-	const menus = [ 
-		{to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
-    {to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
-  ]; 
-  setTimeout(() => {
-		resolve(menus);
-  }, 3000);
-})
-
+function getMenus(){
+	return new Promise((resolve)=> {
+		renderCircle();
+		const menus = [ 
+			{to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
+			{to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
+		]; 
+		setTimeout(() => {
+			resolve(menus);
+		}, 3000);
+	})
+}
+	
 async function showMenus() {
-	const menus = await getMenus;
+	const menus = await getMenus();
 	removeCircle();
 	renderMenus(menus);
 }
