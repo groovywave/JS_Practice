@@ -1,7 +1,7 @@
+const ul = document.getElementById("js-ul"); 
 
 function renderCircle(){
-  const loadingCircle = document.createElement("img"); 
-  const ul = document.getElementById("js-ul"); 
+	const loadingCircle = document.createElement("img"); 
   loadingCircle.src = "img/loading-circle.gif";
   loadingCircle.alt = "ローディング画像";
   loadingCircle.id = "loading-circle";
@@ -13,7 +13,6 @@ function removeCircle(){
 }
 
 function renderMenus(menus){
-  const ul = document.getElementById("js-ul"); 
   const fragment = document.createDocumentFragment(); 
   for (const menu of menus) { 
     const li = document.createElement("li"); 
@@ -31,25 +30,23 @@ function renderMenus(menus){
   ul.appendChild(fragment);
 }
 
-function getMenus() {
-  renderCircle();
-  const menus = [ 
-    {to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
-    {to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
-  ]; 
-  setTimeout(() => {
-		console.log(menus);
-    return menus;
-  }, 3000);
+function getMenus(){
+	return new Promise((resolve)=> {
+		renderCircle();
+		const menus = [ 
+			{to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
+			{to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
+		]; 
+		setTimeout(() => {
+			resolve(menus);
+		}, 3000);
+	})
+}
+	
+async function showMenus() {
+	const menus = await getMenus();
+	removeCircle();
+	renderMenus(menus);
 }
 
-async function men() {
-	 await getMenus();
-	 removeCircle();
-}
-	// await renderMenus(menus);
-let val = men();
-console.log(val);
-val.then((val) =>{
-	renderMenus(val);
-})
+showMenus();
