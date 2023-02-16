@@ -43,16 +43,16 @@ function getMenus(){
 	})
 }
 	
-async function showMenus() {
+async function tryToGetMenus() {
 	try{
-		const menus = await getMenus();
-		removeCircle();
-		renderMenus(menus);
+		return await getMenus();
 	}catch(error){
 		console.error(error);
 	}finally{
-		console.log("finished");
+		removeCircle();
 	}
 }
 
-showMenus();
+tryToGetMenus().then((menus)=>{
+	renderMenus(menus);
+});
