@@ -37,12 +37,12 @@ function getMenus(){
 			{to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
 			{to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
 		]; 
-			setTimeout(() => {
-				resolve(menus);
-			}, 3000);
+		setTimeout(() => {
+			resolve(menus);
+		}, 3000);
 	})
 }
-	
+
 async function tryToGetMenus() {
 	try{
 		return await getMenus();
@@ -53,6 +53,21 @@ async function tryToGetMenus() {
 	}
 }
 
-tryToGetMenus().then((menus)=>{
-	renderMenus(menus);
+(async ()  => {
+	try{
+		const menus = await tryToGetMenus();
+		renderMenus(menus);
+	}catch{
+		ul.textContent = "Something went wrong";
+	}
+})();
+
+/*あえてthenメソッドを使うとしたら以下もありでしょうか？
+tryToGetMenus()
+.then((menus)=>{
+		renderMenus(menus);
+	})
+.catch(()=>{
+	ul.textContent = "Something went wrong";
 });
+*/		
