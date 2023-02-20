@@ -44,30 +44,15 @@ function getMenus(){
 }
 
 async function tryToGetMenus() {
+	let menus;
 	try{
-		return await getMenus();
+		menus =  await getMenus();
 	}catch(error){
 		console.error(error);
 	}finally{
 		removeCircle();
 	}
+	renderMenus(menus);
 }
 
-(async ()  => {
-	try{
-		const menus = await tryToGetMenus();
-		renderMenus(menus);
-	}catch{
-		ul.textContent = "Something went wrong";
-	}
-})();
-
-/*あえてthenメソッドを使うとしたら以下もありでしょうか？
-tryToGetMenus()
-.then((menus)=>{
-		renderMenus(menus);
-	})
-.catch(()=>{
-	ul.textContent = "Something went wrong";
-});
-*/		
+tryToGetMenus();
