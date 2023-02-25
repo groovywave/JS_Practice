@@ -43,7 +43,7 @@ function getMenus(){
 	})
 }
 
-async function tryGetRenderMenus() {
+async function getRenderMenus() {
 	let menus;
 	try{
 		menus =  await getMenus();
@@ -55,4 +55,4 @@ async function tryGetRenderMenus() {
 	renderMenus(menus);
 }
 
-tryGetRenderMenus();
+getRenderMenus();
