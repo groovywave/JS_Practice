@@ -42,11 +42,17 @@ function getMenus(){
 		}, 3000);
 	})
 }
-	
-async function showMenus() {
-	const menus = await getMenus();
-	removeCircle();
+
+async function getRenderMenus() {
+	let menus;
+	try{
+		menus =  await getMenus();
+	}catch(error){
+		console.error(error);
+	}finally{
+		removeCircle();
+	}
 	renderMenus(menus);
 }
 
-showMenus();
+getRenderMenus();
