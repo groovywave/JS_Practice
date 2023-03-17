@@ -1,4 +1,8 @@
 const ul = document.getElementById("js-ul"); 
+const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+const options = {
+  method: "GET"
+};
 
 function renderCircle(){
 	const loadingCircle = document.createElement("img"); 
@@ -13,6 +17,7 @@ function removeCircle(){
 }
 
 function renderMenus(menus){
+  console.log(menus);
   const fragment = document.createDocumentFragment(); 
   for (const menu of menus) { 
     const li = document.createElement("li"); 
@@ -30,23 +35,24 @@ function renderMenus(menus){
   ul.appendChild(fragment);
 }
 
-function getMenus(){
-	return new Promise((resolve)=> {
-		renderCircle();
-		const menus = [ 
-			{to: "bookmark.html", img:"img/1.png", alt:"画像1", text: "ブックマーク"}, 
-			{to: "message.html", img:"img/2.png", alt:"画像2", text: "メッセージ"} 
-		]; 
-		setTimeout(() => {
-			resolve(menus);
-		}, 3000);
-	})
+async function fetchMenus(url, options){
+  renderCircle();
+	const response = await fetch(url, options);
+  response.then((response)=>{
+    if(!response.ok){
+      return new Promise.reject("エラーです");
+    }
+    const menus = response.json().data;
+    console.log(menus);
+    return menus;
+  })
 }
 
 async function getRenderMenus() {
 	let menus;
 	try{
-		menus =  await getMenus();
+    menus = await fetchMenus(url, options);
+    console.log(menus);
 	}catch(error){
 		console.error(error);
 	}finally{
