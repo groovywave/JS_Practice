@@ -1,8 +1,16 @@
 const ul = document.getElementById("js-ul"); 
-const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+const url = "";
+// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const options = {
   method: "GET"
 };
+
+function renderError(error){
+	const renderError = document.createElement("p"); 
+  renderError.id = "render-error";
+  renderError.textContent = `エラー：${error}`;
+  document.body.appendChild(renderError);
+}  
 
 function renderCircle(){
 	const loadingCircle = document.createElement("img"); 
@@ -38,23 +46,20 @@ function renderMenus(menus){
 async function fetchMenus(url, options){
   renderCircle();
 	const response = await fetch(url, options);
-  response.then((response)=>{
     if(!response.ok){
-      return new Promise.reject("エラーです");
+      return new Promise.reject("サーバから応答がありません");
+    }else{
+      const menus = response.json();
+      return menus;
     }
-    const menus = response.json().data;
-    console.log(menus);
-    return menus;
-  })
 }
 
 async function getRenderMenus() {
 	let menus;
 	try{
     menus = await fetchMenus(url, options);
-    console.log(menus);
 	}catch(error){
-		console.error(error);
+		renderError(error);
 	}finally{
 		removeCircle();
 	}
