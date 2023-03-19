@@ -25,7 +25,6 @@ function removeCircle(){
 }
 
 function renderMenus(menus){
-  console.log(menus);
   const fragment = document.createDocumentFragment(); 
   for (const menu of menus) { 
     const li = document.createElement("li"); 
@@ -43,7 +42,7 @@ function renderMenus(menus){
   ul.appendChild(fragment);
 }
 
-async function fetchMenus(url, options){
+async function fetchData(url, options){
   renderCircle();
 	const response = await fetch(url, options);
     if(!response.ok){
@@ -57,7 +56,7 @@ async function fetchMenus(url, options){
 async function getRenderMenus() {
 	let menus;
 	try{
-    menus = await fetchMenus(url, options);
+    menus = await fetchData(url, options);
 	}catch(error){
 		renderError(error);
 	}finally{
