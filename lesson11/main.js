@@ -1,6 +1,6 @@
 const ul = document.getElementById("js-ul"); 
-const url = "";
-// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+// const url = "";
+const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const options = {
   method: "GET"
 };
@@ -50,37 +50,39 @@ function renderData(menus){
 }
 
 async function fetchData(url, options){
-  renderCircle();
+
+  let response;
   try{
-    const response = await fetch(url, options);
+    response = await fetch(url, options);
     console.log(response);
   }catch(error){
     displayInfo(error);
   }
 
-  if(!response.ok){
-    renderError(response);
-  }else{
-    return response.json();
-  }
+  // else{
+  //   return response.json();
+  // }
 }
 
-async function fetchRenderMenus() {
-	// let response;
-
+async function fetchRenderData() {
+	let response;
+  renderCircle();
 	try{
-    const response = await fetchData(url, options);
+    const response = await fetch(url, options);
+    if(!response.ok){
+      renderError(response);
+    }
+    if(!response.length){
+      // console.log(response.length);
+      displayInfo("no data");
+    }
+    console.log(response);
 	}catch(error){
 		displayInfo(error);
 	}finally{
 		removeCircle();
-    if(!response.length){
-      displayInfo("no data");
-    }
     renderData(response);
 	}
-
-
 }
 
-fetchRenderMenus();
+fetchRenderData();
