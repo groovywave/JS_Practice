@@ -8,6 +8,13 @@ const options = {
 function renderError(error){
 	const renderError = document.createElement("p"); 
   renderError.id = "render-error";
+  renderError.textContent = `${error.status}：${error.statusText}`;
+  document.body.appendChild(renderError);
+}
+
+function displayInfo(error){
+	const renderError = document.createElement("p"); 
+  renderError.id = "render-error";
   renderError.textContent = `エラー：${error}`;
   document.body.appendChild(renderError);
 }  
