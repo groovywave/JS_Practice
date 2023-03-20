@@ -15,7 +15,7 @@ function renderError(error){
 function displayInfo(error){
 	const renderError = document.createElement("p"); 
   renderError.id = "render-error";
-  renderError.textContent = `エラー：${error}`;
+  renderError.textContent = error;
   document.body.appendChild(renderError);
 }  
 
@@ -31,7 +31,7 @@ function removeCircle(){
   document.getElementById("loading-circle").remove();
 }
 
-function renderMenus(menus){
+function renderData(menus){
   const fragment = document.createDocumentFragment(); 
   for (const menu of menus) { 
     const li = document.createElement("li"); 
@@ -51,25 +51,36 @@ function renderMenus(menus){
 
 async function fetchData(url, options){
   renderCircle();
-	const response = await fetch(url, options);
-    if(!response.ok){
-      return new Promise.reject("サーバから応答がありません");
-    }else{
-      const menus = response.json();
-      return menus;
-    }
+  try{
+    const response = await fetch(url, options);
+    console.log(response);
+  }catch(error){
+    displayInfo(error);
+  }
+
+  if(!response.ok){
+    renderError(response);
+  }else{
+    return response.json();
+  }
 }
 
-async function getRenderMenus() {
-	let menus;
+async function fetchRenderMenus() {
+	// let response;
+
 	try{
-    menus = await fetchData(url, options);
+    const response = await fetchData(url, options);
 	}catch(error){
-		renderError(error);
+		displayInfo(error);
 	}finally{
 		removeCircle();
+    if(!response.length){
+      displayInfo("no data");
+    }
+    renderData(response);
 	}
-	renderMenus(menus);
+
+
 }
 
-getRenderMenus();
+fetchRenderMenus();
