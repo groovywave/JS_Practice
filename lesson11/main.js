@@ -1,5 +1,7 @@
 const ul = document.getElementById("js-ul"); 
+
 // const url = "";
+// const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8";
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const options = {
   method: "GET"
@@ -8,13 +10,13 @@ const options = {
 function renderError(error){
 	const renderError = document.createElement("p"); 
   renderError.id = "render-error";
-  renderError.textContent = `${error.status}：${error.statusText}`;
+  renderError.textContent = `${error.status}:${error.statusText}`;
   document.body.appendChild(renderError);
 }
 
 function displayInfo(error){
 	const renderError = document.createElement("p"); 
-  renderError.id = "render-error";
+  renderError.id = "display-info";
   renderError.textContent = error;
   document.body.appendChild(renderError);
 }  
@@ -29,6 +31,7 @@ function renderCircle(){
 
 function removeCircle(){
   document.getElementById("loading-circle").remove();
+  // loadingCircle.remove();
 }
 
 function renderData(menus){
@@ -49,40 +52,30 @@ function renderData(menus){
   ul.appendChild(fragment);
 }
 
-async function fetchData(url, options){
-
-  let response;
-  try{
-    response = await fetch(url, options);
-    console.log(response);
-  }catch(error){
-    displayInfo(error);
-  }
-
-  // else{
-  //   return response.json();
-  // }
-}
-
-async function fetchRenderData() {
-	let response;
+async function fetchData() {
   renderCircle();
 	try{
     const response = await fetch(url, options);
+    const json = await response.json();
     if(!response.ok){
       renderError(response);
+      console.error(`${response.status}:${response.statusText}`);
     }
-    if(!response.length){
-      // console.log(response.length);
+    if(!json.length){
+      console.log(json.length);
       displayInfo("no data");
     }
-    console.log(response);
+    return json;
 	}catch(error){
 		displayInfo(error);
 	}finally{
 		removeCircle();
-    renderData(response);
 	}
+}
+
+async function fetchRenderData(){
+  const json = await fetchData();
+  renderData(json);
 }
 
 fetchRenderData();
