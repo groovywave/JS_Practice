@@ -9,7 +9,7 @@ const options = {
 
 function renderStatus(error){
 	const p = document.createElement("p"); 
-  p.id = "render-error";
+  p.id = "render-status";
   p.textContent = `${error.status}:${error.statusText}`;
   document.body.appendChild(p);
 }
