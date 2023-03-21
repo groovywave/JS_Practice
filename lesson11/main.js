@@ -7,18 +7,18 @@ const options = {
   method: "GET"
 };
 
-function renderError(error){
-	const renderError = document.createElement("p"); 
-  renderError.id = "render-error";
-  renderError.textContent = `${error.status}:${error.statusText}`;
-  document.body.appendChild(renderError);
+function renderStatus(error){
+	const p = document.createElement("p"); 
+  p.id = "render-error";
+  p.textContent = `${error.status}:${error.statusText}`;
+  document.body.appendChild(p);
 }
 
 function displayInfo(error){
-	const renderError = document.createElement("p"); 
-  renderError.id = "display-info";
-  renderError.textContent = error;
-  document.body.appendChild(renderError);
+	const p = document.createElement("p"); 
+  p.id = "display-info";
+  p.textContent = error;
+  document.body.appendChild(p);
 }  
 
 function renderCircle(){
@@ -58,11 +58,10 @@ async function fetchData() {
     const response = await fetch(url, options);
     const json = await response.json();
     if(!response.ok){
-      renderError(response);
+      renderStatus(response);
       console.error(`${response.status}:${response.statusText}`);
     }
     if(!json.length){
-      console.log(json.length);
       displayInfo("no data");
     }
     return json;
