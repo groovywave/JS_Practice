@@ -31,7 +31,6 @@ function renderCircle(){
 
 function removeCircle(){
   document.getElementById("loading-circle").remove();
-  // loadingCircle.remove();
 }
 
 function renderData(menus){
@@ -74,7 +73,9 @@ async function fetchData() {
 
 async function fetchRenderData(){
   const json = await fetchData();
-  renderData(json);
+  if (json){
+    renderData(json);
+  }
 }
 
 fetchRenderData();
