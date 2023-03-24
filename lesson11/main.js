@@ -55,15 +55,15 @@ async function fetchData() {
   renderCircle();
 	try{
     const response = await fetch(url, options);
-    const json = await response.json();
+    const object = await response.json();
     if(!response.ok){
       renderStatus(response);
       console.error(`${response.status}:${response.statusText}`);
     }
-    if(!json.length){
+    if(!object.length){
       displayInfo("no data");
     }
-    return json;
+    return object;
 	}catch(error){
 		displayInfo(error);
 	}finally{
@@ -72,9 +72,9 @@ async function fetchData() {
 }
 
 async function fetchRenderData(){
-  const json = await fetchData();
-  if (json){
-    renderData(json);
+  const object = await fetchData();
+  if (object){
+    renderData(object);
   }
 }
 
