@@ -48,7 +48,7 @@ function renderData(menus){
   ul.appendChild(fragment);
 }
 
-async function fetchData() {
+async function fetchData(url) {
   renderCircle();
 	try{
     const response = await fetch(url);
@@ -69,7 +69,7 @@ async function fetchData() {
 }
 
 async function fetchRenderData(){
-  const responseData = await fetchData();
+  const responseData = await fetchData(url);
   if (responseData){
     renderData(responseData);
   }
