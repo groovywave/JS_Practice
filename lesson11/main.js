@@ -3,9 +3,6 @@ const ul = document.getElementById("js-ul");
 // const url = "";
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8";
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
-const options = {
-  method: "GET"
-};
 
 function renderStatus(error){
 	const p = document.createElement("p"); 
@@ -54,7 +51,7 @@ function renderData(menus){
 async function fetchData() {
   renderCircle();
 	try{
-    const response = await fetch(url, options);
+    const response = await fetch(url);
     const responseData = await response.json();
     if(!response.ok){
       renderStatus(response);
