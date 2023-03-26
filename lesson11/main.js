@@ -4,10 +4,10 @@ const ul = document.getElementById("js-ul");
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8";
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 
-function renderStatus(error){
+function renderStatus(response){
 	const p = document.createElement("p"); 
   p.id = "render-status";
-  p.textContent = `${error.status}:${error.statusText}`;
+  p.textContent = `${response.status}:${response.statusText}`;
   document.body.appendChild(p);
 }
 
