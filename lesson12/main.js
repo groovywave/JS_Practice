@@ -19,6 +19,15 @@ function displayInfo(error) {
   document.body.appendChild(p);
 }
 
+const button = document.createElement("button");
+button.id = "button";
+button.textContent = "取得";
+ul.appendChild(button);
+
+function removeButton() {
+  document.getElementById("button").remove();
+}
+
 function renderCircle() {
   const loadingCircle = document.createElement("img");
   loadingCircle.src = "img/loading-circle.gif";
@@ -76,4 +85,7 @@ async function fetchRenderData() {
   }
 }
 
-fetchRenderData();
+document.getElementById("button").addEventListener("click", () => {
+  removeButton();
+  fetchRenderData();
+});
