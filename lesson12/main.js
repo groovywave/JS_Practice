@@ -19,11 +19,6 @@ function displayInfo(error) {
   document.body.appendChild(p);
 }
 
-const button = document.createElement("button");
-button.id = "button";
-button.textContent = "取得";
-ul.appendChild(button);
-
 function removeButton() {
   document.getElementById("button").remove();
 }
