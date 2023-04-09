@@ -76,11 +76,11 @@ async function fetchData(url) {
 async function fetchRenderData() {
   const responseData = await fetchData(url);
   if (responseData) {
+    removeButton();
     renderData(responseData);
   }
 }
 
 button.addEventListener("click", () => {
-  removeButton();
   fetchRenderData();
 });
