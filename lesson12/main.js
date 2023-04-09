@@ -1,5 +1,5 @@
 const ul = document.getElementById("js-ul");
-
+const button = document.getElementById("button").remove();
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -20,7 +20,7 @@ function displayInfo(error) {
 }
 
 function removeButton() {
-  document.getElementById("button").remove();
+  button.remove();
 }
 
 function renderCircle() {
@@ -80,7 +80,7 @@ async function fetchRenderData() {
   }
 }
 
-document.getElementById("button").addEventListener("click", () => {
+button.addEventListener("click", () => {
   removeButton();
   fetchRenderData();
 });
