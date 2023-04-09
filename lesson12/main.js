@@ -19,10 +19,6 @@ function displayInfo(error) {
   document.body.appendChild(p);
 }
 
-function removeButton() {
-  button.remove();
-}
-
 function renderCircle() {
   const loadingCircle = document.createElement("img");
   loadingCircle.src = "img/loading-circle.gif";
@@ -76,7 +72,7 @@ async function fetchData(url) {
 async function fetchRenderData() {
   const responseData = await fetchData(url);
   if (responseData) {
-    removeButton();
+    button.remove();
     renderData(responseData);
   }
 }
