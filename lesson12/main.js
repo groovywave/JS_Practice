@@ -1,5 +1,5 @@
 const ul = document.getElementById("js-ul");
-
+const button = document.getElementById("js-button");
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -72,8 +72,11 @@ async function fetchData(url) {
 async function fetchRenderData() {
   const responseData = await fetchData(url);
   if (responseData) {
+    button.remove();
     renderData(responseData);
   }
 }
 
-fetchRenderData();
+button.addEventListener("click", () => {
+  fetchRenderData();
+});
