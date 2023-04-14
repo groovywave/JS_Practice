@@ -6,7 +6,7 @@ body {
   font-size: 14px;
 }
 
-#open, #close {
+#open {
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
