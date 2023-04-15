@@ -92,9 +92,10 @@ open.addEventListener('click', () => {
   mask.classList.remove('hidden');
 });
 
-close.addEventListener('click', () => {
+button.addEventListener('click', () => {
   modal.classList.add('hidden');
   mask.classList.add('hidden');
+  open.classList.add('hidden');
 });
 
 mask.addEventListener('click', () => {

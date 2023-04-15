@@ -6,7 +6,7 @@ body {
   font-size: 14px;
 }
 
-#open {
+#open ,#close{
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -49,5 +49,9 @@ body {
 }
 
 #modal.hidden {
+  transform: translate(0, -500px);
+}
+
+#open.hidden {
   transform: translate(0, -500px);
 }
