@@ -1,0 +1,70 @@
+[Task28]
+パスワードを忘れた方へ画面作成
+https://github.com/kenmori/handsonFrontend/blob/master/work/markup/1.md#28
+
+codesandbox / Latest commit:0b6f20e
+課題28仕様
+パスワード忘れた方へ(forgetpassword.html)のページを作ってください
+
+前回実装済
+この課題から会員登録された内容はlocalstorage内に保有され ログイン時は固定値ではなく localstorage内の値とチェックされます。 イメージしたいのはローカルストレージはここではサーバー内のテーブルとして使っています。 なので現実的ではそのような実装はないですが、ここの課題はそれで実装したいです
+
+今回実装点
+①会員登録画面(register.js)
+会員登録画面でsubmitした時、localStorage内の値とチェックしてメールアドレスが既に登録されていた場合はエラーを出します。
+
+②パスワードをお忘れの方へ(forgotpassword.js)
+上記で作ったメールアドレス兼ユーザー名を入力するところがあります
+メールアドレスのinput値がバリデーションを通れば送信ボタンが押せます
+もしメールアドレスが登録がされていない場合は「見つかりませんでした」というエラーメッセージを出してください
+この課題の実装では forgetpassword.htmlでsubmitしたらトークンを発行して(仮にこの説明では482r22fafahとします)、ローカルストレージに保存。 そのあと register/password.htmlへ飛ばしてください
+その際のリンクはregister/password.html?token=482r22fafah みたいなurlにして(このリンクが本来メール本文にあるリンクのイメージです)
+
+③パスワード再設定ページ(password.js)
+「新規パスワード入力」 「確認のためのパスワード入力」 があり、バリデーションも効きます
+
+確認してほしい点
+【動作確認してほしい箇所】
+①会員登録画面(register.html)
+一度会員登録した後、ローカルストレージに既にあるメールアドレスで再登録しようとするとエラーが出る
+
+↓パスワードをお忘れの方へページへ遷移してもらい
+
+②パスワードをお忘れの方へページ(forgotpassword.html)
+・入力値が間違っている場合エラーが出る
+・メールアドレスのバリデーションが通ればsubmitボタンが押せて、password.htmlへ飛べる
+
+↓forgotpassword.htmlから遷移すると
+
+③パスワード再設定ページ
+・パラメータ(発行されたトークン(tokenForforgotPassword))付きのURLになっている
+・新規PWと確認用PWの入力値を入れればsubmitボタン押せる
+・新規PWと確認用PWの入力値が相違ある場合にエラーが出る（submitボタン押せない）
+
+前回の課題から変更したファイル
+・register.js
+・forgotpassword.js
+・/module/validation.js
+
+前回の課題から追加したファイル
+・password.js
+
+未実装箇所
+フロントはurlパラメータのtokenがすぐ前で発行した482r22fafahかどうかを確認します。 (ローカルストレージがサーバー側の役割をしているイメージ)
+もしtokenが間違っていたら notautherize.html 権限がありませんページに飛ばしてください
+urlパラメータが正しい場合にregister/password.htmlを表示します
+表示は下記の通りで
+
+inputの値が同じでバリデーションが通ればパスワードを再発行と新たなトークンを発行して ローカルストレージに埋め込みor以前のそれを破棄、変更してください
+
+パスワード再設定完了ページ
+register/passworddone.html?token=tagaerega <-新しいトークン で飛ばします
+完了ページでは urlパラメータからトークンと直近で作られたトークンがローカルストレージのそれと合っていたら
+「パスワード再設定が完了しました」 「ログインページへ」
+を表示し
+間違っていたりトークンがなかったり直叩きでurlが間違っていたら 権限なしページに飛ばしてください
+その後、新たに作ったパスワードでログインができるようにします
+
+[Comment for this Task]
+Please see below for the changes and additions that have been made.
+

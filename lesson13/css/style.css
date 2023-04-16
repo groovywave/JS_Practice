@@ -1,5 +1,7 @@
 button {
   cursor: pointer;
+  display: block;
+  margin: auto;
 }
 
 body {
@@ -42,6 +44,7 @@ body {
 
 #modal > p {
   margin: 0 0 20px;
+  text-align: center;
 }
 
 #mask.hidden {
@@ -55,3 +58,4 @@ body {
 #open.hidden {
   transform: translate(0, -500px);
 }
+
