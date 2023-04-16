@@ -6,7 +6,7 @@ body {
   font-size: 14px;
 }
 
-#open ,#close{
+#js-open {
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -16,7 +16,7 @@ body {
   margin: 16px auto 0;
 }
 
-#mask {
+#js-mask {
   background: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
@@ -26,7 +26,7 @@ body {
   z-index: 1;
 }
 
-#modal {
+#js-modal {
   background: #fff;
   width: 300px;
   padding: 20px;
@@ -40,15 +40,15 @@ body {
   z-index: 2;
 }
 
-#modal > p {
+#js-modal > p {
   margin: 0 0 20px;
 }
 
-#mask.hidden {
+#js-mask.hidden {
   display: none;
 }
 
-#modal.hidden {
+#js-modal.hidden {
   transform: translate(0, -500px);
 }
 
