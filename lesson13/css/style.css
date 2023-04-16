@@ -1,5 +1,7 @@
 button {
   cursor: pointer;
+  display: block;
+  margin: 10px auto;
 }
 
 body {
@@ -42,6 +44,7 @@ body {
 
 #js-modal > p {
   margin: 0 0 20px;
+  text-align: center;
 }
 
 #js-mask.hidden {

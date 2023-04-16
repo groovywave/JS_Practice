@@ -82,9 +82,9 @@ button.addEventListener("click", () => {
 });
 
 
-const open = document.getElementById('open');
-const close = document.getElementById('close');
-const modal = document.getElementById('modal');
+const open = document.getElementById('js-open');
+const close = document.getElementById('js-close');
+const modal = document.getElementById('js-modal');
 const mask = document.getElementById('mask');
 
 open.addEventListener('click', () => {
