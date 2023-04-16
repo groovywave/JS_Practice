@@ -82,23 +82,25 @@ button.addEventListener("click", () => {
 });
 
 
-const open = document.getElementById('js-open');
-const close = document.getElementById('js-close');
-const modal = document.getElementById('js-modal');
-const mask = document.getElementById('mask');
+const open = document.getElementById("js-open");
+const close = document.getElementById("js-close");
+const modal = document.getElementById("js-modal");
+const mask = document.getElementById("js-mask");
 
 open.addEventListener('click', () => {
-  modal.classList.remove('hidden');
-  mask.classList.remove('hidden');
+  // if (ul.lstElementChild) [
+  //   ul.lastElementChild.remove();
+  // ]
+  modal.classList.remove("hidden");
+  mask.classList.remove("hidden");
+});
+button.addEventListener("click", () => {
+  modal.classList.add("hidden");
+  mask.classList.add("hidden");
+  open.classList.add("hidden");
 });
 
-button.addEventListener('click', () => {
-  modal.classList.add('hidden');
-  mask.classList.add('hidden');
-  open.classList.add('hidden');
-});
-
-mask.addEventListener('click', () => {
+mask.addEventListener("click", () => {
   // modal.classList.add('hidden');
   // mask.classList.add('hidden');
   close.click();
