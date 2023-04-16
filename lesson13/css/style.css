@@ -8,7 +8,7 @@ body {
   font-size: 14px;
 }
 
-#open ,#close{
+#open {
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -21,10 +21,7 @@ body {
 #mask {
   background: rgba(0, 0, 0, 0.4);
   position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  inset: 0; 
   z-index: 1;
 }
 
