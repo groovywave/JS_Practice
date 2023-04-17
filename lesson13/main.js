@@ -1,19 +1,20 @@
 const ul = document.getElementById("js-ul");
 const button = document.getElementById("js-button");
-const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
-// const url = ""; //Not JSON
+const p = document.createElement("p");
+// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
 // const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
-  const p = document.createElement("p");
+
   p.id = "render-status";
   p.textContent = `${response.status}:${response.statusText}`;
   document.body.appendChild(p);
 }
 
 function displayInfo(error) {
-  const p = document.createElement("p");
+ 
   p.id = "display-info";
   p.textContent = error;
   document.body.appendChild(p);
@@ -33,8 +34,10 @@ function removeCircle() {
 
 function renderData(menus) {
   const fragment = document.createDocumentFragment();
+  fragment.id = "fragment";  
   for (const menu of menus) {
     const li = document.createElement("li");
+    li.id = "js-li";
     const a = document.createElement("a");
     const img = document.createElement("img");
     a.href = menu.to;
@@ -82,23 +85,34 @@ button.addEventListener("click", () => {
 });
 
 
-const open = document.getElementById('open');
-const close = document.getElementById('close');
-const modal = document.getElementById('modal');
-const mask = document.getElementById('mask');
+const open = document.getElementById("js-open");
+const back = document.getElementById("js-back");
+const modal = document.getElementById("js-modal");
+const mask = document.getElementById("js-mask");
 
 open.addEventListener('click', () => {
-  modal.classList.remove('hidden');
-  mask.classList.remove('hidden');
+  // if (ul.lstElementChild) [
+  //   ul.lastElementChild.remove();
+  // ]
+  modal.classList.remove("hidden");
+  mask.classList.remove("hidden");
+});
+button.addEventListener("click", () => {
+  modal.classList.add("hidden");
+  mask.classList.add("hidden");
+  open.classList.add("hidden");
+  back.classList.remove("hidden");
 });
 
-button.addEventListener('click', () => {
-  modal.classList.add('hidden');
-  mask.classList.add('hidden');
-  open.classList.add('hidden');
+back.addEventListener('click', () => {
+  modal.classList.add("hidden");
+  mask.classList.add("hidden");
+  back.classList.add("hidden");
+  open.classList.remove("hidden");
+  document.body.removeChild(p);
 });
 
-mask.addEventListener('click', () => {
+mask.addEventListener("click", () => {
   // modal.classList.add('hidden');
   // mask.classList.add('hidden');
   close.click();

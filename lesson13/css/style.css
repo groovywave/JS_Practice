@@ -1,14 +1,14 @@
 button {
   cursor: pointer;
   display: block;
-  margin: auto;
+  margin: 10px auto;
 }
 
 body {
   font-size: 14px;
 }
 
-#open {
+#js-open ,#js-back{
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -18,14 +18,14 @@ body {
   margin: 16px auto ;
 }
 
-#mask {
+#js-mask {
   background: rgba(0, 0, 0, 0.4);
   position: fixed;
   inset: 0; 
   z-index: 1;
 }
 
-#modal {
+#js-modal ,#js-back{
   background: #fff;
   width: 300px;
   padding: 20px;
@@ -39,20 +39,23 @@ body {
   z-index: 2;
 }
 
-#modal > p {
+#js-modal > p {
   margin: 0 0 20px;
   text-align: center;
 }
 
-#mask.hidden {
+#js-mask.hidden {
   display: none;
 }
 
-#modal.hidden {
+#js-modal.hidden {
   transform: translate(0, -500px);
 }
 
-#open.hidden {
+#js-open.hidden {
   transform: translate(0, -500px);
 }
 
+#js-back.hidden {
+  display:none;
+}
