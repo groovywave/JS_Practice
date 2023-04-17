@@ -1,20 +1,24 @@
 const ul = document.getElementById("js-ul");
 const button = document.getElementById("js-button");
 const p = document.createElement("p");
+const open = document.getElementById("js-open");
+const back = document.getElementById("js-back");
+const modal = document.getElementById("js-modal");
+const mask = document.getElementById("js-mask");
+
 // const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
 // const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
-
   p.id = "render-status";
-  p.textContent = `${response.status}:${response.statusText}`;
+  // p.textContent = `${response.status}:::${response.statusText}`;
+  // p.textContent = response.status;
   document.body.appendChild(p);
 }
 
 function displayInfo(error) {
- 
   p.id = "display-info";
   p.textContent = error;
   document.body.appendChild(p);
@@ -59,10 +63,12 @@ async function fetchData(url) {
     const responseData = await response.json();
     if (!response.ok) {
       renderStatus(response);
+      // back.classList.remove("hidden");
       console.error(`${response.status}:${response.statusText}`);
     }
     if (!responseData.length) {
       displayInfo("no data");
+      back.classList.remove("hidden");
     }
     return responseData;
   } catch (error) {
@@ -75,8 +81,11 @@ async function fetchData(url) {
 async function fetchRenderData() {
   const responseData = await fetchData(url);
   if (responseData) {
-    button.remove();
+    // button.remove();
+    // open.classList.add("hidden");
     renderData(responseData);
+  }else{
+    back.classList.remove("hidden");
   }
 }
 
@@ -85,23 +94,17 @@ button.addEventListener("click", () => {
 });
 
 
-const open = document.getElementById("js-open");
-const back = document.getElementById("js-back");
-const modal = document.getElementById("js-modal");
-const mask = document.getElementById("js-mask");
 
 open.addEventListener('click', () => {
-  // if (ul.lstElementChild) [
-  //   ul.lastElementChild.remove();
-  // ]
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
 });
+
 button.addEventListener("click", () => {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
   open.classList.add("hidden");
-  back.classList.remove("hidden");
+  // back.classList.remove("hidden");
 });
 
 back.addEventListener('click', () => {
@@ -110,10 +113,4 @@ back.addEventListener('click', () => {
   back.classList.add("hidden");
   open.classList.remove("hidden");
   document.body.removeChild(p);
-});
-
-mask.addEventListener("click", () => {
-  // modal.classList.add('hidden');
-  // mask.classList.add('hidden');
-  close.click();
 });

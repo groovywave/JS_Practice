@@ -1,3 +1,4 @@
+
 button {
   cursor: pointer;
   display: block;
@@ -8,26 +9,30 @@ body {
   font-size: 14px;
 }
 
-#js-open ,#js-back{
+#js-open {
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: center;
   padding: 12px 0;
-  margin: 16px auto ;
+  margin: 16px auto 0;
+  z-index: 2;
 }
 
 #js-mask {
   background: rgba(0, 0, 0, 0.4);
   position: fixed;
-  inset: 0; 
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 1;
 }
 
-#js-modal ,#js-back{
+#js-modal, #js-back{
   background: #fff;
-  width: 300px;
+  width: 200px;
   padding: 20px;
   border-radius: 4px;
   position: absolute;
@@ -39,6 +44,18 @@ body {
   z-index: 2;
 }
 
+#js-back {
+  cursor: pointer;
+  width: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 0;
+  margin: 16px auto 0;
+  opacity: 0.8;
+  /* z-index: 2; */
+}
+
 #js-modal > p {
   margin: 0 0 20px;
   text-align: center;
@@ -48,14 +65,14 @@ body {
   display: none;
 }
 
-#js-modal.hidden {
+#js-modal.hidden, #js-open.hidden, #js-back.hidden {
   transform: translate(0, -500px);
 }
 
-#js-open.hidden {
+/* #js-open.hidden {
   transform: translate(0, -500px);
 }
 
 #js-back.hidden {
   display:none;
-}
+} */
