@@ -6,15 +6,14 @@ const back = document.getElementById("js-back");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 
-// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
-const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
+// const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
   p.id = "render-status";
-  // p.textContent = `${response.status}:::${response.statusText}`;
-  // p.textContent = response.status;
+  p.textContent = `${response.status}:${response.statusText}`;
   document.body.appendChild(p);
 }
 
@@ -60,32 +59,31 @@ async function fetchData(url) {
   renderCircle();
   try {
     const response = await fetch(url);
+    console.log(response);
     const responseData = await response.json();
+    console.log(responseData);
     if (!response.ok) {
       renderStatus(response);
-      // back.classList.remove("hidden");
       console.error(`${response.status}:${response.statusText}`);
     }
     if (!responseData.length) {
       displayInfo("no data");
-      back.classList.remove("hidden");
     }
     return responseData;
   } catch (error) {
     displayInfo(error);
   } finally {
     removeCircle();
+    back.classList.remove("hidden");
   }
 }
 
 async function fetchRenderData() {
   const responseData = await fetchData(url);
   if (responseData) {
-    // button.remove();
-    // open.classList.add("hidden");
     renderData(responseData);
-  }else{
-    back.classList.remove("hidden");
+  // }else{
+  //   back.classList.remove("hidden");
   }
 }
 
@@ -106,9 +104,27 @@ mask.addEventListener('click', () => {
   mask.classList.add("hidden");
 });
 
-
 back.addEventListener('click', () => {
   back.classList.add("hidden");
   open.classList.remove("hidden");
-  document.body.removeChild(p);
+  // if(getElementById("render-status")){
+  //   p.remove();
+  //   // document.body.removeChild(p);
+  // }
+  // if(getElementById("display-info")){
+  //   p.remove();
+  //   // document.body.removeChild(p);
+  // }
+  // if(getElementById("fragment")){
+  //   fragment.remove();
+  // }
+  const p = document.querySelector("#render-status, #display-info");
+  if (p) {
+    p.remove();
+  }
+  const fragment = getElementById("fragment");
+  if (fragment) {
+    fragment.remove();
+    // fragment.parentNode.removeChild(fragment);
+  } 
 });
