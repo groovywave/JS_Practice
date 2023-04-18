@@ -7,9 +7,9 @@ const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 
 // const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
-const url = ""; //Not JSON
+// const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
-// const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
+const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
   p.id = "render-status";
@@ -89,27 +89,25 @@ async function fetchRenderData() {
   }
 }
 
-button.addEventListener("click", () => {
-  fetchRenderData();
-});
-
-
-
 open.addEventListener('click', () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
 });
 
 button.addEventListener("click", () => {
+  fetchRenderData();
   modal.classList.add("hidden");
   mask.classList.add("hidden");
   open.classList.add("hidden");
-  // back.classList.remove("hidden");
 });
 
-back.addEventListener('click', () => {
+mask.addEventListener('click', () => {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
+});
+
+
+back.addEventListener('click', () => {
   back.classList.add("hidden");
   open.classList.remove("hidden");
   document.body.removeChild(p);
