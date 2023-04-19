@@ -53,7 +53,6 @@ body {
   padding: 12px 0;
   margin: 16px auto 0;
   opacity: 0.8;
-  /* z-index: 2; */
 }
 
 #js-modal > p {
@@ -68,11 +67,3 @@ body {
 #js-modal.hidden, #js-open.hidden, #js-back.hidden {
   transform: translate(0, -500px);
 }
-
-/* #js-open.hidden {
-  transform: translate(0, -500px);
-}
-
-#js-back.hidden {
-  display:none;
-} */

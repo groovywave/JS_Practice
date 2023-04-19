@@ -107,17 +107,6 @@ mask.addEventListener('click', () => {
 back.addEventListener('click', () => {
   back.classList.add("hidden");
   open.classList.remove("hidden");
-  // if(getElementById("render-status")){
-  //   p.remove();
-  //   // document.body.removeChild(p);
-  // }
-  // if(getElementById("display-info")){
-  //   p.remove();
-  //   // document.body.removeChild(p);
-  // }
-  // if(getElementById("fragment")){
-  //   fragment.remove();
-  // }
   const p = document.querySelector("#render-status, #display-info");
   if (p) {
     p.remove();
