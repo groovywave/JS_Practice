@@ -40,7 +40,6 @@ function renderData(menus) {
   fragment.id = "fragment";  
   for (const menu of menus) {
     const li = document.createElement("li");
-    // li.id = "js-li";
     const a = document.createElement("a");
     const img = document.createElement("img");
     a.href = menu.to;
