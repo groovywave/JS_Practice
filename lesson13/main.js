@@ -82,8 +82,6 @@ async function fetchRenderData() {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
-  // }else{
-  //   back.classList.remove("hidden");
   }
 }
 
