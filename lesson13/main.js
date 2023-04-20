@@ -6,10 +6,10 @@ const back = document.getElementById("js-back");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 
-const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
-// const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
+const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
   p.id = "render-status";
@@ -58,9 +58,7 @@ async function fetchData(url) {
   renderCircle();
   try {
     const response = await fetch(url);
-    console.log(response);
     const responseData = await response.json();
-    console.log(responseData);
     if (!response.ok) {
       renderStatus(response);
       console.error(`${response.status}:${response.statusText}`);
