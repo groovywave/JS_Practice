@@ -1,6 +1,6 @@
 const ul = document.getElementById("js-ul");
 const fetchButton = document.getElementById("js-fetch-button");
-const p = document.createElement("p");
+const fetchErrorMessage = document.createElement("p");
 const openButton = document.getElementById("js-open-button");
 const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
@@ -12,14 +12,14 @@ const mask = document.getElementById("js-mask");
 const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
-  p.id = "render-status";
-  p.textContent = `${response.status}:${response.statusText}`;
+  fetchErrorMessage.id = "render-status";
+  fetchErrorMessage.textContent = `${response.status}:${response.statusText}`;
   document.body.appendChild(p);
 }
 
 function displayInfo(error) {
-  p.id = "display-info";
-  p.textContent = error;
+  fetchErrorMessage.id = "display-info";
+  fetchErrorMessage.textContent = error;
   document.body.appendChild(p);
 }
 
@@ -102,9 +102,11 @@ mask.addEventListener("click", () => {
 backButton.addEventListener("click", () => {
   backButton.classList.add("hidden");
   openButton.classList.remove("hidden");
-  const p = document.querySelector("#render-status, #display-info");
-  if (p) {
-    p.remove();
+  const fetchErrorMessage = document.querySelector(
+    "#render-status, #display-info"
+  );
+  if (fetchErrorMessage) {
+    fetchErrorMessage.remove();
   }
   while (ul.firstChild) {
     ul.firstChild.remove();
