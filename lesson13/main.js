@@ -1,8 +1,8 @@
 const ul = document.getElementById("js-ul");
-const button = document.getElementById("js-button");
+const fetchButton = document.getElementById("js-fetch-button");
 const p = document.createElement("p");
-const open = document.getElementById("js-open");
-const back = document.getElementById("js-back");
+const openButton = document.getElementById("js-open-button");
+const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 
@@ -37,7 +37,7 @@ function removeCircle() {
 
 function renderData(menus) {
   const fragment = document.createDocumentFragment();
-  fragment.id = "fragment";  
+  fragment.id = "fragment";
   for (const menu of menus) {
     const li = document.createElement("li");
     const a = document.createElement("a");
@@ -71,7 +71,7 @@ async function fetchData(url) {
     displayInfo(error);
   } finally {
     removeCircle();
-    back.classList.remove("hidden");
+    backButton.classList.remove("hidden");
   }
 }
 
@@ -82,31 +82,31 @@ async function fetchRenderData() {
   }
 }
 
-open.addEventListener('click', () => {
+openButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
 });
 
-button.addEventListener("click", () => {
+fetchButton.addEventListener("click", () => {
   fetchRenderData();
   modal.classList.add("hidden");
   mask.classList.add("hidden");
-  open.classList.add("hidden");
+  openButton.classList.add("hidden");
 });
 
-mask.addEventListener('click', () => {
+mask.addEventListener("click", () => {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
 
-back.addEventListener('click', () => {
-  back.classList.add("hidden");
-  open.classList.remove("hidden");
+backButton.addEventListener("click", () => {
+  backButton.classList.add("hidden");
+  openButton.classList.remove("hidden");
   const p = document.querySelector("#render-status, #display-info");
   if (p) {
     p.remove();
   }
-  while(ul.firstChild){
+  while (ul.firstChild) {
     ul.firstChild.remove();
   }
 });

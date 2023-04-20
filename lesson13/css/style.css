@@ -13,7 +13,7 @@ body {
   pointer-events: none;
 }
 
-#js-open {
+#js-open-button {
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -34,7 +34,7 @@ body {
   z-index: 1;
 }
 
-#js-modal, #js-back{
+#js-modal, #js-back-button{
   background: #fff;
   width: 200px;
   padding: 20px;
@@ -48,7 +48,7 @@ body {
   z-index: 2;
 }
 
-#js-back {
+#js-back-button {
   cursor: pointer;
   width: 100px;
   border: 1px solid #ccc;
@@ -68,6 +68,6 @@ body {
   display: none;
 }
 
-#js-modal.hidden, #js-open.hidden, #js-back.hidden {
+#js-modal.hidden, #js-open-button.hidden, #js-back-button.hidden {
   transform: translate(0, -500px);
 }
