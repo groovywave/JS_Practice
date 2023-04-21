@@ -8,8 +8,8 @@ const mask = document.getElementById("js-mask");
 
 // const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
-// const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
-const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
+const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
+// const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
   fetchErrorMessage.id = "render-status";
@@ -93,10 +93,8 @@ fetchButton.addEventListener("click", () => {
   fetchRenderData();
   modal.classList.add("frame-out");
   mask.classList.add("frame-out");
-  // openButton.classList.add("frame-out");
   modal.setAttribute("aria-hidden", "true");
   mask.setAttribute("aria-hidden", "true");
-  // openButton.setAttribute("aria-hidden", "true");
 });
 
 mask.addEventListener("click", () => {
@@ -110,9 +108,6 @@ backButton.addEventListener("click", () => {
   backButton.classList.add("frame-out");
   openButton.classList.remove("disappear");
   backButton.setAttribute("aria-hidden", "true");
-  const fetchErrorMessage = document.querySelector(
-    "#render-status, #display-info"
-  );
   if (fetchErrorMessage) {
     fetchErrorMessage.remove();
   }
