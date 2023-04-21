@@ -20,7 +20,7 @@ function renderStatus(response) {
 function displayInfo(error) {
   fetchErrorMessage.id = "display-info";
   fetchErrorMessage.textContent = error;
-  document.body.appendChild(p);
+  document.body.appendChild(fetchErrorMessage);
 }
 
 function renderCircle() {
@@ -92,11 +92,16 @@ fetchButton.addEventListener("click", () => {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
   openButton.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+  mask.setAttribute("aria-hidden", "true");
+  openButton.setAttribute("aria-hidden", "true");
 });
 
 mask.addEventListener("click", () => {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+  mask.setAttribute("aria-hidden", "true");
 });
 
 backButton.addEventListener("click", () => {
