@@ -35,12 +35,14 @@ body {
   background: #fff;
   width: 200px;
   padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 4px;
   position: absolute;
   top: 40px;
   left: 0;
   right: 0;
   margin: 0 auto;
+  opacity: 0.8;
   transition: transform 0.4s;
   z-index: 2;
 }
@@ -61,10 +63,10 @@ body {
   text-align: center;
 }
 
-#js-mask.hidden {
+.disappear {
   display: none;
 }
 
-#js-modal.hidden, #js-open-button.hidden, #js-back-button.hidden {
+.frame-out {
   transform: translate(0, -500px);
 }

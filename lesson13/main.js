@@ -71,7 +71,7 @@ async function fetchData(url) {
     displayInfo(error);
   } finally {
     removeCircle();
-    backButton.classList.remove("hidden");
+    backButton.classList.remove("frame-out");
   }
 }
 
@@ -83,30 +83,31 @@ async function fetchRenderData() {
 }
 
 openButton.addEventListener("click", () => {
-  modal.classList.remove("hidden");
-  mask.classList.remove("hidden");
+  modal.classList.remove("frame-out");
+  mask.classList.remove("frame-out");
 });
 
 fetchButton.addEventListener("click", () => {
   fetchRenderData();
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
-  openButton.classList.add("hidden");
+  modal.classList.add("frame-out");
+  mask.classList.add("frame-out");
+  openButton.classList.add("frame-out");
   modal.setAttribute("aria-hidden", "true");
   mask.setAttribute("aria-hidden", "true");
   openButton.setAttribute("aria-hidden", "true");
 });
 
 mask.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
+  modal.classList.add("frame-out");
+  mask.classList.add("frame-out");
   modal.setAttribute("aria-hidden", "true");
   mask.setAttribute("aria-hidden", "true");
 });
 
 backButton.addEventListener("click", () => {
-  backButton.classList.add("hidden");
-  openButton.classList.remove("hidden");
+  backButton.classList.add("frame-out");
+  openButton.classList.remove("frame-out");
+  backButton.setAttribute("aria-hidden", "true");
   const fetchErrorMessage = document.querySelector(
     "#render-status, #display-info"
   );
