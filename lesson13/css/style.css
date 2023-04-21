@@ -22,7 +22,6 @@ ul {
   padding: 12px 0;
   margin: 16px auto 0;
   transition: opacity 0.4s;
-  /* z-index: 2; */
 }
 
 .mask {
@@ -50,14 +49,10 @@ ul {
 }
 
 .back-button {
-  /* cursor: pointer; */
   width: 100px;
-  /* border: 1px solid #ccc;
-  border-radius: 4px; */
   text-align: center;
   padding: 12px 0;
   margin: 16px auto 0;
-  /* opacity: 0.8; */
 }
 
 .modal > p {
