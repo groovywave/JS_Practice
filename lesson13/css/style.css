@@ -13,7 +13,7 @@ body {
   pointer-events: none;
 }
 
-#js-open-button {
+.open-button {
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -21,6 +21,7 @@ body {
   text-align: center;
   padding: 12px 0;
   margin: 16px auto 0;
+  transition: opacity 0.4s;
   z-index: 2;
 }
 
@@ -31,7 +32,7 @@ body {
   z-index: 1;
 }
 
-#js-modal, #js-back-button{
+.modal, .button{
   background: #fff;
   width: 200px;
   padding: 20px;
@@ -47,7 +48,7 @@ body {
   z-index: 2;
 }
 
-#js-back-button {
+.button {
   cursor: pointer;
   width: 100px;
   border: 1px solid #ccc;
@@ -64,7 +65,8 @@ body {
 }
 
 .disappear {
-  display: none;
+  /* display: none; */
+  opacity: 0;
 }
 
 .frame-out {
