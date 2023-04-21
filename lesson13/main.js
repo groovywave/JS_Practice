@@ -2,6 +2,7 @@ const ul = document.getElementById("js-ul");
 const fetchButton = document.getElementById("js-fetch-button");
 const fetchErrorMessage = document.createElement("p");
 const openButton = document.getElementById("js-open-button");
+const closeButton = document.getElementById("js-close-button");
 const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
@@ -84,7 +85,7 @@ async function fetchRenderData() {
 
 openButton.addEventListener("click", () => {
   modal.classList.remove("frame-out");
-  mask.classList.remove("frame-out");
+  mask.classList.remove("hidden");
   openButton.classList.add("disappear");
   openButton.setAttribute("aria-hidden", "true");
 });
@@ -92,16 +93,21 @@ openButton.addEventListener("click", () => {
 fetchButton.addEventListener("click", () => {
   fetchRenderData();
   modal.classList.add("frame-out");
-  mask.classList.add("frame-out");
+  mask.classList.add("hidden");
   modal.setAttribute("aria-hidden", "true");
   mask.setAttribute("aria-hidden", "true");
 });
 
 mask.addEventListener("click", () => {
   modal.classList.add("frame-out");
-  mask.classList.add("frame-out");
+  mask.classList.add("hidden");
+  openButton.classList.remove("disappear");
   modal.setAttribute("aria-hidden", "true");
   mask.setAttribute("aria-hidden", "true");
+});
+
+closeButton.addEventListener("click", () => {
+  mask.click();
 });
 
 backButton.addEventListener("click", () => {

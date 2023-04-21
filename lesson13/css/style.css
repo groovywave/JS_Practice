@@ -1,19 +1,27 @@
 
-button {
-  cursor: pointer;
-  display: block;
-  margin: 10px auto;
-}
-
 body {
   font-size: 14px;
+  user-select: none;
 }
 
 ul {
   pointer-events: none;
 }
 
+button {
+  cursor: pointer;
+  margin: 10px auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+}
+
 .open-button {
+  display: block;
   cursor: pointer;
   width: 200px;
   border: 1px solid #ccc;
@@ -21,7 +29,7 @@ ul {
   text-align: center;
   padding: 12px 0;
   margin: 16px auto 0;
-  transition: opacity 0.4s;
+  transition: opacity 0.8s;
 }
 
 .mask {
@@ -31,8 +39,8 @@ ul {
   z-index: 1;
 }
 
-.modal, .back-button{
-  /* display: block; */
+.modal, .back-button {
+  justify-content: center;
   background: #fff;
   width: 200px;
   padding: 20px;
@@ -55,9 +63,14 @@ ul {
   margin: 16px auto 0;
 }
 
-.modal > p {
+.modal > p { 
+  width: 200px;
   margin: 0 0 20px;
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }
 
 .disappear {
