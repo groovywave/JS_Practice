@@ -87,7 +87,7 @@ async function fetchRenderData() {
 openButton.addEventListener("click", () => {
   modal.classList.remove("frame-out");
   mask.classList.remove("hidden");
-  openButton.classList.add("disappear");
+  openButton.classList.add("hidden");
 });
 
 fetchButton.addEventListener("click", () => {
@@ -99,7 +99,7 @@ fetchButton.addEventListener("click", () => {
 mask.addEventListener("click", () => {
   modal.classList.add("frame-out");
   mask.classList.add("hidden");
-  openButton.classList.remove("disappear");
+  openButton.classList.remove("hidden");
 });
 
 closeButton.addEventListener("click", () => {
@@ -108,7 +108,7 @@ closeButton.addEventListener("click", () => {
 
 backButton.addEventListener("click", () => {
   backButton.classList.add("frame-out");
-  openButton.classList.remove("disappear");
+  openButton.classList.remove("hidden");
   if (errorMessage) {
     errorMessage.remove();
   }

@@ -29,7 +29,6 @@ button {
   text-align: center;
   padding: 12px 0;
   margin: 16px auto 0;
-  transition: opacity 0.8s;
 }
 
 .mask {
@@ -73,10 +72,6 @@ button {
 
 .hidden {
   display: none;
-}
-
-.disappear {
-  opacity: 0;
 }
 
 .frame-out {
