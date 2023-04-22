@@ -39,7 +39,7 @@ button {
   z-index: 1;
 }
 
-.modal, .back-button {
+.modal {
   justify-content: center;
   background: #fff;
   width: 200px;
@@ -57,10 +57,12 @@ button {
 }
 
 .back-button {
+  display: block;
   width: 100px;
   text-align: center;
   padding: 12px 0;
   margin: 16px auto 0;
+  transition: transform 0.4s;
 }
 
 .modal > p { 

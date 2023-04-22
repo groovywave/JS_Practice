@@ -111,6 +111,7 @@ closeButton.addEventListener("click", () => {
 });
 
 backButton.addEventListener("click", () => {
+  // document.body.removeChild(ul);
   backButton.classList.add("frame-out");
   openButton.classList.remove("disappear");
   backButton.setAttribute("aria-hidden", "true");
