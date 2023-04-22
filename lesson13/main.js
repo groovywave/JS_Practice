@@ -43,6 +43,7 @@ function renderData(menus) {
     const li = document.createElement("li");
     const a = document.createElement("a");
     const img = document.createElement("img");
+    img.setAttribute("aria-hidden", "true");
     a.href = menu.to;
     a.textContent = menu.text;
     img.src = menu.img;
@@ -111,7 +112,6 @@ closeButton.addEventListener("click", () => {
 });
 
 backButton.addEventListener("click", () => {
-  // document.body.removeChild(ul);
   backButton.classList.add("frame-out");
   openButton.classList.remove("disappear");
   backButton.setAttribute("aria-hidden", "true");
