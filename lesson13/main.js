@@ -1,27 +1,27 @@
 const ul = document.getElementById("js-ul");
 const fetchButton = document.getElementById("js-fetch-button");
-const fetchErrorMessage = document.createElement("p");
+const errorMessage = document.createElement("p");
 const openButton = document.getElementById("js-open-button");
 const closeButton = document.getElementById("js-close-button");
 const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 
-const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
-// const url = ""; //Not JSON
+// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
 // const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
-  fetchErrorMessage.id = "render-status";
-  fetchErrorMessage.textContent = `${response.status}:${response.statusText}`;
+  errorMessage.id = "render-status";
+  errorMessage.textContent = `${response.status}:${response.statusText}`;
   document.body.appendChild(p);
 }
 
 function displayInfo(error) {
-  fetchErrorMessage.id = "display-info";
-  fetchErrorMessage.textContent = error;
-  document.body.appendChild(fetchErrorMessage);
+  errorMessage.id = "display-info";
+  errorMessage.textContent = error;
+  document.body.appendChild(errorMessage);
 }
 
 function renderCircle() {
@@ -88,23 +88,18 @@ openButton.addEventListener("click", () => {
   modal.classList.remove("frame-out");
   mask.classList.remove("hidden");
   openButton.classList.add("disappear");
-  openButton.setAttribute("aria-hidden", "true");
 });
 
 fetchButton.addEventListener("click", () => {
   fetchRenderData();
   modal.classList.add("frame-out");
   mask.classList.add("hidden");
-  modal.setAttribute("aria-hidden", "true");
-  mask.setAttribute("aria-hidden", "true");
 });
 
 mask.addEventListener("click", () => {
   modal.classList.add("frame-out");
   mask.classList.add("hidden");
   openButton.classList.remove("disappear");
-  modal.setAttribute("aria-hidden", "true");
-  mask.setAttribute("aria-hidden", "true");
 });
 
 closeButton.addEventListener("click", () => {
@@ -114,9 +109,8 @@ closeButton.addEventListener("click", () => {
 backButton.addEventListener("click", () => {
   backButton.classList.add("frame-out");
   openButton.classList.remove("disappear");
-  backButton.setAttribute("aria-hidden", "true");
-  if (fetchErrorMessage) {
-    fetchErrorMessage.remove();
+  if (errorMessage) {
+    errorMessage.remove();
   }
   while (ul.firstChild) {
     ul.firstChild.remove();
