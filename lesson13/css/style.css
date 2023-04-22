@@ -64,7 +64,7 @@ button {
   transition: transform 0.4s;
 }
 
-.modal > p { 
+.text-in-modal { 
   width: 200px;
   margin: 0 0 20px;
   text-align: center;
