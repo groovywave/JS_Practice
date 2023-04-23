@@ -22,11 +22,7 @@ button {
 
 .open-button {
   display: block;
-  cursor: pointer;
   width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  text-align: center;
   padding: 12px 0;
   margin: 16px auto 0;
 }
@@ -51,17 +47,14 @@ button {
   right: 0;
   margin: 0 auto;
   opacity: 0.8;
-  transition: transform 0.4s;
   z-index: 2;
 }
 
 .back-button {
   display: block;
   width: 100px;
-  text-align: center;
   padding: 12px 0;
   margin: 16px auto 0;
-  transition: transform 0.4s;
 }
 
 .text-in-modal { 
@@ -72,8 +65,4 @@ button {
 
 .hidden {
   display: none;
-}
-
-.frame-out {
-  transform: translate(0, -500px);
 }

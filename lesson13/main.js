@@ -7,8 +7,8 @@ const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 
-// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
-const url = ""; //Not JSON
+const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+// const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
 // const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
@@ -73,7 +73,7 @@ async function fetchData(url) {
     displayInfo(error);
   } finally {
     removeCircle();
-    backButton.classList.remove("frame-out");
+    backButton.classList.remove("hidden");
   }
 }
 
@@ -85,19 +85,19 @@ async function fetchRenderData() {
 }
 
 openButton.addEventListener("click", () => {
-  modal.classList.remove("frame-out");
+  modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
 });
 
 fetchButton.addEventListener("click", () => {
   fetchRenderData();
-  modal.classList.add("frame-out");
+  modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
 
 mask.addEventListener("click", () => {
-  modal.classList.add("frame-out");
+  modal.classList.add("hidden");
   mask.classList.add("hidden");
   openButton.classList.remove("hidden");
 });
@@ -107,7 +107,7 @@ closeButton.addEventListener("click", () => {
 });
 
 backButton.addEventListener("click", () => {
-  backButton.classList.add("frame-out");
+  backButton.classList.add("hidden");
   openButton.classList.remove("hidden");
   if (errorMessage) {
     errorMessage.remove();
