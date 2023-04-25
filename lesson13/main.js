@@ -95,14 +95,18 @@ fetchButton.addEventListener("click", () => {
   mask.classList.add("hidden");
 });
 
-mask.addEventListener("click", () => {
+function closeWindow () {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
-  openButton.classList.remove("hidden");
+  openButton.classList.remove("hidden");  
+}
+
+mask.addEventListener("click", () => {
+  closeWindow();
 });
 
 closeButton.addEventListener("click", () => {
-  mask.click();
+  closeWindow();
 });
 
 backButton.addEventListener("click", () => {
