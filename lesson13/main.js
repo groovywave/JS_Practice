@@ -15,7 +15,7 @@ const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 function renderStatus(response) {
   errorMessage.id = "render-status";
   errorMessage.textContent = `${response.status}:${response.statusText}`;
-  document.body.appendChild(p);
+  document.body.appendChild(errorMessage);
 }
 
 function displayInfo(error) {
