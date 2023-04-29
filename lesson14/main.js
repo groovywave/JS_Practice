@@ -6,6 +6,7 @@ const closeButton = document.getElementById("js-close-button");
 const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
+const inputBox = document.getElementById("js-input-box");
 
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -87,18 +88,22 @@ openButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
+  inputBox.focus();
 });
 
 fetchButton.addEventListener("click", () => {
+  if (this.classList.contains("disabled")) {
+    return;
+  }
   fetchRenderData();
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
 
-function closeModal () {
+function closeModal() {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
-  openButton.classList.remove("hidden");  
+  openButton.classList.remove("hidden");
 }
 
 mask.addEventListener("click", () => {
@@ -109,7 +114,7 @@ closeButton.addEventListener("click", () => {
   closeModal();
 });
 
-backButton.addEventListener("click", () => {
+backButton.addEventListener("click", function () {
   backButton.classList.add("hidden");
   openButton.classList.remove("hidden");
   if (errorMessage) {
@@ -119,3 +124,13 @@ backButton.addEventListener("click", () => {
     ul.firstChild.remove();
   }
 });
+
+function checkInput() {
+  if (inputBox.value.match(/^[1-9][0-9]*$/) !== null) {
+    fetchButton.classList.remove("disabled");
+  } else {
+    fetchButton.classList.add("disabled");
+  }
+}
+
+inputBox.addEventListener("keyup", checkInput);
