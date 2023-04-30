@@ -90,6 +90,7 @@ openButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
+  inputBox.value = "";
   inputBox.focus();
 });
 
@@ -139,4 +140,4 @@ function checkInput() {
   }
 }
 
-inputBox.addEventListener("keyup", checkInput);
+// inputBox.addEventListener("keyup", checkInput);
