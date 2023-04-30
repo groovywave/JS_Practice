@@ -6,8 +6,9 @@ const closeButton = document.getElementById("js-close-button");
 const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
+const promptMessage = document.getElementById("js-prompt-message");
 const inputBox = document.getElementById("js-input-box");
-
+const inputNumber = inputBox.value;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -77,7 +78,7 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData() {
+async function fetchRenderData(inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
@@ -114,7 +115,7 @@ closeButton.addEventListener("click", () => {
   closeModal();
 });
 
-backButton.addEventListener("click", function () {
+backButton.addEventListener("click", () => {
   backButton.classList.add("hidden");
   openButton.classList.remove("hidden");
   if (errorMessage) {
@@ -126,10 +127,12 @@ backButton.addEventListener("click", function () {
 });
 
 function checkInput() {
-  if (inputBox.value.match(/^[1-9][0-9]*$/) !== null) {
+  if (inputNumber.match(/^[1-9][0-9]*$/)) {
     fetchButton.classList.remove("disabled");
   } else {
     fetchButton.classList.add("disabled");
+    promptMessage.textContent = "半角数値を入力ください";
+    promptMessage.style.color = "red";
   }
 }
 
