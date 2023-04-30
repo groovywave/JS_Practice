@@ -12,7 +12,7 @@
     <ul id="js-ul"></ul> 
     <div id="js-modal" class="modal hidden" role="dialog">
       <p id="js-prompt-message" class="text-in-modal">入力後ボタンを押してください</p>
-      <input type="number" pattern="^-?[0-9][0-9]*$" id="js-input-box" placeholder="半角数値を入力ください">
+      <input type="number" pattern="^-?[0-9][0-9]*$" id="js-input-box" placeholder="半角数値を入力ください" onkeyup="checkInput()">
       <div class="button-container">
         <button id="js-fetch-button" type="button" class="disabled">取　得</button> 
         <button id="js-close-button" type="button">閉じる</button>

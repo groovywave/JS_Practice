@@ -8,7 +8,6 @@ const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
 const inputBox = document.getElementById("js-input-box");
-const inputNumber = inputBox.value;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -78,7 +77,9 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData(inputNumber) {
+async function fetchRenderData() {
+  // const inputNumber = inputBox.value;
+  // await checkInput(inputNumber);
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
@@ -93,7 +94,7 @@ openButton.addEventListener("click", () => {
 });
 
 fetchButton.addEventListener("click", () => {
-  if (this.classList.contains("disabled")) {
+  if (fetchButton.classList.contains("disabled")) {
     return;
   }
   fetchRenderData();
@@ -127,7 +128,9 @@ backButton.addEventListener("click", () => {
 });
 
 function checkInput() {
-  if (inputNumber.match(/^[1-9][0-9]*$/)) {
+  const inputNumber = inputBox.value;
+  if (inputNumber.match(/^[0-9][0-9]*$/)) {
+    promptMessage.textContent = "";
     fetchButton.classList.remove("disabled");
   } else {
     fetchButton.classList.add("disabled");
