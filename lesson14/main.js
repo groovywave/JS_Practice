@@ -130,14 +130,7 @@ backButton.addEventListener("click", () => {
 
 function checkInput() {
   const inputNumber = inputBox.value;
-  if (inputNumber.match(/^[0-9][0-9]*$/)) {
-    promptMessage.textContent = "";
+  if (inputNumber.match(/^-?[0-9]*$/)) {
     fetchButton.classList.remove("disabled");
-  } else {
-    fetchButton.classList.add("disabled");
-    promptMessage.textContent = "半角数値を入力ください";
-    promptMessage.style.color = "red";
   }
 }
-
-// inputBox.addEventListener("keyup", checkInput);
