@@ -90,6 +90,8 @@ openButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
+  promptMessage.textContent = "入力後ボタンを押してください";
+  promptMessage.style.color = "black";
   inputBox.value = "";
   inputBox.focus();
 });
@@ -130,14 +132,26 @@ backButton.addEventListener("click", () => {
 
 function checkInput() {
   const inputNumber = inputBox.value;
-  if (inputNumber.match(/^[0-9][0-9]*$/)) {
-    promptMessage.textContent = "";
-    fetchButton.classList.remove("disabled");
+  console.log(inputNumber);
+  if (
+    inputNumber.match(/^-?[0-9]+(\.?[0-9]*)$/) &&
+    !inputNumber.includes("e")
+  ) {
+    validInput();
   } else {
-    fetchButton.classList.add("disabled");
-    promptMessage.textContent = "半角数値を入力ください";
-    promptMessage.style.color = "red";
+    invalidInput();
   }
 }
 
-// inputBox.addEventListener("keyup", checkInput);
+function validInput() {
+  promptMessage.textContent = "";
+  fetchButton.classList.remove("disabled");
+}
+
+function invalidInput() {
+  promptMessage.textContent = "半角数値を入力ください";
+  promptMessage.style.color = "red";
+  fetchButton.classList.add("disabled");
+}
+
+inputBox.addEventListener("keyup", checkInput);
