@@ -78,8 +78,6 @@ async function fetchData(url) {
 }
 
 async function fetchRenderData() {
-  // const inputNumber = inputBox.value;
-  // await checkInput(inputNumber);
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
