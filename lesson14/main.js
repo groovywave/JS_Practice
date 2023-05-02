@@ -78,7 +78,6 @@ async function fetchData(url) {
 }
 
 async function fetchRenderData(inputNumber) {
-  console.log(inputNumber);
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
@@ -102,7 +101,6 @@ fetchButton.addEventListener("click", () => {
     return;
   }
   const inputNumber = inputBox.value;
-  console.log(inputNumber);
   fetchRenderData(inputNumber);
   modal.classList.add("hidden");
   mask.classList.add("hidden");
