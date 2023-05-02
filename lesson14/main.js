@@ -77,10 +77,12 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData() {
+async function fetchRenderData(inputNumber) {
+  console.log(inputNumber);
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
+    console.log(inputNumber);
   }
 }
 
@@ -99,7 +101,9 @@ fetchButton.addEventListener("click", () => {
   if (fetchButton.classList.contains("disabled")) {
     return;
   }
-  fetchRenderData();
+  const inputNumber = inputBox.value;
+  console.log(inputNumber);
+  fetchRenderData(inputNumber);
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
