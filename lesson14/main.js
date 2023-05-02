@@ -145,13 +145,13 @@ function checkInput() {
 
 function validInput() {
   promptMessage.textContent = "";
-  fetchButton.classList.remove("disabled");
+  fetchButton.disabled = false;
 }
 
 function invalidInput() {
   promptMessage.textContent = "半角数値を入力ください";
   promptMessage.style.color = "red";
-  fetchButton.classList.add("disabled");
+  fetchButton.disabled = true;
 }
 
 inputBox.addEventListener("keyup", checkInput);
