@@ -81,6 +81,7 @@ async function fetchRenderData(inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
+    console.log(inputNumber);
   }
 }
 
