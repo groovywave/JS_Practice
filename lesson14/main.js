@@ -134,7 +134,7 @@ backButton.addEventListener("click", () => {
 function checkInput() {
   const inputNumber = inputBox.value;
   if (
-    inputNumber.match(/^(?<digitNumber>-?[0-9]+(\.?[0-9]*))$/) &&
+    inputNumber.match(/^(?<halfWidthDigits>-?[0-9]+(\.?[0-9]*))$/) &&
     !inputNumber.includes("e")
   ) {
     validInput();
