@@ -77,11 +77,14 @@ async function fetchData(url) {
   }
 }
 
+<<<<<<< HEAD
 async function fetchRenderData(inputNumber) {
+=======
+async function fetchRenderData() {
+>>>>>>> parent of a963eb8 (Fix: Pass an argument as a inputed number to the function fetchRenderData)
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
-    console.log(inputNumber);
   }
 }
 
@@ -100,8 +103,12 @@ fetchButton.addEventListener("click", () => {
   if (fetchButton.classList.contains("disabled")) {
     return;
   }
+<<<<<<< HEAD
   const inputNumber = inputBox.value;
   fetchRenderData(inputNumber);
+=======
+  fetchRenderData();
+>>>>>>> parent of a963eb8 (Fix: Pass an argument as a inputed number to the function fetchRenderData)
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
