@@ -88,6 +88,7 @@ openButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
+  fetchButton.classList.add("disabled");
   promptMessage.textContent = "入力後ボタンを押してください";
   promptMessage.style.color = "black";
   inputBox.value = "";
