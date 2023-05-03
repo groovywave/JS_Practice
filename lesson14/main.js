@@ -154,4 +154,4 @@ function invalidInput() {
   fetchButton.disabled = true;
 }
 
-inputBox.addEventListener("keyup", checkInput);
+inputBox.addEventListener("input", checkInput);
