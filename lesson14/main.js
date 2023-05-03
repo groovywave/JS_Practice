@@ -86,18 +86,20 @@ async function fetchRenderData(inputNumber) {
 }
 
 openButton.addEventListener("click", () => {
-  modal.classList.remove("hidden");
-  mask.classList.remove("hidden");
-  openButton.classList.add("hidden");
-  fetchButton.classList.add("disabled");
   promptMessage.textContent = "入力後ボタンを押してください";
   promptMessage.style.color = "black";
   inputBox.value = "";
-  inputBox.focus();
+  setTimeout(() => {
+    inputBox.focus();
+  }, 0);
+  modal.classList.remove("hidden");
+  mask.classList.remove("hidden");
+  openButton.classList.add("hidden");
+  fetchButton.setAttribute("disabled", "true");
 });
 
 fetchButton.addEventListener("click", () => {
-  if (fetchButton.classList.contains("disabled")) {
+  if (fetchButton.hasAttribute("disabled")) {
     return;
   }
   const inputNumber = inputBox.value;
