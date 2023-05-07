@@ -16,8 +16,8 @@ const validationTerms = {
     pattern: /^(?<halfWidthDigits>-?[0-9]+(\.?[0-9]*))$/,
   },
 };
-console.log("test");
-console.log(validationTerms.digits.pattern.value);
+// console.log("test");
+// console.log(validationTerms.digits);
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -146,8 +146,8 @@ backButton.addEventListener("click", () => {
 function checkInput() {
   const inputNumber = inputBox.value;
   if (
-    inputNumber.match(/^(?<halfWidthDigits>-?[0-9]+(\.?[0-9]*))$/) &&
-    // inputNumber.match(validationTerms.digits.pattern) &&
+    // inputNumber.match(/^(?<halfWidthDigits>-?[0-9]+(\.?[0-9]*))$/) &&
+    inputNumber.match(validationTerms.digits.pattern) &&
     !inputNumber.includes("e")
   ) {
     validInput();
