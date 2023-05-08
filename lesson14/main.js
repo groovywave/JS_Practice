@@ -6,7 +6,9 @@ const closeButton = document.getElementById("js-close-button");
 const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
-
+const promptMessage = document.getElementById("js-prompt-message");
+const inputBox = document.getElementById("js-input-box");
+const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -76,29 +78,41 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData() {
+async function fetchRenderData(inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
+    console.log(inputNumber); //show inputted number
   }
 }
 
 openButton.addEventListener("click", () => {
+  promptMessage.textContent = "入力後ボタンを押してください";
+  promptMessage.style.color = "black";
+  inputBox.value = "";
+  setTimeout(() => {
+    inputBox.focus();
+  }, 0);
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
+  fetchButton.setAttribute("disabled", "true");
 });
 
 fetchButton.addEventListener("click", () => {
-  fetchRenderData();
+  if (fetchButton.hasAttribute("disabled")) {
+    return;
+  }
+  const inputNumber = inputBox.value;
+  fetchRenderData(inputNumber);
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
 
-function closeModal () {
+function closeModal() {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
-  openButton.classList.remove("hidden");  
+  openButton.classList.remove("hidden");
 }
 
 mask.addEventListener("click", () => {
@@ -119,3 +133,25 @@ backButton.addEventListener("click", () => {
     ul.firstChild.remove();
   }
 });
+
+function checkInput() {
+  const inputNumber = inputBox.value;
+  if (inputNumber.match(halfWidthDigits)) {
+    validInput();
+  } else {
+    invalidInput();
+  }
+}
+
+function validInput() {
+  promptMessage.textContent = "";
+  fetchButton.disabled = false;
+}
+
+function invalidInput() {
+  promptMessage.textContent = "半角数値を入力ください";
+  promptMessage.style.color = "red";
+  fetchButton.disabled = true;
+}
+
+inputBox.addEventListener("input", checkInput);
