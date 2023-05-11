@@ -7,7 +7,7 @@ const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
-const inputBox = document.getElementById("js-input-box");
+const numberBox = document.getElementById("js-number-box");
 const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -89,9 +89,9 @@ async function fetchRenderData(inputNumber) {
 openButton.addEventListener("click", () => {
   promptMessage.textContent = "入力後ボタンを押してください";
   promptMessage.style.color = "black";
-  inputBox.value = "";
+  numberBox.value = "";
   setTimeout(() => {
-    inputBox.focus();
+    numberBox.focus();
   }, 0);
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
@@ -103,7 +103,7 @@ fetchButton.addEventListener("click", () => {
   if (fetchButton.hasAttribute("disabled")) {
     return;
   }
-  const inputNumber = inputBox.value;
+  const inputNumber = numberBox.value;
   fetchRenderData(inputNumber);
   modal.classList.add("hidden");
   mask.classList.add("hidden");
@@ -135,7 +135,7 @@ backButton.addEventListener("click", () => {
 });
 
 function checkInput() {
-  const inputNumber = inputBox.value;
+  const inputNumber = numberBox.value;
   if (inputNumber.match(halfWidthDigits)) {
     validInput();
   } else {
@@ -155,4 +155,4 @@ function invalidInput() {
   fetchButton.disabled = true;
 }
 
-inputBox.addEventListener("input", checkInput);
+numberBox.addEventListener("input", checkInput);
