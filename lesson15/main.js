@@ -144,7 +144,8 @@ function checkInput() {
 }
 
 function validInput() {
-  promptMessage.textContent = "";
+  promptMessage.textContent = "入力後ボタンを押してください";
+  promptMessage.style.color = "black";
   fetchButton.disabled = false;
 }
 
