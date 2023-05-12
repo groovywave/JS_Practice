@@ -7,7 +7,9 @@ const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
+const textBox = document.getElementById("js-text-box");
 const numberBox = document.getElementById("js-number-box");
+const name = /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z\s]*)?$/;
 const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -89,9 +91,10 @@ async function fetchRenderData(inputNumber) {
 openButton.addEventListener("click", () => {
   promptMessage.textContent = "入力後ボタンを押してください";
   promptMessage.style.color = "black";
+  textBox.value = "";
   numberBox.value = "";
   setTimeout(() => {
-    numberBox.focus();
+    textBox.focus();
   }, 0);
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
