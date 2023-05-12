@@ -8,8 +8,13 @@ const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
 const textBox = document.getElementById("js-text-box");
+const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
-const name = /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z\s]*)?$/;
+const personName =
+  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z\s]*)?$/;
+
+// const personName =
+// /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]*)?$/;
 const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -84,7 +89,7 @@ async function fetchRenderData(inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
-    console.log(inputNumber); //show inputted number
+    console.log(personName, inputNumber); //show inputted number
   }
 }
 
@@ -138,8 +143,9 @@ backButton.addEventListener("click", () => {
 });
 
 function checkInput() {
+  const inputName = nameBox.value;
   const inputNumber = numberBox.value;
-  if (inputNumber.match(halfWidthDigits)) {
+  if (inputName.match(personName) && inputNumber.match(halfWidthDigits)) {
     validInput();
   } else {
     invalidInput();
@@ -159,3 +165,4 @@ function invalidInput() {
 }
 
 numberBox.addEventListener("input", checkInput);
+checkInput();
