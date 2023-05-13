@@ -84,11 +84,11 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData(personName, inputNumber) {
+async function fetchRenderData(inputName, inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
-    console.log(personName, inputNumber); //show inputted number
+    console.log(inputName, inputNumber); //show inputted number
   }
 }
 
