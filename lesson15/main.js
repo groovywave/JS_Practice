@@ -7,7 +7,6 @@ const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
-const textBox = document.getElementById("js-text-box");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
 const personName =
@@ -85,7 +84,7 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData(inputNumber) {
+async function fetchRenderData(personName, inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
@@ -96,10 +95,10 @@ async function fetchRenderData(inputNumber) {
 openButton.addEventListener("click", () => {
   promptMessage.textContent = "入力後ボタンを押してください";
   promptMessage.style.color = "black";
-  textBox.value = "";
+  nameBox.value = "";
   numberBox.value = "";
   setTimeout(() => {
-    textBox.focus();
+    nameBox.focus();
   }, 0);
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
@@ -111,8 +110,9 @@ fetchButton.addEventListener("click", () => {
   if (fetchButton.hasAttribute("disabled")) {
     return;
   }
+  const inputName = nameBox.value;
   const inputNumber = numberBox.value;
-  fetchRenderData(inputNumber);
+  fetchRenderData(inputName, inputNumber);
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
