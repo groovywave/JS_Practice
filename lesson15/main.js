@@ -7,7 +7,7 @@ const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
-const nameLabel = document.getElementById("js-nameLabel");
+const nameLabel = document.getElementById("js-name-label");
 const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
@@ -176,7 +176,7 @@ function invalidInputName() {
   nameLabel.textContent = "数字や記号を入力しないでください";
   // promptMessage.textContent = "数字や記号を入力しないでください";
   promptMessage.style.color = "red";
-  fetchButton.disabled = true;
+  fetchButton.setAttribute("disabled", "true");
 }
 
 function invalidInputNumber() {
