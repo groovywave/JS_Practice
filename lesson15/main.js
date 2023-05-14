@@ -7,6 +7,8 @@ const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
+const nameLabel = document.getElementById("js-nameLabel");
+const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
 const personName =
@@ -143,13 +145,44 @@ backButton.addEventListener("click", () => {
 });
 
 function checkInput() {
-  const inputName = nameBox.value;
-  const inputNumber = numberBox.value;
-  if (inputName.match(personName) && inputNumber.match(halfWidthDigits)) {
+  if (checkInputName() && checkInputNumber()) {
     validInput();
-  } else {
-    invalidInput();
   }
+}
+
+function checkInputName() {
+  const inputName = nameBox.value;
+  if (inputName === "") {
+    return false;
+  } else if (!inputName.match(personName)) {
+    invalidInputName();
+  } else {
+    return true;
+  }
+}
+
+function checkInputNumber() {
+  const inputNumber = numberBox.value;
+  if (inputNumber === "") {
+    return false;
+  } else if (!inputNumber.match(halfWidthDigits)) {
+    invalidInputNumber();
+  } else {
+    return true;
+  }
+}
+
+function invalidInputName() {
+  nameLabel.textContent = "数字や記号を入力しないでください";
+  // promptMessage.textContent = "数字や記号を入力しないでください";
+  promptMessage.style.color = "red";
+  fetchButton.disabled = true;
+}
+
+function invalidInputNumber() {
+  promptMessage.textContent = "半角数値を入力ください";
+  promptMessage.style.color = "red";
+  fetchButton.disabled = true;
 }
 
 function validInput() {
@@ -157,12 +190,6 @@ function validInput() {
   promptMessage.style.color = "black";
   fetchButton.disabled = false;
 }
-
-function invalidInput() {
-  promptMessage.textContent = "半角数値を入力ください";
-  promptMessage.style.color = "red";
-  fetchButton.disabled = true;
-}
-
+nameBox.addEventListener("input", checkInput);
 numberBox.addEventListener("input", checkInput);
 checkInput();
