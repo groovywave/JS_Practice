@@ -12,7 +12,7 @@ const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
 const personName =
-/^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
+  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
 const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -103,6 +103,10 @@ openButton.addEventListener("click", () => {
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
   fetchButton.setAttribute("disabled", "true");
+  nameLabel.textContent = "名前";
+  nameLabel.style.color = "black";
+  numberLabel.textContent = "数字";
+  numberLabel.style.color = "black";
 });
 
 fetchButton.addEventListener("click", () => {
@@ -176,7 +180,7 @@ function checkInputNumber() {
 }
 
 function invalidInputName() {
-  nameLabel.textContent = "数字や記号を入力しないでください";
+  nameLabel.textContent = "名前を入力してください";
   nameLabel.style.color = "red";
   fetchButton.disabled = true;
 }
