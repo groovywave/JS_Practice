@@ -153,6 +153,7 @@ function checkInput() {
 function checkInputName() {
   const inputName = nameBox.value;
   if (inputName === "") {
+    invalidInputName();
     return false;
   } else if (!inputName.match(personName)) {
     invalidInputName();
@@ -164,6 +165,7 @@ function checkInputName() {
 function checkInputNumber() {
   const inputNumber = numberBox.value;
   if (inputNumber === "") {
+    invalidInputNumber();
     return false;
   } else if (!inputNumber.match(halfWidthDigits)) {
     invalidInputNumber();
