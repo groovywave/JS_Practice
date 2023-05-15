@@ -12,10 +12,7 @@ const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
 const personName =
-  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z\s]*)?$/;
-
-// const personName =
-// /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Z]*)?$/;
+/^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
 const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -158,6 +155,8 @@ function checkInputName() {
   } else if (!inputName.match(personName)) {
     invalidInputName();
   } else {
+    nameLabel.textContent = "名前";
+    nameLabel.style.color = "black";
     return true;
   }
 }
@@ -170,20 +169,21 @@ function checkInputNumber() {
   } else if (!inputNumber.match(halfWidthDigits)) {
     invalidInputNumber();
   } else {
+    numberLabel.textContent = "数字";
+    numberLabel.style.color = "black";
     return true;
   }
 }
 
 function invalidInputName() {
   nameLabel.textContent = "数字や記号を入力しないでください";
-  // promptMessage.textContent = "数字や記号を入力しないでください";
-  promptMessage.style.color = "red";
-  fetchButton.setAttribute("disabled", "true");
+  nameLabel.style.color = "red";
+  fetchButton.disabled = true;
 }
 
 function invalidInputNumber() {
-  promptMessage.textContent = "半角数値を入力ください";
-  promptMessage.style.color = "red";
+  numberLabel.textContent = "半角数値を入力ください";
+  numberLabel.style.color = "red";
   fetchButton.disabled = true;
 }
 
