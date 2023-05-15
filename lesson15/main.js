@@ -154,13 +154,13 @@ function checkInput() {
 function checkInputName() {
   const inputName = nameBox.value;
   if (inputName === "") {
-    invalidInputName();
+    nameLabel.textContent = "名前";
+    nameLabel.style.color = "black";
     return false;
   } else if (!inputName.match(personName)) {
     invalidInputName();
+    return false;
   } else {
-    nameLabel.textContent = "名前";
-    nameLabel.style.color = "black";
     return true;
   }
 }
@@ -168,13 +168,13 @@ function checkInputName() {
 function checkInputNumber() {
   const inputNumber = numberBox.value;
   if (inputNumber === "") {
-    invalidInputNumber();
+    numberLabel.textContent = "数字";
+    numberLabel.style.color = "black";
     return false;
   } else if (!inputNumber.match(halfWidthDigits)) {
     invalidInputNumber();
+    return false;
   } else {
-    numberLabel.textContent = "数字";
-    numberLabel.style.color = "black";
     return true;
   }
 }
