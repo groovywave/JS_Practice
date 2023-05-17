@@ -196,6 +196,7 @@ function validInput() {
   promptMessage.style.color = "black";
   fetchButton.disabled = false;
 }
+
 nameBox.addEventListener("input", checkInput);
 numberBox.addEventListener("input", checkInput);
 checkInput();
