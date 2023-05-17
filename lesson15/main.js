@@ -199,4 +199,3 @@ function validInput() {
 
 nameBox.addEventListener("input", checkInput);
 numberBox.addEventListener("input", checkInput);
-checkInput();
