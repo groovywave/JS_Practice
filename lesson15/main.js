@@ -154,8 +154,8 @@ function checkInput() {
 function checkInputName() {
   const inputName = nameBox.value;
   if (inputName === "") {
-    nameLabel.textContent = "名前";
-    nameLabel.style.color = "black";
+    // nameLabel.textContent = "名前";
+    // nameLabel.style.color = "black";
     return false;
   } else if (!inputName.match(personName)) {
     invalidInputName();
@@ -168,8 +168,10 @@ function checkInputName() {
 function checkInputNumber() {
   const inputNumber = numberBox.value;
   if (inputNumber === "") {
-    numberLabel.textContent = "数字";
-    numberLabel.style.color = "black";
+    promptMessage.textContent = "入力後ボタンを押してください";
+    promptMessage.style.color = "black";
+    // numberLabel.textContent = "数字";
+    // numberLabel.style.color = "black";
     return false;
   } else if (!inputNumber.match(halfWidthDigits)) {
     invalidInputNumber();
@@ -180,14 +182,18 @@ function checkInputNumber() {
 }
 
 function invalidInputName() {
-  nameLabel.textContent = "名前を入力してください";
-  nameLabel.style.color = "red";
+  promptMessage.textContent = "名前を入力してください";
+  promptMessage.style.color = "red";
+  // nameLabel.textContent = "名前を入力してください";
+  // nameLabel.style.color = "red";
   fetchButton.disabled = true;
 }
 
 function invalidInputNumber() {
-  numberLabel.textContent = "半角数値を入力ください";
-  numberLabel.style.color = "red";
+  promptMessage.textContent = "半角数値を入力ください";
+  promptMessage.style.color = "red";
+  // numberLabel.textContent = "半角数値を入力ください";
+  // numberLabel.style.color = "red";
   fetchButton.disabled = true;
 }
 
