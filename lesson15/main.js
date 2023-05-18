@@ -190,8 +190,8 @@ function invalidInputName() {
 }
 
 function invalidInputNumber() {
-  promptMessage.textContent = "半角数値を入力ください";
-  promptMessage.style.color = "red";
+  // promptMessage.textContent = "半角数値を入力ください";
+  // promptMessage.style.color = "red";
   // numberLabel.textContent = "半角数値を入力ください";
   // numberLabel.style.color = "red";
   fetchButton.disabled = true;
