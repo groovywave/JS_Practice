@@ -11,9 +11,9 @@ const nameLabel = document.getElementById("js-name-label");
 const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
-const personName =
+const namePattern =
   /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
-const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
+const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -145,19 +145,46 @@ backButton.addEventListener("click", () => {
   }
 });
 
+// function checkInput() {
+//   if (checkInputName() && checkInputNumber()) {
+//     validInput();
+//   }
+// }
+
 function checkInput() {
-  if (checkInputName() && checkInputNumber()) {
+  const nameBoxValue = nameBox.value;
+  const promptMessageOfName = "入力後ボタンを押してください";
+  const errorMessageOfName = "名前を入力ください";
+  const numberBoxValue = numberBox.value;
+  const promptMessageOfNumber = "入力後ボタンを押してください";
+  const errorMessageOfNumber = "半角数字を入力ください";
+  if (checkInputValue(nameBoxValue,promptMessageOfName,namePattern,errorMessageoFName) && checkInputValue(numberBoxValue,promptMessageOfNumber,numberPattern,errorMessageOfNumber)) {
     validInput();
   }
 }
 
+function checkInputValue(value,promptMessage,regExp,errorMessage){
+  if (value === "" ){
+    promptMessage.textContent = promptMessage;
+    promptMessage.style.color = "black";
+    return false;
+  } else if (!inputNumber.match(regExp)) {
+    invalidInput(errorMessage);
+    // invalidInputNumber();
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function checkInputName() {
+  checkInputValue(nameBox.value,)
   const inputName = nameBox.value;
   if (inputName === "") {
     // nameLabel.textContent = "名前";
     // nameLabel.style.color = "black";
     return false;
-  } else if (!inputName.match(personName)) {
+  } else if (!inputName.match(namePattern)) {
     invalidInputName();
     return false;
   } else {
@@ -173,7 +200,7 @@ function checkInputNumber() {
     // numberLabel.textContent = "数字";
     // numberLabel.style.color = "black";
     return false;
-  } else if (!inputNumber.match(halfWidthDigits)) {
+  } else if (!inputNumber.match(numberPattern)) {
     invalidInputNumber();
     return false;
   } else {
@@ -181,21 +208,27 @@ function checkInputNumber() {
   }
 }
 
-function invalidInputName() {
-  promptMessage.textContent = "名前を入力してください";
+function invalidInput(errorMessage) {
+  promptMessage.textContent = errorMessage;
   promptMessage.style.color = "red";
-  // nameLabel.textContent = "名前を入力してください";
-  // nameLabel.style.color = "red";
   fetchButton.disabled = true;
 }
 
-function invalidInputNumber() {
-  // promptMessage.textContent = "半角数値を入力ください";
-  // promptMessage.style.color = "red";
-  // numberLabel.textContent = "半角数値を入力ください";
-  // numberLabel.style.color = "red";
-  fetchButton.disabled = true;
-}
+// function invalidInputName() {
+//   promptMessage.textContent = "名前を入力してください";
+//   promptMessage.style.color = "red";
+//   // nameLabel.textContent = "名前を入力してください";
+//   // nameLabel.style.color = "red";
+//   fetchButton.disabled = true;
+// }
+
+// function invalidInputNumber() {
+//   // promptMessage.textContent = "半角数値を入力ください";
+//   // promptMessage.style.color = "red";
+//   // numberLabel.textContent = "半角数値を入力ください";
+//   // numberLabel.style.color = "red";
+//   fetchButton.disabled = true;
+// }
 
 function validInput() {
   promptMessage.textContent = "入力後ボタンを押してください";
