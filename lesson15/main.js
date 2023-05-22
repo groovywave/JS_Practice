@@ -204,7 +204,7 @@ function checkInputValue(value, initialMessage, regExp) {
     promptMessage.textContent = initialMessage;
     promptMessage.style.color = "black";
     // invalidInput(errorMessage);
-    return false;
+    // return false;
   } else if (!value.match(regExp)) {
     // invalidInput(errorMessage);
     return false;
