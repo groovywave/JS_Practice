@@ -177,16 +177,16 @@ function validateNumber() {
 
 function checkInputName() {
   const value = nameBox.value;
-  const promptMessage = "入力後ボタンを押してください";
-  const isCheckName = checkInputValue(value, promptMessage, namePattern);
+  const initialMessage = "入力後ボタンを押してください";
+  const isCheckName = checkInputValue(value, initialMessage, namePattern);
   console.log(isCheckName);
   return isCheckName;
 }
 
 function checkInputNumber() {
   const value = numberBox.value;
-  const promptMessage = "入力後ボタンを押してください";
-  const isCheckNumber = checkInputValue(value, promptMessage, numberPattern);
+  const initialMessage = "入力後ボタンを押してください";
+  const isCheckNumber = checkInputValue(value, initialMessage, numberPattern);
   return isCheckNumber;
 }
 
@@ -197,11 +197,11 @@ function checkInput(isCheckName, isCheckNumber) {
   }
 }
 
-function checkInputValue(value, promptMessage, regExp) {
+function checkInputValue(value, initialMessage, regExp) {
   //errorMessage
-  console.log(value, promptMessage, regExp);
+  console.log(value, initialMessage, regExp);
   if (value === '""') {
-    promptMessage.textContent = promptMessage;
+    promptMessage.textContent = initialMessage;
     promptMessage.style.color = "black";
     // invalidInput(errorMessage);
     return false;
