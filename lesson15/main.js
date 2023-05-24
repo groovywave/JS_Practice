@@ -150,7 +150,8 @@ const isCheckName = false;
 const isCheckNumber = false;
 
 function validateName() {
-  const isCheckName = checkInputName();
+  // const isCheckName = checkInputName();
+  isCheckName = checkInputName();
   console.log(isCheckName);
   if (!isCheckName) {
     const errorMessage = "名前を入力ください";
