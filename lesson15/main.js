@@ -12,8 +12,10 @@ const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
 const namePattern =
-  // /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
-  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ][ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
+  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
+// /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
+/^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
+// /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
 const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -93,7 +95,7 @@ async function fetchRenderData(inputName, inputNumber) {
 }
 
 openButton.addEventListener("click", () => {
-  promptMessage.textContent = "入力後ボタンを押してください";
+  promptMessage.textContent = "入力後、取得ボタンを押してね";
   promptMessage.style.color = "black";
   nameBox.value = "";
   numberBox.value = "";
@@ -146,70 +148,45 @@ backButton.addEventListener("click", () => {
   }
 });
 
-const isCheckName = false;
-const isCheckNumber = false;
+let isValidateName = false;
+let isValidateNumber = false;
 
-function validateName() {
-  const isCheckName = checkInputName();
-  console.log(isCheckName);
-  if (!isCheckName) {
-    const errorMessage = "名前を入力ください";
-    invalidInput(errorMessage);
-  } else {
-    const isCheckNumber = checkInputNumber();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
+function validateSubmit(inputBox, validPattern, errorMessage) {
+  const isValue = checkInputValue(inputBox, validPattern, errorMessage);
+  if (inputBox === nameBox) {
+    isValidateName = isValue;
+  } else if (inputBox === numberBox) {
+    isValidateNumber = isValue;
+  }
+  if (isValue) {
+    resetPrompt();
+    enableSubmit(isValidateName, isValidateNumber);
+    console.log(isValidateName, isValidateNumber);
   }
 }
 
-function validateNumber() {
-  const isCheckNumber = checkInputNumber();
-  if (!isCheckNumber) {
-    const errorMessage = "半角数字を入力ください";
-    invalidInput(errorMessage);
-  } else {
-    promptMessage.textContent = "入力後ボタンを押してください";
-    const isCheckName = checkInputName();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
-  }
-}
-
-function checkInputName() {
-  const value = nameBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckName = checkInputValue(value, initialMessage, namePattern);
-  console.log(isCheckName);
-  return isCheckName;
-}
-
-function checkInputNumber() {
-  const value = numberBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckNumber = checkInputValue(value, initialMessage, numberPattern);
-  return isCheckNumber;
-}
-
-function checkInput(isCheckName, isCheckNumber) {
-  console.log(isCheckName, isCheckNumber);
-  if (isCheckName && isCheckNumber) {
-    validInput();
-  }
-}
-
-function checkInputValue(value, initialMessage, regExp) {
-  //errorMessage
-  console.log(value, initialMessage, regExp);
+function checkInputValue(inputBox, regExp, errorMessage) {
+  const value = inputBox.value;
   if (value === '""') {
-    promptMessage.textContent = initialMessage;
-    promptMessage.style.color = "black";
-    // invalidInput(errorMessage);
-    // return false;
+    console.log("check blank", value);
+    resetPrompt();
+    fetchButton.disabled = false;
   } else if (!value.match(regExp)) {
-    // invalidInput(errorMessage);
+    invalidInput(errorMessage);
     return false;
   } else {
     return true;
+  }
+}
+
+function resetPrompt() {
+  promptMessage.textContent = "入力後、取得ボタンを押してね";
+  promptMessage.style.color = "black";
+}
+
+function enableSubmit(isValueOne, isValueTheOther) {
+  if (isValueOne && isValueTheOther) {
+    validInput();
   }
 }
 
@@ -225,14 +202,9 @@ function validInput() {
   fetchButton.disabled = false;
 }
 
-// nameBox.addEventListener("input", checkInput);
-// nameBox.addEventListener("blur", checkInput);
-// nameBox.addEventListener("change", checkInput);
-// nameBox.addEventListener("keyup", checkInputName);
-nameBox.addEventListener("keyup", validateName);
-// nameBox.addEventListener("keydown", checkInput);
-// numberBox.addEventListener("input", checkInput);
-// numberBox.addEventListener("blur", checkInput);
-// numberBox.addEventListener("change", checkInput);
-numberBox.addEventListener("keyup", validateNumber);
-// numberBox.addEventListener("keydown", checkInput);
+nameBox.addEventListener("keyup", () =>
+  validateSubmit(nameBox, namePattern, "名前を入力ください")
+);
+numberBox.addEventListener("keyup", () =>
+  validateSubmit(numberBox, numberPattern, "半角数字を入力ください")
+);
