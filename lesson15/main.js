@@ -146,19 +146,24 @@ backButton.addEventListener("click", () => {
   }
 });
 
-const isCheckName = false;
+const isCheckThisValue = false;
 const isCheckNumber = false;
 
-function validateName() {
-  const isCheckName = checkInputName();
-  console.log(isCheckName);
-  if (!isCheckName) {
+function validate(inputBox,validPattern,bothBoxCheck)() {
+const isCheckValue = checkInput(inputBox,validPattern);
+  console.log(isCheckThisValue);
+  if (!isCheckThisValue) {
     const errorMessage = "名前を入力ください";
     invalidInput(errorMessage);
-  } else {
+  } else if(bothBoxCheck){
+    if(inputBox=nameBox){
+      checkInput(numberBox,numberPattern)
+    }else if(inputBox=numberBox){
+      checkInput(nameBox,namePattern)
+    }
     const isCheckNumber = checkInputNumber();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
+    checkInput(isCheckThisValue, isCheckNumber);
+    console.log(isCheckThisValue, isCheckNumber);
   }
 }
 
@@ -175,10 +180,10 @@ function validateNumber() {
   }
 }
 
-function checkInputName() {
-  const value = nameBox.value;
+function checkInput(inputBox,validPattern) {
+  const value = inputBox.value;
   const initialMessage = "入力後ボタンを押してください";
-  const isCheckName = checkInputValue(value, initialMessage, namePattern);
+  const isCheckName = checkInputValue(value, initialMessage, validPattern);
   console.log(isCheckName);
   return isCheckName;
 }
@@ -229,7 +234,7 @@ function validInput() {
 // nameBox.addEventListener("blur", checkInput);
 // nameBox.addEventListener("change", checkInput);
 // nameBox.addEventListener("keyup", checkInputName);
-nameBox.addEventListener("keyup", validateName);
+nameBox.addEventListener("keyup", validate(nameBox,namePattern,true));
 // nameBox.addEventListener("keydown", checkInput);
 // numberBox.addEventListener("input", checkInput);
 // numberBox.addEventListener("blur", checkInput);
