@@ -146,75 +146,53 @@ backButton.addEventListener("click", () => {
   }
 });
 
-const isCheckName = false;
-const isCheckNumber = false;
+// const isCheckThisValue = false;
+// const isCheckNumber = false;
 
-function validateName() {
-  // const isCheckName = checkInputName();
-  isCheckName = checkInputName();
-  console.log(isCheckName);
-  if (!isCheckName) {
-    const errorMessage = "名前を入力ください";
+function validateInputData(inputBox,validPattern,errorMessage) {
+const value = inputBox.value;
+const value2=nameBox;
+console.log(value);
+console.log(value2);
+const isCheckThisValue = checkInputValue(value,validPattern);
+  console.log(isCheckThisValue);
+  if (!isCheckThisValue) {
     invalidInput(errorMessage);
   } else {
-    const isCheckNumber = checkInputNumber();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
+    let isCheckTheOtherValue;
+    if(inputBox===nameBox){
+       isCheckTheOtherValue = checkInputValue(numberBox,numberPattern)
+    }else if(inputBox===numberBox){
+       isCheckTheOtherValue = checkInputValue(nameBox,namePattern)
+    }
+    enableSubmit(isCheckThisValue, isCheckTheOtherValue);
+    console.log(isCheckThisValue, isCheckTheOtherValue);
   }
 }
 
-function validateNumber() {
-  const isCheckNumber = checkInputNumber();
-  if (!isCheckNumber) {
-    const errorMessage = "半角数字を入力ください";
-    invalidInput(errorMessage);
-  } else {
-    promptMessage.textContent = "入力後ボタンを押してください";
-    const isCheckName = checkInputName();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
-  }
-}
-
-function checkInputName() {
-  const value = nameBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckName = checkInputValue(value, initialMessage, namePattern);
-  console.log(isCheckName);
-  return isCheckName;
-}
-
-function checkInputNumber() {
-  const value = numberBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckNumber = checkInputValue(value, initialMessage, numberPattern);
-  return isCheckNumber;
-}
-
-function checkInput(isCheckName, isCheckNumber) {
-  console.log(isCheckName, isCheckNumber);
-  if (isCheckName && isCheckNumber) {
-    validInput();
-  }
-}
-
-function checkInputValue(value, initialMessage, regExp) {
-  //errorMessage
-  console.log(value, initialMessage, regExp);
+function checkInputValue(inputBox, regExp) {
+  
+  const value = inputBox.value;
+  console.log(value,  regExp);
   if (value === '""') {
-    promptMessage.textContent = initialMessage;
+    promptMessage.textContent = "入力後ボタンを押してください";
     promptMessage.style.color = "black";
-    // invalidInput(errorMessage);
-    // return false;
   } else if (!value.match(regExp)) {
-    // invalidInput(errorMessage);
     return false;
   } else {
     return true;
   }
 }
 
+function enableSubmit(isValueOne, isValueTheOther) {
+  console.log(isValueOne, isValueTheOther);
+  if (isValueOne && isValueTheOther) {
+    validInput();
+  }
+}
+
 function invalidInput(errorMessage) {
+  console.log(errorMessage);
   promptMessage.textContent = errorMessage;
   promptMessage.style.color = "red";
   fetchButton.disabled = true;
@@ -230,10 +208,10 @@ function validInput() {
 // nameBox.addEventListener("blur", checkInput);
 // nameBox.addEventListener("change", checkInput);
 // nameBox.addEventListener("keyup", checkInputName);
-nameBox.addEventListener("keyup", validateName);
+nameBox.addEventListener("keyup", validateInputData(nameBox,namePattern,"名前を入力ください"));
 // nameBox.addEventListener("keydown", checkInput);
 // numberBox.addEventListener("input", checkInput);
 // numberBox.addEventListener("blur", checkInput);
 // numberBox.addEventListener("change", checkInput);
-numberBox.addEventListener("keyup", validateNumber);
+numberBox.addEventListener("keyup", validateInputData(numberBox,numberPattern,"半角数字を入力ください"));
 // numberBox.addEventListener("keydown", checkInput);
