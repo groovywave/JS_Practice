@@ -149,17 +149,21 @@ backButton.addEventListener("click", () => {
 const isCheckThisValue = false;
 const isCheckNumber = false;
 
-function validate(inputBox,validPattern,bothBoxCheck)() {
-const isCheckValue = checkInput(inputBox,validPattern);
+function validateInputData(inputBox, validPattern, errorMessage) {
+  const value = inputBox.value;
+  // const value2=nameBox;
+  console.log(value);
+  // console.log(value2);
+  const isCheckThisValue = checkInputValue(value, validPattern);
   console.log(isCheckThisValue);
   if (!isCheckThisValue) {
     const errorMessage = "名前を入力ください";
     invalidInput(errorMessage);
-  } else if(bothBoxCheck){
-    if(inputBox=nameBox){
-      checkInput(numberBox,numberPattern)
-    }else if(inputBox=numberBox){
-      checkInput(nameBox,namePattern)
+  } else if (bothBoxCheck) {
+    if ((inputBox = nameBox)) {
+      checkInput(numberBox, numberPattern);
+    } else if ((inputBox = numberBox)) {
+      checkInput(nameBox, namePattern);
     }
     const isCheckNumber = checkInputNumber();
     checkInput(isCheckThisValue, isCheckNumber);
@@ -180,7 +184,7 @@ function validateNumber() {
   }
 }
 
-function checkInput(inputBox,validPattern) {
+function checkInput(inputBox, validPattern) {
   const value = inputBox.value;
   const initialMessage = "入力後ボタンを押してください";
   const isCheckName = checkInputValue(value, initialMessage, validPattern);
@@ -230,14 +234,25 @@ function validInput() {
   fetchButton.disabled = false;
 }
 
+nameBox.addEventListener(
+  "keyup",
+  validateInputData(nameBox, namePattern, "名前を入力ください")
+);
+numberBox.addEventListener(
+  "keyup",
+  validateInputData(numberBox, numberPattern, "半角数字を入力ください")
+);
+
 // nameBox.addEventListener("input", checkInput);
 // nameBox.addEventListener("blur", checkInput);
 // nameBox.addEventListener("change", checkInput);
 // nameBox.addEventListener("keyup", checkInputName);
-nameBox.addEventListener("keyup", validate(nameBox,namePattern,true));
 // nameBox.addEventListener("keydown", checkInput);
 // numberBox.addEventListener("input", checkInput);
 // numberBox.addEventListener("blur", checkInput);
 // numberBox.addEventListener("change", checkInput);
-numberBox.addEventListener("keyup", validateNumber);
 // numberBox.addEventListener("keydown", checkInput);
+// const nameBoxData = nameBox.value;
+// const numberBoxData = numberBox.value;
+// nameBox.addEventListener("keyup", validateInputData(nameBoxData,namePattern,"名前を入力ください"));
+// numberBox.addEventListener("keyup", validateInputData(numberBoxData,numberPattern,"半角数字を入力ください"));
