@@ -12,8 +12,8 @@ const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
 const namePattern =
-  // /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
-  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ][ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
+  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
+// /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
 const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -177,38 +177,20 @@ function validateNumber() {
     const errorMessage = "半角数字を入力ください";
     invalidInput(errorMessage);
   } else {
-    promptMessage.textContent = "入力後ボタンを押してください";
-    const isCheckName = checkInputName();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
+    let isCheckTheOtherValue;
+    if (inputBox === nameBox) {
+      isCheckTheOtherValue = checkInputValue(numberBox, numberPattern);
+    } else if (inputBox === numberBox) {
+      isCheckTheOtherValue = checkInputValue(nameBox, namePattern);
+    }
+    enableSubmit(isCheckThisValue, isCheckTheOtherValue);
+    console.log(isCheckThisValue, isCheckTheOtherValue);
   }
 }
 
-function checkInput(inputBox, validPattern) {
+function checkInputValue(inputBox, regExp) {
   const value = inputBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckName = checkInputValue(value, initialMessage, validPattern);
-  console.log(isCheckName);
-  return isCheckName;
-}
-
-function checkInputNumber() {
-  const value = numberBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckNumber = checkInputValue(value, initialMessage, numberPattern);
-  return isCheckNumber;
-}
-
-function checkInput(isCheckName, isCheckNumber) {
-  console.log(isCheckName, isCheckNumber);
-  if (isCheckName && isCheckNumber) {
-    validInput();
-  }
-}
-
-function checkInputValue(value, initialMessage, regExp) {
-  //errorMessage
-  console.log(value, initialMessage, regExp);
+  console.log(value, regExp);
   if (value === '""') {
     promptMessage.textContent = initialMessage;
     promptMessage.style.color = "black";
@@ -243,16 +225,49 @@ numberBox.addEventListener(
   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
 );
 
-// nameBox.addEventListener("input", checkInput);
-// nameBox.addEventListener("blur", checkInput);
-// nameBox.addEventListener("change", checkInput);
-// nameBox.addEventListener("keyup", checkInputName);
-// nameBox.addEventListener("keydown", checkInput);
-// numberBox.addEventListener("input", checkInput);
-// numberBox.addEventListener("blur", checkInput);
-// numberBox.addEventListener("change", checkInput);
-// numberBox.addEventListener("keydown", checkInput);
+// nameBox.addEventListener(
+//   "input",
+//   validateInputData(nameBox, namePattern, "名前を入力ください")
+// );
+// nameBox.addEventListener(
+//   "blur",
+//   validateInputData(nameBox, namePattern, "名前を入力ください")
+// );
+// nameBox.addEventListener(
+//   "change",
+//   validateInputData(nameBox, namePattern, "名前を入力ください")
+// );
+// nameBox.addEventListener(
+//   "keyup",
+//   validateInputData(nameBox, namePattern, "名前を入力ください")
+// );
+// nameBox.addEventListener(
+//   "keydown",
+//   validateInputData(nameBox, namePattern, "名前を入力ください")
+// );
+// numberBox.addEventListener(
+//   "input",
+//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
+// );
+// numberBox.addEventListener(
+//   "blur",
+//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
+// );
+// numberBox.addEventListener(
+//   "change",
+//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
+// );
+// numberBox.addEventListener(
+//   "keydown",
+//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
+// );
 // const nameBoxData = nameBox.value;
 // const numberBoxData = numberBox.value;
-// nameBox.addEventListener("keyup", validateInputData(nameBoxData,namePattern,"名前を入力ください"));
-// numberBox.addEventListener("keyup", validateInputData(numberBoxData,numberPattern,"半角数字を入力ください"));
+// nameBox.addEventListener(
+//   "keyup",
+//   validateInputData(nameBox, namePattern, "名前を入力ください")
+// );
+// numberBox.addEventListener(
+//   "keyup",
+//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
+// );
