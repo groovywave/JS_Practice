@@ -226,6 +226,7 @@ numberBox.addEventListener(
 );
 
 //変更
+//変更
 // nameBox.addEventListener(
 //   "input",
 //   validateInputData(nameBox, namePattern, "名前を入力ください")
