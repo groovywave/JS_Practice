@@ -212,6 +212,7 @@ numberBox.addEventListener("keyup", () =>
   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
 );
 
+//変更
 // nameBox.addEventListener(
 //   "input",
 //   validateInputData(nameBox, namePattern, "名前を入力ください")
