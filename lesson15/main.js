@@ -146,37 +146,13 @@ backButton.addEventListener("click", () => {
   }
 });
 
-const isCheckThisValue = false;
-const isCheckNumber = false;
+// const isCheckThisValue = false;
+// const isCheckNumber = false;
 
 function validateInputData(inputBox, validPattern, errorMessage) {
-  console.log(inputBox);
-  console.log(inputBox.value);
-  const value = inputBox.value;
-  // const value2=nameBox;
-  console.log(value);
-  // console.log(value2);
-  const isCheckThisValue = checkInputValue(value, validPattern);
-  console.log(isCheckThisValue);
+  const isCheckThisValue = checkInputValue(inputBox, validPattern);
+  console.log("isCheckThisValue:", isCheckThisValue);
   if (!isCheckThisValue) {
-    const errorMessage = "名前を入力ください";
-    invalidInput(errorMessage);
-  } else if (bothBoxCheck) {
-    if ((inputBox = nameBox)) {
-      checkInput(numberBox, numberPattern);
-    } else if ((inputBox = numberBox)) {
-      checkInput(nameBox, namePattern);
-    }
-    const isCheckNumber = checkInputNumber();
-    checkInput(isCheckThisValue, isCheckNumber);
-    console.log(isCheckThisValue, isCheckNumber);
-  }
-}
-
-function validateNumber() {
-  const isCheckNumber = checkInputNumber();
-  if (!isCheckNumber) {
-    const errorMessage = "半角数字を入力ください";
     invalidInput(errorMessage);
   } else {
     resetPrompt();
@@ -194,14 +170,17 @@ function validateNumber() {
 function checkInputValue(inputBox, regExp) {
   const value = inputBox.value;
   if (value === '""') {
-    promptMessage.textContent = "入力後ボタンを押してください";
-    promptMessage.style.color = "black";
+    resetPrompt();
   } else if (!value.match(regExp)) {
-    // invalidInput(errorMessage);
     return false;
   } else {
     return true;
   }
+}
+
+function resetPrompt() {
+  promptMessage.textContent = "入力後ボタンを押してください";
+  promptMessage.style.color = "black";
 }
 
 function enableSubmit(isValueOne, isValueTheOther) {
@@ -212,6 +191,7 @@ function enableSubmit(isValueOne, isValueTheOther) {
 }
 
 function invalidInput(errorMessage) {
+  console.log(errorMessage);
   promptMessage.textContent = errorMessage;
   promptMessage.style.color = "red";
   fetchButton.disabled = true;
@@ -223,11 +203,9 @@ function validInput() {
   fetchButton.disabled = false;
 }
 
-nameBox.addEventListener(
-  "keyup",
+nameBox.addEventListener("keyup", () =>
   validateInputData(nameBox, namePattern, "名前を入力ください")
 );
-numberBox.addEventListener(
-  "keyup",
+numberBox.addEventListener("keyup", () =>
   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
 );
