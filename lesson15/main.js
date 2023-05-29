@@ -169,9 +169,7 @@ function validateInputData(inputBox, validPattern, errorMessage) {
 
 function checkInputValue(inputBox, regExp) {
   const value = inputBox.value;
-  if (value === '""') {
-    resetPrompt();
-  } else if (!value.match(regExp)) {
+  if (!value.match(regExp)) {
     return false;
   } else {
     return true;
