@@ -146,17 +146,17 @@ backButton.addEventListener("click", () => {
   }
 });
 
-// const isCheckThisValue = false;
-// const isCheckNumber = false;
+const isCheckThisValue = false;
+const isCheckTheOtherValue = false;
 
 function validateInputData(inputBox, validPattern, errorMessage) {
-  const isCheckThisValue = checkInputValue(inputBox, validPattern);
+  isCheckThisValue = checkInputValue(inputBox, validPattern);
   console.log("isCheckThisValue:", isCheckThisValue);
   if (!isCheckThisValue) {
     invalidInput(errorMessage);
   } else {
     resetPrompt();
-    let isCheckTheOtherValue;
+    // let isCheckTheOtherValue;
     if (inputBox === nameBox) {
       isCheckTheOtherValue = checkInputValue(numberBox, numberPattern);
     } else if (inputBox === numberBox) {
