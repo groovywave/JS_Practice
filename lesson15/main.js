@@ -150,6 +150,8 @@ const isCheckThisValue = false;
 const isCheckNumber = false;
 
 function validateInputData(inputBox, validPattern, errorMessage) {
+  console.log(inputBox);
+  console.log(inputBox.value);
   const value = inputBox.value;
   // const value2=nameBox;
   console.log(value);
@@ -177,6 +179,7 @@ function validateNumber() {
     const errorMessage = "半角数字を入力ください";
     invalidInput(errorMessage);
   } else {
+    resetPrompt();
     let isCheckTheOtherValue;
     if (inputBox === nameBox) {
       isCheckTheOtherValue = checkInputValue(numberBox, numberPattern);
@@ -190,17 +193,21 @@ function validateNumber() {
 
 function checkInputValue(inputBox, regExp) {
   const value = inputBox.value;
-  console.log(value, regExp);
   if (value === '""') {
-    promptMessage.textContent = initialMessage;
+    promptMessage.textContent = "入力後ボタンを押してください";
     promptMessage.style.color = "black";
-    // invalidInput(errorMessage);
-    // return false;
   } else if (!value.match(regExp)) {
     // invalidInput(errorMessage);
     return false;
   } else {
     return true;
+  }
+}
+
+function enableSubmit(isValueOne, isValueTheOther) {
+  console.log(isValueOne, isValueTheOther);
+  if (isValueOne && isValueTheOther) {
+    validInput();
   }
 }
 
@@ -224,52 +231,3 @@ numberBox.addEventListener(
   "keyup",
   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
 );
-
-//変更
-//変更
-// nameBox.addEventListener(
-//   "input",
-//   validateInputData(nameBox, namePattern, "名前を入力ください")
-// );
-// nameBox.addEventListener(
-//   "blur",
-//   validateInputData(nameBox, namePattern, "名前を入力ください")
-// );
-// nameBox.addEventListener(
-//   "change",
-//   validateInputData(nameBox, namePattern, "名前を入力ください")
-// );
-// nameBox.addEventListener(
-//   "keyup",
-//   validateInputData(nameBox, namePattern, "名前を入力ください")
-// );
-// nameBox.addEventListener(
-//   "keydown",
-//   validateInputData(nameBox, namePattern, "名前を入力ください")
-// );
-// numberBox.addEventListener(
-//   "input",
-//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
-// );
-// numberBox.addEventListener(
-//   "blur",
-//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
-// );
-// numberBox.addEventListener(
-//   "change",
-//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
-// );
-// numberBox.addEventListener(
-//   "keydown",
-//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
-// );
-// const nameBoxData = nameBox.value;
-// const numberBoxData = numberBox.value;
-// nameBox.addEventListener(
-//   "keyup",
-//   validateInputData(nameBox, namePattern, "名前を入力ください")
-// );
-// numberBox.addEventListener(
-//   "keyup",
-//   validateInputData(numberBox, numberPattern, "半角数字を入力ください")
-// );
