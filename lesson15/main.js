@@ -99,9 +99,6 @@ openButton.addEventListener("click", () => {
   promptMessage.style.color = "black";
   nameBox.value = "";
   numberBox.value = "";
-  setTimeout(() => {
-    nameBox.focus();
-  }, 0);
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
@@ -110,6 +107,7 @@ openButton.addEventListener("click", () => {
   nameLabel.style.color = "black";
   numberLabel.textContent = "数字";
   numberLabel.style.color = "black";
+  nameBox.focus();
 });
 
 fetchButton.addEventListener("click", () => {
