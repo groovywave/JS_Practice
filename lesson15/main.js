@@ -161,14 +161,12 @@ function validateSubmit(inputBox, validPattern, errorMessage) {
   if (isValue) {
     resetPrompt();
     enableSubmit(isValidateName, isValidateNumber);
-    console.log(isValidateName, isValidateNumber);
   }
 }
 
 function checkInputValue(inputBox, regExp, errorMessage) {
   const value = inputBox.value;
   if (value === '""') {
-    console.log("check blank", value);
     resetPrompt();
     fetchButton.disabled = false;
   } else if (!value.match(regExp)) {
@@ -191,7 +189,6 @@ function enableSubmit(isValueOne, isValueTheOther) {
 }
 
 function invalidInput(errorMessage) {
-  console.log(errorMessage);
   promptMessage.textContent = errorMessage;
   promptMessage.style.color = "red";
   fetchButton.disabled = true;
