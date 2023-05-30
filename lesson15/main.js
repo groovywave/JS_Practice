@@ -191,6 +191,7 @@ function enableSubmit(isValueOne, isValueTheOther) {
 }
 
 function invalidInput(errorMessage) {
+  console.log(errorMessage);
   promptMessage.textContent = errorMessage;
   promptMessage.style.color = "red";
   fetchButton.disabled = true;
