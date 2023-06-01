@@ -14,8 +14,6 @@ const numberBox = document.getElementById("js-number-box");
 const namePattern =
   /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
 // /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
-/^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
-// /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
 const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
@@ -161,12 +159,14 @@ function validateSubmit(inputBox, validPattern, errorMessage) {
   if (isValue) {
     resetPrompt();
     enableSubmit(isValidateName, isValidateNumber);
+    console.log(isValidateName, isValidateNumber);
   }
 }
 
 function checkInputValue(inputBox, regExp, errorMessage) {
   const value = inputBox.value;
   if (value === '""') {
+    console.log("check blank", value);
     resetPrompt();
     fetchButton.disabled = false;
   } else if (!value.match(regExp)) {
