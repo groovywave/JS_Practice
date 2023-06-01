@@ -159,14 +159,12 @@ function validateSubmit(inputBox, validPattern, errorMessage) {
   if (isValue) {
     resetPrompt();
     enableSubmit(isValidateName, isValidateNumber);
-    console.log(isValidateName, isValidateNumber);
   }
 }
 
 function checkInputValue(inputBox, regExp, errorMessage) {
   const value = inputBox.value;
   if (value === '""') {
-    console.log("check blank", value);
     resetPrompt();
     fetchButton.disabled = false;
   } else if (!value.match(regExp)) {
