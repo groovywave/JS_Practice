@@ -12,13 +12,9 @@ const numberLabel = document.getElementById("js-number-label");
 const nameBox = document.getElementById("js-name-box");
 const numberBox = document.getElementById("js-number-box");
 const namePattern =
-  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
-// /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
+  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/; //https://arc-tech.hatenablog.com/entry/2021/01/20/105620
 const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
-// const url = ""; //Not JSON
-// const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
-// const url = "https://mocki.io/v1/1c058349-634e-"; //Failed to fetch
 
 function renderStatus(response) {
   errorMessage.id = "render-status";
@@ -97,9 +93,6 @@ openButton.addEventListener("click", () => {
   promptMessage.style.color = "black";
   nameBox.value = "";
   numberBox.value = "";
-  setTimeout(() => {
-    nameBox.focus();
-  }, 0);
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
@@ -108,6 +101,7 @@ openButton.addEventListener("click", () => {
   nameLabel.style.color = "black";
   numberLabel.textContent = "数字";
   numberLabel.style.color = "black";
+  nameBox.focus();
 });
 
 fetchButton.addEventListener("click", () => {
