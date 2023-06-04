@@ -124,10 +124,12 @@ function closeModal() {
 
 mask.addEventListener("click", () => {
   closeModal();
+  resetValidation();
 });
 
 closeButton.addEventListener("click", () => {
   closeModal();
+  resetValidation();
 });
 
 backButton.addEventListener("click", () => {
@@ -173,6 +175,11 @@ function checkInputValue(inputBox, regExp, errorMessage) {
 function resetPrompt() {
   promptMessage.textContent = "入力後、取得ボタンを押してね";
   promptMessage.style.color = "black";
+}
+
+function resetValidation() {
+  isValidateName = false;
+  isValidateNumber = false;
 }
 
 function enableSubmit(isValueOne, isValueTheOther) {
