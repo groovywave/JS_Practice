@@ -196,6 +196,12 @@ function validInput() {
 nameBox.addEventListener("keyup", () =>
   validateSubmit(nameBox, namePattern, "名前を入力ください")
 );
+nameBox.addEventListener("input", () =>
+  validateSubmit(nameBox, namePattern, "名前を入力ください")
+);
 numberBox.addEventListener("keyup", () =>
+  validateSubmit(numberBox, numberPattern, "半角数字を入力ください")
+);
+numberBox.addEventListener("input", () =>
   validateSubmit(numberBox, numberPattern, "半角数字を入力ください")
 );
