@@ -7,14 +7,8 @@ const backButton = document.getElementById("js-back-button");
 const modal = document.getElementById("js-modal");
 const mask = document.getElementById("js-mask");
 const promptMessage = document.getElementById("js-prompt-message");
-const nameLabel = document.getElementById("js-name-label");
-const numberLabel = document.getElementById("js-number-label");
-const nameBox = document.getElementById("js-name-box");
-const numberBox = document.getElementById("js-number-box");
-const namePattern =
-  // /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*)?([ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]*)?$/;
-  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ][ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
-const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
+const inputBox = document.getElementById("js-input-box");
+const halfWidthDigits = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
 const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 // const url = ""; //Not JSON
 // const url = "https://mocki.io/v1/55dc6233-a8fe-44ca-8906-3de313545ce8"; //No data
@@ -84,39 +78,33 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData(inputName, inputNumber) {
+async function fetchRenderData(inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
-    console.log(inputName, inputNumber); //show inputted number
+    console.log(inputNumber); //show inputted number
   }
 }
 
 openButton.addEventListener("click", () => {
   promptMessage.textContent = "入力後ボタンを押してください";
   promptMessage.style.color = "black";
-  nameBox.value = "";
-  numberBox.value = "";
+  inputBox.value = "";
   setTimeout(() => {
-    nameBox.focus();
+    inputBox.focus();
   }, 0);
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
   fetchButton.setAttribute("disabled", "true");
-  nameLabel.textContent = "名前";
-  nameLabel.style.color = "black";
-  numberLabel.textContent = "数字";
-  numberLabel.style.color = "black";
 });
 
 fetchButton.addEventListener("click", () => {
   if (fetchButton.hasAttribute("disabled")) {
     return;
   }
-  const inputName = nameBox.value;
-  const inputNumber = numberBox.value;
-  fetchRenderData(inputName, inputNumber);
+  const inputNumber = inputBox.value;
+  fetchRenderData(inputNumber);
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 });
@@ -146,93 +134,24 @@ backButton.addEventListener("click", () => {
   }
 });
 
-const isCheckName = false;
-const isCheckNumber = false;
-
-function validateName() {
-  const isCheckName = checkInputName();
-  console.log(isCheckName);
-  if (!isCheckName) {
-    const errorMessage = "名前を入力ください";
-    invalidInput(errorMessage);
-  } else {
-    const isCheckNumber = checkInputNumber();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
-  }
-}
-
-function validateNumber() {
-  const isCheckNumber = checkInputNumber();
-  if (!isCheckNumber) {
-    const errorMessage = "半角数字を入力ください";
-    invalidInput(errorMessage);
-  } else {
-    promptMessage.textContent = "入力後ボタンを押してください";
-    const isCheckName = checkInputName();
-    checkInput(isCheckName, isCheckNumber);
-    console.log(isCheckName, isCheckNumber);
-  }
-}
-
-function checkInputName() {
-  const value = nameBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckName = checkInputValue(value, initialMessage, namePattern);
-  console.log(isCheckName);
-  return isCheckName;
-}
-
-function checkInputNumber() {
-  const value = numberBox.value;
-  const initialMessage = "入力後ボタンを押してください";
-  const isCheckNumber = checkInputValue(value, initialMessage, numberPattern);
-  return isCheckNumber;
-}
-
-function checkInput(isCheckName, isCheckNumber) {
-  console.log(isCheckName, isCheckNumber);
-  if (isCheckName && isCheckNumber) {
+function checkInput() {
+  const inputNumber = inputBox.value;
+  if (inputNumber.match(halfWidthDigits)) {
     validInput();
-  }
-}
-
-function checkInputValue(value, initialMessage, regExp) {
-  //errorMessage
-  console.log(value, initialMessage, regExp);
-  if (value === '""') {
-    promptMessage.textContent = initialMessage;
-    promptMessage.style.color = "black";
-    // invalidInput(errorMessage);
-    // return false;
-  } else if (!value.match(regExp)) {
-    // invalidInput(errorMessage);
-    return false;
   } else {
-    return true;
+    invalidInput();
   }
 }
 
-function invalidInput(errorMessage) {
-  promptMessage.textContent = errorMessage;
+function validInput() {
+  promptMessage.textContent = "";
+  fetchButton.disabled = false;
+}
+
+function invalidInput() {
+  promptMessage.textContent = "半角数値を入力ください";
   promptMessage.style.color = "red";
   fetchButton.disabled = true;
 }
 
-function validInput() {
-  promptMessage.textContent = "入力後ボタンを押してください";
-  promptMessage.style.color = "black";
-  fetchButton.disabled = false;
-}
-
-// nameBox.addEventListener("input", checkInput);
-// nameBox.addEventListener("blur", checkInput);
-// nameBox.addEventListener("change", checkInput);
-// nameBox.addEventListener("keyup", checkInputName);
-nameBox.addEventListener("keyup", validateName);
-// nameBox.addEventListener("keydown", checkInput);
-// numberBox.addEventListener("input", checkInput);
-// numberBox.addEventListener("blur", checkInput);
-// numberBox.addEventListener("change", checkInput);
-numberBox.addEventListener("keyup", validateNumber);
-// numberBox.addEventListener("keydown", checkInput);
+inputBox.addEventListener("input", checkInput);

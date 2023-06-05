@@ -1,0 +1,11 @@
+{
+  "name": "js_practice",
+  "version": "1.0.0",
+  "description": "This is a repository for me learning JS.\r I've taken part in a class Morikenjuku.\r Thank you teacher Moriken!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
