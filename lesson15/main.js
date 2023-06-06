@@ -195,7 +195,7 @@ function invalidInput(errorMessage) {
 }
 
 function validInput() {
-  promptMessage.textContent = "入力後ボタンを押してください";
+  promptMessage.textContent = "入力後、取得ボタンを押してね";
   promptMessage.style.color = "black";
   fetchButton.disabled = false;
 }
