@@ -98,10 +98,6 @@ openButton.addEventListener("click", () => {
   mask.classList.remove("hidden");
   openButton.classList.add("hidden");
   fetchButton.setAttribute("disabled", "true");
-  nameLabel.textContent = "名前";
-  nameLabel.style.color = "black";
-  numberLabel.textContent = "数字";
-  numberLabel.style.color = "black";
   nameBox.focus();
 });
 
