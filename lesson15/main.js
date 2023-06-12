@@ -155,10 +155,7 @@ function validateSubmit(inputBox, validPattern, errorMessage) {
 
 function checkInputValue(inputBox, regExp, errorMessage) {
   const value = inputBox.value;
-  if (value === '""') {
-    resetPrompt();
-    fetchButton.disabled = false;
-  } else if (!value.match(regExp)) {
+  if (!value.match(regExp)) {
     invalidInput(errorMessage);
     return false;
   } else {
