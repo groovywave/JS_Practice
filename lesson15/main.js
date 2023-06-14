@@ -100,9 +100,6 @@ openButton.addEventListener("click", () => {
 });
 
 fetchButton.addEventListener("click", () => {
-  if (fetchButton.hasAttribute("disabled")) {
-    return;
-  }
   const inputNumber = inputBox.value;
   fetchRenderData(inputNumber);
   modal.classList.add("hidden");
