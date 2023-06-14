@@ -99,9 +99,6 @@ openButton.addEventListener("click", () => {
 });
 
 fetchButton.addEventListener("click", () => {
-  // if (fetchButton.hasAttribute("disabled")) {
-  //   return;
-  // }
   const inputName = nameBox.value;
   const inputNumber = numberBox.value;
   fetchRenderData(inputName, inputNumber);
