@@ -41,7 +41,6 @@ function removeCircle() {
 
 function renderData(menus) {
   const fragment = document.createDocumentFragment();
-  fragment.id = "fragment";
   for (const menu of menus) {
     const li = document.createElement("li");
     const a = document.createElement("a");
