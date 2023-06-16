@@ -135,7 +135,7 @@ backButton.addEventListener("click", () => {
 let isValidateName = false;
 let isValidateNumber = false;
 
-function validateSubmit(inputBox, validPattern, errorMessage) {
+function validatePattern(inputBox, validPattern, errorMessage) {
   const isValue = checkInputValue(inputBox, validPattern, errorMessage);
   if (inputBox === nameBox) {
     isValidateName = isValue;
@@ -187,8 +187,8 @@ function validInput() {
 }
 
 nameBox.addEventListener("input", () =>
-  validateSubmit(nameBox, namePattern, "名前を入力ください")
+  validatePattern(nameBox, namePattern, "名前を入力ください")
 );
 numberBox.addEventListener("input", () =>
-  validateSubmit(numberBox, numberPattern, "半角数字を入力ください")
+  validatePattern(numberBox, numberPattern, "半角数字を入力ください")
 );
