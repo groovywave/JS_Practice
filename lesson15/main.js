@@ -144,7 +144,7 @@ function validatePattern(inputBox, validPattern, errorMessage) {
   }
   if (isValue) {
     resetPrompt();
-    enableSubmit(isValidateName, isValidateNumber);
+    checkEnableSubmit();
   }
 }
 
@@ -167,8 +167,8 @@ function resetValidation() {
   isValidateNumber = false;
 }
 
-function enableSubmit(isValueOne, isValueTheOther) {
-  if (isValueOne && isValueTheOther) {
+function checkEnableSubmit() {
+  if (isValidateName && isValidateNumber) {
     validInput();
   }
 }
