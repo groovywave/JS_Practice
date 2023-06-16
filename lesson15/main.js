@@ -150,12 +150,11 @@ function validatePattern(inputBox, validPattern, errorMessage) {
 
 function checkInputValue(inputBox, regExp, errorMessage) {
   const value = inputBox.value;
-  if (!value.match(regExp)) {
+  const result = regExp.test(value);
+  if (!result) {
     invalidInput(errorMessage);
-    return false;
-  } else {
-    return true;
   }
+  return result;
 }
 
 function resetPrompt() {
