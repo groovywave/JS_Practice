@@ -78,11 +78,11 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData(inputName, inputNumber) {
+async function fetchRenderData(inputNumber) {
   const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
-    console.log(inputName, inputNumber); //show inputted number
+    console.log(inputNumber); //show inputted number
   }
 }
 
@@ -170,8 +170,11 @@ function resetValidation() {
 function checkEnableSubmit() {
   if (isValidateName && isValidateNumber) {
     validInput();
+  } else {
+    invalidInput();
   }
 }
+
 
 function invalidInput(errorMessage) {
   promptMessage.textContent = errorMessage;
@@ -191,3 +194,4 @@ nameBox.addEventListener("input", () =>
 numberBox.addEventListener("input", () =>
   validatePattern(numberBox, numberPattern, "半角数字を入力ください")
 );
+
