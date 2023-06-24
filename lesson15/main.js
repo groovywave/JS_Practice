@@ -1,6 +1,6 @@
 // import { format, differenceInCalendarDays } from "date-fns";
 // const tabMenuList = document.getElementById("js-tab-menu__list");
-
+const tabArea = getElementById("js-ul");
 const menuItems = document.querySelectorAll(".menu li a");
 const contents = document.querySelectorAll(".content");
 
