@@ -7,6 +7,11 @@ body {
   width: 500px;
 }
 
+.tab-area{
+  display: flex;
+}
+
+
 .menu {
   display: flex;
 }

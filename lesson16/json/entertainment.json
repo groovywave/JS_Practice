@@ -1,8 +1,8 @@
 {
-  "id": "economy",
-  "category": "economy",
+  "id": "entertainment",
+  "category": "entertainment",
   "select": false,
-  "image": "https://i.postimg.cc/65MSC6DL/mark-dollar.png",
+  "image": "https://i.postimg.cc/Bn4GSkqH/tv-haishin-owarai-man.png",
   "article": [
     {
       "id": "04",
@@ -64,6 +64,6 @@
           "detail": "十和さんのコメント"
         }
       ]
-    }      
+    }
   ]
 }
