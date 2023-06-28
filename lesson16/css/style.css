@@ -27,7 +27,7 @@ body {
   display: flex;
 }
 
-.content li a {
+.genre li a {
   /* display: inline-block; */
   width: 100px;
   text-align: center;
@@ -46,13 +46,13 @@ body {
   opacity: 0.5;
   transition: opacity 0.4s;
 }
-.content.active {
+.genre.active {
   background: #333;
   color: #fff;
   min-height: 150px;
   padding: 12px;
   display: block;
 }
-.content {
+.genre {
   display: none;
 }

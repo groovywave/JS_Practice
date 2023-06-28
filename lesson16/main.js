@@ -22,9 +22,10 @@ const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
+const titleArea = document.createElement("div");
 const imageArea = document.createElement("div");
-// const menuItems = document.querySelectorAll(".menu tabList a");
-// const contents = document.querySelectorAll(".content");
+// const menuItems = document.querySelectorAll(".menu tabTitle a");
+// const contents = [];
 async function fetchRenderData() {
   const responseData = await Promise.all(articlesAPI.map(fetchData));
   console.log(responseData);
@@ -75,24 +76,24 @@ function displayInfo(error) {
 
 function renderData(responseData) {
   const fragmentTabs = document.createDocumentFragment();
-  const fragmentArticles = document.createDocumentFragment();
+  const fragmentTitles = document.createDocumentFragment();
   const fragmentImages = document.createDocumentFragment();
 
   for (const data of responseData) {
     //Tabsの生成
-    const tabList = document.createElement("li");
+    const tabTitle = document.createElement("li");
     const tabAnchor = document.createElement("a");
     tabAnchor.href = "#";
     tabAnchor.textContent = data.category;
     tabAnchor.setAttribute("data-id", data.id);
     tabAnchor.classList.add("tab");
-    fragmentTabs.appendChild(tabList).appendChild(tabAnchor);
+    fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 
     //記事タイトルの作成
-    const content = document.createElement("section");
-    content.id = data.id;
-    content.classList.add("content");
-    // console.log(content);
+    const genre = document.createElement("section");
+    genre.id = data.id;
+    genre.classList.add("genre");
+    // console.log(genre);
     const articleList = data.article;
     for (const article of articleList) {
       const title = document.createElement("li");
@@ -100,11 +101,16 @@ function renderData(responseData) {
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
       // title.textContent = article.title;
-      content.appendChild(title).appendChild(titleAnchor);
+      // genre.appendChild(title).appendChild(titleAnchor);
+      titleArea
+        // .appendChild(titleArea)
+        .appendChild(title)
+        .appendChild(titleAnchor);
       // console.log(title);
     }
-    fragmentArticles.appendChild(content);
-    // console.log(fragmentArticles);
+    // fragmentTitles.appendChild(genre);
+    fragmentTitles.appendChild(titleArea);
+    // console.log(fragmentTitles);
 
     //imageの作成
     const img = document.createElement("img");
@@ -112,27 +118,30 @@ function renderData(responseData) {
     fragmentImages.appendChild(img);
   }
   tabArea.appendChild(fragmentTabs);
-  articleArea.appendChild(fragmentArticles);
-  imageArea.appendChild(fragmentImages);
-  tabArea
-    .insertAdjacentElement("afterend", articleArea)
-    .insertAdjacentElement("afterend", imageArea);
+  genre.appendChild(fragmentTitles).appendChild(fragmentImages);
+  articleArea.appendChild(genre);
+  // genre.appendChild(fragmentTitles); //
+  // imageArea.appendChild(fragmentImages);
+  tabArea.insertAdjacentElement("afterend", articleArea);
+  // .insertAdjacentElement("afterend", imageArea);
 
   // console.log(tabs);
   // console.log(contents);
   // addClickEvent(contents);
   const tabs = Array.from(document.getElementsByClassName("tab"));
-  const contents = Array.from(document.getElementsByClassName("content"));
-  addClickEvent(tabs);
+  const contents = Array.from(document.getElementsByClassName("genre"));
+  addClickEvent(tabs, contents);
+  console.log(tabs);
+  console.log(contents);
 }
-// const fragmentArticles = document.createDocumentFragment();
+// const fragmentTitles = document.createDocumentFragment();
 // for (data of responseData) {
 // const articleArea = document.createElement("ul");
 // const imageArea = document.createElement("div");
 //   img.src = data.image;
 //   console.log(data.image);
 //   img.alt = data.category;
-//   fragmentArticles.appendChild(section);
+//   fragmentTitles.appendChild(section);
 // }
 
 function removeCircle() {
@@ -141,7 +150,7 @@ function removeCircle() {
 
 fetchRenderData();
 
-function addClickEvent(elements) {
+function addClickEvent(elements, contents) {
   // console.log(elements);
   elements.forEach((clickedItem) => {
     clickedItem.addEventListener("click", (e) => {
@@ -153,14 +162,14 @@ function addClickEvent(elements) {
         item.classList.remove("active");
       });
       clickedItem.classList.add("active");
-      console.log(contents);
-      contents.forEach((content) => {
-        console.log(content);
-        content.classList.remove("active");
+      // console.log(contents);
+      contents.forEach((genre) => {
+        console.log(genre);
+        genre.classList.remove("active");
       });
+      console.log(contents);
       console.log(clickedItem.dataset.id);
       document.getElementById(clickedItem.dataset.id).classList.add("active");
-
       //clickedItem.dataset.id で取得した a タグの data-id を document.getElementById() の引数に ID の名前として渡すことによって、その data-id と同名の ID をもつ section タグを取得し、それに active クラスを付与しているので、a タグではなく section タグに active クラスがつきます。
     });
   });
