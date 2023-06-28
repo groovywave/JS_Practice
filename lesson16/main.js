@@ -23,8 +23,8 @@ const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 const imageArea = document.createElement("div");
-const menuItems = document.querySelectorAll(".menu tabList a");
-const contents = document.querySelectorAll(".content");
+// const menuItems = document.querySelectorAll(".menu tabList a");
+// const contents = document.querySelectorAll(".content");
 async function fetchRenderData() {
   const responseData = await Promise.all(articlesAPI.map(fetchData));
   console.log(responseData);
@@ -92,7 +92,7 @@ function renderData(responseData) {
     const content = document.createElement("section");
     content.id = data.id;
     content.classList.add("content");
-    console.log(content);
+    // console.log(content);
     const articleList = data.article;
     for (const article of articleList) {
       const title = document.createElement("li");
@@ -101,10 +101,10 @@ function renderData(responseData) {
       titleAnchor.textContent = article.title;
       // title.textContent = article.title;
       content.appendChild(title).appendChild(titleAnchor);
-      console.log(title);
+      // console.log(title);
     }
     fragmentArticles.appendChild(content);
-    console.log(fragmentArticles);
+    // console.log(fragmentArticles);
 
     //imageの作成
     const img = document.createElement("img");
@@ -118,13 +118,12 @@ function renderData(responseData) {
     .insertAdjacentElement("afterend", articleArea)
     .insertAdjacentElement("afterend", imageArea);
 
+  // console.log(tabs);
+  // console.log(contents);
+  // addClickEvent(contents);
   const tabs = Array.from(document.getElementsByClassName("tab"));
-  console.log(tabs);
-  addClickEvent(tabs);
-
   const contents = Array.from(document.getElementsByClassName("content"));
-  console.log(contents);
-  addClickEvent(contents);
+  addClickEvent(tabs);
 }
 // const fragmentArticles = document.createDocumentFragment();
 // for (data of responseData) {
@@ -143,19 +142,20 @@ function removeCircle() {
 fetchRenderData();
 
 function addClickEvent(elements) {
-  console.log(elements);
+  // console.log(elements);
   elements.forEach((clickedItem) => {
     clickedItem.addEventListener("click", (e) => {
-      console.log(clickedItem);
-      console.log(e);
+      // console.log(clickedItem);
+      // console.log(e);
       e.preventDefault();
       //a タグの規定の動作（リンク先にページを遷移する）を無効化
       elements.forEach((item) => {
         item.classList.remove("active");
       });
       clickedItem.classList.add("active");
-
+      console.log(contents);
       contents.forEach((content) => {
+        console.log(content);
         content.classList.remove("active");
       });
       console.log(clickedItem.dataset.id);
