@@ -22,8 +22,7 @@ const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
-const titleArea = document.createElement("div");
-const imageArea = document.createElement("div");
+
 // const menuItems = document.querySelectorAll(".menu tabTitle a");
 // const contents = [];
 async function fetchRenderData() {
@@ -74,11 +73,11 @@ function displayInfo(error) {
   document.body.appendChild(errorMessage);
 }
 
-function renderData(responseData) {
-  const fragmentTabs = document.createDocumentFragment();
-  const fragmentTitles = document.createDocumentFragment();
-  const fragmentImages = document.createDocumentFragment();
+const fragmentTabs = document.createDocumentFragment();
+const fragmentTitles = document.createDocumentFragment();
+const fragmentGenres = document.createDocumentFragment();
 
+function renderData(responseData) {
   for (const data of responseData) {
     //Tabsの生成
     const tabTitle = document.createElement("li");
@@ -87,62 +86,49 @@ function renderData(responseData) {
     tabAnchor.textContent = data.category;
     tabAnchor.setAttribute("data-id", data.id);
     tabAnchor.classList.add("tab");
+    if (data.select) {
+      tabAnchor.classList.add("active");
+    }
     fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 
     //記事タイトルの作成
-    const genre = document.createElement("section");
-    genre.id = data.id;
-    genre.classList.add("genre");
-    // console.log(genre);
     const articleList = data.article;
     for (const article of articleList) {
       const title = document.createElement("li");
       const titleAnchor = document.createElement("a");
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
-      // title.textContent = article.title;
-      // genre.appendChild(title).appendChild(titleAnchor);
-      titleArea
-        // .appendChild(titleArea)
-        .appendChild(title)
-        .appendChild(titleAnchor);
-      // console.log(title);
+      fragmentTitles.appendChild(title).appendChild(titleAnchor);
     }
-    // fragmentTitles.appendChild(genre);
-    fragmentTitles.appendChild(titleArea);
-    // console.log(fragmentTitles);
 
     //imageの作成
     const img = document.createElement("img");
     img.src = data.image;
-    fragmentImages.appendChild(img);
+
+    const genre = document.createElement("section");
+    const titleArea = document.createElement("div");
+    const imageArea = document.createElement("div");
+    titleArea.classList.add("content");
+    imageArea.classList.add("content");
+    genre.id = data.id;
+    genre.classList.add("genre");
+    genre.appendChild(titleArea).appendChild(fragmentTitles);
+    genre.appendChild(imageArea).appendChild(img);
+    if (data.select) {
+      genre.classList.add("active");
+    }
+    fragmentGenres.appendChild(genre);
   }
   tabArea.appendChild(fragmentTabs);
-  genre.appendChild(fragmentTitles).appendChild(fragmentImages);
-  articleArea.appendChild(genre);
-  // genre.appendChild(fragmentTitles); //
-  // imageArea.appendChild(fragmentImages);
+  articleArea.appendChild(fragmentGenres);
+  console.log(articleArea);
   tabArea.insertAdjacentElement("afterend", articleArea);
-  // .insertAdjacentElement("afterend", imageArea);
-
-  // console.log(tabs);
-  // console.log(contents);
-  // addClickEvent(contents);
   const tabs = Array.from(document.getElementsByClassName("tab"));
   const contents = Array.from(document.getElementsByClassName("genre"));
   addClickEvent(tabs, contents);
   console.log(tabs);
   console.log(contents);
 }
-// const fragmentTitles = document.createDocumentFragment();
-// for (data of responseData) {
-// const articleArea = document.createElement("ul");
-// const imageArea = document.createElement("div");
-//   img.src = data.image;
-//   console.log(data.image);
-//   img.alt = data.category;
-//   fragmentTitles.appendChild(section);
-// }
 
 function removeCircle() {
   document.getElementById("loading-circle").remove();
@@ -174,198 +160,3 @@ function addClickEvent(elements, contents) {
     });
   });
 }
-// const ul = document.getElementById("js-ul");
-// const fetchButton = document.getElementById("js-fetch-button");
-// const errorMessage = document.createElement("p");
-// const openButton = document.getElementById("js-open-button");
-// const closeButton = document.getElementById("js-close-button");
-// const backButton = document.getElementById("js-back-button");
-// const modal = document.getElementById("js-modal");
-// const mask = document.getElementById("js-mask");
-// const promptMessage = document.getElementById("js-prompt-message");
-// const nameBox = document.getElementById("js-name-box");
-// const numberBox = document.getElementById("js-number-box");
-// const namePattern =
-//   /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
-// //https://arc-tech.hatenablog.com/entry/2021/01/20/105620
-// const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
-// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
-
-// function renderStatus(response) {
-//   errorMessage.id = "render-status";
-//   errorMessage.textContent = `${response.status}:${response.statusText}`;
-//   document.body.appendChild(errorMessage);
-// }
-
-// function displayInfo(error) {
-//   errorMessage.id = "display-info";
-//   errorMessage.textContent = error;
-//   document.body.appendChild(errorMessage);
-// }
-
-// function renderCircle() {
-//   const loadingCircle = document.createElement("img");
-//   loadingCircle.src = "img/loading-circle.gif";
-//   loadingCircle.alt = "ローディング画像";
-//   loadingCircle.id = "loading-circle";
-//   ul.appendChild(loadingCircle);
-// }
-
-// function removeCircle() {
-//   document.getElementById("loading-circle").remove();
-// }
-
-// function renderData(menus) {
-//   const fragment = document.createDocumentFragment();
-//   for (const menu of menus) {
-//     const li = document.createElement("li");
-//     const a = document.createElement("a");
-//     const img = document.createElement("img");
-//     a.href = menu.to;
-//     a.textContent = menu.text;
-//     img.src = menu.img;
-//     img.alt = menu.alt;
-//     fragment
-//       .appendChild(li)
-//       .appendChild(a)
-//       .insertAdjacentElement("afterbegin", img);
-//   }
-//   ul.appendChild(fragment);
-// }
-
-// async function fetchData(url) {
-//   renderCircle();
-//   try {
-//     const response = await fetch(url);
-//     const responseData = await response.json();
-//     if (!response.ok) {
-//       renderStatus(response);
-//       console.error(`${response.status}:${response.statusText}`);
-//     }
-//     if (!responseData.length) {
-//       displayInfo("no data");
-//     }
-//     return responseData;
-//   } catch (error) {
-//     displayInfo(error);
-//   } finally {
-//     removeCircle();
-//     backButton.classList.remove("hidden");
-//   }
-// }
-
-// async function fetchRenderData(inputNumber) {
-//   const responseData = await fetchData(url);
-//   if (responseData) {
-//     renderData(responseData);
-//     console.log(inputNumber); //show inputted number
-//   }
-// }
-
-// openButton.addEventListener("click", () => {
-//   resetPrompt();
-//   nameBox.value = "";
-//   numberBox.value = "";
-//   modal.classList.remove("hidden");
-//   mask.classList.remove("hidden");
-//   openButton.classList.add("hidden");
-//   fetchButton.setAttribute("disabled", "true");
-//   nameBox.focus();
-// });
-
-// fetchButton.addEventListener("click", () => {
-//   const inputName = nameBox.value;
-//   const inputNumber = numberBox.value;
-//   fetchRenderData(inputName, inputNumber);
-//   modal.classList.add("hidden");
-//   mask.classList.add("hidden");
-// });
-
-// function closeModal() {
-//   modal.classList.add("hidden");
-//   mask.classList.add("hidden");
-//   openButton.classList.remove("hidden");
-// }
-
-// mask.addEventListener("click", () => {
-//   closeModal();
-//   resetValidation();
-// });
-
-// closeButton.addEventListener("click", () => {
-//   closeModal();
-//   resetValidation();
-// });
-
-// backButton.addEventListener("click", () => {
-//   backButton.classList.add("hidden");
-//   openButton.classList.remove("hidden");
-//   if (errorMessage) {
-//     errorMessage.remove();
-//   }
-//   while (ul.firstChild) {
-//     ul.firstChild.remove();
-//   }
-// });
-
-// let isValidateName = false;
-// let isValidateNumber = false;
-
-// function validatePattern(inputBox, validPattern, errorMessage) {
-//   const isValue = checkInputValue(inputBox, validPattern, errorMessage);
-//   if (inputBox === nameBox) {
-//     isValidateName = isValue;
-//   } else if (inputBox === numberBox) {
-//     isValidateNumber = isValue;
-//   }
-//   if (isValue) {
-//     resetPrompt();
-//     checkEnableSubmit();
-//   }
-// }
-
-// function checkInputValue(inputBox, regExp, errorMessage) {
-//   const value = inputBox.value;
-//   const result = regExp.test(value);
-//   if (!result) {
-//     invalidInput(errorMessage);
-//   }
-//   return result;
-// }
-
-// function resetPrompt() {
-//   promptMessage.textContent = "入力後、取得ボタンを押してね";
-//   promptMessage.style.color = "black";
-// }
-
-// function resetValidation() {
-//   isValidateName = false;
-//   isValidateNumber = false;
-// }
-
-// function checkEnableSubmit() {
-//   if (isValidateName && isValidateNumber) {
-//     validInput();
-//   } else {
-//     invalidInput();
-//   }
-// }
-
-// function invalidInput(errorMessage) {
-//   promptMessage.textContent = errorMessage;
-//   promptMessage.style.color = "red";
-//   fetchButton.disabled = true;
-// }
-
-// function validInput() {
-//   promptMessage.textContent = "入力後、取得ボタンを押してね";
-//   promptMessage.style.color = "black";
-//   fetchButton.disabled = false;
-// }
-
-// nameBox.addEventListener("input", () =>
-//   validatePattern(nameBox, namePattern, "名前を入力ください")
-// );
-// numberBox.addEventListener("input", () =>
-//   validatePattern(numberBox, numberPattern, "半角数字を入力ください")
-// );

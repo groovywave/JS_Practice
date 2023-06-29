@@ -47,6 +47,7 @@ body {
   transition: opacity 0.4s;
 }
 .genre.active {
+  display: flex;
   background: #333;
   color: #fff;
   min-height: 150px;
@@ -56,3 +57,14 @@ body {
 .genre {
   display: none;
 }
+
+.content {
+  /* display: flex; */
+  width: 200px;
+  text-align: center;
+  padding: 8px 0;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px 4px 0 0;
+}
+
