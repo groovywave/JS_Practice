@@ -98,33 +98,40 @@ function renderData(responseData) {
       const titleAnchor = document.createElement("a");
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
+      // titleAnchor.classList.add("articleTitle");
       fragmentTitles.appendChild(title).appendChild(titleAnchor);
     }
 
     //imageの作成
     const img = document.createElement("img");
     img.src = data.image;
+    img.width = "100";
+    img.height = "100";
 
-    const genre = document.createElement("section");
+    // const genre = document.createElement("section");
+    const genreContainer = document.createElement("div");
+    genreContainer.classList.add("genre-container");
     const titleArea = document.createElement("div");
     const imageArea = document.createElement("div");
-    titleArea.classList.add("content");
-    imageArea.classList.add("content");
-    genre.id = data.id;
-    genre.classList.add("genre");
-    genre.appendChild(titleArea).appendChild(fragmentTitles);
-    genre.appendChild(imageArea).appendChild(img);
+    titleArea.classList.add("content", "title-area");
+    imageArea.classList.add("content", "image-area");
+    genreContainer.id = data.id;
+    // genre.classList.add("genre-container");
+    genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
+    genreContainer.appendChild(imageArea).appendChild(img);
     if (data.select) {
-      genre.classList.add("active");
+      genreContainer.classList.add("active");
     }
-    fragmentGenres.appendChild(genre);
+    fragmentGenres.appendChild(genreContainer);
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
   console.log(articleArea);
   tabArea.insertAdjacentElement("afterend", articleArea);
   const tabs = Array.from(document.getElementsByClassName("tab"));
-  const contents = Array.from(document.getElementsByClassName("genre"));
+  const contents = Array.from(
+    document.getElementsByClassName("genre-container")
+  );
   addClickEvent(tabs, contents);
   console.log(tabs);
   console.log(contents);
@@ -149,9 +156,9 @@ function addClickEvent(elements, contents) {
       });
       clickedItem.classList.add("active");
       // console.log(contents);
-      contents.forEach((genre) => {
-        console.log(genre);
-        genre.classList.remove("active");
+      contents.forEach((genreContainer) => {
+        console.log(genreContainer);
+        genreContainer.classList.remove("active");
       });
       console.log(contents);
       console.log(clickedItem.dataset.id);
