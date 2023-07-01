@@ -18,13 +18,11 @@ const articlesAPI = [
   "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
 ];
 
-const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 
-// const menuItems = document.querySelectorAll(".menu tabTitle a");
-// const contents = [];
 async function fetchRenderData() {
   const responseData = await Promise.all(articlesAPI.map(fetchData));
   console.log(responseData);
@@ -98,7 +96,6 @@ function renderData(responseData) {
       const titleAnchor = document.createElement("a");
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
-      // titleAnchor.classList.add("articleTitle");
       fragmentTitles.appendChild(title).appendChild(titleAnchor);
     }
 
@@ -144,18 +141,13 @@ function removeCircle() {
 fetchRenderData();
 
 function addClickEvent(elements, contents) {
-  // console.log(elements);
   elements.forEach((clickedItem) => {
     clickedItem.addEventListener("click", (e) => {
-      // console.log(clickedItem);
-      // console.log(e);
       e.preventDefault();
-      //a タグの規定の動作（リンク先にページを遷移する）を無効化
       elements.forEach((item) => {
         item.classList.remove("active");
       });
       clickedItem.classList.add("active");
-      // console.log(contents);
       contents.forEach((genreContainer) => {
         console.log(genreContainer);
         genreContainer.classList.remove("active");
@@ -163,7 +155,6 @@ function addClickEvent(elements, contents) {
       console.log(contents);
       console.log(clickedItem.dataset.id);
       document.getElementById(clickedItem.dataset.id).classList.add("active");
-      //clickedItem.dataset.id で取得した a タグの data-id を document.getElementById() の引数に ID の名前として渡すことによって、その data-id と同名の ID をもつ section タグを取得し、それに active クラスを付与しているので、a タグではなく section タグに active クラスがつきます。
     });
   });
 }
