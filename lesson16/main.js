@@ -1,5 +1,13 @@
-// import { format, differenceInCalendarDays } from "date-fns";
 // const tabMenuList = document.getElementById("js-tab-data__tabListst");
+// // ES2015 *babel
+// import dateFns from 'date-fns';
+// CommonJS * node.js
+const dataFns = require('data-fns');
+
+import { isAfter, addDays } from "date-fns";
+const now = new Date();
+const threeDaysAgo = addDays(now, -3);
+console.log(isAfter(now, threeDaysAgo));
 // const articlesAPI = {
 //   main: " https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
 //   economy: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
