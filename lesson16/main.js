@@ -2,9 +2,14 @@
 // // ES2015 *babel
 // import dateFns from 'date-fns';
 // CommonJS * node.js
-const dataFns = require('data-fns');
+// const dataFns = require("data-fns");
+// import { compareAsc, format } from "date-fns";
 
-import { isAfter, addDays } from "date-fns";
+// console.log(format(new Date(2014, 1, 11), "yyyy-MM-dd"));
+
+// import { isAfter, addDays } from "../node_modules/date-fns";
+import { isAfter, addDays } from "./node_modules/date-fns";
+// import { isAfter, addDays } from "../../node_modules/date-fns/index.html";
 const now = new Date();
 const threeDaysAgo = addDays(now, -3);
 console.log(isAfter(now, threeDaysAgo));
