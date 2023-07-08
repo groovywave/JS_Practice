@@ -1,3 +1,15 @@
+const articlesAPI = [
+  //main
+  "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
+  //economy
+  "https://mocki.io/v1/d408a3b3-9504-4c43-bf12-6773efb74361",
+  //entertainment
+  "https://mocki.io/v1/7b94b922-6130-44a6-b0c0-179cf5f76af5",
+  //sports
+  "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
+];
+
+
 const ul = document.getElementById("js-ul");
 const fetchButton = document.getElementById("js-fetch-button");
 const errorMessage = document.createElement("p");
