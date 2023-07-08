@@ -153,4 +153,38 @@ function renderData(responseData) {
   addClickEvent(tabs, contents);
 }
 
+function removeCircle() {
+  document.getElementById("loading-circle").remove();
+}
+
+fetchRenderData();
+
+function withinThreeDays(day) {
+  const today = new Date();
+  console.log(today);
+  const msInThreeDays = 7 * 24 * 60 * 60 * 1000;
+  const diff = today.getTime() - day.getTime();
+  console.log(diff);
+  if (diff < msInThreeDays) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function addClickEvent(elements, contents) {
+  elements.forEach((clickedItem) => {
+    clickedItem.addEventListener("click", (e) => {
+      e.preventDefault();
+      elements.forEach((item) => {
+        item.classList.remove("active");
+      });
+      clickedItem.classList.add("active");
+      contents.forEach((genreContainer) => {
+        genreContainer.classList.remove("active");
+      });
+      document.getElementById(clickedItem.dataset.id).classList.add("active");
+    });
+  });
+}
 
