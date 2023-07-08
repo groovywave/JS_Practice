@@ -1,38 +1,4 @@
-import moment from "moment";
-moment().format();
-const today = moment();
-console.log(today);
-// const tabMenuList = document.getElementById("js-tab-data__tabListst");
-// // ES2015 *babel
-// import dateFns from 'date-fns';
-// CommonJS * node.js
-// const dataFns = require("data-fns");
-// import { compareAsc, format } from "date-fns";
 
-// console.log(format(new Date(2014, 1, 11), "yyyy-MM-dd"));
-// import { compareAsc, format } from "./date-fns";
-
-// format(new Date(2014, 1, 11), "yyyy-MM-dd");
-// => '2014-02-11'
-
-// const dates = [
-// new Date(1995, 6, 2),
-// new Date(1987, 1, 11),
-// new Date(1989, 6, 10),
-// ];
-// dates.sort(compareAsc);
-// import { isAfter, addDays } from "../node_modules/date-fns";
-// import { isAfter, addDays } from "./node_modules/date-fns";
-// import { isAfter, addDays } from "node:module";
-// import { isAfter, addDays } from "./date-fns";
-// import { isAfter, addDays } from "../date-fns";
-// import { isAfter, addDays } from "./node_modules";
-// import { format } from "./date-fns";
-// import { isAfter, addDays } from "date-fns";
-// import { isAfter, addDays } from "../../node_modules/date-fns/index.html";
-// const now = new Date();
-// const threeDaysAgo = addDays(now, -3);
-// console.log(isAfter(now, threeDaysAgo));
 // const articlesAPI = {
 //   main: " https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
 //   economy: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
@@ -129,6 +95,17 @@ function renderData(responseData) {
       const titleAnchor = document.createElement("a");
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
+      console.log(article.date);
+      const articleDate = new Date(article.date);
+      if (withinThreeDays(articleDate)) {
+        const newIcon = document.createElement("img");
+        newIcon.src = "./img/new.png";
+        // title.classList.add("new");
+        newIcon.classList.add("new");
+        titleAnchor.appendChild(newIcon);
+        // titleAnchor.appendChild(addNew);
+        // titleAnchor.insertAdjacentElement("afterbegin", addNew);
+      }
       fragmentTitles.appendChild(title).appendChild(titleAnchor);
     }
 
@@ -149,6 +126,7 @@ function renderData(responseData) {
     // genre.classList.add("genre-container");
     genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
     genreContainer.appendChild(imageArea).appendChild(img);
+    //初期表示の設定
     if (data.select) {
       genreContainer.classList.add("active");
     }
@@ -163,8 +141,6 @@ function renderData(responseData) {
     document.getElementsByClassName("genre-container")
   );
   addClickEvent(tabs, contents);
-  console.log(tabs);
-  console.log(contents);
 }
 
 function removeCircle() {
@@ -172,6 +148,19 @@ function removeCircle() {
 }
 
 fetchRenderData();
+
+function withinThreeDays(day) {
+  const today = new Date();
+  console.log(today);
+  const msInThreeDays = 3 * 24 * 60 * 60 * 1000;
+  const diff = today.getTime() - day.getTime();
+  console.log(diff);
+  if (diff < msInThreeDays) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function addClickEvent(elements, contents) {
   elements.forEach((clickedItem) => {
@@ -182,11 +171,8 @@ function addClickEvent(elements, contents) {
       });
       clickedItem.classList.add("active");
       contents.forEach((genreContainer) => {
-        console.log(genreContainer);
         genreContainer.classList.remove("active");
       });
-      console.log(contents);
-      console.log(clickedItem.dataset.id);
       document.getElementById(clickedItem.dataset.id).classList.add("active");
     });
   });
