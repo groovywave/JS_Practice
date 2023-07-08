@@ -314,3 +314,4 @@ function addClickEvent(elements, contents) {
   });
 }
 
+fetchRenderData();
