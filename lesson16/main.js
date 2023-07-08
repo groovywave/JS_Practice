@@ -1,3 +1,7 @@
+import moment from "moment";
+moment().format();
+const today = moment();
+console.log(today);
 // const tabMenuList = document.getElementById("js-tab-data__tabListst");
 // // ES2015 *babel
 // import dateFns from 'date-fns';
@@ -6,13 +10,29 @@
 // import { compareAsc, format } from "date-fns";
 
 // console.log(format(new Date(2014, 1, 11), "yyyy-MM-dd"));
+// import { compareAsc, format } from "./date-fns";
 
+// format(new Date(2014, 1, 11), "yyyy-MM-dd");
+// => '2014-02-11'
+
+// const dates = [
+// new Date(1995, 6, 2),
+// new Date(1987, 1, 11),
+// new Date(1989, 6, 10),
+// ];
+// dates.sort(compareAsc);
 // import { isAfter, addDays } from "../node_modules/date-fns";
-import { isAfter, addDays } from "./node_modules/date-fns";
+// import { isAfter, addDays } from "./node_modules/date-fns";
+// import { isAfter, addDays } from "node:module";
+// import { isAfter, addDays } from "./date-fns";
+// import { isAfter, addDays } from "../date-fns";
+// import { isAfter, addDays } from "./node_modules";
+// import { format } from "./date-fns";
+// import { isAfter, addDays } from "date-fns";
 // import { isAfter, addDays } from "../../node_modules/date-fns/index.html";
-const now = new Date();
-const threeDaysAgo = addDays(now, -3);
-console.log(isAfter(now, threeDaysAgo));
+// const now = new Date();
+// const threeDaysAgo = addDays(now, -3);
+// console.log(isAfter(now, threeDaysAgo));
 // const articlesAPI = {
 //   main: " https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
 //   economy: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
