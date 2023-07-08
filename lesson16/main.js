@@ -13,46 +13,12 @@ const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 
-function renderStatus(response) {
-  errorMessage.id = "render-status";
-  errorMessage.textContent = `${response.status}:${response.statusText}`;
-  document.body.appendChild(errorMessage);
-}
-
-function displayInfo(error) {
-  errorMessage.id = "display-info";
-  errorMessage.textContent = error;
-  document.body.appendChild(errorMessage);
-}
-
-function renderCircle() {
-  const loadingCircle = document.createElement("img");
-  loadingCircle.src = "img/loading-circle.gif";
-  loadingCircle.alt = "ローディング画像";
-  loadingCircle.id = "loading-circle";
-  ul.appendChild(loadingCircle);
-}
-
-function removeCircle() {
-  document.getElementById("loading-circle").remove();
-}
-
-function renderData(menus) {
-  const fragment = document.createDocumentFragment();
-  for (const menu of menus) {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    const img = document.createElement("img");
-    a.href = menu.to;
-    a.textContent = menu.text;
-    img.src = menu.img;
-    img.alt = menu.alt;
-    fragment
-      .appendChild(li)
-      .appendChild(a)
-      .insertAdjacentElement("afterbegin", img);
+async function fetchRenderData(inputNumber) {
+  const responseData = await fetchData(articlesAPI);
+  if (responseData) {
+    renderData(responseData);
+    console.log(inputNumber); //show inputted number
   }
-  ul.appendChild(fragment);
 }
 
 async function fetchData(url) {
@@ -72,16 +38,27 @@ async function fetchData(url) {
     displayInfo(error);
   } finally {
     removeCircle();
-    backButton.classList.remove("hidden");
   }
 }
 
-async function fetchRenderData(inputNumber) {
-  const responseData = await fetchData(url);
-  if (responseData) {
-    renderData(responseData);
-    console.log(inputNumber); //show inputted number
-  }
+function renderCircle() {
+  const loadingCircle = document.createElement("img");
+  loadingCircle.src = "img/loading-circle.gif";
+  loadingCircle.alt = "ローディング画像";
+  loadingCircle.id = "loading-circle";
+  ul.appendChild(loadingCircle);
+}
+
+function renderStatus(response) {
+  errorMessage.id = "render-status";
+  errorMessage.textContent = `${response.status}:${response.statusText}`;
+  document.body.appendChild(errorMessage);
+}
+
+function displayInfo(error) {
+  errorMessage.id = "display-info";
+  errorMessage.textContent = error;
+  document.body.appendChild(errorMessage);
 }
 
 const fragmentTabs = document.createDocumentFragment();
@@ -187,4 +164,3 @@ function addClickEvent(elements, contents) {
     });
   });
 }
-
