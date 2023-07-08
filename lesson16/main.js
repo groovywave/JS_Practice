@@ -141,7 +141,7 @@ function removeCircle() {
 function withinThreeDays(day) {
   const today = new Date();
   console.log(today);
-  const msInThreeDays = 3 * 24 * 60 * 60 * 1000;
+  const msInThreeDays = 7 * 24 * 60 * 60 * 1000;
   const diff = today.getTime() - day.getTime();
   console.log(diff);
   if (diff < msInThreeDays) {
