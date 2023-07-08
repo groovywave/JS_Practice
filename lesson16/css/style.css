@@ -50,8 +50,27 @@ body {
   flex: 1;
 }
 
-.title-area {
+.title-area,
+.title-area > li {
   text-align: left;
+  display: inline-block;
+  /* display: block; */
+  /* display: inline; */
+  /* display: flex; */
+  /* justify-content: left;  */
+}
+
+/* .title-area > li {
+  text-align: left;
+  display: inline;
+} */
+
+.new {
+  height: 14px;
+  width: auto;
+  float: right;
+  /* vertical-align: bottom; */
+  vertical-align: middle;
 }
 
 .image-area {
@@ -62,4 +81,5 @@ body {
 img {
   width: auto;
   height: 100px;
+  vertical-align: -10px;
 }
