@@ -1,76 +1,75 @@
-
 body {
   font-size: 14px;
-  user-select: none;
 }
 
-ul {
-  pointer-events: none;
+.container {
+  margin: 30px auto;
+  width: 500px;
 }
 
-button {
-  cursor: pointer;
-  margin: 10px auto;
-}
-
-input{
+.tab-area {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto;
 }
 
-.button-container {
+.tab-area > li {
+  flex: 1;
+}
+
+.tab {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 8px 0;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px 4px 0 0;
+}
+
+.tab.active {
+  background: skyblue;
+  color: #fff;
+}
+
+.tab:not(.active):hover {
+  opacity: 0.5;
+  transition: opacity 0.4s;
+}
+.genre-container.active {
+  background: skyblue;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto;
+  color: #fff;
+  min-height: 150px;
+  padding: 12px;
 }
-
-.open-button {
-  display: block;
-  width: 200px;
-  padding: 12px 0;
-  margin: 16px auto 0;
-}
-
-.mask {
-  background: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-}
-
-.modal {
-  text-align: center;
-  justify-content: center;
-  background: #fff;
-  width: 200px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  position: absolute;
-  top: 40px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  opacity: 0.8;
-  z-index: 2;
-}
-
-.back-button {
-  display: block;
-  width: 100px;
-  padding: 12px 0;
-  margin: 16px auto 0;
-}
-
-.text-in-modal { 
-  width: 200px;
-  margin: 0 0 20px;
-  text-align: center;
-}
-
-.hidden {
+.genre-container {
   display: none;
+}
+
+.content {
+  padding: 8px 0;
+  flex: 1;
+}
+
+.title-area,
+.title-area > li {
+  text-align: left;
+  display: inline-block;
+}
+
+
+.new {
+  height: 14px;
+  width: auto;
+  float: right;
+  vertical-align: middle;
+}
+
+.image-area {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  width: auto;
+  height: 100px;
 }
