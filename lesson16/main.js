@@ -84,112 +84,73 @@ async function fetchRenderData(inputNumber) {
   }
 }
 
-openButton.addEventListener("click", () => {
-  resetPrompt();
-  nameBox.value = "";
-  numberBox.value = "";
-  modal.classList.remove("hidden");
-  mask.classList.remove("hidden");
-  openButton.classList.add("hidden");
-  fetchButton.setAttribute("disabled", "true");
-  nameBox.focus();
-});
+const fragmentTabs = document.createDocumentFragment();
+const fragmentTitles = document.createDocumentFragment();
+const fragmentGenres = document.createDocumentFragment();
 
-fetchButton.addEventListener("click", () => {
-  const inputName = nameBox.value;
-  const inputNumber = numberBox.value;
-  fetchRenderData(inputName, inputNumber);
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
-});
+function renderData(responseData) {
+  for (const data of responseData) {
+    //Tabsの生成
+    const tabTitle = document.createElement("li");
+    const tabAnchor = document.createElement("a");
+    tabAnchor.href = "#";
+    tabAnchor.textContent = data.category;
+    tabAnchor.setAttribute("data-id", data.id);
+    tabAnchor.classList.add("tab");
+    if (data.select) {
+      tabAnchor.classList.add("active");
+    }
+    fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 
-function closeModal() {
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
-  openButton.classList.remove("hidden");
-}
+    //記事タイトルの作成
+    const articleList = data.article;
+    for (const article of articleList) {
+      const title = document.createElement("li");
+      const titleAnchor = document.createElement("a");
+      titleAnchor.href = "#";
+      titleAnchor.textContent = article.title;
+      console.log(article.date);
+      const articleDate = new Date(article.date);
+      if (withinThreeDays(articleDate)) {
+        const newIcon = document.createElement("img");
+        newIcon.src = "./img/new.png";
+        newIcon.classList.add("new");
+        titleAnchor.appendChild(newIcon);
+      }
+      fragmentTitles.appendChild(title).appendChild(titleAnchor);
+    }
 
-mask.addEventListener("click", () => {
-  closeModal();
-  resetValidation();
-});
+    //imageの作成
+    const img = document.createElement("img");
+    img.src = data.image;
+    img.width = "100";
+    img.height = "100";
 
-closeButton.addEventListener("click", () => {
-  closeModal();
-  resetValidation();
-});
-
-backButton.addEventListener("click", () => {
-  backButton.classList.add("hidden");
-  openButton.classList.remove("hidden");
-  if (errorMessage) {
-    errorMessage.remove();
+    // const genre = document.createElement("section");
+    const genreContainer = document.createElement("div");
+    genreContainer.classList.add("genre-container");
+    const titleArea = document.createElement("div");
+    const imageArea = document.createElement("div");
+    titleArea.classList.add("content", "title-area");
+    imageArea.classList.add("content", "image-area");
+    genreContainer.id = data.id;
+    genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
+    genreContainer.appendChild(imageArea).appendChild(img);
+    //初期表示の設定
+    if (data.select) {
+      genreContainer.classList.add("active");
+    }
+    fragmentGenres.appendChild(genreContainer);
   }
-  while (ul.firstChild) {
-    ul.firstChild.remove();
-  }
-});
-
-let isValidateName = false;
-let isValidateNumber = false;
-
-function validatePattern(inputBox, validPattern, errorMessage) {
-  const isValue = checkInputValue(inputBox, validPattern, errorMessage);
-  if (inputBox === nameBox) {
-    isValidateName = isValue;
-  } else if (inputBox === numberBox) {
-    isValidateNumber = isValue;
-  }
-  if (isValue) {
-    resetPrompt();
-    checkEnableSubmit();
-  }
+  tabArea.appendChild(fragmentTabs);
+  articleArea.appendChild(fragmentGenres);
+  console.log(articleArea);
+  tabArea.insertAdjacentElement("afterend", articleArea);
+  const tabs = Array.from(document.getElementsByClassName("tab"));
+  const contents = Array.from(
+    document.getElementsByClassName("genre-container")
+  );
+  addClickEvent(tabs, contents);
 }
 
-function checkInputValue(inputBox, regExp, errorMessage) {
-  const value = inputBox.value;
-  const result = regExp.test(value);
-  if (!result) {
-    invalidInput(errorMessage);
-  }
-  return result;
-}
-
-function resetPrompt() {
-  promptMessage.textContent = "入力後、取得ボタンを押してね";
-  promptMessage.style.color = "black";
-}
-
-function resetValidation() {
-  isValidateName = false;
-  isValidateNumber = false;
-}
-
-function checkEnableSubmit() {
-  if (isValidateName && isValidateNumber) {
-    validInput();
-  } else {
-    invalidInput();
-  }
-}
-
-
-function invalidInput(errorMessage) {
-  promptMessage.textContent = errorMessage;
-  promptMessage.style.color = "red";
-  fetchButton.disabled = true;
-}
-
-function validInput() {
-  promptMessage.textContent = "入力後、取得ボタンを押してね";
-  promptMessage.style.color = "black";
-  fetchButton.disabled = false;
-}
-
-nameBox.addEventListener("input", () =>
-  validatePattern(nameBox, namePattern, "名前を入力ください")
-);
-numberBox.addEventListener("input", () =>
-  validatePattern(numberBox, numberPattern, "半角数字を入力ください")
-);
 
