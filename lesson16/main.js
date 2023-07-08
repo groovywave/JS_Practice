@@ -61,6 +61,75 @@ function displayInfo(error) {
   document.body.appendChild(errorMessage);
 }
 
+function renderData(responseData) {
+  for (const data of responseData) {
+    //Tabsの生成
+    const tabTitle = document.createElement("li");
+    const tabAnchor = document.createElement("a");
+    tabAnchor.href = "#";
+    tabAnchor.textContent = data.category;
+    tabAnchor.setAttribute("data-id", data.id);
+    tabAnchor.classList.add("tab");
+    if (data.select) {
+      tabAnchor.classList.add("active");
+    }
+    fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
+
+    //記事タイトルの作成
+    const articleList = data.article;
+    for (const article of articleList) {
+      const title = document.createElement("li");
+      const titleAnchor = document.createElement("a");
+      titleAnchor.href = "#";
+      titleAnchor.textContent = article.title;
+      console.log(article.date);
+      const articleDate = new Date(article.date);
+      if (withinThreeDays(articleDate)) {
+        const newIcon = document.createElement("img");
+        newIcon.src = "./img/new.png";
+        // title.classList.add("new");
+        newIcon.classList.add("new");
+        titleAnchor.appendChild(newIcon);
+        // titleAnchor.appendChild(addNew);
+        // titleAnchor.insertAdjacentElement("afterbegin", addNew);
+      }
+      fragmentTitles.appendChild(title).appendChild(titleAnchor);
+    }
+
+    //imageの作成
+    const img = document.createElement("img");
+    img.src = data.image;
+    img.width = "100";
+    img.height = "100";
+
+    // const genre = document.createElement("section");
+    const genreContainer = document.createElement("div");
+    genreContainer.classList.add("genre-container");
+    const titleArea = document.createElement("div");
+    const imageArea = document.createElement("div");
+    titleArea.classList.add("content", "title-area");
+    imageArea.classList.add("content", "image-area");
+    genreContainer.id = data.id;
+    // genre.classList.add("genre-container");
+    genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
+    genreContainer.appendChild(imageArea).appendChild(img);
+    //初期表示の設定
+    if (data.select) {
+      genreContainer.classList.add("active");
+    }
+    fragmentGenres.appendChild(genreContainer);
+  }
+  tabArea.appendChild(fragmentTabs);
+  articleArea.appendChild(fragmentGenres);
+  console.log(articleArea);
+  tabArea.insertAdjacentElement("afterend", articleArea);
+  const tabs = Array.from(document.getElementsByClassName("tab"));
+  const contents = Array.from(
+    document.getElementsByClassName("genre-container")
+  );
+  addClickEvent(tabs, contents);
+}
+
 function removeCircle() {
   document.getElementById("loading-circle").remove();
 }
