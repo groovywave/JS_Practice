@@ -13,6 +13,34 @@ const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 
+async function fetchRenderData() {
+  const responseData = await Promise.all(articlesAPI.map(fetchData));
+  console.log(responseData);
+  if (responseData) {
+    renderData(responseData);
+  }
+}
+
+async function fetchData(url) {
+  renderCircle();
+  try {
+    const response = await fetch(url);
+    const responseData = await response.json();
+    if (!response.ok) {
+      renderStatus(response);
+      console.error(`${response.status}:${response.statusText}`);
+    }
+    if (!responseData.length) {
+      displayInfo("no data");
+    }
+    return responseData;
+  } catch (error) {
+    displayInfo(error);
+  } finally {
+    removeCircle();
+  }
+}
+
 function renderStatus(response) {
   errorMessage.id = "render-status";
   errorMessage.textContent = `${response.status}:${response.statusText}`;
@@ -53,35 +81,6 @@ function renderData(menus) {
       .insertAdjacentElement("afterbegin", img);
   }
   ul.appendChild(fragment);
-}
-
-async function fetchData(url) {
-  renderCircle();
-  try {
-    const response = await fetch(url);
-    const responseData = await response.json();
-    if (!response.ok) {
-      renderStatus(response);
-      console.error(`${response.status}:${response.statusText}`);
-    }
-    if (!responseData.length) {
-      displayInfo("no data");
-    }
-    return responseData;
-  } catch (error) {
-    displayInfo(error);
-  } finally {
-    removeCircle();
-    backButton.classList.remove("hidden");
-  }
-}
-
-async function fetchRenderData(inputNumber) {
-  const responseData = await fetchData(url);
-  if (responseData) {
-    renderData(responseData);
-    console.log(inputNumber); //show inputted number
-  }
 }
 
 openButton.addEventListener("click", () => {
