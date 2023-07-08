@@ -1,19 +1,17 @@
-const ul = document.getElementById("js-ul");
-const fetchButton = document.getElementById("js-fetch-button");
+const articlesAPI = [
+  //main
+  "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
+  //economy
+  "https://mocki.io/v1/d408a3b3-9504-4c43-bf12-6773efb74361",
+  //entertainment
+  "https://mocki.io/v1/7b94b922-6130-44a6-b0c0-179cf5f76af5",
+  //sports
+  "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
+];
+
 const errorMessage = document.createElement("p");
-const openButton = document.getElementById("js-open-button");
-const closeButton = document.getElementById("js-close-button");
-const backButton = document.getElementById("js-back-button");
-const modal = document.getElementById("js-modal");
-const mask = document.getElementById("js-mask");
-const promptMessage = document.getElementById("js-prompt-message");
-const nameBox = document.getElementById("js-name-box");
-const numberBox = document.getElementById("js-number-box");
-const namePattern =
-  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
-//https://arc-tech.hatenablog.com/entry/2021/01/20/105620
-const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
-const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+const tabArea = document.getElementById("js-ul");
+const articleArea = document.createElement("div");
 
 function renderStatus(response) {
   errorMessage.id = "render-status";
@@ -175,7 +173,6 @@ function checkEnableSubmit() {
   }
 }
 
-
 function invalidInput(errorMessage) {
   promptMessage.textContent = errorMessage;
   promptMessage.style.color = "red";
@@ -194,4 +191,3 @@ nameBox.addEventListener("input", () =>
 numberBox.addEventListener("input", () =>
   validatePattern(numberBox, numberPattern, "半角数字を入力ください")
 );
-
