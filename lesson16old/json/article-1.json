@@ -1,0 +1,25 @@
+{
+  "id": "01",
+  "date": "2023-07-01",
+  "title": "日本が世界2位のIT国家に",
+  "comment": [
+    {
+      "id": "01-01",
+      "name": "太郎",
+      "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
+      "detail": "太郎さんのコメント"
+    },
+    {
+      "id": "01-02",
+      "name": "花子",
+      "icon": "https://i.postimg.cc/mDYTSh0s/business-woman1-1-smile.png",
+      "detail": "花子さんのコメント"
+    },
+    {
+      "id": "01-03",
+      "name": "三毛",
+      "icon": "https://i.postimg.cc/pV3gdP7Q/cat2-1-idea.png",
+      "detail": "三毛さんのコメント"
+    }
+  ]
+}
