@@ -13,11 +13,10 @@ const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 
-async function fetchRenderData(inputNumber) {
-  const responseData = await fetchData(articlesAPI);
+async function fetchRenderData() {
+  const responseData = await Promise.all(articlesAPI.map(fetchData));
   if (responseData) {
     renderData(responseData);
-    console.log(inputNumber); //show inputted number
   }
 }
 
@@ -46,7 +45,7 @@ function renderCircle() {
   loadingCircle.src = "img/loading-circle.gif";
   loadingCircle.alt = "ローディング画像";
   loadingCircle.id = "loading-circle";
-  ul.appendChild(loadingCircle);
+  tabArea.appendChild(loadingCircle);
 }
 
 function renderStatus(response) {
