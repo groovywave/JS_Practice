@@ -15,7 +15,6 @@ const articleArea = document.createElement("div");
 
 async function fetchRenderData() {
   const responseData = await Promise.all(articlesAPI.map(fetchData));
-  console.log(responseData);
   if (responseData) {
     renderData(responseData);
   }
@@ -29,11 +28,11 @@ async function fetchData(url) {
     if (!response.ok) {
       renderStatus(response);
       console.error(`${response.status}:${response.statusText}`);
-    }
-    if (!responseData.length) {
+    } else if (!Object.keys(responseData).length) {
       displayInfo("no data");
+    } else {
+      return responseData;
     }
-    return responseData;
   } catch (error) {
     displayInfo(error);
   } finally {
@@ -86,16 +85,12 @@ function renderData(responseData) {
       const titleAnchor = document.createElement("a");
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
-      console.log(article.date);
       const articleDate = new Date(article.date);
       if (withinThreeDays(articleDate)) {
         const newIcon = document.createElement("img");
         newIcon.src = "./img/new.png";
-        // title.classList.add("new");
         newIcon.classList.add("new");
         titleAnchor.appendChild(newIcon);
-        // titleAnchor.appendChild(addNew);
-        // titleAnchor.insertAdjacentElement("afterbegin", addNew);
       }
       fragmentTitles.appendChild(title).appendChild(titleAnchor);
     }
@@ -125,7 +120,6 @@ function renderData(responseData) {
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
-  console.log(articleArea);
   tabArea.insertAdjacentElement("afterend", articleArea);
   const tabs = Array.from(document.getElementsByClassName("tab"));
   const contents = Array.from(
@@ -140,10 +134,8 @@ function removeCircle() {
 
 function withinThreeDays(day) {
   const today = new Date();
-  console.log(today);
   const msInThreeDays = 7 * 24 * 60 * 60 * 1000;
   const diff = today.getTime() - day.getTime();
-  console.log(diff);
   if (diff < msInThreeDays) {
     return true;
   } else {
