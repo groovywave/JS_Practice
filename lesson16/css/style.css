@@ -1,6 +1,9 @@
 body {
   font-size: 14px;
 }
+.page-title {
+  text-align: center;
+}
 
 .container {
   margin: 30px auto;
@@ -41,6 +44,7 @@ body {
   min-height: 150px;
   padding: 12px;
 }
+
 .genre-container {
   display: none;
 }
@@ -54,22 +58,13 @@ body {
 .title-area > li {
   text-align: left;
   display: inline-block;
-  /* display: block; */
-  /* display: inline; */
-  /* display: flex; */
-  /* justify-content: left;  */
 }
 
-/* .title-area > li {
-  text-align: left;
-  display: inline;
-} */
-
-.new {
+.new,
+.comment {
   height: 14px;
   width: auto;
   float: right;
-  /* vertical-align: bottom; */
   vertical-align: middle;
 }
 
@@ -78,8 +73,7 @@ body {
   justify-content: center;
 }
 
-img {
+.article-image {
   width: auto;
   height: 100px;
-  vertical-align: -10px;
 }

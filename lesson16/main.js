@@ -1,20 +1,3 @@
-// const tabMenuList = document.getElementById("js-tab-data__tabListst");
-// // ES2015 *babel
-// import dateFns from 'date-fns';
-// CommonJS * node.js
-// const dataFns = require('data-fns');
-
-// import { isAfter, addDays } from "date-fns";
-// const now = new Date();
-// const threeDaysAgo = addDays(now, -3);
-// console.log(isAfter(now, threeDaysAgo));
-// const articlesAPI = {
-//   main: " https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
-//   economy: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
-//   entertainment: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
-//   sports: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
-// };
-
 const articlesAPI = [
   //main
   "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
@@ -26,14 +9,12 @@ const articlesAPI = [
   "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
 ];
 
-// const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
 const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 
 async function fetchRenderData() {
   const responseData = await Promise.all(articlesAPI.map(fetchData));
-  console.log(responseData);
   if (responseData) {
     renderData(responseData);
   }
@@ -47,11 +28,11 @@ async function fetchData(url) {
     if (!response.ok) {
       renderStatus(response);
       console.error(`${response.status}:${response.statusText}`);
-    }
-    if (!responseData.length) {
+    } else if (!Object.keys(responseData).length) {
       displayInfo("no data");
+    } else {
+      return responseData;
     }
-    return responseData;
   } catch (error) {
     displayInfo(error);
   } finally {
@@ -102,24 +83,44 @@ function renderData(responseData) {
     for (const article of articleList) {
       const title = document.createElement("li");
       const titleAnchor = document.createElement("a");
+      const iconContainer = document.createElement("div");
+      const newIconContainer = document.createElement("div");
+      const commentIconContainer = document.createElement("div");
+
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
-      console.log(article.date);
       const articleDate = new Date(article.date);
       if (withinThreeDays(articleDate)) {
         const newIcon = document.createElement("img");
         newIcon.src = "./img/new.png";
-        // title.classList.add("new");
         newIcon.classList.add("new");
-        titleAnchor.appendChild(newIcon);
-        // titleAnchor.appendChild(addNew);
-        // titleAnchor.insertAdjacentElement("afterbegin", addNew);
+        newIconContainer.appendChild(newIcon);
+        // titleAnchor.appendChild(newIcon);
       }
-      fragmentTitles.appendChild(title).appendChild(titleAnchor);
+      if (article.comment) {
+        const commentIcon = document.createElement("img");
+        commentIcon.src = "./img/comment.png";
+        commentIcon.classList.add("comment");
+        commentIcon.width = "14";
+        commentIcon.height = "14";
+        commentIconContainer.appendChild(commentIcon);
+
+        const numOfComments = document.createElement("p");
+        const numOfCommentProps = Object.keys(article.comment).length;
+        numOfComments.textContent = numOfCommentProps;
+        commentIconContainer.appendChild(numOfComments);
+      }
+      fragmentTitles
+        .appendChild(title)
+        .appendChild(titleAnchor)
+        .appendChild(iconContainer)
+        .appendChild(newIconContainer)
+        .appendChild(commentIconContainer);
     }
 
     //imageの作成
     const img = document.createElement("img");
+    img.classList.add("article-image");
     img.src = data.image;
     img.width = "100";
     img.height = "100";
@@ -143,7 +144,6 @@ function renderData(responseData) {
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
-  console.log(articleArea);
   tabArea.insertAdjacentElement("afterend", articleArea);
   const tabs = Array.from(document.getElementsByClassName("tab"));
   const contents = Array.from(
@@ -156,14 +156,10 @@ function removeCircle() {
   document.getElementById("loading-circle").remove();
 }
 
-fetchRenderData();
-
 function withinThreeDays(day) {
   const today = new Date();
-  console.log(today);
-  const msInThreeDays = 3 * 24 * 60 * 60 * 1000;
+  const msInThreeDays = 7 * 24 * 60 * 60 * 1000;
   const diff = today.getTime() - day.getTime();
-  console.log(diff);
   if (diff < msInThreeDays) {
     return true;
   } else {
@@ -186,3 +182,5 @@ function addClickEvent(elements, contents) {
     });
   });
 }
+
+fetchRenderData();
