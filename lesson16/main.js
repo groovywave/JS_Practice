@@ -125,7 +125,6 @@ function renderData(responseData) {
     img.width = "100";
     img.height = "100";
 
-    // const genre = document.createElement("section");
     const genreContainer = document.createElement("div");
     genreContainer.classList.add("genre-container");
     const titleArea = document.createElement("div");
