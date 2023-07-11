@@ -162,18 +162,18 @@ function withinThreeDays(day) {
   return diff < msInThreeDays;
 }
 
-function addClickEvent(elements, contents) {
-  elements.forEach((clickedItem) => {
-    clickedItem.addEventListener("click", (e) => {
+function addClickEvent(index, contents) {
+  index.forEach((targetItem) => {
+    targetItem.addEventListener("click", (e) => {
       e.preventDefault();
-      elements.forEach((item) => {
+      index.forEach((item) => {
         item.classList.remove("active");
       });
-      clickedItem.classList.add("active");
-      contents.forEach((genreContainer) => {
-        genreContainer.classList.remove("active");
+      targetItem.classList.add("active");
+      contents.forEach((item) => {
+        item.classList.remove("active");
       });
-      document.getElementById(clickedItem.dataset.id).classList.add("active");
+      document.getElementById(targetItem.dataset.id).classList.add("active");
     });
   });
 }
