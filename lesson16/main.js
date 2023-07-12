@@ -61,109 +61,112 @@ function displayInfo(error) {
 }
 
 const fragmentTabs = document.createDocumentFragment();
-const fragmentTitles = document.createDocumentFragment();
 const fragmentGenres = document.createDocumentFragment();
+const fragmentTitles = document.createDocumentFragment();
+const fragmentImages = document.createDocumentFragment();
 
 function renderData(responseData) {
   for (const data of responseData) {
     createTab(data);
     createArticles(data);
     const img = createImage(data);
-    integrateElements(data, img);
-  }
-
-  function createTab(data) {
-    const tabTitle = document.createElement("li");
-    const tabAnchor = document.createElement("a");
-    tabAnchor.href = "#";
-    tabAnchor.textContent = data.category;
-    tabAnchor.setAttribute("data-id", data.id);
-    tabAnchor.classList.add("tab");
-    if (data.select) {
-      tabAnchor.classList.add("active");
-    }
-    fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
-  }
-
-  function createArticles(data) {
-    const articleList = data.article;
-    for (const article of articleList) {
-      const title = document.createElement("li");
-      const titleAnchor = document.createElement("a");
-      const iconContainer = document.createElement("div");
-      const newIconContainer = document.createElement("div");
-      const commentIconContainer = document.createElement("div");
-
-      titleAnchor.href = "#";
-      titleAnchor.textContent = article.title;
-      const articleDate = new Date(article.date);
-      if (withinThreeDays(articleDate)) {
-        const newIcon = document.createElement("img");
-        newIcon.src = "./img/new.png";
-        newIcon.classList.add("new");
-        newIconContainer.appendChild(newIcon);
-        // titleAnchor.appendChild(newIcon);
-      }
-      if (article.comment) {
-        const commentIcon = document.createElement("img");
-        commentIcon.src = "./img/comment.png";
-        commentIcon.classList.add("comment");
-        commentIcon.width = "14";
-        commentIcon.height = "14";
-        commentIconContainer.appendChild(commentIcon);
-
-        const numOfComments = document.createElement("p");
-        const numOfCommentProps = Object.keys(article.comment).length;
-        numOfComments.textContent = numOfCommentProps;
-        commentIconContainer.appendChild(numOfComments);
-      }
-      fragmentTitles.appendChild(title).appendChild(titleAnchor);
-    }
-  }
-
-  function createImage(data) {
-    const img = document.createElement("img");
-    img.classList.add("article-image");
-    img.src = data.image;
-    img.width = "100";
-    img.height = "100";
-    return img;
-  }
-
-  function integrateElements(data, img) {
-    const genreContainer = document.createElement("div");
-    genreContainer.classList.add("genre-container");
-    const titleArea = document.createElement("div");
-    const imageArea = document.createElement("div");
-    titleArea.classList.add("content", "title-area");
-    imageArea.classList.add("content", "image-area");
-    genreContainer.id = data.id;
-    genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
-    genreContainer.appendChild(imageArea).appendChild(img);
-    //初期表示の設定
-    if (data.select) {
-      genreContainer.classList.add("active");
-    }
-    fragmentGenres.appendChild(genreContainer);
+    combineArticleImage(data, img);
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
   tabArea.insertAdjacentElement("afterend", articleArea);
+  const tabs = Array.from(document.getElementsByClassName("tab"));
+  const contents = Array.from(
+    document.getElementsByClassName("genre-container")
+  );
+  addClickEvent(tabs, contents);
 }
 
-const tabs = Array.from(document.getElementsByClassName("tab"));
-console.log(tabs);
-const contents = Array.from(document.getElementsByClassName("genre-container"));
-console.log(contents);
-addClickEvent(tabs, contents);
+function createTab(data) {
+  const tabTitle = document.createElement("li");
+  const tabAnchor = document.createElement("a");
+  tabAnchor.href = "#";
+  tabAnchor.textContent = data.category;
+  tabAnchor.setAttribute("data-id", data.id);
+  tabAnchor.classList.add("tab");
+  if (data.select) {
+    tabAnchor.classList.add("active");
+  }
+  fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
+}
 
+function createArticles(data) {
+  const articleList = data.article;
+  for (const article of articleList) {
+    const title = document.createElement("li");
+    const titleAnchor = document.createElement("a");
+    const newIconContainer = document.createElement("div");
+    const commentIconContainer = document.createElement("div");
+
+    titleAnchor.href = "#";
+    titleAnchor.textContent = article.title;
+    const articleDate = new Date(article.date);
+    if (withinThreeDays(articleDate)) {
+      const newIcon = document.createElement("img");
+      newIcon.src = "./img/new.png";
+      newIcon.classList.add("new");
+      newIconContainer.appendChild(newIcon);
+    }
+    if (article.comment) {
+      const commentIcon = document.createElement("img");
+      commentIcon.src = "./img/comment.png";
+      commentIcon.classList.add("comment");
+      commentIcon.width = "14";
+      commentIcon.height = "14";
+      commentIconContainer.appendChild(commentIcon);
+
+      const numOfComments = document.createElement("p");
+      const numOfCommentProps = Object.keys(article.comment).length;
+      numOfComments.textContent = numOfCommentProps;
+      commentIconContainer.appendChild(numOfComments);
+    }
+    fragmentTitles
+      .appendChild(title)
+      .appendChild(titleAnchor)
+      .appendChild(newIconContainer)
+      .appendChild(commentIconContainer);
+  }
+}
+
+function createImage(data) {
+  const img = document.createElement("img");
+  img.classList.add("article-image");
+  img.src = data.image;
+  img.width = "100";
+  img.height = "100";
+  fragmentImages.appendChild(img);
+  return img;
+}
+
+function combineArticleImage(data, img) {
+  const genreContainer = document.createElement("div");
+  genreContainer.classList.add("genre-container");
+  const titleArea = document.createElement("div");
+  const imageArea = document.createElement("div");
+  titleArea.classList.add("content", "title-area");
+  imageArea.classList.add("content", "image-area");
+  genreContainer.id = data.id;
+  genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
+  genreContainer.appendChild(imageArea).appendChild(img);
+
+  //初期表示の設定
+  if (data.select) {
+    genreContainer.classList.add("active");
+  }
+  fragmentGenres.appendChild(genreContainer);
+}
 function removeCircle() {
   document.getElementById("loading-circle").remove();
 }
 
 function withinThreeDays(day) {
   const today = new Date();
-  const msInThreeDays = 7 * 24 * 60 * 60 * 1000;
+  const msInThreeDays = 20 * 24 * 60 * 60 * 1000;
   const diff = today.getTime() - day.getTime();
   return diff < msInThreeDays;
 }
