@@ -66,7 +66,13 @@ const fragmentGenres = document.createDocumentFragment();
 
 function renderData(responseData) {
   for (const data of responseData) {
-    //Tabsの生成
+    createTab(data);
+    createArticles(data);
+    const img = createImage(data);
+    integrateElements(data, img);
+  }
+
+  function createTab(data) {
     const tabTitle = document.createElement("li");
     const tabAnchor = document.createElement("a");
     tabAnchor.href = "#";
@@ -77,8 +83,9 @@ function renderData(responseData) {
       tabAnchor.classList.add("active");
     }
     fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
+  }
 
-    //記事タイトルの作成
+  function createArticles(data) {
     const articleList = data.article;
     for (const article of articleList) {
       const title = document.createElement("li");
@@ -94,14 +101,17 @@ function renderData(responseData) {
       }
       fragmentTitles.appendChild(title).appendChild(titleAnchor);
     }
+  }
 
-    //imageの作成
+  function createImage(data) {
     const img = document.createElement("img");
     img.src = data.image;
     img.width = "100";
     img.height = "100";
+    return img;
+  }
 
-    // const genre = document.createElement("section");
+  function integrateElements(data, img) {
     const genreContainer = document.createElement("div");
     genreContainer.classList.add("genre-container");
     const titleArea = document.createElement("div");
@@ -109,7 +119,6 @@ function renderData(responseData) {
     titleArea.classList.add("content", "title-area");
     imageArea.classList.add("content", "image-area");
     genreContainer.id = data.id;
-    // genre.classList.add("genre-container");
     genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
     genreContainer.appendChild(imageArea).appendChild(img);
     //初期表示の設定
@@ -121,12 +130,13 @@ function renderData(responseData) {
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
   tabArea.insertAdjacentElement("afterend", articleArea);
-  const tabs = Array.from(document.getElementsByClassName("tab"));
-  const contents = Array.from(
-    document.getElementsByClassName("genre-container")
-  );
-  addClickEvent(tabs, contents);
 }
+
+const tabs = Array.from(document.getElementsByClassName("tab"));
+console.log(tabs);
+const contents = Array.from(document.getElementsByClassName("genre-container"));
+console.log(contents);
+addClickEvent(tabs, contents);
 
 function removeCircle() {
   document.getElementById("loading-circle").remove();
