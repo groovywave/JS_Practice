@@ -90,6 +90,10 @@ function renderData(responseData) {
     for (const article of articleList) {
       const title = document.createElement("li");
       const titleAnchor = document.createElement("a");
+      const iconContainer = document.createElement("div");
+      const newIconContainer = document.createElement("div");
+      const commentIconContainer = document.createElement("div");
+
       titleAnchor.href = "#";
       titleAnchor.textContent = article.title;
       const articleDate = new Date(article.date);
@@ -97,7 +101,21 @@ function renderData(responseData) {
         const newIcon = document.createElement("img");
         newIcon.src = "./img/new.png";
         newIcon.classList.add("new");
-        titleAnchor.appendChild(newIcon);
+        newIconContainer.appendChild(newIcon);
+        // titleAnchor.appendChild(newIcon);
+      }
+      if (article.comment) {
+        const commentIcon = document.createElement("img");
+        commentIcon.src = "./img/comment.png";
+        commentIcon.classList.add("comment");
+        commentIcon.width = "14";
+        commentIcon.height = "14";
+        commentIconContainer.appendChild(commentIcon);
+
+        const numOfComments = document.createElement("p");
+        const numOfCommentProps = Object.keys(article.comment).length;
+        numOfComments.textContent = numOfCommentProps;
+        commentIconContainer.appendChild(numOfComments);
       }
       fragmentTitles.appendChild(title).appendChild(titleAnchor);
     }
@@ -105,6 +123,7 @@ function renderData(responseData) {
 
   function createImage(data) {
     const img = document.createElement("img");
+    img.classList.add("article-image");
     img.src = data.image;
     img.width = "100";
     img.height = "100";
@@ -146,25 +165,21 @@ function withinThreeDays(day) {
   const today = new Date();
   const msInThreeDays = 7 * 24 * 60 * 60 * 1000;
   const diff = today.getTime() - day.getTime();
-  if (diff < msInThreeDays) {
-    return true;
-  } else {
-    return false;
-  }
+  return diff < msInThreeDays;
 }
 
-function addClickEvent(elements, contents) {
-  elements.forEach((clickedItem) => {
-    clickedItem.addEventListener("click", (e) => {
+function addClickEvent(index, contents) {
+  index.forEach((targetItem) => {
+    targetItem.addEventListener("click", (e) => {
       e.preventDefault();
-      elements.forEach((item) => {
+      index.forEach((item) => {
         item.classList.remove("active");
       });
-      clickedItem.classList.add("active");
-      contents.forEach((genreContainer) => {
-        genreContainer.classList.remove("active");
+      targetItem.classList.add("active");
+      contents.forEach((item) => {
+        item.classList.remove("active");
       });
-      document.getElementById(clickedItem.dataset.id).classList.add("active");
+      document.getElementById(targetItem.dataset.id).classList.add("active");
     });
   });
 }
