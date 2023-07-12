@@ -79,7 +79,7 @@ function renderData(responseData) {
   const contents = Array.from(
     document.getElementsByClassName("genre-container")
   );
-  addClickEvent(tabs, contents);
+  // addClickEvent(tabs, contents);
 }
 
 function createTab(data) {
@@ -98,38 +98,57 @@ function createTab(data) {
 function createArticles(data) {
   const articleList = data.article;
   for (const article of articleList) {
+    const articleContainer = document.createElement("div");
+    articleContainer.classList.add("article-container");
+
     const title = document.createElement("li");
     const titleAnchor = document.createElement("a");
-    const newIconContainer = document.createElement("div");
-    const commentIconContainer = document.createElement("div");
-
     titleAnchor.href = "#";
     titleAnchor.textContent = article.title;
+    title.appendChild(titleAnchor);
+
+    const newIconContainer = document.createElement("div");
+
     const articleDate = new Date(article.date);
     if (withinThreeDays(articleDate)) {
       const newIcon = document.createElement("img");
       newIcon.src = "./img/new.png";
       newIcon.classList.add("new");
       newIconContainer.appendChild(newIcon);
+      // articleContainer.appendChild(newIcon);
     }
+
+    const commentIconContainer = document.createElement("div");
+    commentIconContainer.classList.add("comment-container");
     if (article.comment) {
       const commentIcon = document.createElement("img");
+      commentIcon.classList.add("comment-icon");
       commentIcon.src = "./img/comment.png";
-      commentIcon.classList.add("comment");
       commentIcon.width = "14";
       commentIcon.height = "14";
       commentIconContainer.appendChild(commentIcon);
+      // articleContainer.appendChild(commentIcon);
 
-      const numOfComments = document.createElement("p");
+      const numOfComments = document.createElement("div");
+      numOfComments.classList.add("comment-num");
       const numOfCommentProps = Object.keys(article.comment).length;
       numOfComments.textContent = numOfCommentProps;
+      numOfComments.width = "4px";
+      numOfComments.height = "4px";
       commentIconContainer.appendChild(numOfComments);
     }
-    fragmentTitles
-      .appendChild(title)
-      .appendChild(titleAnchor)
-      .appendChild(newIconContainer)
-      .appendChild(commentIconContainer);
+    // articleContainer.appendChild(titleAnchor);
+    // articleContainer.appendChild(newIconContainer);
+    // articleContainer.appendChild(commentIconContainer);
+    // title.appendChild(articleContainer);
+
+    // fragmentTitles.appendChild(title);
+    articleContainer.appendChild(title);
+    articleContainer.appendChild(newIconContainer);
+    articleContainer.appendChild(commentIconContainer);
+
+    // fragmentTitles.appendChild(title).appendChild(articleContainer);
+    fragmentTitles.appendChild(articleContainer);
   }
 }
 
@@ -171,20 +190,24 @@ function withinThreeDays(day) {
   return diff < msInThreeDays;
 }
 
-function addClickEvent(index, contents) {
-  index.forEach((targetItem) => {
-    targetItem.addEventListener("click", (e) => {
-      e.preventDefault();
-      index.forEach((item) => {
-        item.classList.remove("active");
-      });
-      targetItem.classList.add("active");
-      contents.forEach((item) => {
-        item.classList.remove("active");
-      });
-      document.getElementById(targetItem.dataset.id).classList.add("active");
+tabArea.addEventListener("click", (e) => {
+  const targetElement = e.target;
+  console.log(targetElement);
+  if (targetElement.tagName.toLowerCase() === "a") {
+    const tabs = Array.from(document.getElementsByClassName("tab"));
+    tabs.forEach((tab) => {
+      tab.classList.remove("active");
     });
+    targetElement.classList.add("active");
+  }
+  const contents = Array.from(
+    document.getElementsByClassName("genre-container")
+  );
+  contents.forEach((item) => {
+    item.classList.remove("active");
   });
-}
+  document.getElementById(targetElement.dataset.id).classList.add("active");
+  e.preventDefault();
+});
 
 fetchRenderData();

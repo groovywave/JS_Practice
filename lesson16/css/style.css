@@ -54,18 +54,39 @@ body {
   flex: 1;
 }
 
-.title-area,
+/* .title-area,
 .title-area > li {
   text-align: left;
   display: inline-block;
+  align-items: baseline;
 }
 
+.title-area>li>a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
+
+.article-container{
+  display: flex;
+}
+
+.comment-container{
+  display: flex;
+}
 .new,
-.comment {
+.comment-icon {
   height: 14px;
   width: auto;
-  float: right;
-  vertical-align: middle;
+  margin-top: 4px;
+  /* float: right; */
+  /* vertical-align: middle; */
+}
+.comment-num{
+  font-size: 4px;
+  margin-top: 4px;
+   /* height: 4px; */
+  /* width: auto; */
 }
 
 .image-area {
