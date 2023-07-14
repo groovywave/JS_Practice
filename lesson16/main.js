@@ -1,20 +1,17 @@
-const articlesAPI = [
-  //main
-  "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
-  //economy
-  "https://mocki.io/v1/d408a3b3-9504-4c43-bf12-6773efb74361",
-  //entertainment
-  "https://mocki.io/v1/7b94b922-6130-44a6-b0c0-179cf5f76af5",
-  //sports
-  "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
-];
+const articlesAPI = {
+  main: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
+  economy: "https://mocki.io/v1/d408a3b3-9504-4c43-bf12-6773efb74361",
+  entertainment: "https://mocki.io/v1/7b94b922-6130-44a6-b0c0-179cf5f76af5",
+  sports: "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
+};
 
 const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 
-async function fetchRenderData() {
-  const responseData = await Promise.all(articlesAPI.map(fetchData));
+async function fetchRenderGenreData(genre) {
+  const url = articlesAPI[genre];
+  const responseData = await fetchData(url);
   if (responseData) {
     renderData(responseData);
   }
@@ -66,6 +63,7 @@ const fragmentTitles = document.createDocumentFragment();
 const fragmentImages = document.createDocumentFragment();
 
 function renderData(responseData) {
+  console.log(responseData);
   for (const data of responseData) {
     createTab(data);
     createArticles(data);
@@ -179,6 +177,7 @@ function combineArticleImage(data, img) {
   }
   fragmentGenres.appendChild(genreContainer);
 }
+
 function removeCircle() {
   document.getElementById("loading-circle").remove();
 }
@@ -192,7 +191,8 @@ function withinThreeDays(day) {
 
 tabArea.addEventListener("click", (e) => {
   const targetElement = e.target;
-  console.log(targetElement);
+  const genre = targetElement.textContent;
+  fetchRenderGenreData(genre);
   if (targetElement.tagName.toLowerCase() === "a") {
     const tabs = Array.from(document.getElementsByClassName("tab"));
     tabs.forEach((tab) => {
@@ -207,7 +207,32 @@ tabArea.addEventListener("click", (e) => {
     item.classList.remove("active");
   });
   document.getElementById(targetElement.dataset.id).classList.add("active");
-  e.preventDefault();
 });
 
-fetchRenderData();
+// const initialSelect = articlesAPI.filter((prop) => {
+//   return fetch(prop).select === true;
+// });
+
+// fetchRenderGenreData(initialSelect);
+
+// Function to fetch all data
+async function fetchAllData(urlProps) {
+  console.log(Object.values(urlProps));
+  const requests = Object.values(urlProps).map((url) => fetchData(url));
+  console.log(requests);
+  const PromiseAll = Promise.all(requests);
+  console.log(PromiseAll);
+  // return Promise.all(requests);
+}
+
+// Fetch data from all URLs
+fetchAllData(articlesAPI).then((data) => {
+  console.log(data);
+  // Find the initial data to display
+  const initialData = data.find((item) => item.select === true);
+  // Render the initial data
+  console.log(initialData);
+  if (initialData) {
+    renderData(initialData);
+  }
+});
