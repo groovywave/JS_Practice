@@ -9,12 +9,13 @@ const errorMessage = document.createElement("p");
 const tabArea = document.getElementById("js-ul");
 const articleArea = document.createElement("div");
 
-async function fetchRenderGenreData(genre) {
-  const url = articlesAPI[genre];
-  const responseData = await fetchData(url);
-  if (responseData) {
-    renderData(responseData);
-  }
+async function fetchDataSet(urlProps) {
+  const urls = Object.values(urlProps);
+  const promisedDataSet = urls.map((url) => fetchData(url));
+  const rowDataSet = await Promise.allSettled(promisedDataSet);
+  return rowDataSet
+    .filter((data) => data.status === "fulfilled")
+    .map((data) => data.value);
 }
 
 async function fetchData(url) {
@@ -62,9 +63,10 @@ const fragmentGenres = document.createDocumentFragment();
 const fragmentTitles = document.createDocumentFragment();
 const fragmentImages = document.createDocumentFragment();
 
-function renderData(responseData) {
-  console.log(responseData);
-  for (const data of responseData) {
+function renderData(dataSet) {
+  console.log(dataSet);
+  for (const data of dataSet) {
+    console.log(data);
     createTab(data);
     createArticles(data);
     const img = createImage(data);
@@ -77,7 +79,7 @@ function renderData(responseData) {
   const contents = Array.from(
     document.getElementsByClassName("genre-container")
   );
-  // addClickEvent(tabs, contents);
+  addClickEventListener(tabs, contents);
 }
 
 function createTab(data) {
@@ -95,6 +97,7 @@ function createTab(data) {
 
 function createArticles(data) {
   const articleList = data.article;
+  console.log(articleList);
   for (const article of articleList) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
@@ -113,7 +116,6 @@ function createArticles(data) {
       newIcon.src = "./img/new.png";
       newIcon.classList.add("new");
       newIconContainer.appendChild(newIcon);
-      // articleContainer.appendChild(newIcon);
     }
 
     const commentIconContainer = document.createElement("div");
@@ -125,7 +127,6 @@ function createArticles(data) {
       commentIcon.width = "14";
       commentIcon.height = "14";
       commentIconContainer.appendChild(commentIcon);
-      // articleContainer.appendChild(commentIcon);
 
       const numOfComments = document.createElement("div");
       numOfComments.classList.add("comment-num");
@@ -135,17 +136,11 @@ function createArticles(data) {
       numOfComments.height = "4px";
       commentIconContainer.appendChild(numOfComments);
     }
-    // articleContainer.appendChild(titleAnchor);
-    // articleContainer.appendChild(newIconContainer);
-    // articleContainer.appendChild(commentIconContainer);
-    // title.appendChild(articleContainer);
 
-    // fragmentTitles.appendChild(title);
     articleContainer.appendChild(title);
     articleContainer.appendChild(newIconContainer);
     articleContainer.appendChild(commentIconContainer);
 
-    // fragmentTitles.appendChild(title).appendChild(articleContainer);
     fragmentTitles.appendChild(articleContainer);
   }
 }
@@ -189,50 +184,26 @@ function withinThreeDays(day) {
   return diff < msInThreeDays;
 }
 
-tabArea.addEventListener("click", (e) => {
-  const targetElement = e.target;
-  const genre = targetElement.textContent;
-  fetchRenderGenreData(genre);
-  if (targetElement.tagName.toLowerCase() === "a") {
-    const tabs = Array.from(document.getElementsByClassName("tab"));
-    tabs.forEach((tab) => {
-      tab.classList.remove("active");
+function addClickEventListener(tabs, contents) {
+  tabArea.addEventListener("click", (e) => {
+    const targetElement = e.target;
+    if (targetElement.tagName.toLowerCase() === "a") {
+      tabs.forEach((tab) => {
+        tab.classList.remove("active");
+        console.log(tab);
+      });
+      targetElement.classList.add("active");
+    }
+    contents.forEach((item) => {
+      item.classList.remove("active");
     });
-    targetElement.classList.add("active");
-  }
-  const contents = Array.from(
-    document.getElementsByClassName("genre-container")
-  );
-  contents.forEach((item) => {
-    item.classList.remove("active");
+    document.getElementById(targetElement.dataset.id).classList.add("active");
   });
-  document.getElementById(targetElement.dataset.id).classList.add("active");
-});
-
-// const initialSelect = articlesAPI.filter((prop) => {
-//   return fetch(prop).select === true;
-// });
-
-// fetchRenderGenreData(initialSelect);
-
-// Function to fetch all data
-async function fetchAllData(urlProps) {
-  console.log(Object.values(urlProps));
-  const requests = Object.values(urlProps).map((url) => fetchData(url));
-  console.log(requests);
-  const PromiseAll = Promise.all(requests);
-  console.log(PromiseAll);
-  // return Promise.all(requests);
 }
 
-// Fetch data from all URLs
-fetchAllData(articlesAPI).then((data) => {
-  console.log(data);
-  // Find the initial data to display
-  const initialData = data.find((item) => item.select === true);
-  // Render the initial data
-  console.log(initialData);
-  if (initialData) {
-    renderData(initialData);
-  }
-});
+async function fetchRenderData() {
+  const availableDataSet = await fetchDataSet(articlesAPI);
+  renderData(availableDataSet);
+}
+
+fetchRenderData();
