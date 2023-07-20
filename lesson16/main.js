@@ -67,8 +67,8 @@ function renderArticlesAndTabMenus(allArticles) {
   for (const aGenreArticles of allArticles) {
     createTab(aGenreArticles);
     createArticles(aGenreArticles);
-    const img = createImage(aGenreArticles);
-    combineArticleImage(aGenreArticles, img);
+    const thumbnail = createThumbnail(aGenreArticles);
+    combineArticlesThumbnail(aGenreArticles, thumbnail);
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
@@ -122,7 +122,7 @@ function createArticles(data) {
   }
 }
 
-function createImage(data) {
+function createThumbnail(data) {
   const img = document.createElement("img");
   img.classList.add("article-image");
   img.src = data.image;
@@ -132,7 +132,7 @@ function createImage(data) {
   return img;
 }
 
-function combineArticleImage(data, img) {
+function combineArticlesThumbnail(data, img) {
   const genreContainer = document.createElement("div");
   genreContainer.classList.add("genre-container");
   const titleArea = document.createElement("div");
