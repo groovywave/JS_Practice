@@ -64,9 +64,7 @@ const fragmentTitles = document.createDocumentFragment();
 const fragmentImages = document.createDocumentFragment();
 
 function renderData(dataSet) {
-  console.log(dataSet);
   for (const data of dataSet) {
-    console.log(data);
     createTab(data);
     createArticles(data);
     const img = createImage(data);
@@ -97,7 +95,6 @@ function createTab(data) {
 
 function createArticles(data) {
   const articleList = data.article;
-  console.log(articleList);
   for (const article of articleList) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
@@ -170,7 +167,6 @@ function addClickEventListener(tabs, contents) {
     if (targetElement.tagName.toLowerCase() === "a") {
       tabs.forEach((tab) => {
         tab.classList.remove("active");
-        console.log(tab);
       });
       targetElement.classList.add("active");
     }
