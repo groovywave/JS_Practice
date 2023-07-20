@@ -63,12 +63,12 @@ const fragmentGenres = document.createDocumentFragment();
 const fragmentTitles = document.createDocumentFragment();
 const fragmentImages = document.createDocumentFragment();
 
-function renderData(dataSet) {
-  for (const data of dataSet) {
-    createTab(data);
-    createArticles(data);
-    const img = createImage(data);
-    combineArticleImage(data, img);
+function renderArticlesAndTabMenus(allArticles) {
+  for (const aGenreArticles of allArticles) {
+    createTab(aGenreArticles);
+    createArticles(aGenreArticles);
+    const img = createImage(aGenreArticles);
+    combineArticleImage(aGenreArticles, img);
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
@@ -179,7 +179,7 @@ function addClickEventListener(tabs, contents) {
 
 async function fetchRenderData() {
   const availableDataSet = await fetchDataSet(articlesAPI);
-  renderData(availableDataSet);
+  renderArticlesAndTabMenus(availableDataSet);
 }
 
 fetchRenderData();
