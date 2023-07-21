@@ -80,21 +80,21 @@ function renderArticlesAndTabMenus(allArticles) {
   addClickEventListener(tabs, contents);
 }
 
-function createTab(data) {
+function createTab({ category, id, select }) {
   const tabTitle = document.createElement("li");
   const tabAnchor = document.createElement("a");
   tabAnchor.href = "#";
-  tabAnchor.textContent = data.category;
-  tabAnchor.setAttribute("data-id", data.id);
+  tabAnchor.textContent = category;
+  tabAnchor.setAttribute("data-id", id);
   tabAnchor.classList.add("tab");
-  if (data.select) {
+  if (select) {
     tabAnchor.classList.add("active");
   }
   fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 }
 
-function createArticles(data) {
-  const articleList = data.article;
+function createArticles({ article, title, date }) {
+  const articleList = article;
   for (const article of articleList) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
@@ -102,12 +102,12 @@ function createArticles(data) {
     const title = document.createElement("li");
     const titleAnchor = document.createElement("a");
     titleAnchor.href = "#";
-    titleAnchor.textContent = article.title;
+    titleAnchor.textContent = title;
     title.appendChild(titleAnchor);
 
     const newIconContainer = document.createElement("div");
 
-    const articleDate = new Date(article.date);
+    const articleDate = new Date(date);
     if (withinThreeDays(articleDate)) {
       const newIcon = document.createElement("img");
       newIcon.src = "./img/new.png";
@@ -122,29 +122,29 @@ function createArticles(data) {
   }
 }
 
-function createThumbnail(data) {
+function createThumbnail({ image }) {
   const img = document.createElement("img");
   img.classList.add("article-image");
-  img.src = data.image;
+  img.src = image;
   img.width = "100";
   img.height = "100";
   fragmentImages.appendChild(img);
   return img;
 }
 
-function combineArticlesThumbnail(data, img) {
+function combineArticlesThumbnail({ id, select }, img) {
   const genreContainer = document.createElement("div");
   genreContainer.classList.add("genre-container");
   const titleArea = document.createElement("div");
   const imageArea = document.createElement("div");
   titleArea.classList.add("content", "title-area");
   imageArea.classList.add("content", "image-area");
-  genreContainer.id = data.id;
+  genreContainer.id = id;
   genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
   genreContainer.appendChild(imageArea).appendChild(img);
 
   //初期表示の設定
-  if (data.select) {
+  if (select) {
     genreContainer.classList.add("active");
   }
   fragmentGenres.appendChild(genreContainer);
