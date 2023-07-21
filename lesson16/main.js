@@ -165,12 +165,13 @@ function withinThreeDays(day) {
 function addClickEventListener(tabs, contents) {
   tabArea.addEventListener("click", (e) => {
     const targetElement = e.target;
-    if (targetElement.tagName.toLowerCase() === "a") {
-      tabs.forEach((tab) => {
-        tab.classList.remove("active");
-      });
-      targetElement.classList.add("active");
-    }
+    if (targetElement === e.currentTarget) return;
+
+    tabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+    targetElement.classList.add("active");
+
     contents.forEach((item) => {
       item.classList.remove("active");
     });
