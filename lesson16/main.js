@@ -111,6 +111,7 @@ function createArticles({ article, title, date }) {
     if (withinThreeDays(articleDate)) {
       const newIcon = document.createElement("img");
       newIcon.src = "./img/new.png";
+      newIcon.alt = "新着";
       newIcon.classList.add("new");
       newIconContainer.appendChild(newIcon);
     }
