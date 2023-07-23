@@ -93,7 +93,7 @@ function createTab({ category, id, select }) {
   fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 }
 
-function createArticles({ article, title, date }) {
+function createArticles({ article }) {
   const articleList = article;
   for (const article of articleList) {
     const articleContainer = document.createElement("div");
@@ -102,12 +102,12 @@ function createArticles({ article, title, date }) {
     const title = document.createElement("li");
     const titleAnchor = document.createElement("a");
     titleAnchor.href = "#";
-    titleAnchor.textContent = title;
+    titleAnchor.textContent = article.title;
     title.appendChild(titleAnchor);
 
     const newIconContainer = document.createElement("div");
 
-    const articleDate = new Date(date);
+    const articleDate = new Date(article.date);
     if (withinThreeDays(articleDate)) {
       const newIcon = document.createElement("img");
       newIcon.src = "./img/new.png";
@@ -170,7 +170,6 @@ function addClickEventListener(tabs, contents) {
     tabs.forEach((tab) => {
       tab.classList.remove("active");
     });
-    targetElement.classList.add("active");
 
     contents.forEach((item) => {
       item.classList.remove("active");
