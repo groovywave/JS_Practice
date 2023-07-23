@@ -54,19 +54,6 @@ body {
   flex: 1;
 }
 
-/* .title-area,
-.title-area > li {
-  text-align: left;
-  display: inline-block;
-  align-items: baseline;
-}
-
-.title-area>li>a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-} */
-
 .article-container{
   display: flex;
 }
