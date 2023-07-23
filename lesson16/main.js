@@ -77,7 +77,7 @@ function renderArticlesAndTabMenus(allArticles) {
   const contents = Array.from(
     document.getElementsByClassName("genre-container")
   );
-  addClickEventListener(tabs, contents);
+  addClickEventListener();
 }
 
 function createTab({ category, id, select }) {
@@ -162,18 +162,13 @@ function withinThreeDays(day) {
   return diff < msInThreeDays;
 }
 
-function addClickEventListener(tabs, contents) {
+function addClickEventListener() {
   tabArea.addEventListener("click", (e) => {
     const targetElement = e.target;
     if (targetElement === e.currentTarget) return;
-
-    tabs.forEach((tab) => {
-      tab.classList.remove("active");
-    });
-
-    contents.forEach((item) => {
-      item.classList.remove("active");
-    });
+    tabArea.querySelector(".active").classList.remove("active");
+    targetElement.classList.add("active");
+    articleArea.querySelector(".active").classList.remove("active");
     document.getElementById(targetElement.dataset.id).classList.add("active");
   });
 }
