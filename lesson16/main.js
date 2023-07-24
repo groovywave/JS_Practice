@@ -73,10 +73,6 @@ function renderArticlesAndTabMenus(allArticles) {
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
   tabArea.insertAdjacentElement("afterend", articleArea);
-  const tabs = Array.from(document.getElementsByClassName("tab"));
-  const contents = Array.from(
-    document.getElementsByClassName("genre-container")
-  );
   addClickEventListener();
 }
 
