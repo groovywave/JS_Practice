@@ -94,29 +94,36 @@ function createArticles({ article }) {
   for (const article of articleList) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
-
-    const title = document.createElement("li");
-    const titleAnchor = document.createElement("a");
-    titleAnchor.href = "#";
-    titleAnchor.textContent = article.title;
-    title.appendChild(titleAnchor);
-
-    const newIconContainer = document.createElement("div");
-
-    const articleDate = new Date(article.date);
-    if (withinThreeDays(articleDate)) {
-      const newIcon = document.createElement("img");
-      newIcon.src = "./img/new.png";
-      newIcon.alt = "新着";
-      newIcon.classList.add("new");
-      newIconContainer.appendChild(newIcon);
-    }
-
+    const title = createTitle(article);
+    const newIconContainer = createNewIconContainer(article);
     articleContainer.appendChild(title);
     articleContainer.appendChild(newIconContainer);
-
     fragmentTitles.appendChild(articleContainer);
   }
+}
+
+function createTitle(article) {
+  const title = document.createElement("li");
+  const titleAnchor = document.createElement("a");
+  titleAnchor.href = "#";
+  titleAnchor.textContent = article.title;
+  console.log(article.title);
+  title.appendChild(titleAnchor);
+  return title;
+}
+
+function createNewIconContainer(article) {
+  const newIconContainer = document.createElement("div");
+  const articleDate = new Date(article.date);
+  console.log(articleDate);
+  if (withinThreeDays(articleDate)) {
+    const newIcon = document.createElement("img");
+    newIcon.src = "./img/new.png";
+    newIcon.alt = "新着";
+    newIcon.classList.add("new");
+    newIconContainer.appendChild(newIcon);
+  }
+  return newIconContainer;
 }
 
 function createThumbnail({ image }) {
