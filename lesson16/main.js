@@ -90,8 +90,8 @@ function createTab({ category, id, select }) {
 }
 
 function createArticles({ article }) {
-  const articleList = article;
-  for (const article of articleList) {
+  const articles = article;
+  for (const article of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
     const title = createTitle(article);
