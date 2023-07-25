@@ -107,7 +107,6 @@ function createTitle(article) {
   const titleAnchor = document.createElement("a");
   titleAnchor.href = "#";
   titleAnchor.textContent = article.title;
-  console.log(article.title);
   title.appendChild(titleAnchor);
   return title;
 }
@@ -115,7 +114,6 @@ function createTitle(article) {
 function createNewIconContainer(article) {
   const newIconContainer = document.createElement("div");
   const articleDate = new Date(article.date);
-  console.log(articleDate);
   if (withinThreeDays(articleDate)) {
     const newIcon = document.createElement("img");
     newIcon.src = "./img/new.png";
