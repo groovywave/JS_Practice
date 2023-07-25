@@ -5,10 +5,6 @@ const articlesAPI = {
   sports: "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
 };
 
-const errorMessage = document.createElement("p");
-const tabArea = document.getElementById("js-ul");
-const articleArea = document.createElement("div");
-
 async function fetchDataSet(urlProps) {
   const urls = Object.values(urlProps);
   const promisedDataSet = urls.map((url) => fetchData(url));
@@ -38,6 +34,8 @@ async function fetchData(url) {
   }
 }
 
+const tabArea = document.getElementById("js-ul");
+
 function renderCircle() {
   const loadingCircle = document.createElement("img");
   loadingCircle.src = "img/loading-circle.gif";
@@ -45,6 +43,8 @@ function renderCircle() {
   loadingCircle.id = "loading-circle";
   tabArea.appendChild(loadingCircle);
 }
+
+const errorMessage = document.createElement("p");
 
 function renderStatus(response) {
   errorMessage.id = "render-status";
@@ -62,6 +62,8 @@ const fragmentTabs = document.createDocumentFragment();
 const fragmentGenres = document.createDocumentFragment();
 const fragmentTitles = document.createDocumentFragment();
 const fragmentImages = document.createDocumentFragment();
+
+const articleArea = document.createElement("div");
 
 function renderArticlesAndTabMenus(allArticles) {
   for (const aGenreArticles of allArticles) {
