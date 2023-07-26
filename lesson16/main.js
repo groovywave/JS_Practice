@@ -7,7 +7,12 @@ const articlesAPI = {
 
 async function fetchDataSet(urlProps) {
   const urls = Object.values(urlProps);
+  if (!Object.keys(urls).length) {
+    displayInfo("no data");
+    return;
+  }
   const promisedDataSet = urls.map((url) => fetchData(url));
+  console.log(promisedDataSet);
   const rowDataSet = await Promise.allSettled(promisedDataSet);
   return rowDataSet
     .filter((data) => data.status === "fulfilled")
@@ -20,10 +25,8 @@ async function fetchData(url) {
     const response = await fetch(url);
     const responseData = await response.json();
     if (!response.ok) {
-      renderStatus(response);
+      displayInfo(response);
       console.error(`${response.status}:${response.statusText}`);
-    } else if (!Object.keys(responseData).length) {
-      displayInfo("no data");
     } else {
       return responseData;
     }
@@ -44,17 +47,14 @@ function renderCircle() {
   tabArea.appendChild(loadingCircle);
 }
 
-const errorMessage = document.createElement("p");
-
-function renderStatus(response) {
-  errorMessage.id = "render-status";
-  errorMessage.textContent = `${response.status}:${response.statusText}`;
-  document.body.appendChild(errorMessage);
-}
-
-function displayInfo(error) {
+function displayInfo(response) {
+  const errorMessage = document.createElement("p");
   errorMessage.id = "display-info";
-  errorMessage.textContent = error;
+  if (response.status) {
+    errorMessage.textContent = `${response.status}:${response.statusText}`;
+  } else {
+    errorMessage.textContent = response;
+  }
   document.body.appendChild(errorMessage);
 }
 
