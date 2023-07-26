@@ -6,6 +6,7 @@ const articlesAPI = {
 };
 
 async function fetchDataSet(urlProps) {
+  renderCircle();
   const urls = Object.values(urlProps);
   if (!Object.keys(urls).length) {
     displayInfo("no data");
@@ -14,13 +15,13 @@ async function fetchDataSet(urlProps) {
   const promisedDataSet = urls.map((url) => fetchData(url));
   console.log(promisedDataSet);
   const rowDataSet = await Promise.allSettled(promisedDataSet);
+  removeCircle();
   return rowDataSet
     .filter((data) => data.status === "fulfilled")
     .map((data) => data.value);
 }
 
 async function fetchData(url) {
-  renderCircle();
   try {
     const response = await fetch(url);
     const responseData = await response.json();
@@ -32,8 +33,6 @@ async function fetchData(url) {
     }
   } catch (error) {
     displayInfo(error);
-  } finally {
-    removeCircle();
   }
 }
 
