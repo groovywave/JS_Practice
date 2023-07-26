@@ -98,8 +98,10 @@ function createArticles({ article }) {
     articleContainer.classList.add("article-container");
     const title = createTitle(article);
     const newIconContainer = createNewIconContainer(article);
+    const commentIconContainer = createCommentIconContainer(article);
     articleContainer.appendChild(title);
     articleContainer.appendChild(newIconContainer);
+    articleContainer.appendChild(commentIconContainer);
     fragmentTitles.appendChild(articleContainer);
   }
 }
@@ -124,6 +126,28 @@ function createNewIconContainer(article) {
     newIconContainer.appendChild(newIcon);
   }
   return newIconContainer;
+}
+
+function createCommentIconContainer(article) {
+  const commentIconContainer = document.createElement("div");
+  commentIconContainer.classList.add("comment-container");
+  if (article.comment) {
+    const commentIcon = document.createElement("img");
+    commentIcon.classList.add("comment-icon");
+    commentIcon.src = "./img/comment.png";
+    commentIcon.width = "14";
+    commentIcon.height = "14";
+    commentIconContainer.appendChild(commentIcon);
+
+    const numOfComments = document.createElement("div");
+    numOfComments.classList.add("comment-num");
+    const numOfCommentProps = Object.keys(article.comment).length;
+    numOfComments.textContent = numOfCommentProps;
+    numOfComments.width = "4px";
+    numOfComments.height = "4px";
+    commentIconContainer.appendChild(numOfComments);
+  }
+  return commentIconContainer;
 }
 
 function createThumbnail({ image }) {
@@ -160,7 +184,7 @@ function removeCircle() {
 
 function withinThreeDays(day) {
   const today = new Date();
-  const msInThreeDays = 20 * 24 * 60 * 60 * 1000;
+  const msInThreeDays = 30 * 24 * 60 * 60 * 1000;
   const diff = today.getTime() - day.getTime();
   return diff < msInThreeDays;
 }
