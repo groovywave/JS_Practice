@@ -1,197 +1,183 @@
-const ul = document.getElementById("js-ul");
-const fetchButton = document.getElementById("js-fetch-button");
-const errorMessage = document.createElement("p");
-const openButton = document.getElementById("js-open-button");
-const closeButton = document.getElementById("js-close-button");
-const backButton = document.getElementById("js-back-button");
-const modal = document.getElementById("js-modal");
-const mask = document.getElementById("js-mask");
-const promptMessage = document.getElementById("js-prompt-message");
-const nameBox = document.getElementById("js-name-box");
-const numberBox = document.getElementById("js-number-box");
-const namePattern =
-  /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ]+[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠a-zA-Zａ-ｚＡ-Ｚ\s]*$/;
-//https://arc-tech.hatenablog.com/entry/2021/01/20/105620
-const numberPattern = /^-?\d+(\.?\d*)([eE][+-]?\d+)?$/;
-const url = "https://mocki.io/v1/1c058349-634e-462a-ad37-14f135e59b99";
+const articlesAPI = {
+  main: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
+  economy: "https://mocki.io/v1/d408a3b3-9504-4c43-bf12-6773efb74361",
+  entertainment: "https://mocki.io/v1/7b94b922-6130-44a6-b0c0-179cf5f76af5",
+  sports: "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
+};
 
-function renderStatus(response) {
-  errorMessage.id = "render-status";
-  errorMessage.textContent = `${response.status}:${response.statusText}`;
-  document.body.appendChild(errorMessage);
+async function fetchDataSet(urlProps) {
+  renderCircle();
+  const urls = Object.values(urlProps);
+  if (!Object.keys(urls).length) {
+    displayInfo("no data");
+    return;
+  }
+  const promisedDataSet = urls.map((url) => fetchData(url));
+  console.log(promisedDataSet);
+  const rowDataSet = await Promise.allSettled(promisedDataSet);
+  removeCircle();
+  return rowDataSet
+    .filter((data) => data.status === "fulfilled")
+    .map((data) => data.value);
 }
 
-function displayInfo(error) {
-  errorMessage.id = "display-info";
-  errorMessage.textContent = error;
-  document.body.appendChild(errorMessage);
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    const responseData = await response.json();
+    if (!response.ok) {
+      displayInfo(response);
+      console.error(`${response.status}:${response.statusText}`);
+    } else {
+      return responseData;
+    }
+  } catch (error) {
+    displayInfo(error);
+  }
 }
+
+const tabArea = document.getElementById("js-ul");
 
 function renderCircle() {
   const loadingCircle = document.createElement("img");
   loadingCircle.src = "img/loading-circle.gif";
   loadingCircle.alt = "ローディング画像";
   loadingCircle.id = "loading-circle";
-  ul.appendChild(loadingCircle);
+  tabArea.appendChild(loadingCircle);
+}
+
+function displayInfo(response) {
+  const errorMessage = document.createElement("p");
+  errorMessage.id = "display-info";
+  if (response.status) {
+    errorMessage.textContent = `${response.status}:${response.statusText}`;
+  } else {
+    errorMessage.textContent = response;
+  }
+  document.body.appendChild(errorMessage);
+}
+
+const fragmentTabs = document.createDocumentFragment();
+const fragmentGenres = document.createDocumentFragment();
+const fragmentTitles = document.createDocumentFragment();
+const fragmentImages = document.createDocumentFragment();
+
+const articleArea = document.createElement("div");
+
+function renderArticlesAndTabMenus(allArticles) {
+  for (const aGenreArticles of allArticles) {
+    createTab(aGenreArticles);
+    createArticles(aGenreArticles);
+    const thumbnail = createThumbnail(aGenreArticles);
+    combineArticlesThumbnail(aGenreArticles, thumbnail);
+  }
+  tabArea.appendChild(fragmentTabs);
+  articleArea.appendChild(fragmentGenres);
+  tabArea.insertAdjacentElement("afterend", articleArea);
+  addClickEventListener();
+}
+
+function createTab({ category, id, select }) {
+  const tabTitle = document.createElement("li");
+  const tabAnchor = document.createElement("a");
+  tabAnchor.href = "#";
+  tabAnchor.textContent = category;
+  tabAnchor.setAttribute("data-id", id);
+  tabAnchor.classList.add("tab");
+  if (select) {
+    tabAnchor.classList.add("active");
+  }
+  fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
+}
+
+function createArticles({ article }) {
+  const articles = article;
+  for (const article of articles) {
+    const articleContainer = document.createElement("div");
+    articleContainer.classList.add("article-container");
+    const title = createTitle(article);
+    const newIconContainer = createNewIconContainer(article);
+    articleContainer.appendChild(title);
+    articleContainer.appendChild(newIconContainer);
+    fragmentTitles.appendChild(articleContainer);
+  }
+}
+
+function createTitle(article) {
+  const title = document.createElement("li");
+  const titleAnchor = document.createElement("a");
+  titleAnchor.href = "#";
+  titleAnchor.textContent = article.title;
+  title.appendChild(titleAnchor);
+  return title;
+}
+
+function createNewIconContainer(article) {
+  const newIconContainer = document.createElement("div");
+  const articleDate = new Date(article.date);
+  if (withinThreeDays(articleDate)) {
+    const newIcon = document.createElement("img");
+    newIcon.src = "./img/new.png";
+    newIcon.alt = "新着";
+    newIcon.classList.add("new");
+    newIconContainer.appendChild(newIcon);
+  }
+  return newIconContainer;
+}
+
+function createThumbnail({ image }) {
+  const img = document.createElement("img");
+  img.classList.add("article-image");
+  img.src = image;
+  img.width = "100";
+  img.height = "100";
+  fragmentImages.appendChild(img);
+  return img;
+}
+
+function combineArticlesThumbnail({ id, select }, img) {
+  const genreContainer = document.createElement("div");
+  genreContainer.classList.add("genre-container");
+  const titleArea = document.createElement("div");
+  const imageArea = document.createElement("div");
+  titleArea.classList.add("content", "title-area");
+  imageArea.classList.add("content", "image-area");
+  genreContainer.id = id;
+  genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
+  genreContainer.appendChild(imageArea).appendChild(img);
+
+  //初期表示の設定
+  if (select) {
+    genreContainer.classList.add("active");
+  }
+  fragmentGenres.appendChild(genreContainer);
 }
 
 function removeCircle() {
   document.getElementById("loading-circle").remove();
 }
 
-function renderData(menus) {
-  const fragment = document.createDocumentFragment();
-  for (const menu of menus) {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    const img = document.createElement("img");
-    a.href = menu.to;
-    a.textContent = menu.text;
-    img.src = menu.img;
-    img.alt = menu.alt;
-    fragment
-      .appendChild(li)
-      .appendChild(a)
-      .insertAdjacentElement("afterbegin", img);
-  }
-  ul.appendChild(fragment);
+function withinThreeDays(day) {
+  const today = new Date();
+  const msInThreeDays = 20 * 24 * 60 * 60 * 1000;
+  const diff = today.getTime() - day.getTime();
+  return diff < msInThreeDays;
 }
 
-async function fetchData(url) {
-  renderCircle();
-  try {
-    const response = await fetch(url);
-    const responseData = await response.json();
-    if (!response.ok) {
-      renderStatus(response);
-      console.error(`${response.status}:${response.statusText}`);
-    }
-    if (!responseData.length) {
-      displayInfo("no data");
-    }
-    return responseData;
-  } catch (error) {
-    displayInfo(error);
-  } finally {
-    removeCircle();
-    backButton.classList.remove("hidden");
-  }
+function addClickEventListener() {
+  tabArea.addEventListener("click", (e) => {
+    const targetElement = e.target;
+    if (targetElement === e.currentTarget) return;
+    tabArea.querySelector(".active").classList.remove("active");
+    targetElement.classList.add("active");
+    articleArea.querySelector(".active").classList.remove("active");
+    document.getElementById(targetElement.dataset.id).classList.add("active");
+  });
 }
 
-async function fetchRenderData(inputNumber) {
-  const responseData = await fetchData(url);
-  if (responseData) {
-    renderData(responseData);
-    console.log(inputNumber); //show inputted number
-  }
+async function fetchRenderData() {
+  const availableDataSet = await fetchDataSet(articlesAPI);
+  renderArticlesAndTabMenus(availableDataSet);
 }
 
-openButton.addEventListener("click", () => {
-  resetPrompt();
-  nameBox.value = "";
-  numberBox.value = "";
-  modal.classList.remove("hidden");
-  mask.classList.remove("hidden");
-  openButton.classList.add("hidden");
-  fetchButton.setAttribute("disabled", "true");
-  nameBox.focus();
-});
-
-fetchButton.addEventListener("click", () => {
-  const inputName = nameBox.value;
-  const inputNumber = numberBox.value;
-  fetchRenderData(inputName, inputNumber);
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
-});
-
-function closeModal() {
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
-  openButton.classList.remove("hidden");
-}
-
-mask.addEventListener("click", () => {
-  closeModal();
-  resetValidation();
-});
-
-closeButton.addEventListener("click", () => {
-  closeModal();
-  resetValidation();
-});
-
-backButton.addEventListener("click", () => {
-  backButton.classList.add("hidden");
-  openButton.classList.remove("hidden");
-  if (errorMessage) {
-    errorMessage.remove();
-  }
-  while (ul.firstChild) {
-    ul.firstChild.remove();
-  }
-});
-
-let isValidateName = false;
-let isValidateNumber = false;
-
-function validatePattern(inputBox, validPattern, errorMessage) {
-  const isValue = checkInputValue(inputBox, validPattern, errorMessage);
-  if (inputBox === nameBox) {
-    isValidateName = isValue;
-  } else if (inputBox === numberBox) {
-    isValidateNumber = isValue;
-  }
-  if (isValue) {
-    resetPrompt();
-    checkEnableSubmit();
-  }
-}
-
-function checkInputValue(inputBox, regExp, errorMessage) {
-  const value = inputBox.value;
-  const result = regExp.test(value);
-  if (!result) {
-    invalidInput(errorMessage);
-  }
-  return result;
-}
-
-function resetPrompt() {
-  promptMessage.textContent = "入力後、取得ボタンを押してね";
-  promptMessage.style.color = "black";
-}
-
-function resetValidation() {
-  isValidateName = false;
-  isValidateNumber = false;
-}
-
-function checkEnableSubmit() {
-  if (isValidateName && isValidateNumber) {
-    validInput();
-  } else {
-    invalidInput();
-  }
-}
-
-
-function invalidInput(errorMessage) {
-  promptMessage.textContent = errorMessage;
-  promptMessage.style.color = "red";
-  fetchButton.disabled = true;
-}
-
-function validInput() {
-  promptMessage.textContent = "入力後、取得ボタンを押してね";
-  promptMessage.style.color = "black";
-  fetchButton.disabled = false;
-}
-
-nameBox.addEventListener("input", () =>
-  validatePattern(nameBox, namePattern, "名前を入力ください")
-);
-numberBox.addEventListener("input", () =>
-  validatePattern(numberBox, numberPattern, "半角数字を入力ください")
-);
-
+fetchRenderData();
