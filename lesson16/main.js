@@ -10,10 +10,10 @@ async function fetchDataSet(urlProps) {
   const urls = Object.values(urlProps);
   if (!Object.keys(urls).length) {
     displayInfo("no data");
+    removeCircle();
     return;
   }
   const promisedDataSet = urls.map((url) => fetchData(url));
-  console.log(promisedDataSet);
   const rowDataSet = await Promise.allSettled(promisedDataSet);
   removeCircle();
   return rowDataSet
@@ -31,8 +31,8 @@ async function fetchData(url) {
     } else {
       return responseData;
     }
-  } catch (error) {
-    displayInfo(error);
+  } catch {
+    displayInfo("Something went wrong. We can't fetch the data.");
   }
 }
 
