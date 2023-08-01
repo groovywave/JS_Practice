@@ -127,10 +127,11 @@ function createNewIconContainer(article) {
   return newIconContainer;
 }
 
-function createCommentIconContainer(article) {
+function createCommentIconContainer({ comment }) {
+  const comments = comment;
   const commentIconContainer = document.createElement("div");
   commentIconContainer.classList.add("comment-container");
-  if (article.comment) {
+  if (comments.length > 0) {
     const commentIcon = document.createElement("img");
     commentIcon.classList.add("comment-icon");
     commentIcon.src = "./img/comment.png";
@@ -140,7 +141,7 @@ function createCommentIconContainer(article) {
 
     const numOfComments = document.createElement("div");
     numOfComments.classList.add("comment-num");
-    const numOfCommentProps = Object.keys(article.comment).length;
+    const numOfCommentProps = comments.length;
     numOfComments.textContent = numOfCommentProps;
     numOfComments.width = "4px";
     numOfComments.height = "4px";
