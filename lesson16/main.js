@@ -141,8 +141,7 @@ function createCommentIconContainer({ comment }) {
 
     const numOfComments = document.createElement("div");
     numOfComments.classList.add("comment-num");
-    const numOfCommentProps = comments.length;
-    numOfComments.textContent = numOfCommentProps;
+    numOfComments.textContent = comments.length;
     numOfComments.width = "4px";
     numOfComments.height = "4px";
     commentIconContainer.appendChild(numOfComments);
