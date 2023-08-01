@@ -142,6 +142,7 @@ function createCommentIconContainer({ comment }) {
     const numOfComments = document.createElement("div");
     numOfComments.classList.add("comment-num");
     numOfComments.textContent = comments.length;
+    numOfComments.alt = "コメント数";
     numOfComments.width = "4px";
     numOfComments.height = "4px";
     commentIconContainer.appendChild(numOfComments);
