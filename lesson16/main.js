@@ -31,7 +31,8 @@ async function fetchData(url) {
     } else {
       return responseData;
     }
-  } catch {
+  } catch (error) {
+    console.error(error);
     displayInfo("Something went wrong. We can't fetch the data.");
   }
 }
