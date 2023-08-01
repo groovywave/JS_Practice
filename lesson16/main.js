@@ -114,9 +114,9 @@ function createTitle(article) {
   return title;
 }
 
-function createNewIconContainer(article) {
+function createNewIconContainer({ date }) {
   const newIconContainer = document.createElement("div");
-  const articleDate = new Date(article.date);
+  const articleDate = new Date(date);
   if (withinThreeDays(articleDate)) {
     const newIcon = document.createElement("img");
     newIcon.src = "./img/new.png";
