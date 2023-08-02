@@ -129,10 +129,9 @@ function createNewIconContainer({ date }) {
 }
 
 function createCommentIconContainer({ comment }) {
-  const comments = comment;
   const commentIconContainer = document.createElement("div");
   commentIconContainer.classList.add("comment-container");
-  if (comments.length > 0) {
+  if (comment.length > 0) {
     const commentIcon = document.createElement("img");
     commentIcon.classList.add("comment-icon");
     commentIcon.src = "./img/comment.png";
@@ -142,7 +141,7 @@ function createCommentIconContainer({ comment }) {
 
     const numOfComments = document.createElement("div");
     numOfComments.classList.add("comment-num");
-    numOfComments.textContent = comments.length;
+    numOfComments.textContent = comment.length;
     numOfComments.alt = "コメント数";
     commentIconContainer.appendChild(numOfComments);
   }
