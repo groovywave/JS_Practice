@@ -1,8 +1,8 @@
 const articlesAPI = {
-  main: "https://mocki.io/v1/025fa3d8-7096-433d-8766-8392ceab92b1",
-  economy: "https://mocki.io/v1/d408a3b3-9504-4c43-bf12-6773efb74361",
-  entertainment: "https://mocki.io/v1/7b94b922-6130-44a6-b0c0-179cf5f76af5",
-  sports: "https://mocki.io/v1/e30aa30c-649c-49ce-9d75-a4e9c4caca51",
+  main: "https://mocki.io/v1/ea1c92d0-05ee-4268-a870-bde69be3869a",
+  economy: "https://mocki.io/v1/fd259b7f-9987-4837-ac71-6188c91713bf",
+  entertainment: "https://mocki.io/v1/bfac14f8-5bf0-4183-a097-a29e64116f39",
+  sports: "https://mocki.io/v1/921f5530-9c5e-498a-bf7c-62dde80cbfa5",
 };
 
 async function fetchDataSet(urlProps) {
@@ -10,10 +10,10 @@ async function fetchDataSet(urlProps) {
   const urls = Object.values(urlProps);
   if (!Object.keys(urls).length) {
     displayInfo("no data");
+    removeCircle();
     return;
   }
   const promisedDataSet = urls.map((url) => fetchData(url));
-  console.log(promisedDataSet);
   const rowDataSet = await Promise.allSettled(promisedDataSet);
   removeCircle();
   return rowDataSet
@@ -32,7 +32,8 @@ async function fetchData(url) {
       return responseData;
     }
   } catch (error) {
-    displayInfo(error);
+    console.error(error);
+    displayInfo("Something went wrong. We can't fetch the data.");
   }
 }
 
@@ -97,8 +98,10 @@ function createArticles({ article }) {
     articleContainer.classList.add("article-container");
     const title = createTitle(article);
     const newIconContainer = createNewIconContainer(article);
+    const commentIconContainer = createCommentIconContainer(article);
     articleContainer.appendChild(title);
     articleContainer.appendChild(newIconContainer);
+    articleContainer.appendChild(commentIconContainer);
     fragmentTitles.appendChild(articleContainer);
   }
 }
@@ -112,9 +115,9 @@ function createTitle(article) {
   return title;
 }
 
-function createNewIconContainer(article) {
+function createNewIconContainer({ date }) {
   const newIconContainer = document.createElement("div");
-  const articleDate = new Date(article.date);
+  const articleDate = new Date(date);
   if (withinThreeDays(articleDate)) {
     const newIcon = document.createElement("img");
     newIcon.src = "./img/new.png";
@@ -123,6 +126,27 @@ function createNewIconContainer(article) {
     newIconContainer.appendChild(newIcon);
   }
   return newIconContainer;
+}
+
+function createCommentIconContainer({ comment }) {
+  const comments = comment;
+  const commentIconContainer = document.createElement("div");
+  commentIconContainer.classList.add("comment-container");
+  if (comments.length > 0) {
+    const commentIcon = document.createElement("img");
+    commentIcon.classList.add("comment-icon");
+    commentIcon.src = "./img/comment.png";
+    commentIcon.width = "14";
+    commentIcon.height = "14";
+    commentIconContainer.appendChild(commentIcon);
+
+    const numOfComments = document.createElement("div");
+    numOfComments.classList.add("comment-num");
+    numOfComments.textContent = comments.length;
+    numOfComments.alt = "コメント数";
+    commentIconContainer.appendChild(numOfComments);
+  }
+  return commentIconContainer;
 }
 
 function createThumbnail({ image }) {
@@ -159,7 +183,7 @@ function removeCircle() {
 
 function withinThreeDays(day) {
   const today = new Date();
-  const msInThreeDays = 20 * 24 * 60 * 60 * 1000;
+  const msInThreeDays = 30 * 24 * 60 * 60 * 1000;
   const diff = today.getTime() - day.getTime();
   return diff < msInThreeDays;
 }
