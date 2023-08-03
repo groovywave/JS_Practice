@@ -144,8 +144,35 @@ function createCommentIconContainer({ comment }) {
     numOfComments.textContent = comment.length;
     numOfComments.alt = "コメント数";
     commentIconContainer.appendChild(numOfComments);
+
+    const commentContainer = createCommentContainer(comment);
+    const commentArea = document.createElement("div");
+    commentArea.appendChild(commentContainer);
+    articleArea.insertAdjacentElement("beforeend", commentArea);
+    console.log(commentArea);
+    // commentIcon.addEventListener("click",()=>{
+
+    // })
   }
   return commentIconContainer;
+}
+
+function createCommentContainer(comment) {
+  const commentContainer = document.createElement("div");
+  commentContainer.classList.add("comment-container");
+  const fragmentComments = document.createDocumentFragment();
+  comment.forEach(({ name, icon, detail }) => {
+    const commentIcon = document.createElement("img");
+    const commentName = document.createElement("p");
+    const commentText = document.createElement("p");
+    commentIcon.src = icon;
+    commentName.textContent = name;
+    commentText.textContent = detail;
+    fragmentComments.appendChild(commentIcon);
+    fragmentComments.appendChild(commentName);
+    fragmentComments.appendChild(commentText);
+  });
+  return fragmentComments;
 }
 
 function createThumbnail({ image }) {
