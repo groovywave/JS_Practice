@@ -62,8 +62,10 @@ const fragmentTabs = document.createDocumentFragment();
 const fragmentGenres = document.createDocumentFragment();
 const fragmentTitles = document.createDocumentFragment();
 const fragmentImages = document.createDocumentFragment();
+const fragmentComments = document.createDocumentFragment();
 
 const articleArea = document.createElement("div");
+const commentArea = document.createElement("div");
 
 function renderArticlesAndTabMenus(allArticles) {
   for (const aGenreArticles of allArticles) {
@@ -71,11 +73,16 @@ function renderArticlesAndTabMenus(allArticles) {
     createArticles(aGenreArticles);
     const thumbnail = createThumbnail(aGenreArticles);
     combineArticlesThumbnail(aGenreArticles, thumbnail);
+    createComments(aGenreArticles);
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
+  commentArea.appendChild(fragmentComments);
+  console.log(commentArea);
   tabArea.insertAdjacentElement("afterend", articleArea);
   addClickEventListener();
+
+  articleArea.insertAdjacentElement("afterend", commentArea);
 }
 
 function createTab({ category, id, select }) {
@@ -144,35 +151,45 @@ function createCommentIconContainer({ comment }) {
     numOfComments.textContent = comment.length;
     numOfComments.alt = "コメント数";
     commentIconContainer.appendChild(numOfComments);
-
-    const commentContainer = createCommentContainer(comment);
-    const commentArea = document.createElement("div");
-    commentArea.appendChild(commentContainer);
-    articleArea.insertAdjacentElement("beforeend", commentArea);
-    console.log(commentArea);
-    // commentIcon.addEventListener("click",()=>{
-
-    // })
   }
   return commentIconContainer;
 }
 
-function createCommentContainer(comment) {
-  const commentContainer = document.createElement("div");
-  commentContainer.classList.add("comment-container");
-  const fragmentComments = document.createDocumentFragment();
-  comment.forEach(({ name, icon, detail }) => {
-    const commentIcon = document.createElement("img");
-    const commentName = document.createElement("p");
-    const commentText = document.createElement("p");
-    commentIcon.src = icon;
-    commentName.textContent = name;
-    commentText.textContent = detail;
-    fragmentComments.appendChild(commentIcon);
-    fragmentComments.appendChild(commentName);
-    fragmentComments.appendChild(commentText);
+function createComments({ article }) {
+  article.forEach(({ comment, id }) => {
+    const anArticleCommentsContainer = document.createElement("div");
+    anArticleCommentsContainer.id = id;
+    comment.forEach((comment) => {
+      const aComment = createComment(comment);
+      anArticleCommentsContainer.appendChild(aComment);
+    });
+    fragmentComments.appendChild(anArticleCommentsContainer);
   });
-  return fragmentComments;
+  // return anArticleCommentContainer;
+}
+
+function createComment({ name, icon, detail }) {
+  console.log(name, icon, detail);
+  const aCommentContainer = document.createElement("div");
+  const anIconNameContainer = document.createElement("div");
+  const aTextContainer = document.createElement("div");
+  const commentName = document.createElement("p");
+  const commentIcon = document.createElement("img");
+  const commentText = document.createElement("p");
+  commentName.textContent = name;
+  commentIcon.src = icon;
+  commentText.textContent = detail;
+  anIconNameContainer.appendChild(commentIcon);
+  anIconNameContainer.appendChild(commentName);
+  aTextContainer.appendChild(commentText);
+  aCommentContainer.appendChild(anIconNameContainer);
+  aCommentContainer.appendChild(aTextContainer);
+  // fragmentComments.appendChild(commentIcon);
+  // fragmentComments.appendChild(commentName);
+  // fragmentComments.appendChild(commentText);
+  // });
+  console.log(aCommentContainer);
+  return aCommentContainer;
 }
 
 function createThumbnail({ image }) {
