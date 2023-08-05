@@ -1,8 +1,8 @@
 const articlesAPI = {
-  main: "https://mocki.io/v1/ea1c92d0-05ee-4268-a870-bde69be3869a",
-  economy: "https://mocki.io/v1/fd259b7f-9987-4837-ac71-6188c91713bf",
-  entertainment: "https://mocki.io/v1/bfac14f8-5bf0-4183-a097-a29e64116f39",
-  sports: "https://mocki.io/v1/921f5530-9c5e-498a-bf7c-62dde80cbfa5",
+  main: "https://mocki.io/v1/165685f8-4724-4d86-afa1-754598bd5882",
+  economy: "https://mocki.io/v1/a4ef6a4c-b3dc-4590-b4de-1a5ac7e33713",
+  entertainment: "https://mocki.io/v1/bfc03c68-3917-41d7-9586-4a24ca0bff86",
+  sports: "https://mocki.io/v1/0e2a1ea4-7ef0-4540-a435-ac1fcfbdc4cf",
 };
 
 async function fetchDataSet(urlProps) {
@@ -78,11 +78,10 @@ function renderArticlesAndTabMenus(allArticles) {
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
   commentArea.appendChild(fragmentComments);
-  console.log(commentArea);
   tabArea.insertAdjacentElement("afterend", articleArea);
   addClickEventChangeGenre();
-  addClickEventShowComment();
   articleArea.insertAdjacentElement("afterend", commentArea);
+  addClickEventShowComment();
 }
 
 function createTab({ category, id, select }) {
@@ -135,16 +134,16 @@ function createNewIconContainer({ date }) {
   return newIconContainer;
 }
 
-function createCommentIconContainer({id, comment }) {
+function createCommentIconContainer({ id, comment }) {
   const commentIconContainer = document.createElement("div");
-  commentIconContainer.classList.add("comment-container");
+  commentIconContainer.classList.add("comment-icon-container");
   if (comment.length > 0) {
     const commentIcon = document.createElement("img");
     commentIcon.classList.add("comment-icon");
     commentIcon.src = "./img/comment.png";
     commentIcon.width = "14";
     commentIcon.height = "14";
-    commentIcon.dataset.commentId = id;
+    commentIcon.dataset.id = id;
     commentIconContainer.appendChild(commentIcon);
 
     const numOfComments = document.createElement("div");
@@ -160,6 +159,8 @@ function createComments({ article }) {
   article.forEach(({ comment, id }) => {
     const anArticleCommentsContainer = document.createElement("div");
     anArticleCommentsContainer.id = id;
+    anArticleCommentsContainer.classList.add("comment-container");
+    // anArticleCommentsContainer.style.display = "none";
     comment.forEach((comment) => {
       const aComment = createComment(comment);
       anArticleCommentsContainer.appendChild(aComment);
@@ -169,10 +170,8 @@ function createComments({ article }) {
   // return anArticleCommentContainer;
 }
 
-function createComment({ id, name, icon, detail }) {
-  console.log(name, icon, detail);
+function createComment({ name, icon, detail }) {
   const aCommentContainer = document.createElement("div");
-  aCommentContainer.setAttribute("data-id", id);
   const anIconNameContainer = document.createElement("div");
   anIconNameContainer.classList.add("icon-name-container");
   const aTextContainer = document.createElement("div");
@@ -187,7 +186,6 @@ function createComment({ id, name, icon, detail }) {
   aTextContainer.appendChild(commentText);
   aCommentContainer.appendChild(anIconNameContainer);
   aCommentContainer.appendChild(aTextContainer);
-  console.log(aCommentContainer);
   return aCommentContainer;
 }
 
@@ -238,35 +236,31 @@ function addClickEventChangeGenre() {
     targetElement.classList.add("active");
     articleArea.querySelector(".active").classList.remove("active");
     document.getElementById(targetElement.dataset.id).classList.add("active");
+    if (commentArea.querySelector(".active")) {
+      commentArea.querySelector(".active").classList.remove("active");
+    }
   });
 }
-
-// function addClickEventShowComment() {
-//   articleArea.addEventListener("click", (e) => {
-//     const targetElement = e.target;
-//     if (targetElement === e.currentTarget) return;
-//     articleArea.querySelector(".active").classList.remove("active");
-//     targetElement.classList.add("active");
-//     articleArea.querySelector(".active").classList.remove("active");
-//     document.getElementById(targetElement.dataset.id).classList.add("active");
-//   });
-// }
 
 function addClickEventShowComment() {
   articleArea.addEventListener("click", (e) => {
     const targetElement = e.target;
     if (!targetElement.classList.contains("comment-icon")) return;
-    const commentId = targetElement.dataset.commentId;
-    const commentArea = document.getElementById(commentId);
-    if (commentArea.style.display === "none" || !commentArea.style.display) {
-      commentArea.style.display = "block";
-    } else {
-      commentArea.style.display = "none";
+    const targetId = targetElement.dataset.id;
+    if (commentArea.querySelector(".active")) {
+      commentArea.querySelector(".active").classList.remove("active");
+    }
+    if (document.getElementById(targetElement.dataset.id)) {
+      document.getElementById(targetElement.dataset.id).classList.add("active");
     }
   });
 }
 
-
+function hiddenComment() {
+  if (commentArea.querySelector(".active")) {
+    commentArea.querySelector(".active").classList.remove("active");
+  }
+}
 async function fetchRenderData() {
   const availableDataSet = await fetchDataSet(articlesAPI);
   renderArticlesAndTabMenus(availableDataSet);

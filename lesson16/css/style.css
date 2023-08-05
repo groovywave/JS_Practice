@@ -58,7 +58,7 @@ body {
   display: flex;
 }
 
-.comment-container{
+.comment-icon-container{
   display: flex;
 }
 .new,
@@ -88,6 +88,19 @@ body {
 
 .icon-name-container{
   display: flex;
-   width: auto;
+  width: auto;
   height: 30px;
 }
+
+.comment-container.active{
+background: skyblue;
+  display: flex;
+  color: #fff;
+  min-height: 150px;
+  padding: 12px;
+}
+
+.comment-container {
+  display: none;
+}
+
