@@ -10,19 +10,19 @@
       "title": "日本が世界2位のIT国家に",
       "comment": [
         {
-          "id": "main0101",
+          "id": "main01",
           "name": "太郎",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "太郎さんのコメント"
         },
         {
-          "id": "main0102",
+          "id": "main01",
           "name": "花子",
           "icon": "https://i.postimg.cc/mDYTSh0s/business-woman1-1-smile.png",
           "detail": "花子さんのコメント"
         },
         {
-          "id": "main0103",
+          "id": "main01",
           "name": "三毛",
           "icon": "https://i.postimg.cc/pV3gdP7Q/cat2-1-idea.png",
           "detail": "三毛さんのコメント"
@@ -35,55 +35,55 @@
       "title": "パソコン一人一台へ普及進む",
       "comment": [
         {
-          "id": "main0201",
+          "id": "main02",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
           "detail": "一男さんのコメント"
         },
         {
-          "id": "main0202",
+          "id": "main02",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "main0203",
+          "id": "main02",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
         },
         {
-          "id": "main0204",
+          "id": "main02",
           "name": "五木",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "五木さんのコメント,"
         },
         {
-          "id": "main0205",
+          "id": "main02",
           "name": "六",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "六さんのコメント"
         },
         {
-          "id": "main0207",
+          "id": "main02",
           "name": "七",
           "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
           "detail": "七さんのコメント"
         },
         {
-          "id": "amin0208",
+          "id": "amin02",
           "name": "八",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "八さんのコメント"
         },
         {
-          "id": "main0209",
+          "id": "main02",
           "name": "九郎",
           "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
           "detail": "九郎さんのコメント"
         },
         {
-          "id": "main0210",
+          "id": "main02",
           "name": "十和",
           "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
           "detail": "十和さんのコメント"
@@ -96,55 +96,55 @@
       "title": "ChatGPT音声入力に対応",
       "comment": [
         {
-          "id": "main0301",
+          "id": "main03",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
           "detail": "一男さんのコメント"
         },
         {
-          "id": "amin0302",
+          "id": "amin03",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "amin0303",
+          "id": "amin03",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
         },
         {
-          "id": "main0304",
+          "id": "main03",
           "name": "五木",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "五木さんのコメント,"
         },
         {
-          "id": "amin0305",
+          "id": "amin03",
           "name": "六",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "六さんのコメント"
         },
         {
-          "id": "main0306",
+          "id": "main03",
           "name": "七",
           "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
           "detail": "七さんのコメント"
         },
         {
-          "id": "main0307",
+          "id": "main03",
           "name": "八",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "八さんのコメント"
         },
         {
-          "id": "main0308",
+          "id": "main03",
           "name": "九郎",
           "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
           "detail": "九郎さんのコメント"
         },
         {
-          "id": "main0309",
+          "id": "main03",
           "name": "十和",
           "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
           "detail": "十和さんのコメント"
@@ -157,55 +157,55 @@
       "title": "全学校、国語除き英語で授業",
       "comment": [
         {
-          "id": "main0401",
+          "id": "main04",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
           "detail": "一男さんのコメント"
         },
         {
-          "id": "main0402",
+          "id": "main04",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "main0403",
+          "id": "main04",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
         },
         {
-          "id": "main0404",
+          "id": "main04",
           "name": "五木",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "五木さんのコメント,"
         },
         {
-          "id": "main0405",
+          "id": "main04",
           "name": "六",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "六さんのコメント"
         },
         {
-          "id": "main0406",
+          "id": "main04",
           "name": "七",
           "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
           "detail": "七さんのコメント"
         },
         {
-          "id": "main0407",
+          "id": "main04",
           "name": "八",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "八さんのコメント"
         },
         {
-          "id": "main0408",
+          "id": "main04",
           "name": "九郎",
           "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
           "detail": "九郎さんのコメント"
         },
         {
-          "id": "main0409",
+          "id": "main04",
           "name": "十和",
           "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
           "detail": "十和さんのコメント"

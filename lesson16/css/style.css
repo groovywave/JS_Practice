@@ -85,3 +85,9 @@ body {
   width: auto;
   height: 100px;
 }
+
+.icon-name-container{
+  display: flex;
+   width: auto;
+  height: 30px;
+}

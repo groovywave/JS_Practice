@@ -172,6 +172,7 @@ function createComment({ name, icon, detail }) {
   console.log(name, icon, detail);
   const aCommentContainer = document.createElement("div");
   const anIconNameContainer = document.createElement("div");
+  anIconNameContainer.classList.add("icon-name-container");
   const aTextContainer = document.createElement("div");
   const commentName = document.createElement("p");
   const commentIcon = document.createElement("img");
@@ -184,10 +185,6 @@ function createComment({ name, icon, detail }) {
   aTextContainer.appendChild(commentText);
   aCommentContainer.appendChild(anIconNameContainer);
   aCommentContainer.appendChild(aTextContainer);
-  // fragmentComments.appendChild(commentIcon);
-  // fragmentComments.appendChild(commentName);
-  // fragmentComments.appendChild(commentText);
-  // });
   console.log(aCommentContainer);
   return aCommentContainer;
 }
