@@ -11,21 +11,21 @@
       "comment": [
         {
           "id": "economy01",
-          "name": "一男",
+          "name": "経済一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "少子高齢化対策でしょ。"
         },
         {
           "id": "economy01",
-          "name": "一花",
+          "name": "経済一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
-          "detail": "一花さんのコメント,"
+          "detail": "経済一花さんのコメント,"
         },
         {
           "id": "economy01",
-          "name": "四郎",
+          "name": "経済四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
-          "detail": "四郎さんのコメント,"
+          "detail": "経済四郎さんのコメント,"
         },
         {
           "id": "economy01",
@@ -74,7 +74,7 @@
           "id": "economy02",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "文句言わず電気だけで働く。もう手放せない。"
         },
         {
           "id": "economy02",
@@ -99,7 +99,7 @@
           "id": "economy03",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "耕作放棄地を国が買い取って整備した上で無償貸与するなんて思い切りましたね。"
         },
         {
           "id": "economy03",
@@ -124,7 +124,7 @@
           "id": "economy04",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "これは産油国も穏やかではないですね。"
         },
         {
           "id": "economy04",

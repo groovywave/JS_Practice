@@ -80,8 +80,8 @@ function renderArticlesAndTabMenus(allArticles) {
   commentArea.appendChild(fragmentComments);
   console.log(commentArea);
   tabArea.insertAdjacentElement("afterend", articleArea);
-  addClickEventListener();
-
+  addClickEventChangeGenre();
+  addClickEventShowComment();
   articleArea.insertAdjacentElement("afterend", commentArea);
 }
 
@@ -135,7 +135,7 @@ function createNewIconContainer({ date }) {
   return newIconContainer;
 }
 
-function createCommentIconContainer({ comment }) {
+function createCommentIconContainer({id, comment }) {
   const commentIconContainer = document.createElement("div");
   commentIconContainer.classList.add("comment-container");
   if (comment.length > 0) {
@@ -144,6 +144,7 @@ function createCommentIconContainer({ comment }) {
     commentIcon.src = "./img/comment.png";
     commentIcon.width = "14";
     commentIcon.height = "14";
+    commentIcon.dataset.commentId = id;
     commentIconContainer.appendChild(commentIcon);
 
     const numOfComments = document.createElement("div");
@@ -168,9 +169,10 @@ function createComments({ article }) {
   // return anArticleCommentContainer;
 }
 
-function createComment({ name, icon, detail }) {
+function createComment({ id, name, icon, detail }) {
   console.log(name, icon, detail);
   const aCommentContainer = document.createElement("div");
+  aCommentContainer.setAttribute("data-id", id);
   const anIconNameContainer = document.createElement("div");
   anIconNameContainer.classList.add("icon-name-container");
   const aTextContainer = document.createElement("div");
@@ -228,7 +230,7 @@ function withinThreeDays(day) {
   return diff < msInThreeDays;
 }
 
-function addClickEventListener() {
+function addClickEventChangeGenre() {
   tabArea.addEventListener("click", (e) => {
     const targetElement = e.target;
     if (targetElement === e.currentTarget) return;
@@ -238,6 +240,32 @@ function addClickEventListener() {
     document.getElementById(targetElement.dataset.id).classList.add("active");
   });
 }
+
+// function addClickEventShowComment() {
+//   articleArea.addEventListener("click", (e) => {
+//     const targetElement = e.target;
+//     if (targetElement === e.currentTarget) return;
+//     articleArea.querySelector(".active").classList.remove("active");
+//     targetElement.classList.add("active");
+//     articleArea.querySelector(".active").classList.remove("active");
+//     document.getElementById(targetElement.dataset.id).classList.add("active");
+//   });
+// }
+
+function addClickEventShowComment() {
+  articleArea.addEventListener("click", (e) => {
+    const targetElement = e.target;
+    if (!targetElement.classList.contains("comment-icon")) return;
+    const commentId = targetElement.dataset.commentId;
+    const commentArea = document.getElementById(commentId);
+    if (commentArea.style.display === "none" || !commentArea.style.display) {
+      commentArea.style.display = "block";
+    } else {
+      commentArea.style.display = "none";
+    }
+  });
+}
+
 
 async function fetchRenderData() {
   const availableDataSet = await fetchDataSet(articlesAPI);
