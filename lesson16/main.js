@@ -1,8 +1,8 @@
 const articlesAPI = {
-  main: "https://mocki.io/v1/165685f8-4724-4d86-afa1-754598bd5882",
-  economy: "https://mocki.io/v1/a4ef6a4c-b3dc-4590-b4de-1a5ac7e33713",
-  entertainment: "https://mocki.io/v1/bfc03c68-3917-41d7-9586-4a24ca0bff86",
-  sports: "https://mocki.io/v1/0e2a1ea4-7ef0-4540-a435-ac1fcfbdc4cf",
+  main: "https://mocki.io/v1/d9f490ff-11bf-4488-b5a5-17234f6e1bcc",
+  economy: "https://mocki.io/v1/0bd9421b-8df2-4129-b410-851490f7c9cb",
+  entertainment: "https://mocki.io/v1/fe8f0b85-5d1a-4d63-a94a-816b586fc786",
+  sports: "https://mocki.io/v1/6a8f82a2-0b80-49e6-baa3-3d5ad600b01c",
 };
 
 async function fetchDataSet(urlProps) {
