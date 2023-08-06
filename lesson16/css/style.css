@@ -94,13 +94,18 @@ body {
 
 .comment-container.active{
 background: skyblue;
-  display: flex;
+  display: block;
   color: #fff;
-  min-height: 150px;
+  height: 150px;
   padding: 12px;
+  overflow-y:scroll;
 }
 
 .comment-container {
   display: none;
 }
 
+
+.a-comment-container{
+  margin-bottom: 16px;
+}

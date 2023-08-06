@@ -167,11 +167,11 @@ function createComments({ article }) {
     });
     fragmentComments.appendChild(anArticleCommentsContainer);
   });
-  // return anArticleCommentContainer;
 }
 
 function createComment({ name, icon, detail }) {
   const aCommentContainer = document.createElement("div");
+  aCommentContainer.classList.add("a-comment-container");
   const anIconNameContainer = document.createElement("div");
   anIconNameContainer.classList.add("icon-name-container");
   const aTextContainer = document.createElement("div");
@@ -256,11 +256,6 @@ function addClickEventShowComment() {
   });
 }
 
-function hiddenComment() {
-  if (commentArea.querySelector(".active")) {
-    commentArea.querySelector(".active").classList.remove("active");
-  }
-}
 async function fetchRenderData() {
   const availableDataSet = await fetchDataSet(articlesAPI);
   renderArticlesAndTabMenus(availableDataSet);
