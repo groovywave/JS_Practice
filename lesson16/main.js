@@ -164,7 +164,6 @@ function createComments(id, comment) {
   const anArticleCommentsContainer = document.createElement("div");
   anArticleCommentsContainer.id = id;
   anArticleCommentsContainer.classList.add("comment-container");
-  // anArticleCommentsContainer.style.display = "none";
   comment.forEach((comment) => {
     const aComment = createComment(comment);
     anArticleCommentsContainer.appendChild(aComment);
