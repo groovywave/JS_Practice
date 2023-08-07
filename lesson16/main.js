@@ -67,13 +67,17 @@ const fragmentComments = document.createDocumentFragment();
 const articleArea = document.createElement("div");
 const commentArea = document.createElement("div");
 
-function renderArticlesAndTabMenus(allArticles) {
-  for (const aGenreArticles of allArticles) {
-    createTab(aGenreArticles);
-    createArticles(aGenreArticles);
-    const thumbnail = createThumbnail(aGenreArticles);
-    combineArticlesThumbnail(aGenreArticles, thumbnail);
-    createComments(aGenreArticles);
+function renderArticlesAndTabMenus(allGenresOfArticles) {
+  for (const { id, category, select, image, article } of allGenresOfArticles) {
+    createTab(category, id, select);
+    createArticles(article);
+    const thumbnail = createThumbnail(image);
+    combineArticlesThumbnail(id, select, thumbnail);
+    for (const { id, comment } of article) {
+      if (comment.length > 0) {
+        createComments(id, comment);
+      }
+    }
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
@@ -84,7 +88,7 @@ function renderArticlesAndTabMenus(allArticles) {
   addClickEventShowComment();
 }
 
-function createTab({ category, id, select }) {
+function createTab(category, id, select) {
   const tabTitle = document.createElement("li");
   const tabAnchor = document.createElement("a");
   tabAnchor.href = "#";
@@ -97,31 +101,34 @@ function createTab({ category, id, select }) {
   fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 }
 
-function createArticles({ article }) {
+function createArticles(article) {
   const articles = article;
-  for (const article of articles) {
+  for (const { id, date, title, comment } of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
-    const title = createTitle(article);
-    const newIconContainer = createNewIconContainer(article);
-    const commentIconContainer = createCommentIconContainer(article);
-    articleContainer.appendChild(title);
+    const articleTitle = createTitle(title);
+    const newIconContainer = createNewIconContainer(date);
+    articleContainer.appendChild(articleTitle);
     articleContainer.appendChild(newIconContainer);
-    articleContainer.appendChild(commentIconContainer);
+    if (comment.length > 0) {
+      const commentIconContainer = createCommentIconContainer(id, comment);
+      articleContainer.appendChild(commentIconContainer);
+    }
     fragmentTitles.appendChild(articleContainer);
+    console.log(articleContainer);
   }
 }
 
-function createTitle(article) {
-  const title = document.createElement("li");
+function createTitle(title) {
+  const articleTitle = document.createElement("li");
   const titleAnchor = document.createElement("a");
   titleAnchor.href = "#";
-  titleAnchor.textContent = article.title;
-  title.appendChild(titleAnchor);
-  return title;
+  titleAnchor.textContent = title;
+  articleTitle.appendChild(titleAnchor);
+  return articleTitle;
 }
 
-function createNewIconContainer({ date }) {
+function createNewIconContainer(date) {
   const newIconContainer = document.createElement("div");
   const articleDate = new Date(date);
   if (withinThreeDays(articleDate)) {
@@ -134,39 +141,35 @@ function createNewIconContainer({ date }) {
   return newIconContainer;
 }
 
-function createCommentIconContainer({ id, comment }) {
+function createCommentIconContainer(id, comment) {
   const commentIconContainer = document.createElement("div");
   commentIconContainer.classList.add("comment-icon-container");
-  if (comment.length > 0) {
-    const commentIcon = document.createElement("img");
-    commentIcon.classList.add("comment-icon");
-    commentIcon.src = "./img/comment.png";
-    commentIcon.width = "14";
-    commentIcon.height = "14";
-    commentIcon.dataset.id = id;
-    commentIconContainer.appendChild(commentIcon);
+  const commentIcon = document.createElement("img");
+  commentIcon.classList.add("comment-icon");
+  commentIcon.src = "./img/comment.png";
+  commentIcon.width = "14";
+  commentIcon.height = "14";
+  commentIcon.dataset.id = id;
+  commentIconContainer.appendChild(commentIcon);
 
-    const numOfComments = document.createElement("div");
-    numOfComments.classList.add("comment-num");
-    numOfComments.textContent = comment.length;
-    numOfComments.alt = "コメント数";
-    commentIconContainer.appendChild(numOfComments);
-  }
+  const numOfComments = document.createElement("div");
+  numOfComments.classList.add("comment-num");
+  numOfComments.textContent = comment.length;
+  numOfComments.alt = "コメント数";
+  commentIconContainer.appendChild(numOfComments);
   return commentIconContainer;
 }
 
-function createComments({ article }) {
-  article.forEach(({ comment, id }) => {
-    const anArticleCommentsContainer = document.createElement("div");
-    anArticleCommentsContainer.id = id;
-    anArticleCommentsContainer.classList.add("comment-container");
-    // anArticleCommentsContainer.style.display = "none";
-    comment.forEach((comment) => {
-      const aComment = createComment(comment);
-      anArticleCommentsContainer.appendChild(aComment);
-    });
-    fragmentComments.appendChild(anArticleCommentsContainer);
+function createComments(id, comment) {
+  const anArticleCommentsContainer = document.createElement("div");
+  anArticleCommentsContainer.id = id;
+  anArticleCommentsContainer.classList.add("comment-container");
+  // anArticleCommentsContainer.style.display = "none";
+  comment.forEach((comment) => {
+    const aComment = createComment(comment);
+    anArticleCommentsContainer.appendChild(aComment);
   });
+  fragmentComments.appendChild(anArticleCommentsContainer);
 }
 
 function createComment({ name, icon, detail }) {
@@ -189,7 +192,7 @@ function createComment({ name, icon, detail }) {
   return aCommentContainer;
 }
 
-function createThumbnail({ image }) {
+function createThumbnail(image) {
   const img = document.createElement("img");
   img.classList.add("article-image");
   img.src = image;
@@ -199,7 +202,7 @@ function createThumbnail({ image }) {
   return img;
 }
 
-function combineArticlesThumbnail({ id, select }, img) {
+function combineArticlesThumbnail(id, select, img) {
   const genreContainer = document.createElement("div");
   genreContainer.classList.add("genre-container");
   const titleArea = document.createElement("div");
