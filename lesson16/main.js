@@ -83,9 +83,10 @@ function renderArticlesAndTabMenus(allGenresOfArticles) {
   articleArea.appendChild(fragmentGenres);
   commentArea.appendChild(fragmentComments);
   tabArea.insertAdjacentElement("afterend", articleArea);
-  addClickEventChangeGenre();
   articleArea.insertAdjacentElement("afterend", commentArea);
-  addClickEventShowComment();
+
+  addClickEventChangeElement(tabArea, true, articleArea);
+  addClickEventHideComment();
 }
 
 function createTab(category, id, select) {
@@ -105,6 +106,7 @@ function createArticles(articles) {
   for (const { id, date, title, comments } of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
+    articleContainer.dataset.id = id;
     const articleTitle = createTitle(title);
     const newIconContainer = createNewIconContainer(date);
     articleContainer.appendChild(articleTitle);
@@ -143,6 +145,7 @@ function createNewIconContainer(date) {
 function createCommentIconContainer(id, comments) {
   const commentIconContainer = document.createElement("div");
   commentIconContainer.classList.add("comment-icon-container");
+  // commentIconContainer.dataset.id = id;
   const commentIcon = document.createElement("img");
   commentIcon.classList.add("comment-icon");
   commentIcon.src = "./img/comment.png";
@@ -155,7 +158,11 @@ function createCommentIconContainer(id, comments) {
   numOfComments.classList.add("comment-num");
   numOfComments.textContent = comments.length;
   numOfComments.alt = "コメント数";
+  numOfComments.dataset.id = id;
   commentIconContainer.appendChild(numOfComments);
+
+  addClickEventChangeElement(commentIconContainer, false, commentArea);
+
   return commentIconContainer;
 }
 
@@ -208,6 +215,7 @@ function combineArticlesThumbnail(id, select, img) {
   genreContainer.id = id;
   genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
   genreContainer.appendChild(imageArea).appendChild(img);
+  // addClickEventShowComment();
 
   //初期表示の設定
   if (select) {
@@ -227,30 +235,30 @@ function withinThreeDays(day) {
   return diff < msInThreeDays;
 }
 
-function addClickEventChangeGenre() {
-  tabArea.addEventListener("click", (e) => {
-    const targetElement = e.target;
-    if (targetElement === e.currentTarget) return;
-    tabArea.querySelector(".active").classList.remove("active");
-    targetElement.classList.add("active");
-    articleArea.querySelector(".active").classList.remove("active");
-    document.getElementById(targetElement.dataset.id).classList.add("active");
-    if (commentArea.querySelector(".active")) {
-      commentArea.querySelector(".active").classList.remove("active");
+function addClickEventChangeElement(
+  parentElem,
+  isChangeClickedElem,
+  parentOfRelationElem
+) {
+  parentElem.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) return;
+    if (isChangeClickedElem) {
+      parentElem.querySelector(".active").classList.remove("active");
+      e.target.classList.add("active");
+    }
+    if (parentOfRelationElem.querySelector(".active")) {
+      parentOfRelationElem.querySelector(".active").classList.remove("active");
+    }
+    if (document.getElementById(e.target.dataset.id)) {
+      document.getElementById(e.target.dataset.id).classList.add("active");
     }
   });
 }
 
-function addClickEventShowComment() {
-  articleArea.addEventListener("click", (e) => {
-    const targetElement = e.target;
-    if (!targetElement.classList.contains("comment-icon")) return;
-    const targetId = targetElement.dataset.id;
+function addClickEventHideComment() {
+  tabArea.addEventListener("click", () => {
     if (commentArea.querySelector(".active")) {
       commentArea.querySelector(".active").classList.remove("active");
-    }
-    if (document.getElementById(targetElement.dataset.id)) {
-      document.getElementById(targetElement.dataset.id).classList.add("active");
     }
   });
 }
