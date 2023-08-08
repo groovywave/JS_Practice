@@ -173,20 +173,20 @@ function createComments(id, comments) {
 function createComment({ name, icon, detail }) {
   const CommentContainer = document.createElement("div");
   CommentContainer.classList.add("a-comment-container");
-  const anIconNameContainer = document.createElement("div");
-  anIconNameContainer.classList.add("icon-name-container");
-  const aTextContainer = document.createElement("div");
+  const iconNameContainer = document.createElement("div");
+  iconNameContainer.classList.add("icon-name-container");
+  const textContainer = document.createElement("div");
   const commentName = document.createElement("p");
   const commentIcon = document.createElement("img");
   const commentText = document.createElement("p");
   commentName.textContent = name;
   commentIcon.src = icon;
   commentText.textContent = detail;
-  anIconNameContainer.appendChild(commentIcon);
-  anIconNameContainer.appendChild(commentName);
-  aTextContainer.appendChild(commentText);
-  CommentContainer.appendChild(anIconNameContainer);
-  CommentContainer.appendChild(aTextContainer);
+  iconNameContainer.appendChild(commentIcon);
+  iconNameContainer.appendChild(commentName);
+  textContainer.appendChild(commentText);
+  CommentContainer.appendChild(iconNameContainer);
+  CommentContainer.appendChild(textContainer);
   return CommentContainer;
 }
 
