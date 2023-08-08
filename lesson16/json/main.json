@@ -3,7 +3,7 @@
   "category": "main",
   "select": true,
   "image": "https://i.postimg.cc/MGT1S8nD/website-news.png",
-  "article": [
+  "articles": [
     {
       "id": "82052c5a-a4b4-4ae7-9774-60ac335dc9b2",
       "date": "2023-07-01",
@@ -93,7 +93,7 @@
     {
       "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
       "date": "2023-07-28",
-      "title": "ChatGPT音声入力に対応",
+      "title": "ChatGPT音声入出力に対応",
       "comment": [
         {
           "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
@@ -154,7 +154,7 @@
     {
       "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
       "date": "2023-07-28",
-      "title": "全学校、国語除き英語で授業",
+      "title": "全校、国語除き英語で授業",
       "comment": [
         {
           "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",

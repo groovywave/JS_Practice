@@ -1,8 +1,8 @@
 const articlesAPI = {
-  main: "https://mocki.io/v1/d9f490ff-11bf-4488-b5a5-17234f6e1bcc",
-  economy: "https://mocki.io/v1/0bd9421b-8df2-4129-b410-851490f7c9cb",
-  entertainment: "https://mocki.io/v1/fe8f0b85-5d1a-4d63-a94a-816b586fc786",
-  sports: "https://mocki.io/v1/6a8f82a2-0b80-49e6-baa3-3d5ad600b01c",
+  main: "https://mocki.io/v1/bef9f7b5-f304-4ac5-88be-1a794e0bdd42",
+  economy: "https://mocki.io/v1/fdc6e391-bc7c-40bb-b6c6-079c2e7bfb0e",
+  entertainment: "https://mocki.io/v1/fca3cca9-e2d4-4fb4-ba57-652d191ecf83",
+  sports: "https://mocki.io/v1/da4a2193-ed0d-4185-87e8-6bfbce4f1b22",
 };
 
 async function fetchDataSet(urlProps) {
@@ -68,12 +68,12 @@ const articleArea = document.createElement("div");
 const commentArea = document.createElement("div");
 
 function renderArticlesAndTabMenus(allGenresOfArticles) {
-  for (const { id, category, select, image, article } of allGenresOfArticles) {
+  for (const { id, category, select, image, articles } of allGenresOfArticles) {
     createTab(category, id, select);
-    createArticles(article);
+    createArticles(articles);
     const thumbnail = createThumbnail(image);
     combineArticlesThumbnail(id, select, thumbnail);
-    for (const { id, comment } of article) {
+    for (const { id, comment } of articles) {
       if (comment.length > 0) {
         createComments(id, comment);
       }
@@ -101,8 +101,7 @@ function createTab(category, id, select) {
   fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 }
 
-function createArticles(article) {
-  const articles = article;
+function createArticles(articles) {
   for (const { id, date, title, comment } of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
@@ -161,19 +160,19 @@ function createCommentIconContainer(id, comment) {
 }
 
 function createComments(id, comment) {
-  const anArticleCommentsContainer = document.createElement("div");
-  anArticleCommentsContainer.id = id;
-  anArticleCommentsContainer.classList.add("comment-container");
+  const ArticleCommentsContainer = document.createElement("div");
+  ArticleCommentsContainer.id = id;
+  ArticleCommentsContainer.classList.add("comment-container");
   comment.forEach((comment) => {
     const aComment = createComment(comment);
-    anArticleCommentsContainer.appendChild(aComment);
+    ArticleCommentsContainer.appendChild(aComment);
   });
-  fragmentComments.appendChild(anArticleCommentsContainer);
+  fragmentComments.appendChild(ArticleCommentsContainer);
 }
 
 function createComment({ name, icon, detail }) {
-  const aCommentContainer = document.createElement("div");
-  aCommentContainer.classList.add("a-comment-container");
+  const CommentContainer = document.createElement("div");
+  CommentContainer.classList.add("a-comment-container");
   const anIconNameContainer = document.createElement("div");
   anIconNameContainer.classList.add("icon-name-container");
   const aTextContainer = document.createElement("div");
@@ -186,9 +185,9 @@ function createComment({ name, icon, detail }) {
   anIconNameContainer.appendChild(commentIcon);
   anIconNameContainer.appendChild(commentName);
   aTextContainer.appendChild(commentText);
-  aCommentContainer.appendChild(anIconNameContainer);
-  aCommentContainer.appendChild(aTextContainer);
-  return aCommentContainer;
+  CommentContainer.appendChild(anIconNameContainer);
+  CommentContainer.appendChild(aTextContainer);
+  return CommentContainer;
 }
 
 function createThumbnail(image) {
