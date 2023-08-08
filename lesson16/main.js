@@ -175,7 +175,6 @@ function createComment({ name, icon, detail }) {
   CommentContainer.classList.add("a-comment-container");
   const iconNameContainer = document.createElement("div");
   iconNameContainer.classList.add("icon-name-container");
-  const textContainer = document.createElement("div");
   const commentName = document.createElement("p");
   const commentIcon = document.createElement("img");
   const commentText = document.createElement("p");
@@ -184,9 +183,8 @@ function createComment({ name, icon, detail }) {
   commentText.textContent = detail;
   iconNameContainer.appendChild(commentIcon);
   iconNameContainer.appendChild(commentName);
-  textContainer.appendChild(commentText);
   CommentContainer.appendChild(iconNameContainer);
-  CommentContainer.appendChild(textContainer);
+  CommentContainer.appendChild(commentText);
   return CommentContainer;
 }
 
