@@ -1,8 +1,8 @@
 const articlesAPI = {
-  main: "https://mocki.io/v1/bef9f7b5-f304-4ac5-88be-1a794e0bdd42",
-  economy: "https://mocki.io/v1/fdc6e391-bc7c-40bb-b6c6-079c2e7bfb0e",
-  entertainment: "https://mocki.io/v1/fca3cca9-e2d4-4fb4-ba57-652d191ecf83",
-  sports: "https://mocki.io/v1/da4a2193-ed0d-4185-87e8-6bfbce4f1b22",
+  main: "https://mocki.io/v1/075c2cc1-6b20-47f1-9b3c-a6dd184eef6b",
+  economy: "https://mocki.io/v1/713bb820-066a-40b4-a36d-8eaa1646adb3",
+  entertainment: "https://mocki.io/v1/c496fb00-f8ef-4eaf-b080-15a09a1215e7",
+  sports: "https://mocki.io/v1/21407eaa-d5c9-455a-ab20-924f6b9759a4",
 };
 
 async function fetchDataSet(urlProps) {
@@ -73,9 +73,9 @@ function renderArticlesAndTabMenus(allGenresOfArticles) {
     createArticles(articles);
     const thumbnail = createThumbnail(image);
     combineArticlesThumbnail(id, select, thumbnail);
-    for (const { id, comment } of articles) {
-      if (comment.length > 0) {
-        createComments(id, comment);
+    for (const { id, comments } of articles) {
+      if (comments.length > 0) {
+        createComments(id, comments);
       }
     }
   }
@@ -102,15 +102,15 @@ function createTab(category, id, select) {
 }
 
 function createArticles(articles) {
-  for (const { id, date, title, comment } of articles) {
+  for (const { id, date, title, comments } of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
     const articleTitle = createTitle(title);
     const newIconContainer = createNewIconContainer(date);
     articleContainer.appendChild(articleTitle);
     articleContainer.appendChild(newIconContainer);
-    if (comment.length > 0) {
-      const commentIconContainer = createCommentIconContainer(id, comment);
+    if (comments.length > 0) {
+      const commentIconContainer = createCommentIconContainer(id, comments);
       articleContainer.appendChild(commentIconContainer);
     }
     fragmentTitles.appendChild(articleContainer);
@@ -140,7 +140,7 @@ function createNewIconContainer(date) {
   return newIconContainer;
 }
 
-function createCommentIconContainer(id, comment) {
+function createCommentIconContainer(id, comments) {
   const commentIconContainer = document.createElement("div");
   commentIconContainer.classList.add("comment-icon-container");
   const commentIcon = document.createElement("img");
@@ -153,19 +153,19 @@ function createCommentIconContainer(id, comment) {
 
   const numOfComments = document.createElement("div");
   numOfComments.classList.add("comment-num");
-  numOfComments.textContent = comment.length;
+  numOfComments.textContent = comments.length;
   numOfComments.alt = "コメント数";
   commentIconContainer.appendChild(numOfComments);
   return commentIconContainer;
 }
 
-function createComments(id, comment) {
+function createComments(id, comments) {
   const ArticleCommentsContainer = document.createElement("div");
   ArticleCommentsContainer.id = id;
   ArticleCommentsContainer.classList.add("comment-container");
-  comment.forEach((comment) => {
-    const aComment = createComment(comment);
-    ArticleCommentsContainer.appendChild(aComment);
+  comments.forEach((comment) => {
+    const Comment = createComment(comment);
+    ArticleCommentsContainer.appendChild(Comment);
   });
   fragmentComments.appendChild(ArticleCommentsContainer);
 }
