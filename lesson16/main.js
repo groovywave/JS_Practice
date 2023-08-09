@@ -116,7 +116,6 @@ function createArticles(articles) {
       articleContainer.appendChild(commentIconContainer);
     }
     fragmentTitles.appendChild(articleContainer);
-    console.log(articleContainer);
   }
 }
 
@@ -145,7 +144,6 @@ function createNewIconContainer(date) {
 function createCommentIconContainer(id, comments) {
   const commentIconContainer = document.createElement("div");
   commentIconContainer.classList.add("comment-icon-container");
-  // commentIconContainer.dataset.id = id;
   const commentIcon = document.createElement("img");
   commentIcon.classList.add("comment-icon");
   commentIcon.src = "./img/comment.png";

@@ -37,6 +37,7 @@ body {
   opacity: 0.5;
   transition: opacity 0.4s;
 }
+
 .genre-container.active {
   background: skyblue;
   display: flex;
@@ -66,14 +67,10 @@ body {
   height: 14px;
   width: auto;
   margin-top: 4px;
-  /* float: right; */
-  /* vertical-align: middle; */
 }
 .comment-num{
   font-size: 4px;
   margin-top: 4px;
-   /* height: 4px; */
-  /* width: auto; */
 }
 
 .image-area {
@@ -108,4 +105,11 @@ background: skyblue;
 
 .a-comment-container{
   margin-bottom: 16px;
+}
+
+
+.comment-icon:hover, .comment-num:hover {
+  opacity: 0.5;
+  transition: opacity 0.4s;
+  cursor: pointer;
 }
