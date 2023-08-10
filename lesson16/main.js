@@ -165,19 +165,19 @@ function createCommentIconContainer(id, comments) {
 }
 
 function createComments(id, comments) {
-  const ArticleCommentsContainer = document.createElement("div");
-  ArticleCommentsContainer.id = id;
-  ArticleCommentsContainer.classList.add("comment-container");
+  const articleCommentsContainer = document.createElement("div");
+  articleCommentsContainer.id = id;
+  articleCommentsContainer.classList.add("comment-container");
   comments.forEach((comment) => {
     const Comment = createComment(comment);
-    ArticleCommentsContainer.appendChild(Comment);
+    articleCommentsContainer.appendChild(Comment);
   });
-  fragmentComments.appendChild(ArticleCommentsContainer);
+  fragmentComments.appendChild(articleCommentsContainer);
 }
 
 function createComment({ name, icon, detail }) {
-  const CommentContainer = document.createElement("div");
-  CommentContainer.classList.add("a-comment-container");
+  const commentContainer = document.createElement("div");
+  commentContainer.classList.add("a-comment-container");
   const iconNameContainer = document.createElement("div");
   iconNameContainer.classList.add("icon-name-container");
   const commentName = document.createElement("p");
@@ -188,9 +188,9 @@ function createComment({ name, icon, detail }) {
   commentText.textContent = detail;
   iconNameContainer.appendChild(commentIcon);
   iconNameContainer.appendChild(commentName);
-  CommentContainer.appendChild(iconNameContainer);
-  CommentContainer.appendChild(commentText);
-  return CommentContainer;
+  commentContainer.appendChild(iconNameContainer);
+  commentContainer.appendChild(commentText);
+  return commentContainer;
 }
 
 function createThumbnail(image) {
