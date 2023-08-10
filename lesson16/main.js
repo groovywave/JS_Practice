@@ -213,7 +213,6 @@ function combineArticlesThumbnail(id, select, img) {
   genreContainer.id = id;
   genreContainer.appendChild(titleArea).appendChild(fragmentTitles);
   genreContainer.appendChild(imageArea).appendChild(img);
-  // addClickEventShowComment();
 
   //初期表示の設定
   if (select) {
