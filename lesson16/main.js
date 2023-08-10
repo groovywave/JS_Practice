@@ -112,8 +112,7 @@ function createArticles(articles) {
     articleContainer.appendChild(articleTitle);
     articleContainer.appendChild(newIconContainer);
     if (comments.length > 0) {
-      const commentIconContainer = createCommentIconContainer(id, comments);
-      articleContainer.appendChild(commentIconContainer);
+      articleContainer.appendChild(createCommentIconContainer(id, comments));
     }
     fragmentTitles.appendChild(articleContainer);
   }
