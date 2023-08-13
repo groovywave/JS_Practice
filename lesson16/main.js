@@ -168,8 +168,7 @@ function createComments(id, comments) {
   articleCommentsContainer.id = id;
   articleCommentsContainer.classList.add("comment-container");
   comments.forEach((comment) => {
-    const Comment = createComment(comment);
-    articleCommentsContainer.appendChild(Comment);
+    articleCommentsContainer.appendChild(createComment(comment));
   });
   fragmentComments.appendChild(articleCommentsContainer);
 }
