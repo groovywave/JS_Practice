@@ -86,7 +86,6 @@ function renderArticlesAndTabMenus(allGenresOfArticles) {
   articleArea.insertAdjacentElement("afterend", commentArea);
 
   addClickEventChangeElement(tabArea, true, articleArea);
-  addClickEventHideComment();
 }
 
 function createTab(category, id, select) {
@@ -250,13 +249,11 @@ function addClickEventChangeElement(
   });
 }
 
-function addClickEventHideComment() {
-  tabArea.addEventListener("click", () => {
-    if (commentArea.querySelector(".active")) {
-      commentArea.querySelector(".active").classList.remove("active");
-    }
-  });
-}
+tabArea.addEventListener("click", () => {
+  if (commentArea.querySelector(".active")) {
+    commentArea.querySelector(".active").classList.remove("active");
+  }
+});
 
 async function fetchRenderData() {
   const availableDataSet = await fetchDataSet(articlesAPI);
