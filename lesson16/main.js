@@ -240,12 +240,8 @@ function addClickEventChangeElement(
       parentElem.querySelector(".active").classList.remove("active");
       e.target.classList.add("active");
     }
-    if (parentOfRelationElem.querySelector(".active")) {
-      parentOfRelationElem.querySelector(".active").classList.remove("active");
-    }
-    if (document.getElementById(e.target.dataset.id)) {
+      parentOfRelationElem.querySelector(".active")?.classList.remove("active");
       document.getElementById(e.target.dataset.id).classList.add("active");
-    }
   });
 }
 
