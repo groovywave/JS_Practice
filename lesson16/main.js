@@ -70,7 +70,7 @@ const commentArea = document.createElement("div");
 function renderArticleAndTabMenu(allGenresOfArticles) {
   for (const { id, category, select, image, articles } of allGenresOfArticles) {
     createTab(category, id, select);
-    createArticle(articles);
+    createTitleAndIcon(articles);
     const thumbnail = createThumbnail(image);
     combineArticlesThumbnail(id, select, thumbnail);
     for (const { id, comments } of articles) {
@@ -101,7 +101,7 @@ function createTab(category, id, select) {
   fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 }
 
-function createArticle(articles) {
+function createTitleAndIcon(articles) {
   for (const { id, date, title, comments } of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
