@@ -75,7 +75,7 @@ function renderArticleAndTabMenu(allGenresOfArticles) {
     combineArticlesThumbnail(id, select, thumbnail);
     for (const { id, comments } of articles) {
       if (comments.length > 0) {
-        createComments(id, comments);
+        createComment(id, comments);
       }
     }
   }
@@ -162,7 +162,7 @@ function createCommentIconContainer(id, comments) {
   return commentIconContainer;
 }
 
-function createComments(id, comments) {
+function crateComment(id, comments) {
   const articleCommentsContainer = document.createElement("div");
   articleCommentsContainer.id = id;
   articleCommentsContainer.classList.add("comment-container");
