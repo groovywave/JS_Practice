@@ -3,62 +3,62 @@
   "category": "economy",
   "select": false,
   "image": "https://i.postimg.cc/65MSC6DL/mark-dollar.png",
-  "article": [
+  "articles": [
     {
-      "id": "eco01",
+      "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
       "date": "2023-07-03",
       "title": "日本経済復活の鍵とは",
-      "comment": [
+      "comments": [
         {
-          "id": "eco0101",
-          "name": "一男",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
+          "name": "経済一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "少子高齢化対策でしょ。"
         },
         {
-          "id": "eco0102",
-          "name": "一花",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
+          "name": "経済一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
-          "detail": "一花さんのコメント,"
+          "detail": "経済一花さんのコメント,"
         },
         {
-          "id": "eco0103",
-          "name": "四郎",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
+          "name": "経済四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
-          "detail": "四郎さんのコメント,"
+          "detail": "経済四郎さんのコメント,"
         },
         {
-          "id": "eco0104",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
           "name": "五木",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "五木さんのコメント,"
         },
         {
-          "id": "eco0105",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
           "name": "六",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "六さんのコメント"
         },
         {
-          "id": "eco0106",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
           "name": "七",
           "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
           "detail": "七さんのコメント"
         },
         {
-          "id": "eco0107",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
           "name": "八",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "八さんのコメント"
         },
         {
-          "id": "eco0108",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
           "name": "九郎",
           "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
           "detail": "九郎さんのコメント"
         },
         {
-          "id": "eco0109",
+          "id": "8a66c0fd-3abf-44f6-ae5e-c14d70e7b5a7",
           "name": "十和",
           "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
           "detail": "十和さんのコメント"
@@ -66,24 +66,24 @@
       ]
     },
     {
-      "id": "eco02",
+      "id": "c2b25b69-78ef-4bff-b1a9-b4bd28ca5a04",
       "date": "2023-08-03",
       "title": "各家庭ロボット１台へ",
-      "comment": [
+      "comments": [
         {
-          "id": "eco0201",
+          "id": "c2b25b69-78ef-4bff-b1a9-b4bd28ca5a04",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "文句言わず電気だけで働く。もう手放せない。"
         },
         {
-          "id": "eco0202",
+          "id": "c2b25b69-78ef-4bff-b1a9-b4bd28ca5a04",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "eco0203",
+          "id": "c2b25b69-78ef-4bff-b1a9-b4bd28ca5a04",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
@@ -91,24 +91,24 @@
       ]
     },
     {
-      "id": "eco03",
+      "id": "1aaf5b55-df1b-40bf-a17f-b0269ae554a3",
       "date": "2023-08-03",
       "title": "日本の食料自給率大幅向上",
-      "comment": [
+      "comments": [
         {
-          "id": "eco0301",
+          "id": "1aaf5b55-df1b-40bf-a17f-b0269ae554a3",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "耕作放棄地を国が買い取って整備した上で無償貸与するなんて思い切りましたね。"
         },
         {
-          "id": "eco0302",
+          "id": "1aaf5b55-df1b-40bf-a17f-b0269ae554a3",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "eco0303",
+          "id": "1aaf5b55-df1b-40bf-a17f-b0269ae554a3",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
@@ -116,24 +116,24 @@
       ]
     },
     {
-      "id": "eco04",
+      "id": "502fd7b9-7902-49fc-b615-634fb0237b0a",
       "date": "2023-08-04",
       "title": "人工石油、日本が産油国に",
-      "comment": [
+      "comments": [
         {
-          "id": "eco0401",
+          "id": "502fd7b9-7902-49fc-b615-634fb0237b0a",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "これは産油国も穏やかではないですね。"
         },
         {
-          "id": "eco0402",
+          "id": "502fd7b9-7902-49fc-b615-634fb0237b0a",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "eco0403",
+          "id": "502fd7b9-7902-49fc-b615-634fb0237b0a",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"

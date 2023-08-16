@@ -3,26 +3,26 @@
   "category": "main",
   "select": true,
   "image": "https://i.postimg.cc/MGT1S8nD/website-news.png",
-  "article": [
+  "articles": [
     {
-      "id": "articleMain",
+      "id": "82052c5a-a4b4-4ae7-9774-60ac335dc9b2",
       "date": "2023-07-01",
       "title": "日本が世界2位のIT国家に",
-      "comment": [
+      "comments": [
         {
-          "id": "01-01",
+          "id": "82052c5a-a4b4-4ae7-9774-60ac335dc9b2",
           "name": "太郎",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
-          "detail": "太郎さんのコメント"
+          "detail": "プログラミングが必須科目になったのと、パソコンの普及率が上がったのが関係してそう。"
         },
         {
-          "id": "01-02",
+          "id": "82052c5a-a4b4-4ae7-9774-60ac335dc9b2",
           "name": "花子",
           "icon": "https://i.postimg.cc/mDYTSh0s/business-woman1-1-smile.png",
           "detail": "花子さんのコメント"
         },
         {
-          "id": "01-03",
+          "id": "82052c5a-a4b4-4ae7-9774-60ac335dc9b2",
           "name": "三毛",
           "icon": "https://i.postimg.cc/pV3gdP7Q/cat2-1-idea.png",
           "detail": "三毛さんのコメント"
@@ -30,60 +30,60 @@
       ]
     },
     {
-      "id": "02",
+      "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
       "date": "2023-07-02",
       "title": "パソコン一人一台へ普及進む",
-      "comment": [
+      "comments": [
         {
-          "id": "02-01",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "国がパソコン購入に補助金出したのが大きいね。"
         },
         {
-          "id": "02-02",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "02-03",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
         },
         {
-          "id": "02-04",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "五木",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "五木さんのコメント,"
         },
         {
-          "id": "02-05",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "六",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "六さんのコメント"
         },
         {
-          "id": "02-07",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "七",
           "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
           "detail": "七さんのコメント"
         },
         {
-          "id": "02-08",
+          "id": "amin02",
           "name": "八",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "八さんのコメント"
         },
         {
-          "id": "02-09",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "九郎",
           "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
           "detail": "九郎さんのコメント"
         },
         {
-          "id": "02-10",
+          "id": "3f88eab0-d049-4935-bf77-c314a0a1ea06",
           "name": "十和",
           "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
           "detail": "十和さんのコメント"
@@ -91,60 +91,60 @@
       ]
     },
     {
-      "id": "03",
+      "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
       "date": "2023-07-28",
-      "title": "ChatGPT音声入力に対応",
-      "comment": [
+      "title": "ChatGPT音声入出力に対応",
+      "comments": [
         {
-          "id": "02-01",
+          "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
           "detail": "一男さんのコメント"
         },
         {
-          "id": "02-02",
+          "id": "amin03",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "02-03",
+          "id": "amin03",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
         },
         {
-          "id": "02-04",
+          "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
           "name": "五木",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "五木さんのコメント,"
         },
         {
-          "id": "02-05",
+          "id": "amin03",
           "name": "六",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "六さんのコメント"
         },
         {
-          "id": "02-07",
+          "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
           "name": "七",
           "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
           "detail": "七さんのコメント"
         },
         {
-          "id": "02-08",
+          "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
           "name": "八",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "八さんのコメント"
         },
         {
-          "id": "02-09",
+          "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
           "name": "九郎",
           "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
           "detail": "九郎さんのコメント"
         },
         {
-          "id": "02-10",
+          "id": "7c96df38-bbab-481d-81dc-d69618fe0ae3",
           "name": "十和",
           "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
           "detail": "十和さんのコメント"
@@ -152,60 +152,60 @@
       ]
     },
     {
-      "id": "04",
+      "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
       "date": "2023-07-28",
-      "title": "全学校、国語除き英語で授業",
-      "comment": [
+      "title": "全校、国語除き英語で授業",
+      "comments": [
         {
-          "id": "02-01",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "一男",
           "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
-          "detail": "一男さんのコメント"
+          "detail": "先生大丈夫なのかこれ？ALT必須だなこりゃ。"
         },
         {
-          "id": "02-02",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "一花",
           "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
           "detail": "一花さんのコメント,"
         },
         {
-          "id": "02-03",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "四郎",
           "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
           "detail": "四郎さんのコメント,"
         },
         {
-          "id": "02-04",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "五木",
           "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
           "detail": "五木さんのコメント,"
         },
         {
-          "id": "02-05",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "六",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "六さんのコメント"
         },
         {
-          "id": "02-07",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "七",
           "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
           "detail": "七さんのコメント"
         },
         {
-          "id": "02-08",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "八",
           "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
           "detail": "八さんのコメント"
         },
         {
-          "id": "02-09",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "九郎",
           "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
           "detail": "九郎さんのコメント"
         },
         {
-          "id": "02-10",
+          "id": "f9ac1fee-253e-4996-897d-efd5ac207deb",
           "name": "十和",
           "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
           "detail": "十和さんのコメント"

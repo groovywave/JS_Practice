@@ -1,8 +1,8 @@
 const articlesAPI = {
-  main: "https://mocki.io/v1/ea1c92d0-05ee-4268-a870-bde69be3869a",
-  economy: "https://mocki.io/v1/fd259b7f-9987-4837-ac71-6188c91713bf",
-  entertainment: "https://mocki.io/v1/bfac14f8-5bf0-4183-a097-a29e64116f39",
-  sports: "https://mocki.io/v1/921f5530-9c5e-498a-bf7c-62dde80cbfa5",
+  main: "https://mocki.io/v1/075c2cc1-6b20-47f1-9b3c-a6dd184eef6b",
+  economy: "https://mocki.io/v1/713bb820-066a-40b4-a36d-8eaa1646adb3",
+  entertainment: "https://mocki.io/v1/c496fb00-f8ef-4eaf-b080-15a09a1215e7",
+  sports: "https://mocki.io/v1/21407eaa-d5c9-455a-ab20-924f6b9759a4",
 };
 
 async function fetchDataSet(urlProps) {
@@ -62,23 +62,33 @@ const fragmentTabs = document.createDocumentFragment();
 const fragmentGenres = document.createDocumentFragment();
 const fragmentTitles = document.createDocumentFragment();
 const fragmentImages = document.createDocumentFragment();
+const fragmentComments = document.createDocumentFragment();
 
 const articleArea = document.createElement("div");
+const commentArea = document.createElement("div");
 
-function renderArticlesAndTabMenus(allArticles) {
-  for (const aGenreArticles of allArticles) {
-    createTab(aGenreArticles);
-    createArticles(aGenreArticles);
-    const thumbnail = createThumbnail(aGenreArticles);
-    combineArticlesThumbnail(aGenreArticles, thumbnail);
+function renderArticleAndTabMenu(allGenresOfArticles) {
+  for (const { id, category, select, image, articles } of allGenresOfArticles) {
+    createTab(category, id, select);
+    createTitleAndIcon(articles);
+    const thumbnail = createThumbnail(image);
+    combineArticlesThumbnail(id, select, thumbnail);
+    for (const { id, comments } of articles) {
+      if (comments.length > 0) {
+        createComments(id, comments);
+      }
+    }
   }
   tabArea.appendChild(fragmentTabs);
   articleArea.appendChild(fragmentGenres);
+  commentArea.appendChild(fragmentComments);
   tabArea.insertAdjacentElement("afterend", articleArea);
-  addClickEventListener();
+  articleArea.insertAdjacentElement("afterend", commentArea);
+
+  addClickEventChangeElement(tabArea, true, articleArea);
 }
 
-function createTab({ category, id, select }) {
+function createTab(category, id, select) {
   const tabTitle = document.createElement("li");
   const tabAnchor = document.createElement("a");
   tabAnchor.href = "#";
@@ -91,31 +101,32 @@ function createTab({ category, id, select }) {
   fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 }
 
-function createArticles({ article }) {
-  const articles = article;
-  for (const article of articles) {
+function createTitleAndIcon(articles) {
+  for (const { id, date, title, comments } of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
-    const title = createTitle(article);
-    const newIconContainer = createNewIconContainer(article);
-    const commentIconContainer = createCommentIconContainer(article);
-    articleContainer.appendChild(title);
+    articleContainer.dataset.id = id;
+    const articleTitle = createTitle(title);
+    const newIconContainer = createNewIconContainer(date);
+    articleContainer.appendChild(articleTitle);
     articleContainer.appendChild(newIconContainer);
-    articleContainer.appendChild(commentIconContainer);
+    if (comments.length > 0) {
+      articleContainer.appendChild(createCommentIconContainer(id, comments));
+    }
     fragmentTitles.appendChild(articleContainer);
   }
 }
 
-function createTitle(article) {
-  const title = document.createElement("li");
+function createTitle(title) {
+  const articleTitle = document.createElement("li");
   const titleAnchor = document.createElement("a");
   titleAnchor.href = "#";
-  titleAnchor.textContent = article.title;
-  title.appendChild(titleAnchor);
-  return title;
+  titleAnchor.textContent = title;
+  articleTitle.appendChild(titleAnchor);
+  return articleTitle;
 }
 
-function createNewIconContainer({ date }) {
+function createNewIconContainer(date) {
   const newIconContainer = document.createElement("div");
   const articleDate = new Date(date);
   if (withinThreeDays(articleDate)) {
@@ -128,28 +139,58 @@ function createNewIconContainer({ date }) {
   return newIconContainer;
 }
 
-function createCommentIconContainer({ comment }) {
-  const comments = comment;
+function createCommentIconContainer(id, comments) {
   const commentIconContainer = document.createElement("div");
-  commentIconContainer.classList.add("comment-container");
-  if (comments.length > 0) {
-    const commentIcon = document.createElement("img");
-    commentIcon.classList.add("comment-icon");
-    commentIcon.src = "./img/comment.png";
-    commentIcon.width = "14";
-    commentIcon.height = "14";
-    commentIconContainer.appendChild(commentIcon);
+  commentIconContainer.classList.add("comment-icon-container");
+  const commentIcon = document.createElement("img");
+  commentIcon.classList.add("comment-icon");
+  commentIcon.src = "./img/comment.png";
+  commentIcon.width = "14";
+  commentIcon.height = "14";
+  commentIcon.dataset.id = id;
+  commentIconContainer.appendChild(commentIcon);
 
-    const numOfComments = document.createElement("div");
-    numOfComments.classList.add("comment-num");
-    numOfComments.textContent = comments.length;
-    numOfComments.alt = "コメント数";
-    commentIconContainer.appendChild(numOfComments);
-  }
+  const numOfComments = document.createElement("div");
+  numOfComments.classList.add("comment-num");
+  numOfComments.textContent = comments.length;
+  numOfComments.alt = "コメント数";
+  numOfComments.dataset.id = id;
+  commentIconContainer.appendChild(numOfComments);
+
+  addClickEventChangeElement(commentIconContainer, false, commentArea);
+
   return commentIconContainer;
 }
 
-function createThumbnail({ image }) {
+function createComments(id, comments) {
+  const articleCommentsContainer = document.createElement("div");
+  articleCommentsContainer.id = id;
+  articleCommentsContainer.classList.add("comment-container");
+  comments.forEach((comment) => {
+    articleCommentsContainer.appendChild(createComment(comment));
+  });
+  fragmentComments.appendChild(articleCommentsContainer);
+}
+
+function createComment({ name, icon, detail }) {
+  const commentContainer = document.createElement("div");
+  commentContainer.classList.add("a-comment-container");
+  const iconNameContainer = document.createElement("div");
+  iconNameContainer.classList.add("icon-name-container");
+  const commentName = document.createElement("p");
+  const commentIcon = document.createElement("img");
+  const commentText = document.createElement("p");
+  commentName.textContent = name;
+  commentIcon.src = icon;
+  commentText.textContent = detail;
+  iconNameContainer.appendChild(commentIcon);
+  iconNameContainer.appendChild(commentName);
+  commentContainer.appendChild(iconNameContainer);
+  commentContainer.appendChild(commentText);
+  return commentContainer;
+}
+
+function createThumbnail(image) {
   const img = document.createElement("img");
   img.classList.add("article-image");
   img.src = image;
@@ -159,7 +200,7 @@ function createThumbnail({ image }) {
   return img;
 }
 
-function combineArticlesThumbnail({ id, select }, img) {
+function combineArticlesThumbnail(id, select, img) {
   const genreContainer = document.createElement("div");
   genreContainer.classList.add("genre-container");
   const titleArea = document.createElement("div");
@@ -188,20 +229,31 @@ function withinThreeDays(day) {
   return diff < msInThreeDays;
 }
 
-function addClickEventListener() {
-  tabArea.addEventListener("click", (e) => {
-    const targetElement = e.target;
-    if (targetElement === e.currentTarget) return;
-    tabArea.querySelector(".active").classList.remove("active");
-    targetElement.classList.add("active");
-    articleArea.querySelector(".active").classList.remove("active");
-    document.getElementById(targetElement.dataset.id).classList.add("active");
+function addClickEventChangeElement(
+  parentElem,
+  isChangeClickedElem,
+  parentOfRelationElem
+) {
+  parentElem.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) return;
+    if (isChangeClickedElem) {
+      parentElem.querySelector(".active").classList.remove("active");
+      e.target.classList.add("active");
+    }
+    parentOfRelationElem.querySelector(".active")?.classList.remove("active");
+    document.getElementById(e.target.dataset.id).classList.add("active");
   });
 }
 
+tabArea.addEventListener("click", () => {
+  if (commentArea.querySelector(".active")) {
+    commentArea.querySelector(".active").classList.remove("active");
+  }
+});
+
 async function fetchRenderData() {
   const availableDataSet = await fetchDataSet(articlesAPI);
-  renderArticlesAndTabMenus(availableDataSet);
+  renderArticleAndTabMenu(availableDataSet);
 }
 
 fetchRenderData();
