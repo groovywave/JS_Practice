@@ -67,10 +67,10 @@ const fragmentComments = document.createDocumentFragment();
 const articleArea = document.createElement("div");
 const commentArea = document.createElement("div");
 
-function renderArticlesAndTabMenus(allGenresOfArticles) {
+function renderArticleAndTabMenu(allGenresOfArticles) {
   for (const { id, category, select, image, articles } of allGenresOfArticles) {
     createTab(category, id, select);
-    createArticles(articles);
+    createArticle(articles);
     const thumbnail = createThumbnail(image);
     combineArticlesThumbnail(id, select, thumbnail);
     for (const { id, comments } of articles) {
@@ -101,7 +101,7 @@ function createTab(category, id, select) {
   fragmentTabs.appendChild(tabTitle).appendChild(tabAnchor);
 }
 
-function createArticles(articles) {
+function createArticle(articles) {
   for (const { id, date, title, comments } of articles) {
     const articleContainer = document.createElement("div");
     articleContainer.classList.add("article-container");
@@ -253,7 +253,7 @@ tabArea.addEventListener("click", () => {
 
 async function fetchRenderData() {
   const availableDataSet = await fetchDataSet(articlesAPI);
-  renderArticlesAndTabMenus(availableDataSet);
+  renderArticleAndTabMenu(availableDataSet);
 }
 
 fetchRenderData();
