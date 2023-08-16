@@ -75,7 +75,7 @@ function renderArticleAndTabMenu(allGenresOfArticles) {
     combineArticlesThumbnail(id, select, thumbnail);
     for (const { id, comments } of articles) {
       if (comments.length > 0) {
-        createComment(id, comments);
+        createComments(id, comments);
       }
     }
   }
@@ -162,7 +162,7 @@ function createCommentIconContainer(id, comments) {
   return commentIconContainer;
 }
 
-function crateComment(id, comments) {
+function createComments(id, comments) {
   const articleCommentsContainer = document.createElement("div");
   articleCommentsContainer.id = id;
   articleCommentsContainer.classList.add("comment-container");
@@ -240,8 +240,8 @@ function addClickEventChangeElement(
       parentElem.querySelector(".active").classList.remove("active");
       e.target.classList.add("active");
     }
-      parentOfRelationElem.querySelector(".active")?.classList.remove("active");
-      document.getElementById(e.target.dataset.id).classList.add("active");
+    parentOfRelationElem.querySelector(".active")?.classList.remove("active");
+    document.getElementById(e.target.dataset.id).classList.add("active");
   });
 }
 
