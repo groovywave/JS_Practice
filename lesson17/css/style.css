@@ -1,6 +1,40 @@
-.container{
-  width: 80%;
-  height: 220px;
-  margin: 16px;
-  outline: 8px solid red;
+.carousel-container{
+  width: 320px;
+  height: 200px;
+  margin: 16px auto;
+  position: relative;
 }
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
+
+#prev,
+#next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0,0,0,0);
+  color:rgba(249, 246, 246, 0.5);
+  font-size: 24px;
+  padding: 0 8px 4px;
+  cursor: pointer;
+}
+
+#prev:hover,
+#next:hover {
+  opacity: .8;
+}
+
+#prev {
+  left: 0;
+}
+
+#next {
+  right: 0;
+}
+

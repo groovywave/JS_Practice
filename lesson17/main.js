@@ -22,24 +22,35 @@ function renderData(images) {
   const carousel = document.createElement("section");
   carousel.id = "carousel";
   const carouselContainer = document.createElement("div");
-  carouselContainer.id = "carousel-container";
+  carouselContainer.id = "carouselContainer";
+  carouselContainer.className = "carousel-container";
+  let i = 0;
   for (const image of images) {
     const img = document.createElement("img");
     img.className = "carousel-img";
     img.src = image.img;
     img.alt = image.alt;
+    i = --i;
+    img.style.zIndex = images.length + i;
     fragment.appendChild(img);
   }
 
   const prevButton = document.createElement("button");
   prevButton.id = "prev";
+  prevButton.style.zIndex = 100;
+  const prevIcon = document.createElement("i")
+  prevIcon.className="fa-solid fa-backward"
   prevButton.addEventListener("click", slidesMovePrev());
-  fragment.appendChild(prevButton);
+  fragment.appendChild(prevButton).appendChild(prevIcon);
+  
   const nextButton = document.createElement("button");
-  prevButton.addEventListener("click", slidesMoveNext());
   nextButton.id = "next";
-  fragment.appendChild(nextButton);
-
+  nextButton.style.zIndex = 100;
+  const nextIcon = document.createElement("i")
+  nextIcon.className="fa-solid fa-forward"
+  prevButton.addEventListener("click", slidesMoveNext());
+  fragment.appendChild(nextButton).appendChild(nextIcon);
+  
   document.body
     .appendChild(carousel)
     .appendChild(carouselContainer)
