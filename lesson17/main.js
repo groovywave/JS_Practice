@@ -15,18 +15,39 @@ function displayInfo(error) {
   document.body.appendChild(errorMessage);
 }
 
+function getZIndex(slide) {
+  return parseInt(slide.style.zIndex, 10);
+}
+
+function updateButton(slides) {
+  const activeSlide = slides.find(
+    (slide) => getZIndex(slide) === slides.length - 1
+  );
+  activeSlide.parentNode.querySelector(".current").classList.remove("current");
+  activeSlide.classList.add("current");
+  activeSlide.parentNode.querySelector(".hidden")?.classList.remove("hidden");
+  if (activeSlide === slides[0]) {
+    document.getElementById("prev").classList.add("hidden");
+  }
+  if (activeSlide === slides[slides.length - 1]) {
+    document.getElementById("next").classList.add("hidden");
+  }
+}
+
 function slidesMovePrev() {
   for (const slide of slides) {
-    const slideZIndex = parseInt(slide.style.zIndex, 10);
+    const slideZIndex = getZIndex(slide);
     slide.style.zIndex = (slideZIndex + slides.length - 1) % slides.length;
   }
+  updateButton(slides);
 }
 
 function slidesMoveNext() {
   for (const slide of slides) {
-    const slideZIndex = parseInt(slide.style.zIndex, 10);
+    const slideZIndex = getZIndex(slide);
     slide.style.zIndex = (slideZIndex + 1) % slides.length;
   }
+  updateButton(slides);
 }
 
 function renderData(images) {
@@ -47,6 +68,7 @@ function renderData(images) {
     fragment.appendChild(slide);
     slides.push(slide);
   }
+  slides[0].classList.add("current");
   currentIndex = images.length - 1;
 
   const prevButton = document.createElement("button");
@@ -69,6 +91,8 @@ function renderData(images) {
     .appendChild(carousel)
     .appendChild(carouselContainer)
     .appendChild(fragment);
+
+  updateButton(slides);
 }
 
 async function fetchData(url) {
