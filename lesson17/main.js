@@ -94,7 +94,11 @@ function renderData(images) {
 
 async function fetchData(url) {
   try {
-    const response = await fetch(url);
+    const response = await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(fetch(url));
+      }, 3000);
+    });
     if (!response.ok) {
       renderStatus(response);
       console.error(`${response.status}:${response.statusText}`);
