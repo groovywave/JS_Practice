@@ -61,7 +61,7 @@ function renderData(images) {
     slide.className = "carousel-img";
     slide.src = image.img;
     slide.alt = image.alt;
-    i = --i;
+    --i;
     slide.style.zIndex = images.length + i;
     fragment.appendChild(slide);
     slides.push(slide);
