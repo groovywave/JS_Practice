@@ -20,16 +20,16 @@ function getZIndex(slide) {
 }
 
 function updateButton(slides) {
-  const activeSlide = slides.find(
+  const currentSlide = slides.find(
     (slide) => getZIndex(slide) === slides.length - 1
   );
-  activeSlide.parentNode.querySelector(".current").classList.remove("current");
-  activeSlide.classList.add("current");
-  activeSlide.parentNode.querySelector(".hidden")?.classList.remove("hidden");
-  if (activeSlide === slides[0]) {
+  currentSlide.parentNode.querySelector(".current").classList.remove("current");
+  currentSlide.classList.add("current");
+  currentSlide.parentNode.querySelector(".hidden")?.classList.remove("hidden");
+  if (currentSlide === slides[0]) {
     document.getElementById("prev").classList.add("hidden");
   }
-  if (activeSlide === slides[slides.length - 1]) {
+  if (currentSlide === slides[slides.length - 1]) {
     document.getElementById("next").classList.add("hidden");
   }
 }
