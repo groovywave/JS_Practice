@@ -1,7 +1,5 @@
 const slides = [];
-const images = [];
 const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
-let currentIndex;
 
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
@@ -69,7 +67,6 @@ function renderData(images) {
     slides.push(slide);
   }
   slides[0].classList.add("current");
-  currentIndex = images.length - 1;
 
   const prevButton = document.createElement("button");
   prevButton.id = "prev";
