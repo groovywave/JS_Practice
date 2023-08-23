@@ -1,4 +1,11 @@
-.js-carousel-container {
+#carousel {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+.js-slides-container {
   width: 320px;
   height: 200px;
   margin: 16px auto;
