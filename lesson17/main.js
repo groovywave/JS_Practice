@@ -18,22 +18,10 @@ function getZIndex(slide) {
   return parseInt(slide.style.zIndex, 10);
 }
 
-// function getCurrentSlide(slides) {
-//   return slides.find((slide) => getZIndex(slide) === slides.length - 1);
-// }
-
 function updateButton() {
-  // const currentSlide = getCurrentSlide(slides);
-  // const currentSlide = document.getElementsByClassName("js-current");
-  // currentSlide.parentNode
-  //   .querySelector(".js-current")
-  //   .classList.remove("js-current");
-  // currentSlide.classList.add("js-current");
-  // currentSlide.parentNode
   slides[currentIndex].parentNode
     .querySelector(".js-hidden")
     ?.classList.remove("js-hidden");
-  // if (currentSlide === slides[0]) {
   if (slides[currentIndex] === slides[0]) {
     document.getElementById("prev").classList.add("js-hidden");
   }
@@ -42,14 +30,10 @@ function updateButton() {
   }
 }
 
-// function updateSlidesNumber(slides) {
 function updateSlidesNumber() {
-  // const currentSlide = getCurrentSlide(slides);
-  // const currentSlide = document.getElementsByClassName("js-current");
-  document.getElementById("slidesNumber").textContent = `${
-    // slides.indexOf(currentSlide) + 1
-    currentIndex + 1
-  }/${slides.length}`;
+  document.getElementById("slidesNumber").textContent = `${currentIndex + 1}/${
+    slides.length
+  }`;
 }
 
 function slidesMovePrev() {
@@ -58,10 +42,6 @@ function slidesMovePrev() {
     slide.style.zIndex = (slideZIndex + slides.length - 1) % slides.length;
   }
   --currentIndex;
-  // document.getElementById("slidesContainer").classList.remove("js-current");
-  // slides[--currentIndex].classList.add("js-current");
-  // updateButton(slides);
-  // updateSlidesNumber(slides);
   updateButton();
   updateSlidesNumber();
 }
@@ -71,10 +51,6 @@ function slidesMoveNext() {
     const slideZIndex = getZIndex(slide);
     slide.style.zIndex = (slideZIndex + 1) % slides.length;
   }
-  // document.getElementById("slidesContainer").classList.remove("js-current");
-  // slides[++currentIndex].classList.add("js-current");
-  // updateButton(slides);
-  // updateSlidesNumber(slides);
   ++currentIndex;
   updateButton();
   updateSlidesNumber();
