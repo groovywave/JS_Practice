@@ -104,8 +104,6 @@ function renderData(images) {
     .appendChild(slidesContainer)
     .appendChild(fragment);
 
-  const slidesNumberContainer = document.createElement("div");
-  slidesNumberContainer.id = "slidesNumberContainer";
   const slidesNumber = document.createElement("p");
   slidesNumber.id = "slidesNumber";
   slidesNumber.textContent = `${slides[0].index + 1}/${slides.length}`;
