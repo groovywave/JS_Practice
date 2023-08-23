@@ -70,7 +70,8 @@ function makeCarousel(images) {
   const slidesContainer = document.createElement("div");
   slidesContainer.id = "carouselContainer";
   slidesContainer.className = "js-slides-container";
-  for (const [index, image] of images.entries()) {
+  // for (const [index, image] of images.entries()) {
+  images.forEach((image, index) => {
     const slide = document.createElement("img");
     slide.className = "js-carousel-img";
     slide.src = image.img;
@@ -79,7 +80,7 @@ function makeCarousel(images) {
     slide.style.zIndex = images.length - 1 - slide.index;
     fragment.appendChild(slide);
     slides.push(slide);
-  }
+  });
   slides[0].classList.add("js-current");
 
   const prevButton = document.createElement("button");
