@@ -40,9 +40,9 @@ function updateButton(slides) {
 
 function updateSlidesNumber(slides) {
   const currentSlide = getCurrentSlide(slides);
-  document.getElementById("slidesNumber").textContent = `${slides.indexOf(currentSlide) + 1}/${
-    slides.length
-  }`;
+  document.getElementById("slidesNumber").textContent = `${
+    slides.indexOf(currentSlide) + 1
+  }/${slides.length}`;
 }
 
 function slidesMovePrev() {
