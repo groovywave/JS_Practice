@@ -40,9 +40,9 @@ function updateButton(slides) {
 
 function updateSlidesNumber(slides) {
   const currentSlide = getCurrentSlide(slides);
-  document.getElementById("slidesNumber").textContent = `${slides.indexOf(currentSlide) + 1}/${
-    slides.length
-  }`;
+  document.getElementById("slidesNumber").textContent = `${
+    slides.indexOf(currentSlide) + 1
+  }/${slides.length}`;
 }
 
 function slidesMovePrev() {
@@ -88,7 +88,8 @@ function renderData(images) {
   const prevIcon = document.createElement("i");
   prevIcon.className = "fa-solid fa-backward";
   prevButton.addEventListener("click", slidesMovePrev);
-  fragment.appendChild(prevButton).appendChild(prevIcon);
+  prevButton.appendChild(prevIcon);
+  fragment.appendChild(prevButton);
 
   const nextButton = document.createElement("button");
   nextButton.id = "next";
@@ -96,7 +97,8 @@ function renderData(images) {
   const nextIcon = document.createElement("i");
   nextIcon.className = "fa-solid fa-forward";
   nextButton.addEventListener("click", slidesMoveNext);
-  fragment.appendChild(nextButton).appendChild(nextIcon);
+  nextButton.appendChild(nextIcon);
+  fragment.appendChild(nextButton);
 
   document.body
     .appendChild(carousel)
