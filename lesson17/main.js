@@ -63,26 +63,11 @@ function slidesMoveNext() {
   updateSlidesNumber(slides);
 }
 
-function makeCarousel(images) {
-  const fragment = document.createDocumentFragment();
-  const carousel = document.createElement("div");
-  carousel.id = "carousel";
-  const slidesContainer = document.createElement("div");
-  slidesContainer.id = "carouselContainer";
-  slidesContainer.className = "js-slides-container";
-  // for (const [index, image] of images.entries()) {
-  images.forEach((image, index) => {
-    const slide = document.createElement("img");
-    slide.className = "js-carousel-img";
-    slide.src = image.img;
-    slide.alt = image.alt;
-    slide.index = index;
-    slide.style.zIndex = images.length - 1 - slide.index;
-    fragment.appendChild(slide);
-    slides.push(slide);
-  });
-  slides[0].classList.add("js-current");
+const fragment = document.createDocumentFragment();
+const carousel = document.createElement("div");
+carousel.id = "carousel";
 
+function makePrevButton() {
   const prevButton = document.createElement("button");
   prevButton.id = "prev";
   prevButton.style.zIndex = 100;
@@ -91,7 +76,9 @@ function makeCarousel(images) {
   prevButton.addEventListener("click", slidesMovePrev);
   prevButton.appendChild(prevIcon);
   fragment.appendChild(prevButton);
+}
 
+function makeNextButton() {
   const nextButton = document.createElement("button");
   nextButton.id = "next";
   nextButton.style.zIndex = 100;
@@ -100,17 +87,37 @@ function makeCarousel(images) {
   nextButton.addEventListener("click", slidesMoveNext);
   nextButton.appendChild(nextIcon);
   fragment.appendChild(nextButton);
+}
 
-  document.body
-    .appendChild(carousel)
-    .appendChild(slidesContainer)
-    .appendChild(fragment);
-
+function makeSlidesNumber() {
   const slidesNumber = document.createElement("p");
   slidesNumber.id = "slidesNumber";
   slidesNumber.textContent = `${slides[0].index + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
+}
 
+function makeSlide(images) {
+  const slidesContainer = document.createElement("div");
+  slidesContainer.id = "slidesContainer";
+  slidesContainer.className = "js-slides-container";
+  images.forEach((image, index) => {
+    const slide = document.createElement("img");
+    slide.className = "js-slide-img";
+    slide.src = image.img;
+    slide.alt = image.alt;
+    slide.index = index;
+    slide.style.zIndex = images.length - 1 - slide.index;
+    fragment.appendChild(slide);
+    slides.push(slide);
+  });
+  slides[0].classList.add("js-current");
+  makePrevButton();
+  makeNextButton();
+  document.body
+    .appendChild(carousel)
+    .appendChild(slidesContainer)
+    .appendChild(fragment);
+  makeSlidesNumber();
   updateButton(slides);
 }
 
@@ -136,11 +143,11 @@ async function fetchData(url) {
   }
 }
 
-async function fetchMakeCarousel() {
+async function fetchMakeSlide() {
   const responseData = await fetchData(url);
   if (responseData) {
-    makeCarousel(responseData);
+    makeSlide(responseData);
   }
 }
 
-fetchMakeCarousel();
+fetchMakeSlide();
