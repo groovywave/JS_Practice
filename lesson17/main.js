@@ -40,7 +40,7 @@ function updateButton(slides) {
 
 function updateSlidesNumber(slides) {
   const currentSlide = getCurrentSlide(slides);
-  slidesNumber.textContent = `${slides.indexOf(currentSlide) + 1}/${
+  document.getElementById("slidesNumber").textContent = `${slides.indexOf(currentSlide) + 1}/${
     slides.length
   }`;
 }
@@ -76,7 +76,6 @@ function renderData(images) {
     slide.src = image.img;
     slide.alt = image.alt;
     slide.index = index;
-    console.log(slide.index);
     slide.style.zIndex = images.length - 1 - slide.index;
     fragment.appendChild(slide);
     slides.push(slide);
