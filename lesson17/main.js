@@ -74,8 +74,7 @@ function makePrevButton() {
   const prevIcon = document.createElement("i");
   prevIcon.className = "fa-solid fa-backward";
   prevButton.addEventListener("click", slidesMovePrev);
-  prevButton.appendChild(prevIcon);
-  fragment.appendChild(prevButton);
+  fragment.appendChild(prevButton).appendChild(prevIcon);
 }
 
 function makeNextButton() {
@@ -85,8 +84,7 @@ function makeNextButton() {
   const nextIcon = document.createElement("i");
   nextIcon.className = "fa-solid fa-forward";
   nextButton.addEventListener("click", slidesMoveNext);
-  nextButton.appendChild(nextIcon);
-  fragment.appendChild(nextButton);
+  fragment.appendChild(nextButton).appendChild(nextIcon);
 }
 
 function makeSlidesNumber() {
