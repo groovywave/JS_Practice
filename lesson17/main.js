@@ -65,7 +65,7 @@ function slidesMoveNext() {
 
 function makeCarousel(images) {
   const fragment = document.createDocumentFragment();
-  const carousel = document.createElement("section");
+  const carousel = document.createElement("div");
   carousel.id = "carousel";
   const slidesContainer = document.createElement("div");
   slidesContainer.id = "carouselContainer";
