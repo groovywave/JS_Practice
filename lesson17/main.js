@@ -21,14 +21,14 @@ function updateButton(slides) {
   const currentSlide = slides.find(
     (slide) => getZIndex(slide) === slides.length - 1
   );
-  currentSlide.parentNode.querySelector(".current").classList.remove("current");
-  currentSlide.classList.add("current");
-  currentSlide.parentNode.querySelector(".hidden")?.classList.remove("hidden");
+  currentSlide.parentNode.querySelector(".js-current").classList.remove("js-current");
+  currentSlide.classList.add("js-current");
+  currentSlide.parentNode.querySelector(".js-hidden")?.classList.remove("js-hidden");
   if (currentSlide === slides[0]) {
-    document.getElementById("prev").classList.add("hidden");
+    document.getElementById("prev").classList.add("js-hidden");
   }
   if (currentSlide === slides[slides.length - 1]) {
-    document.getElementById("next").classList.add("hidden");
+    document.getElementById("next").classList.add("js-hidden");
   }
 }
 
@@ -54,11 +54,11 @@ function renderData(images) {
   carousel.id = "carousel";
   const carouselContainer = document.createElement("div");
   carouselContainer.id = "carouselContainer";
-  carouselContainer.className = "carousel-container";
+  carouselContainer.className = "js-carousel-container";
   let i = 0;
   for (const image of images) {
     const slide = document.createElement("img");
-    slide.className = "carousel-img";
+    slide.className = "js-carousel-img";
     slide.src = image.img;
     slide.alt = image.alt;
     --i;
@@ -66,7 +66,7 @@ function renderData(images) {
     fragment.appendChild(slide);
     slides.push(slide);
   }
-  slides[0].classList.add("current");
+  slides[0].classList.add("js-current");
 
   const prevButton = document.createElement("button");
   prevButton.id = "prev";

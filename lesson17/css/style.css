@@ -1,11 +1,11 @@
-.carousel-container {
+.js-carousel-container {
   width: 320px;
   height: 200px;
   margin: 16px auto;
   position: relative;
 }
 
-.carousel-img {
+.js-carousel-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -38,6 +38,6 @@
   right: 0;
 }
 
-.hidden {
+.js-hidden {
   display: none;
 }
