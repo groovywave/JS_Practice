@@ -63,7 +63,7 @@ function slidesMoveNext() {
   updateSlidesNumber(slides);
 }
 
-function renderData(images) {
+function makeCarousel(images) {
   const fragment = document.createDocumentFragment();
   const carousel = document.createElement("section");
   carousel.id = "carousel";
@@ -135,11 +135,11 @@ async function fetchData(url) {
   }
 }
 
-async function fetchRenderData() {
+async function fetchMakeCarousel() {
   const responseData = await fetchData(url);
   if (responseData) {
-    renderData(responseData);
+    makeCarousel(responseData);
   }
 }
 
-fetchRenderData();
+fetchMakeCarousel();
