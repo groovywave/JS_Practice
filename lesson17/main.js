@@ -1,5 +1,6 @@
 const slides = [];
 const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
+let currentIndex = 0;
 
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
@@ -17,31 +18,37 @@ function getZIndex(slide) {
   return parseInt(slide.style.zIndex, 10);
 }
 
-function getCurrentSlide(slides) {
-  return slides.find((slide) => getZIndex(slide) === slides.length - 1);
-}
+// function getCurrentSlide(slides) {
+//   return slides.find((slide) => getZIndex(slide) === slides.length - 1);
+// }
 
-function updateButton(slides) {
-  const currentSlide = getCurrentSlide(slides);
-  currentSlide.parentNode
-    .querySelector(".js-current")
-    .classList.remove("js-current");
-  currentSlide.classList.add("js-current");
-  currentSlide.parentNode
+function updateButton() {
+  // const currentSlide = getCurrentSlide(slides);
+  // const currentSlide = document.getElementsByClassName("js-current");
+  // currentSlide.parentNode
+  //   .querySelector(".js-current")
+  //   .classList.remove("js-current");
+  // currentSlide.classList.add("js-current");
+  // currentSlide.parentNode
+  slides[currentIndex].parentNode
     .querySelector(".js-hidden")
     ?.classList.remove("js-hidden");
-  if (currentSlide === slides[0]) {
+  // if (currentSlide === slides[0]) {
+  if (slides[currentIndex] === slides[0]) {
     document.getElementById("prev").classList.add("js-hidden");
   }
-  if (currentSlide === slides[slides.length - 1]) {
+  if (slides[currentIndex] === slides[slides.length - 1]) {
     document.getElementById("next").classList.add("js-hidden");
   }
 }
 
-function updateSlidesNumber(slides) {
-  const currentSlide = getCurrentSlide(slides);
+// function updateSlidesNumber(slides) {
+function updateSlidesNumber() {
+  // const currentSlide = getCurrentSlide(slides);
+  // const currentSlide = document.getElementsByClassName("js-current");
   document.getElementById("slidesNumber").textContent = `${
-    slides.indexOf(currentSlide) + 1
+    // slides.indexOf(currentSlide) + 1
+    currentIndex + 1
   }/${slides.length}`;
 }
 
@@ -50,8 +57,13 @@ function slidesMovePrev() {
     const slideZIndex = getZIndex(slide);
     slide.style.zIndex = (slideZIndex + slides.length - 1) % slides.length;
   }
-  updateButton(slides);
-  updateSlidesNumber(slides);
+  --currentIndex;
+  // document.getElementById("slidesContainer").classList.remove("js-current");
+  // slides[--currentIndex].classList.add("js-current");
+  // updateButton(slides);
+  // updateSlidesNumber(slides);
+  updateButton();
+  updateSlidesNumber();
 }
 
 function slidesMoveNext() {
@@ -59,8 +71,13 @@ function slidesMoveNext() {
     const slideZIndex = getZIndex(slide);
     slide.style.zIndex = (slideZIndex + 1) % slides.length;
   }
-  updateButton(slides);
-  updateSlidesNumber(slides);
+  // document.getElementById("slidesContainer").classList.remove("js-current");
+  // slides[++currentIndex].classList.add("js-current");
+  // updateButton(slides);
+  // updateSlidesNumber(slides);
+  ++currentIndex;
+  updateButton();
+  updateSlidesNumber();
 }
 
 const fragment = document.createDocumentFragment();
@@ -108,7 +125,7 @@ function makeSlide(images) {
     fragment.appendChild(slide);
     slides.push(slide);
   });
-  slides[0].classList.add("js-current");
+  slides[currentIndex].classList.add("js-current");
   makePrevButton();
   makeNextButton();
   document.body
