@@ -20,13 +20,13 @@ function getZIndex(slide) {
 
 function updateButton() {
   slides[currentIndex].parentNode
-    .querySelector(".js-hidden")
-    ?.classList.remove("js-hidden");
+    .querySelector(".js-disabled")
+    ?.classList.remove("js-disabled");
   if (slides[currentIndex] === slides[0]) {
-    document.getElementById("prev").classList.add("js-hidden");
+    document.getElementById("prev").classList.add("js-disabled");
   }
   if (slides[currentIndex] === slides[slides.length - 1]) {
-    document.getElementById("next").classList.add("js-hidden");
+    document.getElementById("next").classList.add("js-disabled");
   }
 }
 
