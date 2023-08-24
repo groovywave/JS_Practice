@@ -5,14 +5,14 @@ align-items: center;
 flex-direction: column;
 }
 
-.js-slides-container {
+.slides-container {
   width: 320px;
   height: 200px;
   margin: 16px auto;
   position: relative;
 }
 
-.js-slide-img {
+.slide-img {
   width: 100%;
   height: 100%;
   object-fit: cover;

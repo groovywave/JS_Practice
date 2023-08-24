@@ -85,10 +85,10 @@ function makeSlidesNumber() {
 function makeSlide(images) {
   const slidesContainer = document.createElement("div");
   slidesContainer.id = "slidesContainer";
-  slidesContainer.className = "js-slides-container";
+  slidesContainer.className = "slides-container";
   images.forEach((image) => {
     const slide = document.createElement("img");
-    slide.className = "js-slide-img";
+    slide.className = "slide-img";
     slide.src = image.img;
     slide.alt = image.alt;
     fragment.appendChild(slide);
