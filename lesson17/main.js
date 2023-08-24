@@ -19,14 +19,18 @@ function getZIndex(slide) {
 }
 
 function updateButton() {
-  slides[currentIndex].parentNode
-    .querySelector(".js-disabled")
-    ?.classList.remove("js-disabled");
+    document.getElementById("prev").disabled = false;
+    document.getElementById("next").disabled = false;
+  // slides[currentIndex].parentNode
+    // .querySelector(".js-disabled")
+    // ?.classList.remove("js-disabled");
   if (slides[currentIndex] === slides[0]) {
-    document.getElementById("prev").classList.add("js-disabled");
+    // document.getElementById("prev").classList.add("js-disabled");
+    document.getElementById("prev").disabled = true;
   }
   if (slides[currentIndex] === slides[slides.length - 1]) {
-    document.getElementById("next").classList.add("js-disabled");
+    document.getElementById("next").disabled = true;
+    // document.getElementById("next").classList.add("js-disabled");
   }
 }
 
