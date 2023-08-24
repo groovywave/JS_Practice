@@ -1,4 +1,4 @@
-#carousel {
+.carousel {
 display: flex;
 justify-content: center;
 align-items: center;
@@ -24,8 +24,8 @@ flex-direction: column;
   z-index: 1;
 }
 
-#prev,
-#next {
+.prev,
+.next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -37,16 +37,16 @@ flex-direction: column;
   cursor: pointer;
 }
 
-#prev:hover,
-#next:hover {
+.prev:hover,
+.next:hover {
   opacity: 0.8;
 }
 
-#prev {
+.prev {
   left: 0;
 }
 
-#next {
+.next {
   right: 0;
 }
 

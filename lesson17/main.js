@@ -15,25 +15,27 @@ function displayInfo(error) {
 }
 
 function updateSlides() {
-  document.querySelector(".js-current").classList.remove("js-current");
+  document
+    .getElementsByClassName("js-current")[0]
+    .classList.remove("js-current");
   slides[currentIndex].classList.add("js-current");
 }
 
 function updateButton() {
-  document.getElementById("prev").disabled = false;
-  document.getElementById("next").disabled = false;
+  document.getElementsByClassName("prev")[0].disabled = false;
+  document.getElementsByClassName("next")[0].disabled = false;
   if (slides[currentIndex] === slides[0]) {
-    document.getElementById("prev").disabled = true;
+    document.getElementsByClassName("prev")[0].disabled = true;
   }
   if (slides[currentIndex] === slides[slides.length - 1]) {
-    document.getElementById("next").disabled = true;
+    document.getElementsByClassName("next")[0].disabled = true;
   }
 }
 
 function updateSlidesNumber() {
-  document.getElementById("slidesNumber").textContent = `${currentIndex + 1}/${
-    slides.length
-  }`;
+  document.getElementsByClassName("js-slides-number")[0].textContent = `${
+    currentIndex + 1
+  }/${slides.length}`;
 }
 
 function slidesMovePrev() {
@@ -52,11 +54,11 @@ function slidesMoveNext() {
 
 const fragment = document.createDocumentFragment();
 const carousel = document.createElement("div");
-carousel.id = "carousel";
+carousel.className = "carousel";
 
 function makePrevButton() {
   const prevButton = document.createElement("button");
-  prevButton.id = "prev";
+  prevButton.className = "prev";
   prevButton.style.zIndex = 100;
   const prevIcon = document.createElement("i");
   prevIcon.className = "fa-solid fa-backward";
@@ -66,7 +68,7 @@ function makePrevButton() {
 
 function makeNextButton() {
   const nextButton = document.createElement("button");
-  nextButton.id = "next";
+  nextButton.className = "next";
   nextButton.style.zIndex = 100;
   const nextIcon = document.createElement("i");
   nextIcon.className = "fa-solid fa-forward";
@@ -76,15 +78,14 @@ function makeNextButton() {
 
 function makeSlidesNumber() {
   const slidesNumber = document.createElement("p");
-  slidesNumber.id = "slidesNumber";
+  slidesNumber.className = "js-slides-number";
   console.log(slides[currentIndex]);
-  slidesNumber.textContent = `${currentIndex+1}/${slides.length}`;
+  slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }
 
 function makeSlide(images) {
   const slidesContainer = document.createElement("div");
-  slidesContainer.id = "slidesContainer";
   slidesContainer.className = "slides-container";
   images.forEach((image) => {
     const slide = document.createElement("img");
