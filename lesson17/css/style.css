@@ -17,6 +17,11 @@ flex-direction: column;
   height: 100%;
   object-fit: cover;
   position: absolute;
+  z-index: -1;
+}
+
+.js-current{
+  z-index: 1;
 }
 
 #prev,

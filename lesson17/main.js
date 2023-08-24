@@ -14,13 +14,14 @@ function displayInfo(error) {
   document.body.appendChild(errorMessage);
 }
 
-function getZIndex(slide) {
-  return parseInt(slide.style.zIndex, 10);
+function updateSlides() {
+  document.querySelector(".js-current").classList.remove("js-current");
+  slides[currentIndex].classList.add("js-current");
 }
 
 function updateButton() {
-    document.getElementById("prev").disabled = false;
-    document.getElementById("next").disabled = false;
+  document.getElementById("prev").disabled = false;
+  document.getElementById("next").disabled = false;
   if (slides[currentIndex] === slides[0]) {
     document.getElementById("prev").disabled = true;
   }
@@ -36,21 +37,15 @@ function updateSlidesNumber() {
 }
 
 function slidesMovePrev() {
-  for (const slide of slides) {
-    const slideZIndex = getZIndex(slide);
-    slide.style.zIndex = (slideZIndex + slides.length - 1) % slides.length;
-  }
   --currentIndex;
+  updateSlides();
   updateButton();
   updateSlidesNumber();
 }
 
 function slidesMoveNext() {
-  for (const slide of slides) {
-    const slideZIndex = getZIndex(slide);
-    slide.style.zIndex = (slideZIndex + 1) % slides.length;
-  }
   ++currentIndex;
+  updateSlides();
   updateButton();
   updateSlidesNumber();
 }
@@ -82,7 +77,8 @@ function makeNextButton() {
 function makeSlidesNumber() {
   const slidesNumber = document.createElement("p");
   slidesNumber.id = "slidesNumber";
-  slidesNumber.textContent = `${slides[0].index + 1}/${slides.length}`;
+  console.log(slides[currentIndex]);
+  slidesNumber.textContent = `${currentIndex+1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }
 
@@ -90,13 +86,11 @@ function makeSlide(images) {
   const slidesContainer = document.createElement("div");
   slidesContainer.id = "slidesContainer";
   slidesContainer.className = "js-slides-container";
-  images.forEach((image, index) => {
+  images.forEach((image) => {
     const slide = document.createElement("img");
     slide.className = "js-slide-img";
     slide.src = image.img;
     slide.alt = image.alt;
-    slide.index = index;
-    slide.style.zIndex = images.length - 1 - slide.index;
     fragment.appendChild(slide);
     slides.push(slide);
   });
