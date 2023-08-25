@@ -81,7 +81,6 @@ function makeNextButton() {
 function makeSlidesNumber() {
   const slidesNumber = document.createElement("p");
   slidesNumber.id = "js-slidesNumber";
-  console.log(slides[currentIndex]);
   slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }
