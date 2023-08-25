@@ -36,8 +36,8 @@
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: rgba(255, 255, 255, 0.3);
-  color: rgba(80, 79, 79, 0.5);
+  background: rgba(255 255 255 / 0.3);
+  color: rgba(80 79 79 /0.5);
   font-size: 24px;
   padding: 0 8px 4px;
   cursor: pointer;
