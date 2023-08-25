@@ -2,6 +2,21 @@ const slides = [];
 const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
 let currentIndex = 0;
 
+function renderCircle() {
+  const loadingCircleContainer = document.createElement("div");
+  loadingCircleContainer.id = "js-loadingCircleContainer";
+  // loadingCircleContainer.id = "js-loadingCircleContainer";
+  loadingCircleContainer.className = "loading-circle-container";
+  const loadingCircle = document.createElement("img");
+  loadingCircle.src = "img/loading-circle.gif";
+  loadingCircle.alt = "ローディング画像";
+  document.body.appendChild(loadingCircleContainer).appendChild(loadingCircle);
+}
+
+function removeCircle() {
+  document.getElementById("js-loadingCircleContainer").remove();
+}
+
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
   errorMessage.textContent = `${response.status}:${response.statusText}`;
@@ -22,18 +37,18 @@ function updateSlides() {
 }
 
 function updateButton() {
-  document.getElementsByClassName("prev")[0].disabled = false;
-  document.getElementsByClassName("next")[0].disabled = false;
+  document.getElementById("js-prev").disabled = false;
+  document.getElementById("js-next").disabled = false;
   if (slides[currentIndex] === slides[0]) {
-    document.getElementsByClassName("prev")[0].disabled = true;
+    document.getElementById("js-prev").disabled = true;
   }
   if (slides[currentIndex] === slides[slides.length - 1]) {
-    document.getElementsByClassName("next")[0].disabled = true;
+    document.getElementById("js-next").disabled = true;
   }
 }
 
 function updateSlidesNumber() {
-  document.getElementsByClassName("js-slides-number")[0].textContent = `${
+  document.getElementById("js-slidesNumber").textContent = `${
     currentIndex + 1
   }/${slides.length}`;
 }
@@ -58,6 +73,7 @@ carousel.className = "carousel";
 
 function makePrevButton() {
   const prevButton = document.createElement("button");
+  prevButton.id = "js-prev";
   prevButton.className = "prev";
   prevButton.style.zIndex = 100;
   const prevIcon = document.createElement("i");
@@ -68,6 +84,7 @@ function makePrevButton() {
 
 function makeNextButton() {
   const nextButton = document.createElement("button");
+  nextButton.id = "js-next";
   nextButton.className = "next";
   nextButton.style.zIndex = 100;
   const nextIcon = document.createElement("i");
@@ -78,8 +95,7 @@ function makeNextButton() {
 
 function makeSlidesNumber() {
   const slidesNumber = document.createElement("p");
-  slidesNumber.className = "js-slides-number";
-  console.log(slides[currentIndex]);
+  slidesNumber.id = "js-slidesNumber";
   slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }
@@ -107,6 +123,7 @@ function makeSlide(images) {
 }
 
 async function fetchData(url) {
+  renderCircle();
   try {
     const response = await new Promise((resolve) => {
       setTimeout(() => {
@@ -125,6 +142,8 @@ async function fetchData(url) {
     return responseData;
   } catch (error) {
     displayInfo(error);
+  } finally {
+    removeCircle();
   }
 }
 
