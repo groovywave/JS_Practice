@@ -5,7 +5,6 @@ let currentIndex = 0;
 function renderCircle() {
   const loadingCircleContainer = document.createElement("div");
   loadingCircleContainer.id = "js-loadingCircleContainer";
-  // loadingCircleContainer.id = "js-loadingCircleContainer";
   loadingCircleContainer.className = "loading-circle-container";
   const loadingCircle = document.createElement("img");
   loadingCircle.src = "img/loading-circle.gif";
