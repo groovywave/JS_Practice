@@ -2,6 +2,21 @@ const slides = [];
 const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
 let currentIndex = 0;
 
+function renderCircle() {
+  const loadingCircleContainer = document.createElement("div");
+  loadingCircleContainer.id = "js-loadingCircleContainer";
+  // loadingCircleContainer.id = "js-loadingCircleContainer";
+  loadingCircleContainer.className = "loading-circle-container";
+  const loadingCircle = document.createElement("img");
+  loadingCircle.src = "img/loading-circle.gif";
+  loadingCircle.alt = "ローディング画像";
+  document.body.appendChild(loadingCircleContainer).appendChild(loadingCircle);
+}
+
+function removeCircle() {
+  document.getElementById("js-loadingCircleContainer").remove();
+}
+
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
   errorMessage.textContent = `${response.status}:${response.statusText}`;
@@ -108,6 +123,7 @@ function makeSlide(images) {
 }
 
 async function fetchData(url) {
+  renderCircle();
   try {
     const response = await new Promise((resolve) => {
       setTimeout(() => {
@@ -126,6 +142,8 @@ async function fetchData(url) {
     return responseData;
   } catch (error) {
     displayInfo(error);
+  } finally {
+    removeCircle();
   }
 }
 

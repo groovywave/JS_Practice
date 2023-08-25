@@ -1,8 +1,14 @@
+.loading-circle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .carousel {
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .slides-container {
@@ -20,7 +26,7 @@ flex-direction: column;
   z-index: -1;
 }
 
-.js-current{
+.js-current {
   z-index: 1;
 }
 
@@ -49,4 +55,3 @@ flex-direction: column;
 .next {
   right: 0;
 }
-
