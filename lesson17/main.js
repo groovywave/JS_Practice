@@ -22,18 +22,18 @@ function updateSlides() {
 }
 
 function updateButton() {
-  document.getElementsByClassName("prev")[0].disabled = false;
-  document.getElementsByClassName("next")[0].disabled = false;
+  document.getElementById("js-prev").disabled = false;
+  document.getElementById("js-next").disabled = false;
   if (slides[currentIndex] === slides[0]) {
-    document.getElementsByClassName("prev")[0].disabled = true;
+    document.getElementById("js-prev").disabled = true;
   }
   if (slides[currentIndex] === slides[slides.length - 1]) {
-    document.getElementsByClassName("next")[0].disabled = true;
+    document.getElementById("js-next").disabled = true;
   }
 }
 
 function updateSlidesNumber() {
-  document.getElementsByClassName("js-slides-number")[0].textContent = `${
+  document.getElementById("js-slidesNumber").textContent = `${
     currentIndex + 1
   }/${slides.length}`;
 }
@@ -58,6 +58,7 @@ carousel.className = "carousel";
 
 function makePrevButton() {
   const prevButton = document.createElement("button");
+  prevButton.id = "js-prev";
   prevButton.className = "prev";
   prevButton.style.zIndex = 100;
   const prevIcon = document.createElement("i");
@@ -68,6 +69,7 @@ function makePrevButton() {
 
 function makeNextButton() {
   const nextButton = document.createElement("button");
+  nextButton.id = "js-next";
   nextButton.className = "next";
   nextButton.style.zIndex = 100;
   const nextIcon = document.createElement("i");
@@ -78,7 +80,7 @@ function makeNextButton() {
 
 function makeSlidesNumber() {
   const slidesNumber = document.createElement("p");
-  slidesNumber.className = "js-slides-number";
+  slidesNumber.id = "js-slidesNumber";
   console.log(slides[currentIndex]);
   slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
