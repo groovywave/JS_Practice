@@ -29,18 +29,17 @@ function displayInfo(error) {
 }
 
 function updateSlides() {
-  document
-    .getElementById("js-current").id=""
-  slides[currentIndex].id=("js-current");
+  document.getElementById("js-current").id = "";
+  slides[currentIndex].id = "js-current";
 }
 
 function updateButton() {
   document.getElementById("js-prev").disabled = false;
   document.getElementById("js-next").disabled = false;
-  if (slides[currentIndex] === slides[0]) {
+  if (currentIndex === 0) {
     document.getElementById("js-prev").disabled = true;
   }
-  if (slides[currentIndex] === slides[slides.length - 1]) {
+  if (currentIndex === slides.length - 1) {
     document.getElementById("js-next").disabled = true;
   }
 }
@@ -67,7 +66,7 @@ function slidesMoveNext() {
 
 const fragment = document.createDocumentFragment();
 const carousel = document.createElement("div");
-carousel.className= "carousel";
+carousel.className = "carousel";
 
 function makePrevButton() {
   const prevButton = document.createElement("button");
@@ -100,7 +99,7 @@ function makeSlidesNumber() {
 
 function makeSlide(images) {
   const slidesContainer = document.createElement("div");
-  slidesContainer.className= "slides-container";
+  slidesContainer.className = "slides-container";
   images.forEach((image) => {
     const slide = document.createElement("img");
     slide.className = "slide-img";
@@ -109,7 +108,7 @@ function makeSlide(images) {
     fragment.appendChild(slide);
     slides.push(slide);
   });
-  slides[currentIndex].id=("js-current");
+  slides[currentIndex].id = "js-current";
   makePrevButton();
   makeNextButton();
   document.body
