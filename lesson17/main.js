@@ -30,9 +30,8 @@ function displayInfo(error) {
 
 function updateSlides() {
   document
-    .getElementsByClassName("js-current")[0]
-    .classList.remove("js-current");
-  slides[currentIndex].classList.add("js-current");
+    .getElementById("js-current").id=""
+  slides[currentIndex].id=("js-current");
 }
 
 function updateButton() {
@@ -68,7 +67,7 @@ function slidesMoveNext() {
 
 const fragment = document.createDocumentFragment();
 const carousel = document.createElement("div");
-carousel.className = "carousel";
+carousel.className= "carousel";
 
 function makePrevButton() {
   const prevButton = document.createElement("button");
@@ -101,7 +100,7 @@ function makeSlidesNumber() {
 
 function makeSlide(images) {
   const slidesContainer = document.createElement("div");
-  slidesContainer.className = "slides-container";
+  slidesContainer.className= "slides-container";
   images.forEach((image) => {
     const slide = document.createElement("img");
     slide.className = "slide-img";
@@ -110,7 +109,7 @@ function makeSlide(images) {
     fragment.appendChild(slide);
     slides.push(slide);
   });
-  slides[currentIndex].classList.add("js-current");
+  slides[currentIndex].id=("js-current");
   makePrevButton();
   makeNextButton();
   document.body

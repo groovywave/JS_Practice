@@ -46,6 +46,6 @@
   right: 0;
 }
 
-.js-current {
+#js-current {
   z-index: 1;
 }
