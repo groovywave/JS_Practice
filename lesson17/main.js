@@ -116,7 +116,7 @@ function makeSlide(images) {
     .appendChild(slidesContainer)
     .appendChild(fragment);
   makeSlidesNumber();
-  updateButton(slides);
+  updateButton();
 }
 
 async function fetchData(url) {
