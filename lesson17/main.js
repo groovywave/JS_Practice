@@ -1,4 +1,4 @@
-const slides = [];
+let slides = [];
 const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
 let currentIndex = 0;
 
