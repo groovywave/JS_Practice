@@ -33,7 +33,7 @@ function updateSlides() {
   slides[currentIndex].id = "js-current";
 }
 
-function updateButton() {
+function updateButtons() {
   document.getElementById("js-prev").disabled = false;
   document.getElementById("js-next").disabled = false;
   if (currentIndex === 0) {
@@ -53,14 +53,14 @@ function updateSlidesNumber() {
 function slidesMovePrev() {
   --currentIndex;
   updateSlides();
-  updateButton();
+  updateButtons();
   updateSlidesNumber();
 }
 
 function slidesMoveNext() {
   ++currentIndex;
   updateSlides();
-  updateButton();
+  updateButtons();
   updateSlidesNumber();
 }
 
@@ -97,6 +97,29 @@ function makeSlidesNumber() {
   carousel.appendChild(slidesNumber);
 }
 
+function makeDots() {
+  for (let i = 0; i < slides.length; i++) {
+    const button = document.createElement("button");
+    button.addEventListener("click", () => {
+      currentIndex = i;
+      updateDots();
+      updateButtons();
+      updateSlides();
+    });
+    dots.push(button);
+    document.getElementsByClassName("nav")[0].appendChild(button);
+  }
+
+  dots[0].classList.add("js-current");
+}
+
+function updateDots() {
+  dots.forEach((dot) => {
+    dot.classList.remove("current");
+  });
+  dots[currentIndex].classList.add("current");
+}
+
 function makeSlide(images) {
   const slidesContainer = document.createElement("div");
   slidesContainer.className = "slides-container";
@@ -116,7 +139,8 @@ function makeSlide(images) {
     .appendChild(slidesContainer)
     .appendChild(fragment);
   makeSlidesNumber();
-  updateButton();
+  updateButtons();
+  makeDots();
 }
 
 async function fetchData(url) {
