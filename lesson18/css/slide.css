@@ -46,6 +46,28 @@
   right: 0;
 }
 
-#js-current {
+#js-currentSlide {
   z-index: 1;
+}
+
+#dotsContainer {
+  margin-top: 16px;
+  text-align: center;
+}
+
+#dotsContainer button + button {
+  margin-left: 8px;
+}
+
+#dotsContainer button {
+  border: none;
+  width: 16px;
+  height: 16px;
+  background: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#dotsContainer #js-currentDot {
+  background: #bbb;
 }

@@ -1,6 +1,7 @@
 let slides = [];
 const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
 let currentIndex = 0;
+let dots = [];
 
 function renderCircle() {
   const loadingCircleContainer = document.createElement("div");
@@ -29,8 +30,8 @@ function displayInfo(error) {
 }
 
 function updateSlides() {
-  document.getElementById("js-current").id = "";
-  slides[currentIndex].id = "js-current";
+  document.getElementById("js-currentSlide").id = "";
+  slides[currentIndex].id = "js-currentSlide";
 }
 
 function updateButtons() {
@@ -55,6 +56,7 @@ function slidesMovePrev() {
   updateSlides();
   updateButtons();
   updateSlidesNumber();
+  updateDots();
 }
 
 function slidesMoveNext() {
@@ -62,6 +64,7 @@ function slidesMoveNext() {
   updateSlides();
   updateButtons();
   updateSlidesNumber();
+  updateDots();
 }
 
 const fragment = document.createDocumentFragment();
@@ -98,6 +101,8 @@ function makeSlidesNumber() {
 }
 
 function makeDots() {
+  const dotsContainer = document.createElement("div");
+  dotsContainer.id = "dotsContainer";
   for (let i = 0; i < slides.length; i++) {
     const button = document.createElement("button");
     button.addEventListener("click", () => {
@@ -105,19 +110,19 @@ function makeDots() {
       updateDots();
       updateButtons();
       updateSlides();
+      updateSlidesNumber();
     });
     dots.push(button);
-    document.getElementsByClassName("nav")[0].appendChild(button);
+    dotsContainer.appendChild(button);
   }
 
-  dots[0].classList.add("js-current");
+  dots[0].id = "js-currentDot";
+  carousel.appendChild(dotsContainer);
 }
 
 function updateDots() {
-  dots.forEach((dot) => {
-    dot.classList.remove("current");
-  });
-  dots[currentIndex].classList.add("current");
+  document.getElementById("js-currentDot").id = "";
+  dots[currentIndex].id = "js-currentDot";
 }
 
 function makeSlide(images) {
@@ -131,7 +136,7 @@ function makeSlide(images) {
     fragment.appendChild(slide);
     slides.push(slide);
   });
-  slides[currentIndex].id = "js-current";
+  slides[currentIndex].id = "js-currentSlide";
   makePrevButton();
   makeNextButton();
   document.body
