@@ -180,4 +180,15 @@ async function fetchMakeSlide() {
   }
 }
 
-fetchMakeSlide();
+async function init() {
+  await fetchMakeSlide();
+  setInterval(() => {
+    currentIndex = ++currentIndex % slides.length;
+    updateSlides();
+    updateButtons();
+    updateSlidesNumber();
+    updateDots();
+  }, 3000);
+}
+
+init();
