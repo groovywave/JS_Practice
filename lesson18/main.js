@@ -104,17 +104,20 @@ function makeDots() {
   const dotsContainer = document.createElement("div");
   dotsContainer.id = "dotsContainer";
   for (let i = 0; i < slides.length; i++) {
-    const button = document.createElement("button");
-    button.addEventListener("click", () => {
-      currentIndex = i;
-      updateDots();
-      updateButtons();
-      updateSlides();
-      updateSlidesNumber();
-    });
-    dots.push(button);
-    dotsContainer.appendChild(button);
+    const dot = document.createElement("button");
+    dot.dataset.index = i;
+    dots.push(dot);
+    dotsContainer.appendChild(dot);
   }
+  dotsContainer.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) return;
+    console.log(e.target);
+    currentIndex = parseInt(e.target.dataset.index, 10);
+    updateDots();
+    updateButtons();
+    updateSlides();
+    updateSlidesNumber();
+  });
 
   dots[0].id = "js-currentDot";
   carousel.appendChild(dotsContainer);
