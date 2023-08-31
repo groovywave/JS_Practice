@@ -45,7 +45,7 @@ function updateButtons() {
   }
 }
 
-function updateSlidesNumber() {
+function updateSlideNumber() {
   document.getElementById("js-slidesNumber").textContent = `${
     currentIndex + 1
   }/${slides.length}`;
@@ -55,16 +55,18 @@ function slidesMovePrev() {
   --currentIndex;
   updateSlides();
   updateButtons();
-  updateSlidesNumber();
+  updateSlideNumber();
   updateDots();
+  resetSlideshowInterval();
 }
 
 function slidesMoveNext() {
   ++currentIndex;
   updateSlides();
   updateButtons();
-  updateSlidesNumber();
+  updateSlideNumber();
   updateDots();
+  resetSlideshowInterval();
 }
 
 const fragment = document.createDocumentFragment();
@@ -116,7 +118,8 @@ function makeDots() {
     updateDots();
     updateButtons();
     updateSlides();
-    updateSlidesNumber();
+    updateSlideNumber();
+    resetSlideshowInterval();
   });
 
   dots[0].id = "js-currentDot";
@@ -183,15 +186,25 @@ async function fetchMakeSlide() {
   }
 }
 
-async function init() {
-  await fetchMakeSlide();
-  setInterval(() => {
+let intervalId;
+function advanceSlidesEvery3Sec() {
+  intervalId = setInterval(() => {
     currentIndex = ++currentIndex % slides.length;
     updateSlides();
     updateButtons();
-    updateSlidesNumber();
+    updateSlideNumber();
     updateDots();
   }, 3000);
+}
+
+function resetSlideshowInterval() {
+  clearInterval(intervalId);
+  advanceSlidesEvery3Sec();
+}
+
+async function init() {
+  await fetchMakeSlide();
+  advanceSlidesEvery3Sec();
 }
 
 init();
