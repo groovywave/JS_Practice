@@ -113,7 +113,6 @@ function makeDots() {
   }
   dotsContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
-    console.log(e.target);
     currentIndex = parseInt(e.target.dataset.index, 10);
     updateDots();
     updateButtons();
