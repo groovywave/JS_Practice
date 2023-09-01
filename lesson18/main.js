@@ -41,11 +41,16 @@ function updateSlides() {
 function updateButtons() {
   document.getElementById("js-prev").disabled = false;
   document.getElementById("js-next").disabled = false;
+  document
+    .getElementsByClassName("disabled-button")[0]
+    ?.classList.remove("disabled-button");
   if (currentIndex === 0) {
     document.getElementById("js-prev").disabled = true;
+    document.getElementById("js-prev").classList.add("disabled-button");
   }
   if (currentIndex === slides.length - 1) {
     document.getElementById("js-next").disabled = true;
+    document.getElementById("js-next").classList.add("disabled-button");
   }
 }
 
