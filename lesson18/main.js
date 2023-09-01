@@ -203,7 +203,7 @@ async function fetchMakeSlide() {
 }
 
 let intervalId;
-function advanceSlidesEvery3Sec() {
+function startAutoPlaySlides() {
   intervalId = setInterval(() => {
     currentIndex = ++currentIndex % slides.length;
     updateSlides();
@@ -215,12 +215,12 @@ function advanceSlidesEvery3Sec() {
 
 function resetSlideshowInterval() {
   clearInterval(intervalId);
-  advanceSlidesEvery3Sec();
+  startAutoPlaySlides();
 }
 
 async function init() {
   await fetchMakeSlide();
-  advanceSlidesEvery3Sec();
+  startAutoPlaySlides();
 }
 
 init();
