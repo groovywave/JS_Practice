@@ -84,6 +84,7 @@ carousel.className = "carousel";
 
 function makePrevButton() {
   const prevButton = document.createElement("button");
+  prevButton.type = "button";
   prevButton.id = "js-prev";
   prevButton.className = "prev";
   prevButton.style.zIndex = 100;
@@ -95,6 +96,7 @@ function makePrevButton() {
 
 function makeNextButton() {
   const nextButton = document.createElement("button");
+  nextButton.type = "button";
   nextButton.id = "js-next";
   nextButton.className = "next";
   nextButton.style.zIndex = 100;
