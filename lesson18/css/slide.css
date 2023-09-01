@@ -46,7 +46,7 @@
   right: 0;
 }
 
-#js-currentSlide {
+.current-slide {
   z-index: 1;
 }
 
@@ -68,6 +68,6 @@
   cursor: pointer;
 }
 
-#dotsContainer #js-currentDot {
+#dotsContainer .current-dot {
   background: #bbb;
 }

@@ -32,6 +32,10 @@ function displayInfo(error) {
 function updateSlides() {
   document.getElementById("js-currentSlide").id = "";
   slides[currentIndex].id = "js-currentSlide";
+  document
+    .getElementsByClassName("current-slide")[0]
+    .classList.remove("current-slide");
+  slides[currentIndex].classList.add("current-slide");
 }
 
 function updateButtons() {
@@ -122,12 +126,17 @@ function makeDots() {
   });
 
   dots[0].id = "js-currentDot";
+  dots[0].classList.add("current-dot");
   carousel.appendChild(dotsContainer);
 }
 
 function updateDots() {
   document.getElementById("js-currentDot").id = "";
   dots[currentIndex].id = "js-currentDot";
+  document
+    .getElementsByClassName("current-dot")[0]
+    .classList.remove("current-dot");
+  dots[currentIndex].classList.add("current-dot");
 }
 
 function makeSlide(images) {
@@ -142,6 +151,7 @@ function makeSlide(images) {
     slides.push(slide);
   });
   slides[currentIndex].id = "js-currentSlide";
+  slides[currentIndex].classList.add("current-slide");
   makePrevButton();
   makeNextButton();
   document.body
