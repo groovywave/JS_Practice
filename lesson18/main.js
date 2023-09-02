@@ -1,6 +1,7 @@
 let slides = [];
 const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
 let currentIndex = 0;
+let dots = [];
 
 function renderCircle() {
   const loadingCircleContainer = document.createElement("div");
@@ -29,11 +30,15 @@ function displayInfo(error) {
 }
 
 function updateSlides() {
-  document.getElementById("js-current").id = "";
-  slides[currentIndex].id = "js-current";
+  document.getElementById("js-currentSlide").id = "";
+  slides[currentIndex].id = "js-currentSlide";
+  document
+    .getElementsByClassName("current-slide")[0]
+    .classList.remove("current-slide");
+  slides[currentIndex].classList.add("current-slide");
 }
 
-function updateButton() {
+function updateButtons() {
   document.getElementById("js-prev").disabled = false;
   document.getElementById("js-next").disabled = false;
   if (currentIndex === 0) {
@@ -44,7 +49,7 @@ function updateButton() {
   }
 }
 
-function updateSlidesNumber() {
+function updateSlideNumber() {
   document.getElementById("js-slidesNumber").textContent = `${
     currentIndex + 1
   }/${slides.length}`;
@@ -53,15 +58,19 @@ function updateSlidesNumber() {
 function slidesMovePrev() {
   --currentIndex;
   updateSlides();
-  updateButton();
-  updateSlidesNumber();
+  updateButtons();
+  updateSlideNumber();
+  updateDots();
+  resetSlideshowInterval();
 }
 
 function slidesMoveNext() {
   ++currentIndex;
   updateSlides();
-  updateButton();
-  updateSlidesNumber();
+  updateButtons();
+  updateSlideNumber();
+  updateDots();
+  resetSlideshowInterval();
 }
 
 const fragment = document.createDocumentFragment();
@@ -70,6 +79,7 @@ carousel.className = "carousel";
 
 function makePrevButton() {
   const prevButton = document.createElement("button");
+  prevButton.type = "button";
   prevButton.id = "js-prev";
   prevButton.className = "prev";
   prevButton.style.zIndex = 100;
@@ -81,6 +91,7 @@ function makePrevButton() {
 
 function makeNextButton() {
   const nextButton = document.createElement("button");
+  nextButton.type = "button";
   nextButton.id = "js-next";
   nextButton.className = "next";
   nextButton.style.zIndex = 100;
@@ -97,6 +108,39 @@ function makeSlidesNumber() {
   carousel.appendChild(slidesNumber);
 }
 
+function makeDots() {
+  const dotsContainer = document.createElement("div");
+  dotsContainer.id = "dotsContainer";
+  for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement("button");
+    dot.dataset.index = i;
+    dots.push(dot);
+    dotsContainer.appendChild(dot);
+  }
+  dotsContainer.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) return;
+    currentIndex = parseInt(e.target.dataset.index, 10);
+    updateDots();
+    updateButtons();
+    updateSlides();
+    updateSlideNumber();
+    resetSlideshowInterval();
+  });
+
+  dots[0].id = "js-currentDot";
+  dots[0].classList.add("current-dot");
+  carousel.appendChild(dotsContainer);
+}
+
+function updateDots() {
+  document.getElementById("js-currentDot").id = "";
+  dots[currentIndex].id = "js-currentDot";
+  document
+    .getElementsByClassName("current-dot")[0]
+    .classList.remove("current-dot");
+  dots[currentIndex].classList.add("current-dot");
+}
+
 function makeSlide(images) {
   const slidesContainer = document.createElement("div");
   slidesContainer.className = "slides-container";
@@ -108,7 +152,8 @@ function makeSlide(images) {
     fragment.appendChild(slide);
     slides.push(slide);
   });
-  slides[currentIndex].id = "js-current";
+  slides[currentIndex].id = "js-currentSlide";
+  slides[currentIndex].classList.add("current-slide");
   makePrevButton();
   makeNextButton();
   document.body
@@ -116,7 +161,8 @@ function makeSlide(images) {
     .appendChild(slidesContainer)
     .appendChild(fragment);
   makeSlidesNumber();
-  updateButton();
+  updateButtons();
+  makeDots();
 }
 
 async function fetchData(url) {
@@ -151,4 +197,25 @@ async function fetchMakeSlide() {
   }
 }
 
-fetchMakeSlide();
+let intervalId;
+function startAutoPlaySlides() {
+  intervalId = setInterval(() => {
+    currentIndex = ++currentIndex % slides.length;
+    updateSlides();
+    updateButtons();
+    updateSlideNumber();
+    updateDots();
+  }, 3000);
+}
+
+function resetSlideshowInterval() {
+  clearInterval(intervalId);
+  startAutoPlaySlides();
+}
+
+async function init() {
+  await fetchMakeSlide();
+  startAutoPlaySlides();
+}
+
+init();
