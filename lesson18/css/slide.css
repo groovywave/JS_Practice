@@ -56,16 +56,16 @@
   z-index: 1;
 }
 
-#dotsContainer {
+.dots-container {
   margin-top: 16px;
   text-align: center;
 }
 
-#dotsContainer button + button {
+.dots-container button + button {
   margin-left: 8px;
 }
 
-#dotsContainer button {
+.dots-container button {
   border: none;
   width: 16px;
   height: 16px;
@@ -74,6 +74,6 @@
   cursor: pointer;
 }
 
-#dotsContainer .current-dot {
+.dots-container .current-dot {
   background: #bbb;
 }
