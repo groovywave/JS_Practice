@@ -110,7 +110,7 @@ function makeSlidesNumber() {
 
 function makeDots() {
   const dotsContainer = document.createElement("div");
-  dotsContainer.id = "dotsContainer";
+  dotsContainer.classList.add("dots-container");
   for (let i = 0; i < slides.length; i++) {
     const dot = document.createElement("button");
     dot.dataset.index = i;
