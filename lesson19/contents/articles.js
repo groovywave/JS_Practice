@@ -212,12 +212,15 @@ function addClickEventChangeElement(
 ) {
   parentElem.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
+    e.preventDefault();
     if (isChangeClickedElem) {
       parentElem.querySelector(".active").classList.remove("active");
       e.target.classList.add("active");
     }
     parentOfRelationElem.querySelector(".active")?.classList.remove("active");
-    document.getElementById(e.target.dataset.id).classList.add("active");
+    const targetElement = document.getElementById(e.target.dataset.id);
+    targetElement.classList.add("active");
+    targetElement.scrollIntoView({ behavior: "smooth" });
   });
 }
 
