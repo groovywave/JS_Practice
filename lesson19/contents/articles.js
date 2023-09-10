@@ -118,7 +118,7 @@ function createNewIconContainer(date) {
   const articleDate = new Date(date);
   if (withinThreeDays(articleDate)) {
     const newIcon = document.createElement("img");
-    newIcon.src = "../img/article/new.png";
+    newIcon.src = "./img/article/new.png";
     newIcon.alt = "新着";
     newIcon.classList.add("new");
     newIconContainer.appendChild(newIcon);
@@ -131,7 +131,7 @@ function createCommentIconContainer(id, comments) {
   commentIconContainer.classList.add("comment-icon-container");
   const commentIcon = document.createElement("img");
   commentIcon.classList.add("comment-icon");
-  commentIcon.src = "../img/article/comment.png";
+  commentIcon.src = "./img/article/comment.png";
   commentIcon.width = "14";
   commentIcon.height = "14";
   commentIcon.dataset.id = id;

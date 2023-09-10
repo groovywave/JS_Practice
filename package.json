@@ -4,8 +4,12 @@
   "description": "This is a repository for me learning JS.\r I've taken part in a class Morikenjuku.\r Thank you teacher Moriken!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^4.4.9"
+  }
 }
