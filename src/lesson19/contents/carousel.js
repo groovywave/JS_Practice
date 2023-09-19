@@ -3,8 +3,7 @@ import {removeCircle} from "../modules/removeCircle.js"
 import {displayInfo} from "../modules/displayInfo.js"
 
 let slides = [];
-// const url = "https://mocki.io/v1/010175de-0176-440a-9f90-d4a7ca8010cc";
-const url = "https://mocki.io/v1/d4fc7861-72ef-4073-96a4-d9caffd6f35a";
+const url = "https://mocki.io/v1/5bef3c12-7172-4815-b050-0ddbfa7019c1";
 let currentIndex = 0;
 let dots = [];
 
