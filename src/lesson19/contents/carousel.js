@@ -1,9 +1,9 @@
-import {renderCircle} from "../modules/renderCircle.js"
-import {removeCircle} from "../modules/removeCircle.js"
-import {displayInfo} from "../modules/displayInfo.js"
+import { renderCircle } from "../modules/renderCircle.js";
+import { removeCircle } from "../modules/removeCircle.js";
+import { displayInfo } from "../modules/displayInfo.js";
 
 let slides = [];
-const url = "https://mocki.io/v1/5bef3c12-7172-4815-b050-0ddbfa7019c1";
+const url = "https://mocki.io/v1/3fc35b83-50ff-4727-92a7-7a81d8fe7db8";
 let currentIndex = 0;
 let dots = [];
 
@@ -140,7 +140,8 @@ function makeSlide(images) {
   slides[currentIndex].classList.add("current-slide");
   makePrevButton();
   makeNextButton();
-  document.getElementById("js-carouselArea")
+  document
+    .getElementById("js-carouselArea")
     .appendChild(carousel)
     .appendChild(slidesContainer)
     .appendChild(fragment);
