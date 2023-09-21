@@ -1,10 +1,10 @@
 {
   "name": "js_practice",
   "version": "1.0.0",
-  "description": "This is a repository for me learning JS.\r I've taken part in a class Morikenjuku.\r Thank you teacher Moriken!",
+  "description": "This is a repository for me learning JS.\r\n I've taken part in a class Morikenjuku.\r\n Thank you teacher Moriken!",
   "main": "index.js",
   "scripts": {
-    // "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -15,7 +15,7 @@
     "vite": "^4.4.9"
   },
   "dependencies": {
-    "glob": "^10.3.4",
+    "glob": "^10.3.5",
     "path": "^0.12.7"
   }
 }
