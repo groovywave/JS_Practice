@@ -8,16 +8,19 @@
 .table {
   width: 50%;
   border-collapse: collapse;
+  border: 1px solid black;
 }
 
 .th {
-  background-color: #f2f2f2;
+  border: 1px solid black;
+  background-color: #c2ff00;
   text-align: left;
   padding: 8px;
 }
 
 .td {
-  border: 1px solid #dddddd;
+  border: 1px solid black;
+  background-color:  #00c7f2;
   text-align: left;
   padding: 8px;
 }
