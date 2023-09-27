@@ -2,7 +2,7 @@ import { renderCircle } from "../modules/renderCircle.js";
 import { removeCircle } from "../modules/removeCircle.js";
 import { displayInfo } from "../modules/displayInfo.js";
 
-const url = "https://mocki.io/v1/3a070eb1-17a3-439e-b1a3-a15649c81c00";
+const url = "https://mocki.io/v1/d8444d45-bf2c-4980-9a81-6d2bbd02dd6e";
 
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
@@ -34,11 +34,12 @@ function makeTable(dataSet) {
   const table = document.createElement("table");
   table.classList.add("table");
 
-  const headerData = [
-    { ID: "", id: "ID", name: "NAME", gender: "GENDER", age: "AGE" },
-  ];
+  let headerData = [];
+  headerData.push(dataSet[0]);
+
+  const slicedDataSet = dataSet.slice(1);
   makeRow("thead", "th", headerData);
-  makeRow("tbody", "td", dataSet);
+  makeRow("tbody", "td", slicedDataSet);
 
   document
     .getElementById("js-div")
