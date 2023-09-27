@@ -5,7 +5,6 @@ import { displayInfo } from "../modules/displayInfo.js";
 // const url = "https://mocki.io/v1/d8444d45-bf2c-4980-9a81-6d2bbd02dd6e";
 const url = "https://mocki.io/v1/55433c48-118c-4b6d-bd79-6db5e34ceed9";
 
-
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
   errorMessage.textContent = `${response.status}:${response.statusText}`;
@@ -44,7 +43,7 @@ function makeTable(dataSet) {
   makeRow("tbody", "td", slicedDataSet);
 
   document
-    .getElementById("js-div")
+    .getElementById("js-contents-container")
     .appendChild(tableContainer)
     .appendChild(table)
     .appendChild(fragment);
