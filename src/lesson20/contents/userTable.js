@@ -67,7 +67,6 @@ async function fetchData(url) {
       displayInfo("no data");
     }
     return responseData;
-    D;
   } catch (error) {
     displayInfo(error);
   } finally {
