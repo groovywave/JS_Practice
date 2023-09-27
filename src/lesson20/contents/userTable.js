@@ -2,7 +2,9 @@ import { renderCircle } from "../modules/renderCircle.js";
 import { removeCircle } from "../modules/removeCircle.js";
 import { displayInfo } from "../modules/displayInfo.js";
 
-const url = "https://mocki.io/v1/d8444d45-bf2c-4980-9a81-6d2bbd02dd6e";
+// const url = "https://mocki.io/v1/d8444d45-bf2c-4980-9a81-6d2bbd02dd6e";
+const url = "https://mocki.io/v1/55433c48-118c-4b6d-bd79-6db5e34ceed9";
+
 
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
@@ -15,9 +17,9 @@ const fragment = document.createDocumentFragment();
 function makeRow(theadOrTbody, thOrTd, dataSet) {
   const theadOrTbodyTag = document.createElement(theadOrTbody);
 
-  for (const { id, name, gender, age } of dataSet) {
+  for (const { ID, name, gender, age } of dataSet) {
     const row = document.createElement("tr");
-    [id, name, gender, age].forEach((data) => {
+    [ID, name, gender, age].forEach((data) => {
       const thOrTdTag = document.createElement(thOrTd);
       thOrTdTag.textContent = data;
       thOrTdTag.classList.add(thOrTd);
