@@ -80,8 +80,4 @@ async function fetchMakeTable() {
   }
 }
 
-async function init() {
-  await fetchMakeTable();
-}
-
-init();
+fetchMakeTable();
