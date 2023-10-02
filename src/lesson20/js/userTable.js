@@ -33,7 +33,10 @@ function makeTable({ header, body }) {
   const table = document.createElement("table");
   table.classList.add("table");
   makeRow("thead", "th", header);
-  makeRow("tbody", "td", body);
+  const sortedBody = body.sort((a, b) => {
+    return parseInt(a.ID) - parseInt(b.ID);
+  });
+  makeRow("tbody", "td", sortedBody);
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
