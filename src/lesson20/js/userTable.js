@@ -2,7 +2,7 @@ import { renderCircle } from "./modules/renderCircle.js";
 import { removeCircle } from "./modules/removeCircle.js";
 import { displayInfo } from "./modules/displayInfo.js";
 
-const url = "https://mocki.io/v1/55433c48-118c-4b6d-bd79-6db5e34ceed9";
+const url = "https://mocki.io/v1/2c4e2e31-2c89-4b3a-9e13-f09524efd629";
 
 function renderStatus(response) {
   const errorMessage = document.createElement("p");
@@ -14,7 +14,6 @@ const fragment = document.createDocumentFragment();
 
 function makeRow(theadOrTbody, thOrTd, dataSet) {
   const theadOrTbodyTag = document.createElement(theadOrTbody);
-
   for (const { ID, name, gender, age } of dataSet) {
     const row = document.createElement("tr");
     [ID, name, gender, age].forEach((data) => {
@@ -28,19 +27,13 @@ function makeRow(theadOrTbody, thOrTd, dataSet) {
   return fragment;
 }
 
-function makeTable(dataSet) {
+function makeTable({ header, body }) {
   const tableContainer = document.createElement("div");
   tableContainer.classList.add("table-container");
   const table = document.createElement("table");
   table.classList.add("table");
-
-  let headerData = [];
-  headerData.push(dataSet[0]);
-
-  const slicedDataSet = dataSet.slice(1);
-  makeRow("thead", "th", headerData);
-  makeRow("tbody", "td", slicedDataSet);
-
+  makeRow("thead", "th", header);
+  makeRow("tbody", "td", body);
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
@@ -61,11 +54,10 @@ async function fetchData(url) {
       console.error(`${response.status}:${response.statusText}`);
     }
     const jsonResponse = await response.json();
-    const responseData = jsonResponse.data;
-    if (!responseData.length) {
-      displayInfo("no data");
+    if (!jsonResponse.header.length || !jsonResponse.body.length) {
+      displayInfo("Some data are missing");
     }
-    return responseData;
+    return jsonResponse;
   } catch (error) {
     displayInfo(error);
   } finally {
