@@ -14,16 +14,16 @@ const fragment = document.createDocumentFragment();
 
 function makeRow(theadOrTbody, thOrTd, dataSet) {
   const theadOrTbodyTag = document.createElement(theadOrTbody);
-  for (const { id, name, gender, age } of dataSet) {
+  dataSet.forEach((data) => {
     const row = document.createElement("tr");
-    [id, name, gender, age].forEach((data) => {
+    Object.keys(data).forEach((key) => {
       const thOrTdTag = document.createElement(thOrTd);
-      thOrTdTag.textContent = data;
+      thOrTdTag.textContent = data[key];
       thOrTdTag.classList.add(thOrTd);
       row.appendChild(thOrTdTag);
     });
     fragment.appendChild(theadOrTbodyTag).appendChild(row);
-  }
+  });
   return fragment;
 }
 
