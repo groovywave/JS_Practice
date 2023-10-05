@@ -42,18 +42,23 @@ function makeBodyRow(dataSet) {
   return fragment;
 }
 
+function makeHeaderData(dataSet) {
+  let obj = {};
+  for (let key of Object.keys(dataSet.data[0])) {
+    obj[key] = key.toUpperCase();
+  }
+  let headerData = [];
+  headerData.push(obj);
+  return headerData;
+}
+
 function makeTable(dataSet) {
   const tableContainer = document.createElement("div");
   tableContainer.classList.add("table-container");
   const table = document.createElement("table");
   table.classList.add("table");
-  let obj = {};
-  for (let key of Object.keys(dataSet.data[0])) {
-    obj[key] = key.toUpperCase();
-  }
-  let header = [];
-  header.push(obj);
-  makeHeaderRow(header);
+  const headerData = makeHeaderData(dataSet);
+  makeHeaderRow(headerData);
   makeBodyRow(dataSet.data);
   document
     .getElementById("js-contents-container")
