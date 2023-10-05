@@ -12,17 +12,32 @@ function renderStatus(response) {
 
 const fragment = document.createDocumentFragment();
 
-function makeRow(theadOrTbody, thOrTd, dataSet) {
-  const theadOrTbodyTag = document.createElement(theadOrTbody);
+function makeHeaderRow(dataSet) {
+  const theadTag = document.createElement("thead");
   dataSet.forEach((data) => {
     const row = document.createElement("tr");
     Object.keys(data).forEach((key) => {
-      const thOrTdTag = document.createElement(thOrTd);
-      thOrTdTag.textContent = data[key];
-      thOrTdTag.classList.add(thOrTd);
-      row.appendChild(thOrTdTag);
+      const thTag = document.createElement("th");
+      thTag.textContent = data[key];
+      thTag.classList.add("th");
+      row.appendChild(thTag);
     });
-    fragment.appendChild(theadOrTbodyTag).appendChild(row);
+    fragment.appendChild(theadTag).appendChild(row);
+  });
+  return fragment;
+}
+
+function makeBodyRow(dataSet) {
+  const tbodyTag = document.createElement("tbody");
+  dataSet.forEach((data) => {
+    const row = document.createElement("tr");
+    Object.keys(data).forEach((key) => {
+      const tdTag = document.createElement("td");
+      tdTag.textContent = data[key];
+      tdTag.classList.add("td");
+      row.appendChild(tdTag);
+    });
+    fragment.appendChild(tbodyTag).appendChild(row);
   });
   return fragment;
 }
@@ -38,8 +53,8 @@ function makeTable(dataSet) {
   }
   let header = [];
   header.push(obj);
-  makeRow("thead", "th", header);
-  makeRow("tbody", "td", dataSet.data);
+  makeHeaderRow(header);
+  makeBodyRow(dataSet.data);
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
