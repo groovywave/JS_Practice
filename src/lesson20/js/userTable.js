@@ -14,16 +14,14 @@ const fragment = document.createDocumentFragment();
 
 function makeHeaderRow(dataSet) {
   const theadTag = document.createElement("thead");
+  const row = document.createElement("tr");
   dataSet.forEach((data) => {
-    const row = document.createElement("tr");
-    Object.keys(data).forEach((key) => {
       const thTag = document.createElement("th");
-      thTag.textContent = data[key];
+      thTag.textContent = data.toUpperCase();
       thTag.classList.add("th");
       row.appendChild(thTag);
-    });
-    fragment.appendChild(theadTag).appendChild(row);
   });
+  fragment.appendChild(theadTag).appendChild(row);
   return fragment;
 }
 
@@ -42,23 +40,12 @@ function makeBodyRow(dataSet) {
   return fragment;
 }
 
-function makeHeaderData(dataSet) {
-  let obj = {};
-  for (let key of Object.keys(dataSet.data[0])) {
-    obj[key] = key.toUpperCase();
-  }
-  let headerData = [];
-  headerData.push(obj);
-  return headerData;
-}
-
 function makeTable(dataSet) {
   const tableContainer = document.createElement("div");
   tableContainer.classList.add("table-container");
   const table = document.createElement("table");
   table.classList.add("table");
-  const headerData = makeHeaderData(dataSet);
-  makeHeaderRow(headerData);
+  makeHeaderRow(Object.keys(dataSet.data[0]));
   makeBodyRow(dataSet.data);
   document
     .getElementById("js-contents-container")
