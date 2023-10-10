@@ -47,7 +47,10 @@ function makeTable(dataSet) {
   table.classList.add("table");
   const headerData = Object.keys(dataSet.data[0]);
   makeHeaderRow(headerData);
-  makeBodyRow(dataSet.data);
+  const sortedBodyData = dataSet.data.sort((a, b) => {
+    return parseInt(a.id) - parseInt(b.id);
+  });
+  makeBodyRow(sortedBodyData);
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
