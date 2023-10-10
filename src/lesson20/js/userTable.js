@@ -16,10 +16,10 @@ function makeHeaderRow(dataSet) {
   const theadTag = document.createElement("thead");
   const row = document.createElement("tr");
   dataSet.forEach((data) => {
-      const thTag = document.createElement("th");
-      thTag.textContent = data.toUpperCase();
-      thTag.classList.add("th");
-      row.appendChild(thTag);
+    const thTag = document.createElement("th");
+    thTag.textContent = data.toUpperCase();
+    thTag.classList.add("th");
+    row.appendChild(thTag);
   });
   fragment.appendChild(theadTag).appendChild(row);
   return fragment;
@@ -45,7 +45,8 @@ function makeTable(dataSet) {
   tableContainer.classList.add("table-container");
   const table = document.createElement("table");
   table.classList.add("table");
-  makeHeaderRow(Object.keys(dataSet.data[0]));
+  const headerData = Object.keys(dataSet.data[0]);
+  makeHeaderRow(headerData);
   makeBodyRow(dataSet.data);
   document
     .getElementById("js-contents-container")
