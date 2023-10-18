@@ -41,9 +41,9 @@ function makeBodyRow(dataSet) {
 }
 
 function sortById(unSortedData) {
-  const stateIndex = [{ 0: "none" }, { 1: "asc" }, { 2: "desc" }];
+  const stateIndex = ["none", "asc", "desc"];
   let currentStateIndex = stateIndex[0];
-  document.getElementById("sortButton").addEventListener("click", function () {
+  document.getElementById("js-sortButton").addEventListener("click", () => {
     currentStateIndex = (currentStateIndex + 1) % 3; // 状態を次に進める
     const funcs = {
       none: function () {
@@ -60,6 +60,9 @@ function sortById(unSortedData) {
         });
       },
     };
+    document.getElementById("table").innerHTML = "";
+    const sortedData = funcs[stateIndex[currentStateIndex]]();
+    makeBodyRow(sortedData);
   });
 }
 
@@ -67,25 +70,25 @@ function makeSortButton(unSortedData) {
   const idAsHeader = document.querySelector("thead th:first-child");
   const sortButton = document.createElement("img");
   // sortButton.src = "Sort by ID";
-  sortButton.id = "sortById";
+  sortButton.id = "js-sortButton";
   idAsHeader.insertAdjacentElement("afterend", sortButton);
   sortButton.addEventListener("click", sortById(unSortedData));
 }
 
+const tableContainer = document.createElement("div");
+tableContainer.classList.add("table-container");
+const table = document.createElement("table");
+table.classList.add("table");
 function makeTable(dataSet) {
-  const tableContainer = document.createElement("div");
-  tableContainer.classList.add("table-container");
-  const table = document.createElement("table");
-  table.classList.add("table");
   const headerData = Object.keys(dataSet.data[0]);
   makeHeaderRow(headerData);
   makeBodyRow(dataSet.data);
-  makeSortButton(dataSet.data);
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
     .appendChild(table)
     .appendChild(fragment);
+  makeSortButton(dataSet.data);
 }
 
 async function fetchData(url) {
