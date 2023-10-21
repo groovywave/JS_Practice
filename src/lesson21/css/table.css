@@ -1,5 +1,62 @@
-.table-container {
+/* .table-container { */
+/* display: flex; */
+/* justify-content: center;
+  align-items: center;
+  min-height: 100vh; */
+/* } */
+
+/* 
+.table {
+  width: 50%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  display: table;  /* この行は既に存在するので変更する必要はありません */
+/* } */
+*/
+/* 
+.th {
+  border: 1px solid black;
+  background-color: #c2ff00;
+  text-align: left;
+  padding: 8px;
+  display: table-cell;
+}
+
+.td {
+  border: 1px solid black;
+  background-color: #00c7f2;
+  text-align: left;
+  padding: 8px;
+}
+.sort-button {
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  margin-left: 5px; /* テキストとの間隔を開ける */
+/* } */ */
+
+/* 
+.cells-container {
+  /* display: flex; */
+  /* align-items: center;
+  justify-content: center; */
+/* } */ */
+
+/* .row {
   display: flex;
+/
+/* 
+.thead-tag {
+ splay: flex;
+} */
+/* 
+.row,
+.thead-tag {
+  display: table-row;
+} */
+
+
+.table-container {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -11,16 +68,34 @@
   border: 1px solid black;
 }
 
-.th {
+.th,
+.td {
   border: 1px solid black;
-  background-color: #c2ff00;
   text-align: left;
   padding: 8px;
 }
 
+.th {
+  background-color: #c2ff00;
+}
+
 .td {
-  border: 1px solid black;
-  background-color:  #00c7f2;
-  text-align: left;
-  padding: 8px;
+  background-color: #00c7f2;
+}
+
+.sort-button {
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.cells-container {
+  align-items: center;
+  justify-content: center;
+}
+
+.row,
+.thead-tag {
+  display: table-row;
 }

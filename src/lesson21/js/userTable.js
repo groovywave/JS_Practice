@@ -13,12 +13,18 @@ function renderStatus(response) {
 const fragment = document.createDocumentFragment();
 
 function makeHeaderRow(dataSet) {
+  // const fragment = document.createDocumentFragment();
   const theadTag = document.createElement("thead");
+  theadTag.classList.add("thead-tag");
   const row = document.createElement("tr");
+  row.classList.add("row");
   dataSet.forEach((data) => {
     const thTag = document.createElement("th");
     thTag.textContent = data.toUpperCase();
     thTag.classList.add("th");
+    // const spanTag = document.createElement("span"); // 新しく追加
+    // spanTag.textContent = data.toUpperCase();
+    // thTag.appendChild(spanTag); // テキストをspanで囲む
     row.appendChild(thTag);
   });
   fragment.appendChild(theadTag).appendChild(row);
@@ -44,7 +50,7 @@ function sortById(unSortedData) {
   const stateIndex = ["none", "asc", "desc"];
   let currentStateIndex = stateIndex[0];
   document.getElementById("js-sortButton").addEventListener("click", () => {
-    currentStateIndex = (currentStateIndex + 1) % 3; // 状態を次に進める
+    currentStateIndex = (currentStateIndex + 1) % 3;
     const funcs = {
       none: function () {
         return unSortedData;
@@ -67,11 +73,18 @@ function sortById(unSortedData) {
 }
 
 function makeSortButton(unSortedData) {
-  const idAsHeader = document.querySelector("thead th:first-child");
+  const cellsContainer = document.createElement("div");
+  cellsContainer.classList.add("cells-container");
+  const headerTagForId = document.querySelector("thead th:first-child");
+  const textOfHeaderTagForId = headerTagForId.textContent;
+  headerTagForId.textContent = "";
   const sortButton = document.createElement("img");
-  // sortButton.src = "Sort by ID";
+  sortButton.src = "./img/both.svg";
   sortButton.id = "js-sortButton";
-  idAsHeader.insertAdjacentElement("afterend", sortButton);
+  sortButton.classList.add("sort-button");
+  cellsContainer.textContent = textOfHeaderTagForId;
+  cellsContainer.appendChild(sortButton);
+  headerTagForId.appendChild(cellsContainer);
   sortButton.addEventListener("click", sortById(unSortedData));
 }
 
