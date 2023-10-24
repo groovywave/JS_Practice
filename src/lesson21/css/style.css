@@ -4,28 +4,7 @@
   justify-content: center;
 }
 
-.sort-button {
+/* .sort-button {
   height: 24px;
   width: auto;
-}
-
-.sort-button {
-  height: 16px;
-  width: 16px;
-  vertical-align: middle;
-  margin-left: 5px; /* テキストとの間隔を開ける */
-}
-
-.th {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* .row {
-  display: flex;
 } */
-
-.thead-tag {
-  display: flex;
-}
