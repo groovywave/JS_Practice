@@ -15,23 +15,25 @@ let fragment = document.createDocumentFragment();
 function makeHeaderRow(dataSet) {
   const headerData = Object.keys(dataSet[0]);
   const theadTag = document.createElement("thead");
+  theadTag.id = "js-thead";
   theadTag.classList.add("thead-tag");
   const row = document.createElement("tr");
+  row.id = "js-theadRow";
   row.classList.add("row");
   headerData.forEach((data) => {
     const thTag = document.createElement("th");
     thTag.textContent = data.toUpperCase();
-    thTag.classList.add("th");
+    thTag.classList.add("js-th");
     row.appendChild(thTag);
   });
   fragment.appendChild(theadTag).appendChild(row);
   // return fragment;
 }
 
-function makeBodyRow(bodyData) {
+function makeBodyRow(dataSet) {
   const tbodyTag = document.createElement("tbody");
   tbodyTag.id = "js-tbodyTag";
-  bodyData.forEach((data) => {
+  dataSet.forEach((data) => {
     const row = document.createElement("tr");
     Object.keys(data).forEach((key) => {
       const tdTag = document.createElement("td");
@@ -47,10 +49,6 @@ function makeBodyRow(bodyData) {
 let currentStateIndex = 0;
 function sortById(unsortedData) {
   const copiedUnsortedData = [...unsortedData];
-  console.log(
-    "🚀 ~ file: userTable.js:50 ~ sortById ~ copiedUnsortedData:",
-    copiedUnsortedData
-  );
   const state = ["none", "asc", "desc"];
   currentStateIndex = (currentStateIndex + 1) % 3;
   const funcs = {
@@ -75,54 +73,44 @@ function sortById(unsortedData) {
   };
   document.getElementById("js-tbodyTag").remove();
   const currentState = state[currentStateIndex];
-  console.log(
-    "🚀 ~ file: userTable.js:70 ~ sortById ~ currentState:",
-    currentState
-  );
   const sortFunc = funcs[currentState];
   const sortedBodyData = sortFunc(copiedUnsortedData);
-
-  console.log(
-    "🚀 ~ file: userTable.js:70 ~ sortById ~ funcs[currentState]:",
-    funcs[currentState]
-  );
-  console.log(
-    "🚀 ~ file: userTable.js:70 ~ sortById ~ sortedBodyData:",
-    sortedBodyData
-  );
-  fragment = new DocumentFragment();
+  // fragment = new DocumentFragment();
   // fragment = "";
-
-  console.log(
-    "🚀 ~, file: userTable.js:96 ~ sortById ~ table:",
-    fragment.children,
-    fragment.childNodes[0]
-  );
   fragment = makeBodyRow(sortedBodyData);
-  console.log(
-    "🚀 ~ file: userTable.js:94 ~ sortById ~ fragment:",
-    fragment.children,
-    fragment.childNodes[0]
-  );
-  console.log("🚀 ~ file: userTable.js:96 ~ sortById ~ table:", table);
   table.appendChild(fragment);
-  console.log("🚀 ~ file: userTable.js:96 ~ sortById ~ table:", table);
 }
 
-function makeSortButton(unsortedData) {
-  const cellsContainer = document.createElement("div");
-  cellsContainer.classList.add("cells-container");
-  const headerForId = document.querySelector("thead th:first-child");
-  const textInHeaderForId = headerForId.textContent;
-  headerForId.textContent = "";
-  const sortButton = document.createElement("img");
-  sortButton.src = "./img/both.svg";
-  sortButton.id = "js-sortButton";
-  sortButton.classList.add("sort-button");
-  cellsContainer.textContent = textInHeaderForId;
-  cellsContainer.appendChild(sortButton);
-  headerForId.appendChild(cellsContainer);
-  sortButton.addEventListener("click", () => sortById(unsortedData));
+const buttonsContainer = document.createElement("div");
+function makeSortButton() {
+  const buttonsProperty = [
+    {
+      id: "js-defaultButton",
+      state: "default",
+      backgroundImage: "./img/both.svg",
+    },
+    {
+      id: "js-ascendingButton",
+      state: "ascending",
+      backgroundImage: "./img/asc.svg",
+    },
+    {
+      id: "js-descendingButton",
+      state: "descending",
+      backgroundImage: "./img/desc.svg",
+    },
+  ];
+  const sortButtons = [];
+  buttonsProperty.forEach((buttonProperty) => {
+    const sortButton = document.createElement("button");
+    sortButton.id = buttonProperty.id;
+    sortButton.dataset.state = buttonProperty.state;
+    sortButton.style.backgroundImage = buttonProperty.backgroundImage;
+    sortButtons.push(sortButton);
+  });
+  sortButtons.forEach((sortButton) => {
+    buttonsContainer.appendChild(sortButton);
+  });
 }
 
 const tableContainer = document.createElement("div");
@@ -132,20 +120,30 @@ table.id = "js-table";
 table.classList.add("table");
 
 function renderTable() {
-  // const headerData = Object.keys(dataSet.data[0]);
-  // makeHeaderRow(headerData);
-  // makeBodyRow(dataSet.data);
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
     .appendChild(table)
     .appendChild(fragment);
+}
 
+function addSortButton(headerItemName) {
+  const searchedHeaderTag = Array.from(document.querySelectorAll(".js-th"))
+    // .map((th) => {
+    //   return th.textContent;
+    // })
+    .find((thTag) => {
+      return thTag.textContent === headerItemName;
+    });
   console.log(
-    "🚀 ~ file: userTable.js:134 ~ renderTable ~ fragment:",
-    fragment.children,
-    fragment.childNodes[0]
+    "🚀 ~ file: userTable.js:138 ~ addSortButton ~ searchedHeaderTag:",
+    searchedHeaderTag
   );
+  console.log(
+    "🚀 ~ file: userTable.js:139 ~ addSortButton ~ buttonsContainer:",
+    buttonsContainer
+  );
+  searchedHeaderTag.appendChild(buttonsContainer);
 }
 
 async function fetchData(url) {
@@ -176,14 +174,11 @@ async function fetchMakeTable() {
   const responseData = await fetchData(url);
   if (responseData) {
     const rawData = responseData.data;
-    console.log(
-      "🚀 ~ file: userTable.js:148 ~ fetchMakeTable ~ rawData:",
-      rawData
-    );
     makeHeaderRow(rawData);
     makeBodyRow(rawData);
-    renderTable(rawData);
-    makeSortButton(rawData);
+    renderTable();
+    makeSortButton();
+    addSortButton("ID");
   }
 }
 
