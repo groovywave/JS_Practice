@@ -46,65 +46,36 @@ function makeBodyRow(dataSet) {
   return fragment;
 }
 
+const state = ["default", "ascending", "descending"];
 let currentStateIndex = 0;
-function sortById(unsortedData) {
-  const copiedUnsortedData = [...unsortedData];
-  const state = ["default", "ascending", "descending"];
+let currentState = state[currentStateIndex];
+function sortData(rawData) {
+  const copiedRawData = [...rawData];
   currentStateIndex = (currentStateIndex + 1) % state.length;
-  const currentState = state[currentStateIndex];
-
-  document.getElementById("js-tbody").remove();
+  currentState = state[currentStateIndex];
   switch (currentState) {
     case "default":
-      break;
+      return rawData;
     case "ascending":
-      document
-        .querySelector("[data-button-status='desc']")
-        .classList.add("is-active");
-      break;
+      return copiedRawData.sort((a, b) => {
+        return parseInt(a.id) - parseInt(b.id);
+      });
     case "descending":
-      document
-        .querySelector("[data-button-status='desc']")
-        .classList.add("is-active");
-      break;
+      return copiedRawData.sort((a, b) => {
+        return parseInt(b.id) - parseInt(a.id);
+      });
     default:
-      document
-        .querySelector("[data-button-status='default']")
-        .classList.add("is-active");
-      break;
+      return rawData;
   }
-  // };
-  // const funcs = {
-  //   none: function (data) {
-  //     return data;
-  //   },
-  //   asc: function (data) {
-  //     const sortedData = data.sort((a, b) => {
-  //       // return data.sort((a, b) => {
-  //       return parseInt(a.id) - parseInt(b.id);
-  //     });
-  //     console.log("in asc : ", sortedData);
-  //     return sortedData;
-  //   },
-  //   desc: function (data) {
-  //     const sortedData = data.sort((a, b) => {
-  //       // return data.sort((a, b) => {
-  //       return parseInt(b.id) - parseInt(a.id);
-  //     });
-  //     return sortedData;
-  //   },
-  // };
+}
+
+function update(data) {
   document.getElementById("js-tbodyTag").remove();
-  const sortFunc = funcs[currentState];
-  const sortedBodyData = sortFunc(copiedUnsortedData);
-  // fragment = new DocumentFragment();
-  // fragment = "";
-  fragment = makeBodyRow(sortedBodyData);
-  table.appendChild(fragment);
+  renderTable(makeBodyRow(data));
 }
 
 const buttonsContainer = document.createElement("div");
-function makeSortButton() {
+function makeSortButton(rawData) {
   const buttonsProperty = [
     {
       id: "js-defaultButton",
@@ -122,7 +93,7 @@ function makeSortButton() {
       backgroundImage: "./img/desc.svg",
     },
   ];
-  const sortButtons = [];
+  let sortButtons = [];
   buttonsProperty.forEach((buttonProperty) => {
     const sortButton = document.createElement("button");
     sortButton.id = buttonProperty.id;
@@ -134,6 +105,12 @@ function makeSortButton() {
   sortButtons.forEach((sortButton) => {
     buttonsContainer.appendChild(sortButton);
   });
+  buttonsContainer.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) return;
+    e.preventDefault();
+    const sortedData = sortData(rawData);
+    update(sortedData);
+  });
 }
 
 const tableContainer = document.createElement("div");
@@ -142,30 +119,20 @@ const table = document.createElement("table");
 table.id = "js-table";
 table.classList.add("table");
 
-function renderTable(fragment) {
+function renderTable(tableElement) {
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
     .appendChild(table)
-    .appendChild(fragment);
+    .appendChild(tableElement);
 }
 
 function addSortButton(headerItemName) {
-  const searchedHeaderTag = Array.from(document.querySelectorAll(".js-th"))
-    // .map((th) => {
-    //   return th.textContent;
-    // })
-    .find((thTag) => {
-      return thTag.textContent === headerItemName;
-    });
-  console.log(
-    "🚀 ~ file: userTable.js:138 ~ addSortButton ~ searchedHeaderTag:",
-    searchedHeaderTag
-  );
-  console.log(
-    "🚀 ~ file: userTable.js:139 ~ addSortButton ~ buttonsContainer:",
-    buttonsContainer
-  );
+  const searchedHeaderTag = Array.from(
+    document.querySelectorAll(".js-th")
+  ).find((thTag) => {
+    return thTag.textContent === headerItemName;
+  });
   searchedHeaderTag.appendChild(buttonsContainer);
 }
 
@@ -197,11 +164,9 @@ async function fetchMakeTable() {
   const responseData = await fetchData(url);
   if (responseData) {
     const rawData = responseData.data;
-    const headerRow = makeHeaderRow(rawData);
-    const bodyRow = makeBodyRow(rawData);
-    renderTable(headerRow);
-    renderTable(bodyRow);
-    makeSortButton();
+    renderTable(makeHeaderRow(rawData));
+    renderTable(makeBodyRow(rawData));
+    makeSortButton(rawData);
     addSortButton("ID");
   }
 }
