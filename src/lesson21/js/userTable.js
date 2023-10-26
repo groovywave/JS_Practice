@@ -10,9 +10,8 @@ function renderStatus(response) {
   document.body.appendChild(errorMessage);
 }
 
-let fragment = document.createDocumentFragment();
-
 function makeHeaderRow(dataSet) {
+  const fragment = document.createDocumentFragment();
   const headerData = Object.keys(dataSet[0]);
   const theadTag = document.createElement("thead");
   theadTag.id = "js-thead";
@@ -27,10 +26,11 @@ function makeHeaderRow(dataSet) {
     row.appendChild(thTag);
   });
   fragment.appendChild(theadTag).appendChild(row);
-  // return fragment;
+  return fragment;
 }
 
 function makeBodyRow(dataSet) {
+  const fragment = document.createDocumentFragment();
   const tbodyTag = document.createElement("tbody");
   tbodyTag.id = "js-tbodyTag";
   dataSet.forEach((data) => {
@@ -43,36 +43,58 @@ function makeBodyRow(dataSet) {
     });
     fragment.appendChild(tbodyTag).appendChild(row);
   });
-  // return fragment;
+  return fragment;
 }
 
 let currentStateIndex = 0;
 function sortById(unsortedData) {
   const copiedUnsortedData = [...unsortedData];
-  const state = ["none", "asc", "desc"];
-  currentStateIndex = (currentStateIndex + 1) % 3;
-  const funcs = {
-    none: function (data) {
-      return data;
-    },
-    asc: function (data) {
-      const sortedData = data.sort((a, b) => {
-        // return data.sort((a, b) => {
-        return parseInt(a.id) - parseInt(b.id);
-      });
-      console.log("in asc : ", sortedData);
-      return sortedData;
-    },
-    desc: function (data) {
-      const sortedData = data.sort((a, b) => {
-        // return data.sort((a, b) => {
-        return parseInt(b.id) - parseInt(a.id);
-      });
-      return sortedData;
-    },
-  };
-  document.getElementById("js-tbodyTag").remove();
+  const state = ["default", "ascending", "descending"];
+  currentStateIndex = (currentStateIndex + 1) % state.length;
   const currentState = state[currentStateIndex];
+
+  document.getElementById("js-tbody").remove();
+  switch (currentState) {
+    case "default":
+      break;
+    case "ascending":
+      document
+        .querySelector("[data-button-status='desc']")
+        .classList.add("is-active");
+      break;
+    case "descending":
+      document
+        .querySelector("[data-button-status='desc']")
+        .classList.add("is-active");
+      break;
+    default:
+      document
+        .querySelector("[data-button-status='default']")
+        .classList.add("is-active");
+      break;
+  }
+  // };
+  // const funcs = {
+  //   none: function (data) {
+  //     return data;
+  //   },
+  //   asc: function (data) {
+  //     const sortedData = data.sort((a, b) => {
+  //       // return data.sort((a, b) => {
+  //       return parseInt(a.id) - parseInt(b.id);
+  //     });
+  //     console.log("in asc : ", sortedData);
+  //     return sortedData;
+  //   },
+  //   desc: function (data) {
+  //     const sortedData = data.sort((a, b) => {
+  //       // return data.sort((a, b) => {
+  //       return parseInt(b.id) - parseInt(a.id);
+  //     });
+  //     return sortedData;
+  //   },
+  // };
+  document.getElementById("js-tbodyTag").remove();
   const sortFunc = funcs[currentState];
   const sortedBodyData = sortFunc(copiedUnsortedData);
   // fragment = new DocumentFragment();
@@ -104,6 +126,7 @@ function makeSortButton() {
   buttonsProperty.forEach((buttonProperty) => {
     const sortButton = document.createElement("button");
     sortButton.id = buttonProperty.id;
+    sortButton.classList.add("sort-button");
     sortButton.dataset.state = buttonProperty.state;
     sortButton.style.backgroundImage = buttonProperty.backgroundImage;
     sortButtons.push(sortButton);
@@ -119,7 +142,7 @@ const table = document.createElement("table");
 table.id = "js-table";
 table.classList.add("table");
 
-function renderTable() {
+function renderTable(fragment) {
   document
     .getElementById("js-contents-container")
     .appendChild(tableContainer)
@@ -174,9 +197,10 @@ async function fetchMakeTable() {
   const responseData = await fetchData(url);
   if (responseData) {
     const rawData = responseData.data;
-    makeHeaderRow(rawData);
-    makeBodyRow(rawData);
-    renderTable();
+    const headerRow = makeHeaderRow(rawData);
+    const bodyRow = makeBodyRow(rawData);
+    renderTable(headerRow);
+    renderTable(bodyRow);
     makeSortButton();
     addSortButton("ID");
   }
