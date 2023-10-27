@@ -55,6 +55,7 @@ function changeState() {
 }
 
 function sortData(rawData) {
+  console.log("🚀 ~ file: userTable.js:58 ~ sortData ~ rawData:", rawData);
   const copiedRawData = [...rawData];
   switch (currentState) {
     case "default":
@@ -117,9 +118,15 @@ function makeSortButton(rawData) {
   sortButtons.forEach((sortButton) => {
     buttonsContainer.appendChild(sortButton);
   });
+}
+
+function addCurrentClassOnButton() {
   document
-    .querySelector(`div[data-state=${currentState}]`)
+    .querySelector(`button[data-state="${currentState}"]`)
     .classList.add("current-button");
+}
+
+function addClickEventOnButton(rawData) {
   buttonsContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
     e.preventDefault();
@@ -187,6 +194,8 @@ async function fetchMakeTable() {
     renderTable(makeBodyRow(rawData));
     makeSortButton(rawData);
     addSortButton("ID");
+    addCurrentClassOnButton(rawData);
+    addClickEventOnButton();
   }
 }
 
