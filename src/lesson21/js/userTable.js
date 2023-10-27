@@ -22,7 +22,7 @@ function makeHeaderRow(dataSet) {
   headerData.forEach((data) => {
     const thTag = document.createElement("th");
     thTag.textContent = data.toUpperCase();
-    thTag.classList.add("js-th");
+    thTag.classList.add("js-th", "th");
     row.appendChild(thTag);
   });
   fragment.appendChild(theadTag).appendChild(row);
@@ -55,7 +55,6 @@ function changeState() {
 }
 
 function sortData(rawData) {
-  console.log("🚀 ~ file: userTable.js:58 ~ sortData ~ rawData:", rawData);
   const copiedRawData = [...rawData];
   switch (currentState) {
     case "default":
@@ -80,14 +79,15 @@ function updateBody(data) {
 
 function updateButtons() {
   document
-    .getElementsByClassName(".current-button")[0]
-    .classList.remove(".current-button");
+    .getElementsByClassName("current-button")[0]
+    .classList.remove("current-button");
   document
-    .querySelector(`button[data-state=${currentState}]`)
+    .querySelector(`button[data-state="${currentState}"]`)
     .classList.add("current-button");
 }
 
 const buttonsContainer = document.createElement("div");
+buttonsContainer.classList.add("buttons-container");
 function makeSortButton(rawData) {
   const buttonsProperty = [
     {
@@ -120,11 +120,11 @@ function makeSortButton(rawData) {
   });
 }
 
-function addCurrentClassOnButton() {
-  document
-    .querySelector(`button[data-state="${currentState}"]`)
-    .classList.add("current-button");
-}
+// function addCurrentClassOnButton() {
+//   document
+//     .querySelector(`button[data-state="${currentState}"]`)
+//     .classList.add("current-button");
+// }
 
 function addClickEventOnButton(rawData) {
   buttonsContainer.addEventListener("click", (e) => {
@@ -160,6 +160,7 @@ function addSortButton(headerItemName) {
     return thTag.textContent === headerItemName;
   });
   searchedHeaderTag.appendChild(buttonsContainer);
+  searchedHeaderTag.classList.add("has-button");
 }
 
 async function fetchData(url) {
@@ -194,8 +195,9 @@ async function fetchMakeTable() {
     renderTable(makeBodyRow(rawData));
     makeSortButton(rawData);
     addSortButton("ID");
-    addCurrentClassOnButton(rawData);
-    addClickEventOnButton();
+    // addCurrentClassOnButton(rawData);
+    addClickEventOnButton(rawData);
+    updateButtons();
   }
 }
 
