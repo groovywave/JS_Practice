@@ -49,10 +49,13 @@ function makeBodyRow(dataSet) {
 const state = ["default", "ascending", "descending"];
 let currentStateIndex = 0;
 let currentState = state[currentStateIndex];
-function sortData(rawData) {
-  const copiedRawData = [...rawData];
+function changeState() {
   currentStateIndex = (currentStateIndex + 1) % state.length;
   currentState = state[currentStateIndex];
+}
+
+function sortData(rawData) {
+  const copiedRawData = [...rawData];
   switch (currentState) {
     case "default":
       return rawData;
@@ -69,9 +72,18 @@ function sortData(rawData) {
   }
 }
 
-function update(data) {
+function updateBody(data) {
   document.getElementById("js-tbodyTag").remove();
   renderTable(makeBodyRow(data));
+}
+
+function updateButtons() {
+  document
+    .getElementsByClassName(".current-button")[0]
+    .classList.remove(".current-button");
+  document
+    .querySelector(`button[data-state=${currentState}]`)
+    .classList.add("current-button");
 }
 
 const buttonsContainer = document.createElement("div");
@@ -105,12 +117,19 @@ function makeSortButton(rawData) {
   sortButtons.forEach((sortButton) => {
     buttonsContainer.appendChild(sortButton);
   });
+  document
+    .querySelector(`div[data-state=${currentState}]`)
+    .classList.add("current-button");
   buttonsContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
     e.preventDefault();
-    const sortedData = sortData(rawData);
-    update(sortedData);
+    changeState();
+    updateBody(sortData(rawData));
+    updateButtons();
   });
+  document
+    .querySelector(`button[data-state=${currentState}]`)
+    .classList.add("current-button");
 }
 
 const tableContainer = document.createElement("div");
