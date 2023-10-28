@@ -78,12 +78,15 @@ function updateBody(data) {
 }
 
 function updateButtons() {
+  if (document.getElementsByClassName("current-button")[0]) {
+    document
+      .getElementsByClassName("current-button")[0]
+      .classList.remove("current-button");
+  }
   document
-    .getElementsByClassName("current-button")[0]
-    .classList.remove("current-button");
-  document
-    .querySelector(`button[data-state="${currentState}"]`)
+    .getElementById(`js-${currentState}Button`)
     .classList.add("current-button");
+  console.log(document.getElementById(`js-${currentState}Button`));
 }
 
 const buttonsContainer = document.createElement("div");
@@ -120,17 +123,13 @@ function makeSortButton(defaultData) {
   });
 }
 
-function addClickEventOnButton(defaultData) {
+function addClickEventOnButtonsContainer(defaultData) {
   buttonsContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
-    e.preventDefault();
     changeState();
     updateBody(sortData(defaultData));
     updateButtons();
   });
-  document
-    .querySelector(`button[data-state=${currentState}]`)
-    .classList.add("current-button");
 }
 
 const tableContainer = document.createElement("div");
@@ -189,7 +188,7 @@ async function fetchMakeTable() {
     renderTable(makeBodyRow(defaultData));
     makeSortButton(defaultData);
     addSortButton("ID");
-    addClickEventOnButton(defaultData);
+    addClickEventOnButtonsContainer(defaultData);
     updateButtons();
   }
 }
