@@ -54,21 +54,21 @@ function changeState() {
   currentState = state[currentStateIndex];
 }
 
-function sortData(rawData) {
-  const copiedRawData = [...rawData];
+function sortData(defaultData) {
+  const copiedData = [...defaultData];
   switch (currentState) {
     case "default":
-      return rawData;
+      return defaultData;
     case "ascending":
-      return copiedRawData.sort((a, b) => {
+      return copiedData.sort((a, b) => {
         return parseInt(a.id) - parseInt(b.id);
       });
     case "descending":
-      return copiedRawData.sort((a, b) => {
+      return copiedData.sort((a, b) => {
         return parseInt(b.id) - parseInt(a.id);
       });
     default:
-      return rawData;
+      return defaultDat;
   }
 }
 
@@ -88,7 +88,7 @@ function updateButtons() {
 
 const buttonsContainer = document.createElement("div");
 buttonsContainer.classList.add("buttons-container");
-function makeSortButton(rawData) {
+function makeSortButton(defaultData) {
   const buttonsProperty = [
     {
       id: "js-defaultButton",
@@ -126,12 +126,12 @@ function makeSortButton(rawData) {
 //     .classList.add("current-button");
 // }
 
-function addClickEventOnButton(rawData) {
+function addClickEventOnButton(defaultData) {
   buttonsContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
     e.preventDefault();
     changeState();
-    updateBody(sortData(rawData));
+    updateBody(sortData(defaultData));
     updateButtons();
   });
   document
@@ -190,13 +190,13 @@ async function fetchData(url) {
 async function fetchMakeTable() {
   const responseData = await fetchData(url);
   if (responseData) {
-    const rawData = responseData.data;
-    renderTable(makeHeaderRow(rawData));
-    renderTable(makeBodyRow(rawData));
-    makeSortButton(rawData);
+    const defaultData = responseData.data;
+    renderTable(makeHeaderRow(defaultData));
+    renderTable(makeBodyRow(defaultData));
+    makeSortButton(defaultData);
     addSortButton("ID");
-    // addCurrentClassOnButton(rawData);
-    addClickEventOnButton(rawData);
+    // addCurrentClassOnButton(defaultData);
+    addClickEventOnButton(defaultData);
     updateButtons();
   }
 }
