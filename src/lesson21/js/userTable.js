@@ -86,7 +86,6 @@ function updateButtons() {
   document
     .getElementById(`js-${currentState}Button`)
     .classList.add("current-button");
-  console.log(document.getElementById(`js-${currentState}Button`));
 }
 
 const buttonsContainer = document.createElement("div");
