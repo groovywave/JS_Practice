@@ -68,7 +68,7 @@ function sortData(defaultData) {
         return parseInt(b.id) - parseInt(a.id);
       });
     default:
-      return defaultDat;
+      return defaultData;
   }
 }
 
@@ -119,12 +119,6 @@ function makeSortButton(defaultData) {
     buttonsContainer.appendChild(sortButton);
   });
 }
-
-// function addCurrentClassOnButton() {
-//   document
-//     .querySelector(`button[data-state="${currentState}"]`)
-//     .classList.add("current-button");
-// }
 
 function addClickEventOnButton(defaultData) {
   buttonsContainer.addEventListener("click", (e) => {
@@ -195,7 +189,6 @@ async function fetchMakeTable() {
     renderTable(makeBodyRow(defaultData));
     makeSortButton(defaultData);
     addSortButton("ID");
-    // addCurrentClassOnButton(defaultData);
     addClickEventOnButton(defaultData);
     updateButtons();
   }
