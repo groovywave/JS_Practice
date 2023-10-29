@@ -114,7 +114,7 @@ function makeSortButton(defaultData) {
     sortButton.id = buttonProperty.id;
     sortButton.classList.add("sort-button");
     sortButton.dataset.state = buttonProperty.state;
-    sortButton.style.backgroundImage = buttonProperty.backgroundImage;
+    sortButton.style.background = `url(${buttonProperty.backgroundImage}) center/contain no-repeat`;
     sortButtons.push(sortButton);
   });
   sortButtons.forEach((sortButton) => {
