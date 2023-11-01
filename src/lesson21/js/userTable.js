@@ -95,19 +95,16 @@ function makeSortButton() {
     {
       id: "js-defaultButton",
       state: "default",
-      // backgroundImage: "./img/both.svg",
       backgroundImage: "/both.svg",
     },
     {
       id: "js-ascendingButton",
       state: "ascending",
-      // backgroundImage: "./img/asc.svg",
       backgroundImage: "/asc.svg",
     },
     {
       id: "js-descendingButton",
       state: "descending",
-      // backgroundImage: "./img/desc.svg",
       backgroundImage: "/desc.svg",
     },
   ];
