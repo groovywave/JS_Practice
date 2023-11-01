@@ -108,16 +108,12 @@ function makeSortButton() {
       backgroundImage: "/desc.svg",
     },
   ];
-  let sortButtons = [];
   buttonsProperty.forEach((buttonProperty) => {
     const sortButton = document.createElement("button");
     sortButton.id = buttonProperty.id;
     sortButton.classList.add("sort-button");
     sortButton.dataset.state = buttonProperty.state;
     sortButton.style.background = `url(${buttonProperty.backgroundImage}) center/contain no-repeat`;
-    sortButtons.push(sortButton);
-  });
-  sortButtons.forEach((sortButton) => {
     buttonsContainer.appendChild(sortButton);
   });
 }
