@@ -90,7 +90,7 @@ function updateButtons() {
 
 const buttonsContainer = document.createElement("div");
 buttonsContainer.classList.add("buttons-container");
-function makeSortButton(defaultData) {
+function makeSortButton() {
   const buttonsProperty = [
     {
       id: "js-defaultButton",
