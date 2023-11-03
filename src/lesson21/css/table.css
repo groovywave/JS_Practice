@@ -46,4 +46,6 @@
 
 .sort-button.current-button {
   display: block;
+  background: center center/contain no-repeat;
+  /* background-size: contain no-repeat; */
 }
