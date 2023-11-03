@@ -115,6 +115,7 @@ function makeSortButton() {
     sortButton.dataset.state = buttonProperty.state;
     // sortButton.style.background = `url(${buttonProperty.backgroundImage}) center center/contain no-repeat`;
     // sortButton.style.background = `url(${buttonProperty.backgroundImage}) `;
+    sortButton.style.background = `url(${buttonProperty.backgroundImage}) `;
     buttonsContainer.appendChild(sortButton);
   });
 }
