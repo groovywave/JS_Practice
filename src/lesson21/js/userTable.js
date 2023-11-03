@@ -95,17 +95,17 @@ function makeSortButton() {
     {
       id: "js-defaultButton",
       state: "default",
-      backgroundImage: "/both.svg",
+      backgroundImage: "/assets/img/both.svg",
     },
     {
       id: "js-ascendingButton",
       state: "ascending",
-      backgroundImage: "/asc.svg",
+      backgroundImage: "/assets/img/asc.svg",
     },
     {
       id: "js-descendingButton",
       state: "descending",
-      backgroundImage: "/desc.svg",
+      backgroundImage: "/assets/img/desc.svg",
     },
   ];
   buttonsProperty.forEach((buttonProperty) => {
@@ -113,7 +113,7 @@ function makeSortButton() {
     sortButton.id = buttonProperty.id;
     sortButton.classList.add("sort-button");
     sortButton.dataset.state = buttonProperty.state;
-    sortButton.style.background = `url(${buttonProperty.backgroundImage}) center/contain no-repeat`;
+    sortButton.style.background = `url(${buttonProperty.backgroundImage}) center center/contain no-repeat`;
     buttonsContainer.appendChild(sortButton);
   });
 }
