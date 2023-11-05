@@ -177,7 +177,7 @@ async function fetchMakeTable() {
     const defaultData = responseData.data;
     renderTable(makeHeaderRow(defaultData));
     renderTable(makeBodyRow(defaultData));
-    makeSortButton(defaultData);
+    makeSortButton();
     addSortButton("ID");
     addClickEventOnButtonsContainer(defaultData);
     updateButtons();
