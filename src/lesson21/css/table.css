@@ -20,7 +20,44 @@
 
 .td {
   border: 1px solid black;
-  background-color:  #00c7f2;
+  background-color: #00c7f2;
   text-align: left;
   padding: 8px;
+}
+
+.has-button {
+  display: flex;
+}
+
+.buttons-container {
+  width: 12px;
+  height: auto;
+  margin: 4px auto;
+  position: relative;
+}
+
+.sort-button {
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
+  position: absolute;
+  display: none;
+}
+
+ .sort-button.current-button {
+  display: block;
+}
+
+.sort-button.current-button[data-state="default"] {
+  background: url(/assets/img/both.svg) center/contain no-repeat;
+
+}
+
+.sort-button.current-button[data-state="ascending"] {
+  background: url(/assets/img/asc.svg) center/contain no-repeat;
+
+}
+.sort-button.current-button[data-state="descending"] {
+  background: url(/assets/img/desc.svg) center/contain no-repeat;
+
 }
