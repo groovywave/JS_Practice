@@ -88,34 +88,37 @@ function updateButtons() {
     .classList.add("current-button");
 }
 
-const buttonsContainer = document.createElement("div");
-buttonsContainer.classList.add("buttons-container");
-function makeSortButton() {
+// function makeButtonContainer(buttonContainer) {
+//   const buttonContainer = document.createElement("div");
+//   buttonContainer.classList.add("buttons-container");
+// }
+
+function makeSortButton(buttonContainer) {
   const buttonsProperty = [
     {
-      id: "js-defaultButton",
+      // id: "js-defaultButton",
       state: "default",
     },
     {
-      id: "js-ascendingButton",
+      // id: "js-ascendingButton",
       state: "ascending",
     },
     {
-      id: "js-descendingButton",
+      // id: "js-descendingButton",
       state: "descending",
     },
   ];
   buttonsProperty.forEach((buttonProperty) => {
     const sortButton = document.createElement("button");
-    sortButton.id = buttonProperty.id;
+    // sortButton.id = buttonProperty.id;
     sortButton.classList.add("sort-button");
     sortButton.dataset.state = buttonProperty.state;
-    buttonsContainer.appendChild(sortButton);
+    buttonContainer.appendChild(sortButton);
   });
 }
 
-function addClickEventOnButtonsContainer(defaultData) {
-  buttonsContainer.addEventListener("click", (e) => {
+function addClickEventOnButtonsContainer(buttonContainer, defaultData) {
+  buttonContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
     changeState();
     updateBody(sortData(defaultData));
@@ -137,13 +140,13 @@ function renderTable(tableElement) {
     .appendChild(tableElement);
 }
 
-function addSortButton(headerItemName) {
+function addSortButton(buttonContainer, headerItemName) {
   const searchedHeaderTag = Array.from(
     document.querySelectorAll(".js-th")
   ).find((thTag) => {
     return thTag.textContent === headerItemName;
   });
-  searchedHeaderTag.appendChild(buttonsContainer);
+  searchedHeaderTag.appendChild(buttonContainer);
   searchedHeaderTag.classList.add("has-button");
 }
 
@@ -171,16 +174,28 @@ async function fetchData(url) {
   }
 }
 
+function makeAddSortButton(buttonContainer, headerName, defaultData) {
+  makeSortButton(buttonContainer);
+  addSortButton(buttonContainer, headerName);
+  addClickEventOnButtonsContainer(buttonContainer, defaultData);
+  updateButtons(buttonContainer);
+}
+
 async function fetchMakeTable() {
   const responseData = await fetchData(url);
   if (responseData) {
     const defaultData = responseData.data;
     renderTable(makeHeaderRow(defaultData));
     renderTable(makeBodyRow(defaultData));
-    makeSortButton();
-    addSortButton("ID");
-    addClickEventOnButtonsContainer(defaultData);
-    updateButtons();
+    const idSortButtonContainer = document.createElement("div");
+    const ageSortButtonContainer = document.createElement("div");
+    idSortButtonContainer.classList.add("buttons-container");
+    ageSortButtonContainer.classList.add("buttons-container");
+    // makeButtonContainer(idSortButtonContainer);
+    // const ageSortButtonContainer = makeButtonContainer();
+    makeAddSortButton(idSortButtonContainer, "ID", defaultData);
+    makeAddSortButton(ageSortButtonContainer, "AGE", defaultData);
+    // makeAddSortButton(ageSortButtonContainer, "AGE", defaultData);
   }
 }
 
