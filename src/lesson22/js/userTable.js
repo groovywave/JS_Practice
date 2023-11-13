@@ -46,32 +46,49 @@ function makeBodyRow(dataSet) {
   return fragment;
 }
 
-const state = ["default", "ascending", "descending"];
-let currentIdIndex = 0;
-let currentAgeIndex = 0;
-let currentIdState = state[currentIdIndex];
-let currentAgeState = state[currentAgeIndex];
-// function makeCurrentIndex() {
-//   let currentIndex = 0;
-//   return currentIndex;
-// }
-function changeState() {
-  currentStateIndex = (currentStateIndex + 1) % state.length;
-  currentState = state[currentStateIndex];
+function addCurrentState() {
+  const stateSet = ["default", "ascending", "descending"];
+  let currentStateIndex = 0;
+  const currentState = stateSet[currentStateIndex];
 }
 
-function sortData(defaultData) {
+const stateSet = ["default", "ascending", "descending"];
+let currentStateIndex = { ID: 0, AGE: 0 };
+const currentState = {
+  ID: stateSet[currentStateIndex.ID],
+  AGE: stateSet[currentStateIndex.AGE],
+};
+
+function changeState(headerItemName) {
+  let currentStateIndex = document.getElementById(`js-${headerItemName}`)
+    .dataset.currentStateIndex;
+  currentStateIndex = (currentStateIndex + 1) % stateSet.length;
+  document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex =
+    currentStateIndex;
+}
+
+function sortData(headerItemName, defaultData) {
   const copiedData = [...defaultData];
+  const currentState =
+    stateSet[
+      document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex
+    ];
   switch (currentState) {
     case "default":
       return defaultData;
     case "ascending":
       return copiedData.sort((a, b) => {
-        return parseInt(a.id) - parseInt(b.id);
+        return (
+          parseInt(a[headerItemName.toLowerCase()]) -
+          parseInt(b[headerItemName.toLowerCase()])
+        );
       });
     case "descending":
       return copiedData.sort((a, b) => {
-        return parseInt(b.id) - parseInt(a.id);
+        return (
+          parseInt(b[headerItemName.toLowerCase()]) -
+          parseInt(a[headerItemName.toLowerCase()])
+        );
       });
     default:
       return defaultData;
@@ -83,54 +100,40 @@ function updateBody(data) {
   renderTable(makeBodyRow(data));
 }
 
-function updateButtons() {
+function updateButtons(headerItemName) {
   if (document.getElementsByClassName("current-button")[0]) {
     document
       .getElementsByClassName("current-button")[0]
       .classList.remove("current-button");
   }
   document
-    .getElementById(`js-${currentState}Button`)
+    .getElementById(`js-${headerItemName}`)
     .classList.add("current-button");
 }
 
-// function makeButtonContainer(buttonContainer) {
-//   const buttonContainer = document.createElement("div");
-//   buttonContainer.classList.add("buttons-container");
-// }
-
-function makeContainerWithButton() {
+function makeContainerWithButton(headerItemName) {
   const buttonContainer = document.createElement("div");
-  const buttonProperty = [
-    {
-      // id: "js-defaultButton",
-      state: "default",
-    },
-    {
-      // id: "js-ascendingButton",
-      state: "ascending",
-    },
-    {
-      // id: "js-descendingButton",
-      state: "descending",
-    },
-  ];
-  buttonProperty.forEach((buttonProperty) => {
+  buttonContainer.id = `js-${headerItemName}`;
+  buttonContainer.dataset.currentStateIndex = 0;
+  stateSet.forEach((state) => {
     const sortButton = document.createElement("button");
-    // sortButton.id = buttonProperty.id;
     sortButton.classList.add("sort-button");
-    sortButton.dataset.state = buttonProperty.state;
+    sortButton.dataset.state = state;
     buttonContainer.appendChild(sortButton);
   });
   return buttonContainer;
 }
 
-function addClickEventOnButtonContainer(buttonContainer, defaultData) {
+function addClickEventOnButtonContainer(
+  buttonContainer,
+  headerItemName,
+  defaultData
+) {
   buttonContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
-    changeState();
-    updateBody(sortData(defaultData));
-    updateButtons();
+    changeState(headerItemName);
+    updateBody(sortData(headerItemName, defaultData));
+    updateButtons(headerItemName);
   });
 }
 
@@ -148,17 +151,13 @@ function renderTable(tableElement) {
     .appendChild(tableElement);
 }
 
-function addSortButton(buttonContainer, headerItemName) {
-  // function addSortButton(headerItemName) {
-  // const buttonContainer = makeSortButton();
-  // addClickEventOnButtonContainer(buttonContainer, defaultData);
+function addContainerWithButton(buttonContainer, headerItemName) {
   const searchedHeaderTag = Array.from(
     document.querySelectorAll(".js-th")
   ).find((thTag) => {
     return thTag.textContent === headerItemName;
   });
   searchedHeaderTag.appendChild(buttonContainer);
-  // searchedHeaderTag.appendChild(buttonsContainer);
   searchedHeaderTag.classList.add("has-button");
 }
 
@@ -186,16 +185,12 @@ async function fetchData(url) {
   }
 }
 
-function makeAddContainerWithButton(headerName, defaultData) {
-  const buttonContainer = makeContainerWithButton();
-  // addSortButton(buttonContainer, headerName);
-  addSortButton(buttonContainer, headerName);
-  addClickEventOnButtonContainer(buttonContainer, defaultData);
+function makeAddContainerWithButton(headerItemName, defaultData) {
+  const buttonContainer = makeContainerWithButton(headerItemName);
+  addContainerWithButton(buttonContainer, headerItemName);
+  addClickEventOnButtonContainer(buttonContainer, headerItemName, defaultData);
   updateButtons(buttonContainer);
 }
-
-// const idSortButtonContainer = document.createElement("div");
-// const ageSortButtonContainer = document.createElement("div");
 
 async function fetchMakeTable() {
   const responseData = await fetchData(url);
@@ -203,16 +198,8 @@ async function fetchMakeTable() {
     const defaultData = responseData.data;
     renderTable(makeHeaderRow(defaultData));
     renderTable(makeBodyRow(defaultData));
-    // idSortButtonContainer.classList.add("buttons-container");
-    // ageSortButtonContainer.classList.add("buttons-container");
-    // makeButtonContainer(idSortButtonContainer);
-    // const ageSortButtonContainer = makeButtonContainer();
-    // addSortButton("ID", defaultData);
-    // addSortButton("AGE", defaultData);
-    // makeAddSortButton(idSortButtonContainer, "ID", defaultData);
-    // makeAddSortButton(ageSortButtonContainer, "AGE", defaultData);
-    // makeAddSortButton(ageSortButtonContainer, "AGE", defaultData);
-    const idSortButtonContainer = makeAddContainerWithButton();
+    makeAddContainerWithButton("ID", defaultData);
+    makeAddContainerWithButton("AGE", defaultData);
   }
 }
 
