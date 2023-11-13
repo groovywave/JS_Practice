@@ -47,8 +47,14 @@ function makeBodyRow(dataSet) {
 }
 
 const state = ["default", "ascending", "descending"];
-let currentStateIndex = 0;
-let currentState = state[currentStateIndex];
+let currentIdIndex = 0;
+let currentAgeIndex = 0;
+let currentIdState = state[currentIdIndex];
+let currentAgeState = state[currentAgeIndex];
+// function makeCurrentIndex() {
+//   let currentIndex = 0;
+//   return currentIndex;
+// }
 function changeState() {
   currentStateIndex = (currentStateIndex + 1) % state.length;
   currentState = state[currentStateIndex];
@@ -93,8 +99,9 @@ function updateButtons() {
 //   buttonContainer.classList.add("buttons-container");
 // }
 
-function makeSortButton(buttonContainer) {
-  const buttonsProperty = [
+function makeContainerWithButton() {
+  const buttonContainer = document.createElement("div");
+  const buttonProperty = [
     {
       // id: "js-defaultButton",
       state: "default",
@@ -108,16 +115,17 @@ function makeSortButton(buttonContainer) {
       state: "descending",
     },
   ];
-  buttonsProperty.forEach((buttonProperty) => {
+  buttonProperty.forEach((buttonProperty) => {
     const sortButton = document.createElement("button");
     // sortButton.id = buttonProperty.id;
     sortButton.classList.add("sort-button");
     sortButton.dataset.state = buttonProperty.state;
     buttonContainer.appendChild(sortButton);
   });
+  return buttonContainer;
 }
 
-function addClickEventOnButtonsContainer(buttonContainer, defaultData) {
+function addClickEventOnButtonContainer(buttonContainer, defaultData) {
   buttonContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
     changeState();
@@ -141,12 +149,16 @@ function renderTable(tableElement) {
 }
 
 function addSortButton(buttonContainer, headerItemName) {
+  // function addSortButton(headerItemName) {
+  // const buttonContainer = makeSortButton();
+  // addClickEventOnButtonContainer(buttonContainer, defaultData);
   const searchedHeaderTag = Array.from(
     document.querySelectorAll(".js-th")
   ).find((thTag) => {
     return thTag.textContent === headerItemName;
   });
   searchedHeaderTag.appendChild(buttonContainer);
+  // searchedHeaderTag.appendChild(buttonsContainer);
   searchedHeaderTag.classList.add("has-button");
 }
 
@@ -174,12 +186,16 @@ async function fetchData(url) {
   }
 }
 
-function makeAddSortButton(buttonContainer, headerName, defaultData) {
-  makeSortButton(buttonContainer);
+function makeAddContainerWithButton(headerName, defaultData) {
+  const buttonContainer = makeContainerWithButton();
+  // addSortButton(buttonContainer, headerName);
   addSortButton(buttonContainer, headerName);
-  addClickEventOnButtonsContainer(buttonContainer, defaultData);
+  addClickEventOnButtonContainer(buttonContainer, defaultData);
   updateButtons(buttonContainer);
 }
+
+// const idSortButtonContainer = document.createElement("div");
+// const ageSortButtonContainer = document.createElement("div");
 
 async function fetchMakeTable() {
   const responseData = await fetchData(url);
@@ -187,15 +203,16 @@ async function fetchMakeTable() {
     const defaultData = responseData.data;
     renderTable(makeHeaderRow(defaultData));
     renderTable(makeBodyRow(defaultData));
-    const idSortButtonContainer = document.createElement("div");
-    const ageSortButtonContainer = document.createElement("div");
-    idSortButtonContainer.classList.add("buttons-container");
-    ageSortButtonContainer.classList.add("buttons-container");
+    // idSortButtonContainer.classList.add("buttons-container");
+    // ageSortButtonContainer.classList.add("buttons-container");
     // makeButtonContainer(idSortButtonContainer);
     // const ageSortButtonContainer = makeButtonContainer();
-    makeAddSortButton(idSortButtonContainer, "ID", defaultData);
-    makeAddSortButton(ageSortButtonContainer, "AGE", defaultData);
+    // addSortButton("ID", defaultData);
+    // addSortButton("AGE", defaultData);
+    // makeAddSortButton(idSortButtonContainer, "ID", defaultData);
     // makeAddSortButton(ageSortButtonContainer, "AGE", defaultData);
+    // makeAddSortButton(ageSortButtonContainer, "AGE", defaultData);
+    const idSortButtonContainer = makeAddContainerWithButton();
   }
 }
 
