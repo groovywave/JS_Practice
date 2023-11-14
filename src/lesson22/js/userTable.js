@@ -53,26 +53,30 @@ function addCurrentState() {
 }
 
 const stateSet = ["default", "ascending", "descending"];
-let currentStateIndex = { ID: 0, AGE: 0 };
-const currentState = {
-  ID: stateSet[currentStateIndex.ID],
-  AGE: stateSet[currentStateIndex.AGE],
-};
+const headerItemNames = ["ID", "AGE"];
+let currentStateIndexes = [0, 0];
+let currentStateSet = [
+  stateSet[currentStateIndexes[0]],
+  stateSet[currentStateIndexes[1]],
+];
 
 function changeState(headerItemName) {
-  let currentStateIndex = document.getElementById(`js-${headerItemName}`)
-    .dataset.currentStateIndex;
-  currentStateIndex = (currentStateIndex + 1) % stateSet.length;
-  document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex =
-    currentStateIndex;
+  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
+  currentStateIndexes[headerItemNameIndex] =
+    (currentStateIndexes[headerItemNameIndex] + 1) % stateSet.length;
+  // document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex =
+  // currentStateIndex;
 }
 
 function sortData(headerItemName, defaultData) {
+  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
+  const currentState = currentStateSet[headerItemNameIndex];
   const copiedData = [...defaultData];
-  const currentState =
-    stateSet[
-      document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex
-    ];
+  // const currentstate = stateSet[]
+  // const currentState =
+  // stateSet[
+  // document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex
+  // ];
   switch (currentState) {
     case "default":
       return defaultData;
@@ -100,7 +104,7 @@ function updateBody(data) {
   renderTable(makeBodyRow(data));
 }
 
-function updateButtons(headerItemName) {
+function updateButtons(buttonContainer, headerItemName) {
   if (document.getElementsByClassName("current-button")[0]) {
     document
       .getElementsByClassName("current-button")[0]
@@ -186,16 +190,23 @@ async function fetchData(url) {
 }
 
 function makeAddContainerWithButton(headerItemName, defaultData) {
+  // let currentStateIndex = 0;
+  // currentStateIndex.dataset.headerItemName = headerItemName;
   const buttonContainer = makeContainerWithButton(headerItemName);
+  buttonContainer.dataset.headerItemName = headerItemName;
   addContainerWithButton(buttonContainer, headerItemName);
   addClickEventOnButtonContainer(buttonContainer, headerItemName, defaultData);
-  updateButtons(buttonContainer);
+  updateButtons(buttonContainer, headerItemName);
 }
 
 async function fetchMakeTable() {
   const responseData = await fetchData(url);
   if (responseData) {
     const defaultData = responseData.data;
+    console.log(
+      "🚀 ~ file: userTable.js:206 ~ fetchMakeTable ~ defaultData:",
+      defaultData
+    );
     renderTable(makeHeaderRow(defaultData));
     renderTable(makeBodyRow(defaultData));
     makeAddContainerWithButton("ID", defaultData);
