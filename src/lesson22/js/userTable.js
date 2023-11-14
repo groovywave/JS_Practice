@@ -105,25 +105,36 @@ function updateBody(data) {
 }
 
 function updateButtons(buttonContainer, headerItemName) {
-  if (document.getElementsByClassName("current-button")[0]) {
+  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
+  if (
+    document.getElementsByClassName(`js-${headerItemName}-current-button`)[0]
+  ) {
     document
-      .getElementsByClassName("current-button")[0]
+      .getElementsByClassName(`js-${headerItemName}-current-button`)[0]
       .classList.remove("current-button");
   }
   document
-    .getElementById(`js-${headerItemName}`)
-    .classList.add("current-button");
+    .getElementById(
+      `js${headerItemName}${currentStateSet[headerItemNameIndex]}`
+    )
+    .classList.add(`js-${headerItemName}-current-button`);
 }
 
 function makeContainerWithButton(headerItemName) {
+  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
+  const currentState = currentStateSet[headerItemNameIndex];
   const buttonContainer = document.createElement("div");
   buttonContainer.id = `js-${headerItemName}`;
   buttonContainer.dataset.currentStateIndex = 0;
   stateSet.forEach((state) => {
     const sortButton = document.createElement("button");
     sortButton.classList.add("sort-button");
-    sortButton.dataset.state = state;
+    sortButton.classList.add();
+    sortButton.id = `js${headerItemName}${state}`;
     buttonContainer.appendChild(sortButton);
+    if (currentState === state) {
+      sortButton.classList.add(`js-${headerItemName}-current-button`);
+    }
   });
   return buttonContainer;
 }
