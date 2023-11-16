@@ -29,7 +29,7 @@
   display: flex;
 }
 
-.buttons-container {
+.button-container {
   width: 12px;
   height: auto;
   margin: 4px auto;
@@ -44,20 +44,17 @@
   display: none;
 }
 
- .sort-button.current-button {
+.sort-button.current-button {
   display: block;
 }
 
 .sort-button.current-button[data-state="default"] {
   background: url(/assets/img/both.svg) center/contain no-repeat;
-
 }
 
 .sort-button.current-button[data-state="ascending"] {
   background: url(/assets/img/asc.svg) center/contain no-repeat;
-
 }
 .sort-button.current-button[data-state="descending"] {
   background: url(/assets/img/desc.svg) center/contain no-repeat;
-
 }

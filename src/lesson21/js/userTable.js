@@ -91,7 +91,7 @@ function updateButtons() {
 const buttonsContainer = document.createElement("div");
 buttonsContainer.classList.add("buttons-container");
 function makeSortButton() {
-  const buttonsProperty = [
+  const buttonPropertySet = [
     {
       id: "js-defaultButton",
       state: "default",
@@ -105,7 +105,7 @@ function makeSortButton() {
       state: "descending",
     },
   ];
-  buttonsProperty.forEach((buttonProperty) => {
+  buttonPropertySet.forEach((buttonProperty) => {
     const sortButton = document.createElement("button");
     sortButton.id = buttonProperty.id;
     sortButton.classList.add("sort-button");
