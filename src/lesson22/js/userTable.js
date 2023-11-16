@@ -184,7 +184,6 @@ async function fetchData(url) {
 
 function makeAddContainerWithButton(headerItemName, defaultData) {
   const buttonContainer = makeContainerWithButton(headerItemName);
-  // buttonContainer.dataset.headerItemName = headerItemName;
   addContainerWithButton(buttonContainer, headerItemName);
   addClickEventOnButtonContainer(buttonContainer, headerItemName, defaultData);
   updateButtons(buttonContainer, headerItemName);
