@@ -14,11 +14,7 @@ function makeHeaderRow(dataSet) {
   const fragment = document.createDocumentFragment();
   const headerData = Object.keys(dataSet[0]);
   const theadTag = document.createElement("thead");
-  theadTag.id = "js-thead";
-  theadTag.classList.add("thead-tag");
   const row = document.createElement("tr");
-  row.id = "js-theadRow";
-  row.classList.add("row");
   headerData.forEach((data) => {
     const thTag = document.createElement("th");
     thTag.textContent = data.toUpperCase();
@@ -109,8 +105,8 @@ function makeContainerWithButton(headerItemName) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
   const buttonContainer = document.createElement("div");
-  buttonContainer.id = `js-${headerItemName}`;
-  buttonContainer.dataset.currentStateIndex = 0;
+  // buttonContainer.id = `js-${headerItemName}`;
+  // buttonContainer.dataset.currentStateIndex = 0;
   buttonContainer.classList.add("button-container");
   stateSet.forEach((state) => {
     const sortButton = document.createElement("button");
@@ -188,7 +184,7 @@ async function fetchData(url) {
 
 function makeAddContainerWithButton(headerItemName, defaultData) {
   const buttonContainer = makeContainerWithButton(headerItemName);
-  buttonContainer.dataset.headerItemName = headerItemName;
+  // buttonContainer.dataset.headerItemName = headerItemName;
   addContainerWithButton(buttonContainer, headerItemName);
   addClickEventOnButtonContainer(buttonContainer, headerItemName, defaultData);
   updateButtons(buttonContainer, headerItemName);
