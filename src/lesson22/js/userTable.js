@@ -46,12 +46,6 @@ function makeBodyRow(dataSet) {
   return fragment;
 }
 
-function addCurrentState() {
-  const stateSet = ["default", "ascending", "descending"];
-  let currentStateIndex = 0;
-  const currentState = stateSet[currentStateIndex];
-}
-
 const stateSet = ["default", "ascending", "descending"];
 const headerItemNames = ["ID", "AGE"];
 let currentStateIndexes = [0, 0];
@@ -59,14 +53,10 @@ let currentStateSet = [
   stateSet[currentStateIndexes[headerItemNames.indexOf("ID")]],
   stateSet[currentStateIndexes[headerItemNames.indexOf("AGE")]],
 ];
-console.log("🚀 ~ file: userTable.js:62 ~ currentStateSet:", currentStateSet);
-
 function changeState(headerItemName) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   currentStateIndexes[headerItemNameIndex] =
     (currentStateIndexes[headerItemNameIndex] + 1) % stateSet.length;
-  // document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex =
-  // currentStateIndex;
   currentStateSet[headerItemNameIndex] =
     stateSet[currentStateIndexes[headerItemNameIndex]];
 }
@@ -75,11 +65,6 @@ function sortData(headerItemName, defaultData) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
   const copiedData = [...defaultData];
-  // const currentState = stateSet[]
-  // const currentState =
-  // stateSet[
-  // document.getElementById(`js-${headerItemName}`).dataset.currentStateIndex
-  // ];
   switch (currentState) {
     case "default":
       return defaultData;
@@ -111,23 +96,13 @@ function updateButtons(buttonContainer, headerItemName) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
   if (buttonContainer.querySelector(".current-button")) {
-    // if (buttonContainer.getElementByClassName("current-button")[0]) {
     buttonContainer
       .querySelector(".current-button")
-      // .getElementByClassName("current-button")[0]
       .classList.remove("current-button");
   }
   document
     .getElementById(`js-${headerItemName}${currentState}`)
     .classList.add("current-button");
-  // if (button.dataset[dataAttribute] === attributeValue) {
-  // 条件に合致するbuttonにcurrentクラスを付与
-  // button.classList.add("current");
-  // }
-  // .getElementById(
-  // `js${headerItemName}${currentStateSet[headerItemNameIndex]}`
-  // )
-  // .classList.add(`js-${headerItemName}-current-button current-button`);
 }
 
 function makeContainerWithButton(headerItemName) {
@@ -140,12 +115,10 @@ function makeContainerWithButton(headerItemName) {
   stateSet.forEach((state) => {
     const sortButton = document.createElement("button");
     sortButton.classList.add("sort-button");
-    // sortButton.classList.add();
     sortButton.id = `js-${headerItemName}${state}`;
     sortButton.dataset.state = state;
     buttonContainer.appendChild(sortButton);
     if (currentState === state) {
-      // sortButton.classList.add(`js-${headerItemName}-current-button`);
       sortButton.classList.add("current");
     }
   });
@@ -160,10 +133,6 @@ function addClickEventOnButtonContainer(
   buttonContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
     changeState(headerItemName);
-    console.log(
-      "🚀 ~ file: userTable.js:161 ~ buttonContainer.addEventListener ~ sortData(headerItemName, defaultData):",
-      sortData(headerItemName, defaultData)
-    );
     updateBody(sortData(headerItemName, defaultData));
     updateButtons(buttonContainer, headerItemName);
   });
@@ -218,8 +187,6 @@ async function fetchData(url) {
 }
 
 function makeAddContainerWithButton(headerItemName, defaultData) {
-  // let currentStateIndex = 0;
-  // currentStateIndex.dataset.headerItemName = headerItemName;
   const buttonContainer = makeContainerWithButton(headerItemName);
   buttonContainer.dataset.headerItemName = headerItemName;
   addContainerWithButton(buttonContainer, headerItemName);
@@ -231,10 +198,6 @@ async function fetchMakeTable() {
   const responseData = await fetchData(url);
   if (responseData) {
     const defaultData = responseData.data;
-    console.log(
-      "🚀 ~ file: userTable.js:206 ~ fetchMakeTable ~ defaultData:",
-      defaultData
-    );
     renderTable(makeHeaderRow(defaultData));
     renderTable(makeBodyRow(defaultData));
     makeAddContainerWithButton("ID", defaultData);
