@@ -105,8 +105,6 @@ function makeContainerWithButton(headerItemName) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
   const buttonContainer = document.createElement("div");
-  // buttonContainer.id = `js-${headerItemName}`;
-  // buttonContainer.dataset.currentStateIndex = 0;
   buttonContainer.classList.add("button-container");
   stateSet.forEach((state) => {
     const sortButton = document.createElement("button");
@@ -115,7 +113,7 @@ function makeContainerWithButton(headerItemName) {
     sortButton.dataset.state = state;
     buttonContainer.appendChild(sortButton);
     if (currentState === state) {
-      sortButton.classList.add("current");
+      sortButton.classList.add("current-button");
     }
   });
   return buttonContainer;
