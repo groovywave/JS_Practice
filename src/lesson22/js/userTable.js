@@ -91,14 +91,7 @@ function updateBody(data) {
 function updateButtons(buttonContainer, headerItemName) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
-  if (buttonContainer.querySelector(".current-button")) {
-    buttonContainer
-      .querySelector(".current-button")
-      .classList.remove("current-button");
-  }
-  document
-    .getElementById(`js-${headerItemName}${currentState}`)
-    .classList.add("current-button");
+  document.getElementById(`js-${headerItemName}`).dataset.state = currentState;
 }
 
 function makeContainerWithButton(headerItemName) {
@@ -106,16 +99,11 @@ function makeContainerWithButton(headerItemName) {
   const currentState = currentStateSet[headerItemNameIndex];
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
-  stateSet.forEach((state) => {
-    const sortButton = document.createElement("button");
-    sortButton.classList.add("sort-button");
-    sortButton.id = `js-${headerItemName}${state}`;
-    sortButton.dataset.state = state;
-    buttonContainer.appendChild(sortButton);
-    if (currentState === state) {
-      sortButton.classList.add("current-button");
-    }
-  });
+  const sortButton = document.createElement("button");
+  sortButton.classList.add("sort-button");
+  sortButton.id = `js-${headerItemName}`;
+  sortButton.dataset.state = currentState;
+  buttonContainer.appendChild(sortButton);
   return buttonContainer;
 }
 
