@@ -88,7 +88,7 @@ function updateBody(data) {
   renderTable(makeBodyRow(data));
 }
 
-function updateButton(buttonContainer, headerItemName) {
+function updateButton(headerItemName) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
   document.getElementById(`js-${headerItemName}`).dataset.state = currentState;
@@ -116,7 +116,7 @@ function addClickEventOnButtonContainer(
     if (e.target === e.currentTarget) return;
     changeState(headerItemName);
     updateBody(sortData(headerItemName, defaultData));
-    updateButton(buttonContainer, headerItemName);
+    updateButton(headerItemName);
   });
 }
 
