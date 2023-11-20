@@ -88,7 +88,7 @@ function updateBody(data) {
   renderTable(makeBodyRow(data));
 }
 
-function updateButtons(buttonContainer, headerItemName) {
+function updateButton(buttonContainer, headerItemName) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
   document.getElementById(`js-${headerItemName}`).dataset.state = currentState;
@@ -116,7 +116,7 @@ function addClickEventOnButtonContainer(
     if (e.target === e.currentTarget) return;
     changeState(headerItemName);
     updateBody(sortData(headerItemName, defaultData));
-    updateButtons(buttonContainer, headerItemName);
+    updateButton(buttonContainer, headerItemName);
   });
 }
 
@@ -172,7 +172,6 @@ function makeAddContainerWithButton(headerItemName, defaultData) {
   const buttonContainer = makeContainerWithButton(headerItemName);
   addContainerWithButton(buttonContainer, headerItemName);
   addClickEventOnButtonContainer(buttonContainer, headerItemName, defaultData);
-  // updateButtons(buttonContainer, headerItemName);
 }
 
 async function fetchMakeTable() {
