@@ -172,7 +172,7 @@ function makeAddContainerWithButton(headerItemName, defaultData) {
   const buttonContainer = makeContainerWithButton(headerItemName);
   addContainerWithButton(buttonContainer, headerItemName);
   addClickEventOnButtonContainer(buttonContainer, headerItemName, defaultData);
-  updateButtons(buttonContainer, headerItemName);
+  // updateButtons(buttonContainer, headerItemName);
 }
 
 async function fetchMakeTable() {
