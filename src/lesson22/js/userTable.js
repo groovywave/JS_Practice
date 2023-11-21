@@ -55,9 +55,18 @@ function changeState(headerItemName) {
   );
   headerItemNameCurrentStateIndex =
     (headerItemNameCurrentStateIndex + 1) % stateSet[headerItemName].length;
-
-  currentStateSet[headerItemNameIndex] =
-    stateSet[headerItemName][headerItemNameCurrentStateIndex];
+  Object.keys(headerItemNames).forEach((key) => {
+    console.log(parseInt(key));
+    console.log(headerItemNameIndex);
+    if (parseInt(key) === headerItemNameIndex) {
+      currentStateSet[headerItemNameIndex] =
+        stateSet[headerItemName][headerItemNameCurrentStateIndex];
+      console.log(currentStateSet);
+    } else {
+      currentStateSet[key] = "default";
+      console.log(currentStateSet);
+    }
+  });
 }
 
 function sortData(headerItemName, defaultData) {
@@ -91,10 +100,11 @@ function updateBody(data) {
   renderTable(makeBodyRow(data));
 }
 
-function updateButton(headerItemName) {
-  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
-  const currentState = currentStateSet[headerItemNameIndex];
-  document.getElementById(`js-${headerItemName}`).dataset.state = currentState;
+function updateButton() {
+  headerItemNames.forEach((headerItemName, index) => {
+    document.getElementById(`js-${headerItemName}`).dataset.state =
+      currentStateSet[index];
+  });
 }
 
 function makeContainerWithButton(headerItemName) {
