@@ -42,19 +42,22 @@ function makeBodyRow(dataSet) {
   return fragment;
 }
 
-const stateSet = ["default", "ascending", "descending"];
 const headerItemNames = ["ID", "AGE"];
-let currentStateIndexes = [0, 0];
-let currentStateSet = [
-  stateSet[currentStateIndexes[headerItemNames.indexOf("ID")]],
-  stateSet[currentStateIndexes[headerItemNames.indexOf("AGE")]],
-];
+const stateSet = {
+  ID: ["default", "ascending", "descending"],
+  AGE: ["default", "ascending", "descending"],
+};
+let currentStateSet = [stateSet.ID[0], stateSet.AGE[0]];
 function changeState(headerItemName) {
-  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
-  currentStateIndexes[headerItemNameIndex] =
-    (currentStateIndexes[headerItemNameIndex] + 1) % stateSet.length;
+  const headerItemNameIndex = Object.keys(stateSet).indexOf(headerItemName);
+  let headerItemNameCurrentStateIndex = stateSet[headerItemName].indexOf(
+    currentStateSet[headerItemNameIndex]
+  );
+  headerItemNameCurrentStateIndex =
+    (headerItemNameCurrentStateIndex + 1) % stateSet[headerItemName].length;
+
   currentStateSet[headerItemNameIndex] =
-    stateSet[currentStateIndexes[headerItemNameIndex]];
+    stateSet[headerItemName][headerItemNameCurrentStateIndex];
 }
 
 function sortData(headerItemName, defaultData) {
