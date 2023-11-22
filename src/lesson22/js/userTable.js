@@ -73,22 +73,17 @@ function sortData(headerItemName, defaultData) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
   const currentState = currentStateSet[headerItemNameIndex];
   const copiedData = [...defaultData];
+  const key = headerItemName.toLowerCase();
   switch (currentState) {
     case "default":
       return defaultData;
     case "ascending":
       return copiedData.sort((a, b) => {
-        return (
-          parseInt(a[headerItemName.toLowerCase()]) -
-          parseInt(b[headerItemName.toLowerCase()])
-        );
+        return a[key] - b[key];
       });
     case "descending":
       return copiedData.sort((a, b) => {
-        return (
-          parseInt(b[headerItemName.toLowerCase()]) -
-          parseInt(a[headerItemName.toLowerCase()])
-        );
+        return b[key] - a[key];
       });
     default:
       return defaultData;
