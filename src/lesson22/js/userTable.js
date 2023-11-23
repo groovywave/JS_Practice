@@ -63,8 +63,6 @@ function changeState(headerItemName) {
 }
 
 function sortData(headerItemName, defaultData) {
-  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
-  // const currentState = currentStateSet[headerItemNameIndex];
   const currentState = document.getElementById(`js-${headerItemName}`).dataset
     .state;
   const copiedData = [...defaultData];
