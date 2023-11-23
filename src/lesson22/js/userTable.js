@@ -43,35 +43,30 @@ function makeBodyRow(dataSet) {
 }
 
 const headerItemNames = ["ID", "AGE"];
-const stateSet = {
-  ID: ["default", "ascending", "descending"],
-  AGE: ["default", "ascending", "descending"],
-};
-let currentStateSet = [stateSet.ID[0], stateSet.AGE[0]];
+const stateSet = ["default", "ascending", "descending"];
 function changeState(headerItemName) {
-  const headerItemNameIndex = Object.keys(stateSet).indexOf(headerItemName);
-  let headerItemNameCurrentStateIndex = stateSet[headerItemName].indexOf(
-    currentStateSet[headerItemNameIndex]
-  );
-  headerItemNameCurrentStateIndex =
-    (headerItemNameCurrentStateIndex + 1) % stateSet[headerItemName].length;
-  Object.keys(headerItemNames).forEach((key) => {
-    console.log(parseInt(key));
-    console.log(headerItemNameIndex);
-    if (parseInt(key) === headerItemNameIndex) {
-      currentStateSet[headerItemNameIndex] =
-        stateSet[headerItemName][headerItemNameCurrentStateIndex];
-      console.log(currentStateSet);
+  const headerItemNameCurrentState = document.getElementById(
+    `js-${headerItemName}`
+  ).dataset.state;
+  const currentStateSetIndex = stateSet.findIndex((state) => {
+    return state === headerItemNameCurrentState;
+  });
+  headerItemNames.forEach((name) => {
+    if (name === headerItemName) {
+      const changedStateSetIndex = (currentStateSetIndex + 1) % stateSet.length;
+      document.getElementById(`js-${name}`).dataset.state =
+        stateSet[changedStateSetIndex];
     } else {
-      currentStateSet[key] = "default";
-      console.log(currentStateSet);
+      document.getElementById(`js-${name}`).dataset.state = stateSet[0];
     }
   });
 }
 
 function sortData(headerItemName, defaultData) {
   const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
-  const currentState = currentStateSet[headerItemNameIndex];
+  // const currentState = currentStateSet[headerItemNameIndex];
+  const currentState = document.getElementById(`js-${headerItemName}`).dataset
+    .state;
   const copiedData = [...defaultData];
   const key = headerItemName.toLowerCase();
   switch (currentState) {
@@ -95,22 +90,13 @@ function updateBody(data) {
   renderTable(makeBodyRow(data));
 }
 
-function updateButton() {
-  headerItemNames.forEach((headerItemName, index) => {
-    document.getElementById(`js-${headerItemName}`).dataset.state =
-      currentStateSet[index];
-  });
-}
-
 function makeContainerWithButton(headerItemName) {
-  const headerItemNameIndex = headerItemNames.indexOf(headerItemName);
-  const currentState = currentStateSet[headerItemNameIndex];
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
   const sortButton = document.createElement("button");
   sortButton.classList.add("sort-button");
   sortButton.id = `js-${headerItemName}`;
-  sortButton.dataset.state = currentState;
+  sortButton.dataset.state = stateSet[0];
   buttonContainer.appendChild(sortButton);
   return buttonContainer;
 }
@@ -124,7 +110,6 @@ function addClickEventOnButtonContainer(
     if (e.target === e.currentTarget) return;
     changeState(headerItemName);
     updateBody(sortData(headerItemName, defaultData));
-    updateButton(headerItemName);
   });
 }
 
