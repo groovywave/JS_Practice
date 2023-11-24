@@ -69,18 +69,12 @@ function sortData(headerItemName, defaultData, element) {
   switch (currentState) {
     case "default":
       return defaultData;
-    // defaultData;
     case "ascending":
-      // return copiedData.sort((a, b) => {
       return copiedData.sort((a, b) => a[key] - b[key]);
-    // return a[key] - b[key];
-    // a[key] - b[key];
-    // );
     case "descending":
       return copiedData.sort((a, b) => b[key] - a[key]);
     default:
       return defaultData;
-    // defaultData;
   }
 }
 
