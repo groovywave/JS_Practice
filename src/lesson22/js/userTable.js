@@ -44,10 +44,11 @@ function makeBodyRow(dataSet) {
 
 const headerItemNames = ["ID", "AGE"];
 const stateSet = ["default", "ascending", "descending"];
-function changeState(headerItemName) {
-  const headerItemNameCurrentState = document.getElementById(
-    `js-${headerItemName}`
-  ).dataset.state;
+function changeState(headerItemName, element) {
+  // const headerItemNameCurrentState = document.getElementById(
+  //   `js-${headerItemName}`
+  // ).dataset.state;
+  const headerItemNameCurrentState = element.dataset.state;
   const currentStateSetIndex = stateSet.findIndex((state) => {
     return state === headerItemNameCurrentState;
   });
@@ -62,9 +63,9 @@ function changeState(headerItemName) {
   });
 }
 
-function sortData(headerItemName, defaultData) {
-  const currentState = document.getElementById(`js-${headerItemName}`).dataset
-    .state;
+function sortData(headerItemName, defaultData, element) {
+  // const currentState = document.getElementById(`js-${headerItemName}`).dataset
+  const currentState = element.dataset.state;
   const copiedData = [...defaultData];
   const key = headerItemName.toLowerCase();
   switch (currentState) {
@@ -106,8 +107,10 @@ function addClickEventOnButtonContainer(
 ) {
   buttonContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
-    changeState(headerItemName);
-    updateBody(sortData(headerItemName, defaultData));
+    // changeState(headerItemName);
+    // updateBody(sortData(headerItemName, defaultData));
+    changeState(headerItemName, e.target);
+    updateBody(sortData(headerItemName, defaultData, e.target));
   });
 }
 
@@ -171,8 +174,9 @@ async function fetchMakeTable() {
     const defaultData = responseData.data;
     renderTable(makeHeaderRow(defaultData));
     renderTable(makeBodyRow(defaultData));
-    makeAddContainerWithButton("ID", defaultData);
-    makeAddContainerWithButton("AGE", defaultData);
+    headerItemNames.forEach((headerItemName) => {
+      makeAddContainerWithButton(headerItemName, defaultData);
+    });
   }
 }
 
