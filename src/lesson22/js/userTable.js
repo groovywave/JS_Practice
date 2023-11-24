@@ -45,9 +45,6 @@ function makeBodyRow(dataSet) {
 const headerItemNames = ["ID", "AGE"];
 const stateSet = ["default", "ascending", "descending"];
 function changeState(headerItemName, element) {
-  // const headerItemNameCurrentState = document.getElementById(
-  //   `js-${headerItemName}`
-  // ).dataset.state;
   const headerItemNameCurrentState = element.dataset.state;
   const currentStateSetIndex = stateSet.findIndex((state) => {
     return state === headerItemNameCurrentState;
@@ -64,7 +61,6 @@ function changeState(headerItemName, element) {
 }
 
 function sortData(headerItemName, defaultData, element) {
-  // const currentState = document.getElementById(`js-${headerItemName}`).dataset
   const currentState = element.dataset.state;
   const copiedData = [...defaultData];
   const key = headerItemName.toLowerCase();
@@ -107,8 +103,6 @@ function addClickEventOnButtonContainer(
 ) {
   buttonContainer.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) return;
-    // changeState(headerItemName);
-    // updateBody(sortData(headerItemName, defaultData));
     changeState(headerItemName, e.target);
     updateBody(sortData(headerItemName, defaultData, e.target));
   });
