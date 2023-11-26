@@ -43,19 +43,21 @@ function makeBodyRow(dataSet) {
 }
 
 const headerItemNames = ["ID", "AGE"];
-const stateSet = ["default", "ascending", "descending"];
+const stateOrders = ["default", "ascending", "descending"];
+
 function changeState(headerItemName, element) {
   const headerItemNameCurrentState = element.dataset.state;
-  const currentStateSetIndex = stateSet.findIndex((state) => {
+  const currentStateSetIndex = stateOrders.findIndex((state) => {
     return state === headerItemNameCurrentState;
   });
   headerItemNames.forEach((name) => {
     if (name === headerItemName) {
-      const changedStateSetIndex = (currentStateSetIndex + 1) % stateSet.length;
+      const changedStateSetIndex =
+        (currentStateSetIndex + 1) % stateOrders.length;
       document.getElementById(`js-${name}`).dataset.state =
-        stateSet[changedStateSetIndex];
+        stateOrders[changedStateSetIndex];
     } else {
-      document.getElementById(`js-${name}`).dataset.state = stateSet[0];
+      document.getElementById(`js-${name}`).dataset.state = stateOrders[0];
     }
   });
 }
@@ -91,7 +93,7 @@ function makeContainerWithButton(headerItemName) {
   const sortButton = document.createElement("button");
   sortButton.classList.add("sort-button");
   sortButton.id = `js-${headerItemName}`;
-  sortButton.dataset.state = stateSet[0];
+  sortButton.dataset.state = stateOrders[0];
   buttonContainer.appendChild(sortButton);
   return buttonContainer;
 }
