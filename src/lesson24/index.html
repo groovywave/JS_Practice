@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <title>Form Validator</title>
+    <script src="main.js" defer></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen m-0">
+    <div
+      class="container mx-auto bg-white rounded-lg shadow-lg p-8 w-full max-w-md"
+    >
+      <form id="form" class="py-8 px-10">
+        <h2 class="text-center text-lg mb-6">Register With Us</h2>
+        <div class="mb-5 relative">
+          <label for="username" class="text-gray-700 block mb-1"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            class="border-2 border-gray-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700"
+            placeholder="Enter username"
+          />
+          <small class="text-errorColor absolute mb-0 ml-0 block invisible"
+            >Error message</small
+          >
+        </div>
+        <div class="mb-5 relative">
+          <label for="email" class="text-gray-700 block mb-1">Email</label>
+          <input
+            type="text"
+            id="email"
+            class="border-2 border-gray-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700"
+            placeholder="Enter email"
+          />
+          <small class="text-errorColor absolute mb-0 ml-0 block hidden"
+            >Error message</small
+          >
+        </div>
+        <div class="mb-5 relative">
+          <label for="password" class="text-gray-700 block mb-1"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            class="border-2 border-gray-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700"
+            placeholder="Enter password"
+          />
+          <small class="text-errorColor absolute mb-0 ml-0 block hidden"
+            >Error message</small
+          >
+        </div>
+        <div class="mb-6 relative">
+          <label for="password2" class="text-gray-700 block mb-1"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            id="password2"
+            class="border-2 border-gray-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700"
+            placeholder="Enter password again"
+          />
+          <small class="text-errorColor absolute mb-0 ml-0 block hidden"
+            >Error message</small
+          >
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

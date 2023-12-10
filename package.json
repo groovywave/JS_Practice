@@ -5,16 +5,21 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build-vite": "vite build",
+    "build-tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "preview": "vite preview"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "tailwindcss": "^3.3.5",
     "vite": "^4.4.9"
   },
   "dependencies": {
     "glob": "^10.3.5",
     "path": "^0.12.7"
-  }
+  },
+  "keywords": []
 }
