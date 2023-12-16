@@ -84,3 +84,18 @@ form.addEventListener("submit", function (e) {
   checkEmail(email);
   checkPasswordsMatch(password, password2);
 });
+
+const linkToRule = document.getElementById("js-linkToRule");
+const mask = document.getElementById("js-mask");
+const modal = document.getElementById("js-modal");
+linkToRule.addEventListener("click", (e) => {
+  console.log("clicked");
+  e.preventDefault();
+  mask.classList.remove("hidden");
+  modal.classList.remove("hidden");
+});
+
+const closeRule = document.getElementById("closeRule");
+closeRule.addEventListener("click", (e) => {
+  modal.classList.add("hidden");
+});
