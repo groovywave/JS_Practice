@@ -1,4 +1,4 @@
-const form = document.getElementById("form");
+const form = document.getElementById("js-form");
 const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -95,7 +95,90 @@ linkToRule.addEventListener("click", (e) => {
   modal.classList.remove("hidden");
 });
 
-const closeRule = document.getElementById("closeRule");
-closeRule.addEventListener("click", (e) => {
+function closeModal() {
+  mask.classList.add("hidden");
   modal.classList.add("hidden");
+}
+
+const closeButton = document.getElementById("js-closeButton");
+closeButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  closeModal();
 });
+
+const cancelButton = document.getElementById("js-cancelButton");
+cancelButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  closeModal();
+  const agreeCheckBoxes = document.querySelectorAll(
+    '[data-id="js-agreeCheckbox"]'
+  );
+  agreeCheckBoxes.forEach((agreeCheckBox) => {
+    agreeCheckBox.setAttribute("disabled", "disabled");
+    agreeCheckBox.checked = false;
+  });
+});
+
+mask.addEventListener("click", (e) => {
+  e.preventDefault();
+  closeModal();
+});
+
+function tabAccessControl(target) {
+  const focusableElementsSelector =
+    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, [tabindex="0"], [contenteditable]';
+  // const target = document.getElementById("js-modal");
+  // const target = document.body;
+  target.focus();
+  target.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      const focusableElements = [
+        ...target.querySelectorAll(focusableElementsSelector),
+      ];
+      const currentFocusedItemIndex = focusableElements.indexOf(
+        document.activeElement
+      );
+      const nextFocusedItemIndex =
+        (currentFocusedItemIndex + 1) % focusableElements.length;
+      focusableElements[nextFocusedItemIndex].focus();
+    }
+    if (event.key === "Escape") {
+      event.preventDefault();
+      hideModal(target);
+    }
+  });
+}
+
+tabAccessControl(document.getElementById("js-form"));
+// tabAccessControl(document.body);
+document.getElementById("js-userName").focus();
+
+function changeToClickable(entries) {
+  console.log(entries[0]);
+  if (!entries[0].isIntersecting) {
+    return;
+  }
+  const agreeButton = document.getElementById("js-agreeButton");
+  agreeButton.className =
+    "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover-bg-blue-700";
+  agreeButton.disabled = false;
+  const agreeCheckBoxes = document.querySelectorAll(
+    '[data-id="js-agreeCheckbox"]'
+  );
+  agreeCheckBoxes.forEach((agreeCheckBox) => {
+    agreeCheckBox.removeAttribute("disabled");
+    agreeCheckBox.checked = true;
+  });
+  // submitButton.disabled = false;
+}
+
+const options = {
+  // root: document.querySelector('[data-id="modal-inner"]'),
+  root: document.getElementById("js-modal"),
+  threshold: 1,
+};
+
+const observer = new IntersectionObserver(changeToClickable, options);
+// observer.observe(document.querySelector('[data-id="last_text"]'));
+observer.observe(document.getElementById("js-agreeButton"));
