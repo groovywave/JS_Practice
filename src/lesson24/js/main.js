@@ -158,19 +158,21 @@ tabAccessControl(document.getElementById("js-form"));
 // tabAccessControl(document.body);
 document.getElementById("js-userName").focus();
 
+const agreeCheckbox = document.getElementById("js-agreeCheckbox");
+const agreeButton = document.getElementById("js-agreeButton");
+const submitCheckbox = document.getElementById("js-submitCheckbox");
+const submitButton = document.getElementById("js-submitButton");
 function changeToClickable(entries) {
   console.log(entries[0]);
   if (!entries[0].isIntersecting) {
     return;
   }
-  const agreeButton = document.getElementById("js-agreeButton");
   agreeButton.className =
     "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
   agreeButton.disabled = false;
   agreeButton.addEventListener("click", (e) => {
     e.preventDefault();
     closeModal();
-    const submitButton = document.getElementById("js-submitButton");
     submitButton.disabled = false;
     submitButton.className =
       "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
@@ -180,9 +182,32 @@ function changeToClickable(entries) {
   const agreeCheckBoxes = document.querySelectorAll(
     '[data-id="js-agreeCheckbox"]'
   );
-  agreeCheckBoxes.forEach((agreeCheckBox) => {
-    agreeCheckBox.removeAttribute("disabled");
-    agreeCheckBox.checked = true;
+  agreeCheckBoxes.forEach((agreeCheckbox) => {
+    agreeCheckbox.removeAttribute("disabled");
+    agreeCheckbox.checked = true;
+  });
+
+  agreeCheckbox.addEventListener("click", (e) => {
+    if (agreeCheckbox.checked) {
+      agreeButton.setAttribute("disabled", "disabled");
+      // agreeButton.disabled = true;
+    } else {
+      agreeButton.removeAttribute("disabled");
+    }
+  });
+  submitCheckbox.addEventListener("click", (e) => {
+    submitButton.disabled = !submitCheckbox.checked;
+    if (submitCheckbox.checked) {
+      // submitButton.setAttribute("disabled", "disabled");
+      submitButton.className =
+        "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
+      // submitButton.disabled = true;
+    } else {
+      submitButton.className =
+        "w-full bg-gray-300 text-white font-bold rounded px-4 py-2 mb-20";
+      // submitButton.disabled = false;
+      // submitButton.removeAttribute("disabled");
+    }
   });
   // submitButton.disabled = false;
 }
