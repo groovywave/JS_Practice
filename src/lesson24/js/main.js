@@ -136,6 +136,10 @@ function tabAccessControl(target) {
       const focusableElements = [
         ...target.querySelectorAll(focusableElementsSelector),
       ];
+      console.log(
+        "🚀 ~ file: main.js:139 ~ target.addEventListener ~ focusableElements:",
+        focusableElements
+      );
       const currentFocusedItemIndex = focusableElements.indexOf(
         document.activeElement
       );
@@ -161,8 +165,18 @@ function changeToClickable(entries) {
   }
   const agreeButton = document.getElementById("js-agreeButton");
   agreeButton.className =
-    "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover-bg-blue-700";
+    "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
   agreeButton.disabled = false;
+  agreeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeModal();
+    const submitButton = document.getElementById("js-submitButton");
+    submitButton.disabled = false;
+    submitButton.className =
+      "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
+    // submitButton.className =
+    // "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover-bg-blue-700";
+  });
   const agreeCheckBoxes = document.querySelectorAll(
     '[data-id="js-agreeCheckbox"]'
   );
@@ -172,6 +186,11 @@ function changeToClickable(entries) {
   });
   // submitButton.disabled = false;
 }
+
+document.getElementById("js-submitButton").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "register-done.html";
+});
 
 const options = {
   // root: document.querySelector('[data-id="modal-inner"]'),
