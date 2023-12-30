@@ -4,7 +4,6 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 
-// Show input error message
 function showError(input, message) {
   input.className =
     "border-2 border-red-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700";
@@ -14,7 +13,6 @@ function showError(input, message) {
   small.className = "text-errorColor absolute mb-0 ml-0 block";
 }
 
-// Show success outline
 function showSuccess(input) {
   input.className =
     "border-2 border-green-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700";
@@ -23,7 +21,6 @@ function showSuccess(input) {
   small.className = "text-errorColor absolute mb-0 ml-0 block invisible";
 }
 
-// Check email is valid
 function checkEmail(input) {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,7 +31,6 @@ function checkEmail(input) {
   }
 }
 
-// Check required fields
 function checkRequired(inputArr) {
   inputArr.forEach(function (input) {
     if (input.value.trim() === "") {
@@ -45,7 +41,6 @@ function checkRequired(inputArr) {
   });
 }
 
-// Check input length
 function checkLength(input, min, max) {
   if (input.value.length < min) {
     showError(
@@ -62,19 +57,16 @@ function checkLength(input, min, max) {
   }
 }
 
-// Check passwords match
 function checkPasswordsMatch(input1, input2) {
   if (input1.value !== input2.value) {
     showError(input2, "Passwords do not match");
   }
 }
 
-// Get fieldname
 function getFieldName(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
-// Event listeners
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -100,12 +92,6 @@ function closeModal() {
   modal.classList.add("hidden");
 }
 
-const closeButton = document.getElementById("js-closeButton");
-closeButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  closeModal();
-});
-
 const cancelButton = document.getElementById("js-cancelButton");
 cancelButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -117,6 +103,13 @@ cancelButton.addEventListener("click", (e) => {
     agreeCheckBox.setAttribute("disabled", "disabled");
     agreeCheckBox.checked = false;
   });
+  disableSubmitButton();
+});
+
+const closeButton = document.getElementById("js-closeButton");
+closeButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  closeModal();
 });
 
 mask.addEventListener("click", (e) => {
@@ -127,8 +120,6 @@ mask.addEventListener("click", (e) => {
 function tabAccessControl(target) {
   const focusableElementsSelector =
     'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, [tabindex="0"], [contenteditable]';
-  // const target = document.getElementById("js-modal");
-  // const target = document.body;
   target.focus();
   target.addEventListener("keydown", (event) => {
     if (event.key === "Tab") {
@@ -136,10 +127,6 @@ function tabAccessControl(target) {
       const focusableElements = [
         ...target.querySelectorAll(focusableElementsSelector),
       ];
-      console.log(
-        "🚀 ~ file: main.js:139 ~ target.addEventListener ~ focusableElements:",
-        focusableElements
-      );
       const currentFocusedItemIndex = focusableElements.indexOf(
         document.activeElement
       );
@@ -155,74 +142,95 @@ function tabAccessControl(target) {
 }
 
 tabAccessControl(document.getElementById("js-form"));
-// tabAccessControl(document.body);
 document.getElementById("js-userName").focus();
 
-const agreeCheckbox = document.getElementById("js-agreeCheckbox");
 const agreeButton = document.getElementById("js-agreeButton");
-const submitCheckbox = document.getElementById("js-submitCheckbox");
-const submitButton = document.getElementById("js-submitButton");
-function changeToClickable(entries) {
-  console.log(entries[0]);
-  if (!entries[0].isIntersecting) {
-    return;
-  }
+
+function enableAgreeButton() {
   agreeButton.className =
     "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
   agreeButton.disabled = false;
+}
+
+function addClickAgreeToCloseModal() {
   agreeButton.addEventListener("click", (e) => {
     e.preventDefault();
     closeModal();
-    submitButton.disabled = false;
-    submitButton.className =
-      "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
-    // submitButton.className =
-    // "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover-bg-blue-700";
+    enableSubmitButton();
   });
+}
+
+const submitButton = document.getElementById("js-submitButton");
+
+function enableSubmitButton() {
+  submitButton.disabled = false;
+  submitButton.className =
+    "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
+}
+
+function disableSubmitButton() {
+  submitButton.disabled = true;
+  submitButton.className =
+    "w-full bg-gray-300 text-white font-bold py-2 px-4 rounded-lg transition-colors";
+}
+
+function checkboxesToBeChecked() {
   const agreeCheckBoxes = document.querySelectorAll(
     '[data-id="js-agreeCheckbox"]'
   );
   agreeCheckBoxes.forEach((agreeCheckbox) => {
-    agreeCheckbox.removeAttribute("disabled");
+    agreeCheckbox.disabled = false;
     agreeCheckbox.checked = true;
   });
+}
 
-  agreeCheckbox.addEventListener("click", (e) => {
+const agreeCheckbox = document.getElementById("js-agreeCheckbox");
+
+function toggleAgreeCheckbox() {
+  agreeCheckbox.addEventListener("change", (e) => {
+    agreeButton.disabled = !agreeCheckbox.checked;
     if (agreeCheckbox.checked) {
-      agreeButton.setAttribute("disabled", "disabled");
-      // agreeButton.disabled = true;
+      agreeButton.className =
+        "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
     } else {
-      agreeButton.removeAttribute("disabled");
+      agreeButton.className =
+        "bg-gray-300 text-white font-bold rounded px-4 py-2 mb-20";
     }
   });
-  submitCheckbox.addEventListener("click", (e) => {
+}
+
+const submitCheckbox = document.getElementById("js-submitCheckbox");
+function toggleSubmitCheckbox() {
+  submitCheckbox.addEventListener("change", (e) => {
     submitButton.disabled = !submitCheckbox.checked;
     if (submitCheckbox.checked) {
-      // submitButton.setAttribute("disabled", "disabled");
-      submitButton.className =
-        "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
-      // submitButton.disabled = true;
+      enableSubmitButton();
     } else {
-      submitButton.className =
-        "w-full bg-gray-300 text-white font-bold rounded px-4 py-2 mb-20";
-      // submitButton.disabled = false;
-      // submitButton.removeAttribute("disabled");
+      disableSubmitButton();
     }
   });
-  // submitButton.disabled = false;
+}
+
+function changeAgreeToClickable(entries) {
+  if (!entries[0].isIntersecting) {
+    return;
+  }
+  enableAgreeButton();
+  addClickAgreeToCloseModal();
+  checkboxesToBeChecked();
+  toggleAgreeCheckbox();
+  toggleSubmitCheckbox();
 }
 
 document.getElementById("js-submitButton").addEventListener("click", (e) => {
   e.preventDefault();
-  window.location.href = "register-done.html";
+  window.location.href = "registration.html";
 });
 
 const options = {
-  // root: document.querySelector('[data-id="modal-inner"]'),
   root: document.getElementById("js-modal"),
   threshold: 1,
 };
 
-const observer = new IntersectionObserver(changeToClickable, options);
-// observer.observe(document.querySelector('[data-id="last_text"]'));
+const observer = new IntersectionObserver(changeAgreeToClickable, options);
 observer.observe(document.getElementById("js-agreeButton"));
