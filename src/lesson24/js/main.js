@@ -4,84 +4,10 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 
-function showError(input, message) {
-  input.className =
-    "border-2 border-red-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700";
-  const formControl = input.parentElement;
-  const small = formControl.querySelector("small");
-  small.innerText = message;
-  small.className = "text-errorColor absolute mb-0 ml-0 block";
-}
-
-function showSuccess(input) {
-  input.className =
-    "border-2 border-green-200 rounded-lg w-full p-2 focus:outline-none focus:border-gray-700";
-  const formControl = input.parentElement;
-  const small = formControl.querySelector("small");
-  small.className = "text-errorColor absolute mb-0 ml-0 block invisible";
-}
-
-function checkEmail(input) {
-  const re =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (re.test(input.value.trim())) {
-    showSuccess(input);
-  } else {
-    showError(input, "Email is not valid");
-  }
-}
-
-function checkRequired(inputArr) {
-  inputArr.forEach(function (input) {
-    if (input.value.trim() === "") {
-      showError(input, `${getFieldName(input)} is required`);
-    } else {
-      showSuccess(input);
-    }
-  });
-}
-
-function checkLength(input, min, max) {
-  if (input.value.length < min) {
-    showError(
-      input,
-      `${getFieldName(input)} must be at least ${min} characters`
-    );
-  } else if (input.value.length > max) {
-    showError(
-      input,
-      `${getFieldName(input)} must be less than ${max} characters`
-    );
-  } else {
-    showSuccess(input);
-  }
-}
-
-function checkPasswordsMatch(input1, input2) {
-  if (input1.value !== input2.value) {
-    showError(input2, "Passwords do not match");
-  }
-}
-
-function getFieldName(input) {
-  return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  checkRequired([username, email, password, password2]);
-  checkLength(username, 3, 15);
-  checkLength(password, 6, 25);
-  checkEmail(email);
-  checkPasswordsMatch(password, password2);
-});
-
 const linkToRule = document.getElementById("js-linkToRule");
 const mask = document.getElementById("js-mask");
 const modal = document.getElementById("js-modal");
 linkToRule.addEventListener("click", (e) => {
-  console.log("clicked");
   e.preventDefault();
   mask.classList.remove("hidden");
   modal.classList.remove("hidden");
@@ -93,8 +19,7 @@ function closeModal() {
 }
 
 const cancelButton = document.getElementById("js-cancelButton");
-cancelButton.addEventListener("click", (e) => {
-  e.preventDefault();
+cancelButton.addEventListener("click", () => {
   closeModal();
   const agreeCheckBoxes = document.querySelectorAll(
     '[data-id="js-agreeCheckbox"]'
@@ -107,13 +32,11 @@ cancelButton.addEventListener("click", (e) => {
 });
 
 const closeButton = document.getElementById("js-closeButton");
-closeButton.addEventListener("click", (e) => {
-  e.preventDefault();
+closeButton.addEventListener("click", () => {
   closeModal();
 });
 
-mask.addEventListener("click", (e) => {
-  e.preventDefault();
+mask.addEventListener("click", () => {
   closeModal();
 });
 
@@ -145,7 +68,6 @@ tabAccessControl(document.getElementById("js-form"));
 document.getElementById("js-userName").focus();
 
 const agreeButton = document.getElementById("js-agreeButton");
-
 function enableAgreeButton() {
   agreeButton.className =
     "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
@@ -153,15 +75,13 @@ function enableAgreeButton() {
 }
 
 function addClickAgreeToCloseModal() {
-  agreeButton.addEventListener("click", (e) => {
-    e.preventDefault();
+  agreeButton.addEventListener("click", () => {
     closeModal();
     enableSubmitButton();
   });
 }
 
 const submitButton = document.getElementById("js-submitButton");
-
 function enableSubmitButton() {
   submitButton.disabled = false;
   submitButton.className =
@@ -185,9 +105,8 @@ function checkboxesToBeChecked() {
 }
 
 const agreeCheckbox = document.getElementById("js-agreeCheckbox");
-
 function toggleAgreeCheckbox() {
-  agreeCheckbox.addEventListener("change", (e) => {
+  agreeCheckbox.addEventListener("change", () => {
     agreeButton.disabled = !agreeCheckbox.checked;
     if (agreeCheckbox.checked) {
       agreeButton.className =
@@ -222,8 +141,7 @@ function changeAgreeToClickable(entries) {
   toggleSubmitCheckbox();
 }
 
-document.getElementById("js-submitButton").addEventListener("click", (e) => {
-  e.preventDefault();
+document.getElementById("js-submitButton").addEventListener("click", () => {
   window.location.href = "registration.html";
 });
 
