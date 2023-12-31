@@ -141,7 +141,8 @@ function changeAgreeToClickable(entries) {
   toggleSubmitCheckbox();
 }
 
-document.getElementById("js-submitButton").addEventListener("click", () => {
+document.getElementById("js-submitButton").addEventListener("click", (e) => {
+  e.preventDefault();
   window.location.href = "registration.html";
 });
 
