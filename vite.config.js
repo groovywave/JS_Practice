@@ -1,4 +1,6 @@
 import { defineConfig } from "vite";
+import tailwind from "vite-plugin-tailwind";
+
 import { resolve } from "path";
 import { glob } from "glob";
 
@@ -14,10 +16,12 @@ const transformedObject = htmlFiles.reduce((acc, item) => {
 }, {});
 
 export default defineConfig({
+  plugins: [tailwind()],
   root: root,
   publicDir: "../public",
   build: {
-    outDir: "../dist",
+    // outDir: "../dist",
+    outDir: "./dist",
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
