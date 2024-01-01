@@ -45,10 +45,6 @@ closeButton.addEventListener("click", () => {
   closeModal();
 });
 
-mask.addEventListener("click", () => {
-  closeModal();
-});
-
 const agreeButton = document.getElementById("js-agreeButton");
 function enableAgreeButton() {
   agreeButton.disabled = false;
@@ -73,6 +69,16 @@ function disableSubmitButton() {
     "w-full bg-gray-300 text-white font-bold py-2 px-4 rounded-lg transition-colors";
 }
 
+mask.addEventListener("click", () => {
+  closeModal();
+  const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
+  agreeCheckBoxes.forEach((agreeCheckBox) => {
+    agreeCheckBox.disabled = true;
+    agreeCheckBox.checked = false;
+  });
+  disableSubmitButton();
+});
+
 function addClickAgreeToCloseModal() {
   agreeButton.addEventListener("click", () => {
     closeModal();
@@ -82,13 +88,7 @@ function addClickAgreeToCloseModal() {
 
 const cancelButton = document.getElementById("js-cancelButton");
 cancelButton.addEventListener("click", () => {
-  closeModal();
-  const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
-  agreeCheckBoxes.forEach((agreeCheckBox) => {
-    agreeCheckBox.disabled = true;
-    agreeCheckBox.checked = false;
-  });
-  disableSubmitButton();
+  mask.click();
 });
 
 function checkboxesToBeChecked() {
