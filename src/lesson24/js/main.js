@@ -91,9 +91,7 @@ function disableSubmitButton() {
 }
 
 function checkboxesToBeChecked() {
-  const agreeCheckBoxes = document.querySelectorAll(
-    '[data-id="js-agreeCheckbox"]'
-  );
+  const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
   agreeCheckBoxes.forEach((agreeCheckbox) => {
     agreeCheckbox.disabled = false;
     agreeCheckbox.checked = true;
