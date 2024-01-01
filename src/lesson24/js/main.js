@@ -4,42 +4,6 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 
-const linkToRule = document.getElementById("js-linkToRule");
-const mask = document.getElementById("js-mask");
-const modal = document.getElementById("js-modal");
-linkToRule.addEventListener("click", (e) => {
-  e.preventDefault();
-  mask.classList.remove("hidden");
-  modal.classList.remove("hidden");
-});
-
-function closeModal() {
-  mask.classList.add("hidden");
-  modal.classList.add("hidden");
-}
-
-const cancelButton = document.getElementById("js-cancelButton");
-cancelButton.addEventListener("click", () => {
-  closeModal();
-  const agreeCheckBoxes = document.querySelectorAll(
-    '[data-id="js-agreeCheckbox"]'
-  );
-  agreeCheckBoxes.forEach((agreeCheckBox) => {
-    agreeCheckBox.disabled = true;
-    agreeCheckBox.checked = false;
-  });
-  disableSubmitButton();
-});
-
-const closeButton = document.getElementById("js-closeButton");
-closeButton.addEventListener("click", () => {
-  closeModal();
-});
-
-mask.addEventListener("click", () => {
-  closeModal();
-});
-
 function tabAccessControl(target) {
   const focusableElementsSelector =
     'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, [tabindex="0"], [contenteditable]';
@@ -59,15 +23,54 @@ function tabAccessControl(target) {
     }
   });
 }
-
 tabAccessControl(document.getElementById("js-form"));
 document.getElementById("js-userName").focus();
 
+const linkToRule = document.getElementById("js-linkToRule");
+const mask = document.getElementById("js-mask");
+const modal = document.getElementById("js-modal");
+linkToRule.addEventListener("click", (e) => {
+  e.preventDefault();
+  mask.classList.remove("hidden");
+  modal.classList.remove("hidden");
+});
+
+function closeModal() {
+  mask.classList.add("hidden");
+  modal.classList.add("hidden");
+}
+
+const closeButton = document.getElementById("js-closeButton");
+closeButton.addEventListener("click", () => {
+  closeModal();
+});
+
+mask.addEventListener("click", () => {
+  closeModal();
+});
+
 const agreeButton = document.getElementById("js-agreeButton");
 function enableAgreeButton() {
+  agreeButton.disabled = false;
   agreeButton.className =
     "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
-  agreeButton.disabled = false;
+}
+function disableAgreeButton() {
+  agreeButton.disabled = true;
+  agreeButton.className =
+    "bg-gray-300 text-white font-bold rounded px-4 py-2 mb-20";
+}
+
+const submitButton = document.getElementById("js-submitButton");
+function enableSubmitButton() {
+  submitButton.disabled = false;
+  submitButton.className =
+    "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
+}
+function disableSubmitButton() {
+  submitButton.disabled = true;
+  submitButton.className =
+    "w-full bg-gray-300 text-white font-bold py-2 px-4 rounded-lg transition-colors";
 }
 
 function addClickAgreeToCloseModal() {
@@ -77,18 +80,16 @@ function addClickAgreeToCloseModal() {
   });
 }
 
-const submitButton = document.getElementById("js-submitButton");
-function enableSubmitButton() {
-  submitButton.disabled = false;
-  submitButton.className =
-    "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
-}
-
-function disableSubmitButton() {
-  submitButton.disabled = true;
-  submitButton.className =
-    "w-full bg-gray-300 text-white font-bold py-2 px-4 rounded-lg transition-colors";
-}
+const cancelButton = document.getElementById("js-cancelButton");
+cancelButton.addEventListener("click", () => {
+  closeModal();
+  const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
+  agreeCheckBoxes.forEach((agreeCheckBox) => {
+    agreeCheckBox.disabled = true;
+    agreeCheckBox.checked = false;
+  });
+  disableSubmitButton();
+});
 
 function checkboxesToBeChecked() {
   const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
@@ -101,13 +102,10 @@ function checkboxesToBeChecked() {
 const agreeCheckbox = document.getElementById("js-agreeCheckbox");
 function toggleAgreeCheckbox() {
   agreeCheckbox.addEventListener("change", () => {
-    agreeButton.disabled = !agreeCheckbox.checked;
     if (agreeCheckbox.checked) {
-      agreeButton.className =
-        "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
+      enableAgreeButton();
     } else {
-      agreeButton.className =
-        "bg-gray-300 text-white font-bold rounded px-4 py-2 mb-20";
+      disableAgreeButton();
     }
   });
 }
@@ -115,7 +113,6 @@ function toggleAgreeCheckbox() {
 const submitCheckbox = document.getElementById("js-submitCheckbox");
 function toggleSubmitCheckbox() {
   submitCheckbox.addEventListener("change", (e) => {
-    submitButton.disabled = !submitCheckbox.checked;
     if (submitCheckbox.checked) {
       enableSubmitButton();
     } else {
