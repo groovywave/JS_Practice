@@ -138,7 +138,7 @@ submitButton.addEventListener("click", (e) => {
 });
 
 const options = {
-  root: document.getElementById("js-modal"),
+  root: modal,
   threshold: 1,
 };
 
