@@ -112,7 +112,7 @@ function toggleAgreeCheckbox() {
 
 const submitCheckbox = document.getElementById("js-submitCheckbox");
 function toggleSubmitCheckbox() {
-  submitCheckbox.addEventListener("change", (e) => {
+  submitCheckbox.addEventListener("change", () => {
     if (submitCheckbox.checked) {
       enableSubmitButton();
     } else {
