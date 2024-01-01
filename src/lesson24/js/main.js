@@ -57,10 +57,6 @@ function tabAccessControl(target) {
         (currentFocusedItemIndex + 1) % focusableElements.length;
       focusableElements[nextFocusedItemIndex].focus();
     }
-    if (event.key === "Escape") {
-      event.preventDefault();
-      hideModal(target);
-    }
   });
 }
 
