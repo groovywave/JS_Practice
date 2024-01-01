@@ -25,7 +25,7 @@ cancelButton.addEventListener("click", () => {
     '[data-id="js-agreeCheckbox"]'
   );
   agreeCheckBoxes.forEach((agreeCheckBox) => {
-    agreeCheckBox.setAttribute("disabled", "disabled");
+    agreeCheckBox.disabled = true;
     agreeCheckBox.checked = false;
   });
   disableSubmitButton();
