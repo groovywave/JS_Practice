@@ -143,4 +143,4 @@ const options = {
 };
 
 const observer = new IntersectionObserver(changeAgreeToClickable, options);
-observer.observe(document.getElementById("js-agreeButton"));
+observer.observe(agreeButton);
