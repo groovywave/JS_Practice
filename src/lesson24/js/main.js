@@ -48,25 +48,25 @@ closeButton.addEventListener("click", () => {
 const agreeButton = document.getElementById("js-agreeButton");
 function enableAgreeButton() {
   agreeButton.disabled = false;
-  agreeButton.className =
-    "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-700";
+  agreeButton.classList.remove("bg-gray-300");
+  agreeButton.classList.add("bg-blue-300", "hover:bg-blue-700");
 }
 function disableAgreeButton() {
   agreeButton.disabled = true;
-  agreeButton.className =
-    "bg-gray-300 text-white font-bold rounded px-4 py-2 mb-20";
+  agreeButton.classList.remove("bg-blue-300");
+  agreeButton.classList.add("bg-gray-300");
 }
 
 const submitButton = document.getElementById("js-submitButton");
 function enableSubmitButton() {
   submitButton.disabled = false;
-  submitButton.className =
-    "w-full bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors";
+  submitButton.classList.remove("bg-gray-300");
+  submitButton.classList.add("bg-blue-300", "hover:bg-blue-700");
 }
 function disableSubmitButton() {
   submitButton.disabled = true;
-  submitButton.className =
-    "w-full bg-gray-300 text-white font-bold py-2 px-4 rounded-lg transition-colors";
+  submitButton.classList.remove("bg-blue-300", "hover:bg-blue-700");
+  submitButton.classList.add("bg-gray-300");
 }
 
 mask.addEventListener("click", () => {
