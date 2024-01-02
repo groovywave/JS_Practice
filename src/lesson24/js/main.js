@@ -69,13 +69,15 @@ function disableSubmitButton() {
   submitButton.classList.add("bg-gray-300");
 }
 
+const submitCheckbox = document.getElementById("js-submitCheckbox");
+function checkboxNotToBeChecked() {
+  submitCheckbox.disabled = true;
+  submitCheckbox.checked = false;
+}
+
 mask.addEventListener("click", () => {
   closeModal();
-  const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
-  agreeCheckBoxes.forEach((agreeCheckBox) => {
-    agreeCheckBox.disabled = true;
-    agreeCheckBox.checked = false;
-  });
+  checkboxNotToBeChecked();
   disableSubmitButton();
 });
 
@@ -91,25 +93,10 @@ cancelButton.addEventListener("click", () => {
   mask.click();
 });
 
-const submitCheckbox = document.getElementById("js-submitCheckbox");
-function checkboxesToBeChecked() {
-  const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
-  agreeCheckBoxes.forEach((agreeCheckbox) => {
-    agreeCheckbox.disabled = false;
-    agreeCheckbox.checked = true;
-  });
+function checkboxToBeChecked() {
+  submitCheckbox.disabled = false;
+  submitCheckbox.checked = true;
   submitCheckbox.classList.remove("cursor-not-allowed");
-}
-
-const agreeCheckbox = document.getElementById("js-agreeCheckbox");
-function toggleAgreeCheckbox() {
-  agreeCheckbox.addEventListener("change", () => {
-    if (agreeCheckbox.checked) {
-      enableAgreeButton();
-    } else {
-      disableAgreeButton();
-    }
-  });
 }
 
 function toggleSubmitCheckbox() {
@@ -128,8 +115,7 @@ function changeAgreeToClickable(entries) {
   }
   enableAgreeButton();
   addClickAgreeToCloseModal();
-  checkboxesToBeChecked();
-  toggleAgreeCheckbox();
+  checkboxToBeChecked();
   toggleSubmitCheckbox();
 }
 
