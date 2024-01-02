@@ -91,12 +91,14 @@ cancelButton.addEventListener("click", () => {
   mask.click();
 });
 
+const submitCheckbox = document.getElementById("js-submitCheckbox");
 function checkboxesToBeChecked() {
   const agreeCheckBoxes = document.querySelectorAll('[data-id="js-checkbox"]');
   agreeCheckBoxes.forEach((agreeCheckbox) => {
     agreeCheckbox.disabled = false;
     agreeCheckbox.checked = true;
   });
+  submitCheckbox.classList.remove("cursor-not-allowed");
 }
 
 const agreeCheckbox = document.getElementById("js-agreeCheckbox");
@@ -110,7 +112,6 @@ function toggleAgreeCheckbox() {
   });
 }
 
-const submitCheckbox = document.getElementById("js-submitCheckbox");
 function toggleSubmitCheckbox() {
   submitCheckbox.addEventListener("change", () => {
     if (submitCheckbox.checked) {
