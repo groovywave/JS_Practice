@@ -5,8 +5,7 @@ const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 
 function tabAccessControl(target) {
-  const focusableElementsSelector =
-    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, [tabindex="0"], [contenteditable]';
+  const focusableElementsSelector = "a[href], input:not([disabled])";
   target.focus();
   target.addEventListener("keydown", (event) => {
     if (event.key === "Tab") {
