@@ -45,30 +45,9 @@ closeButton.addEventListener("click", () => {
 });
 
 const agreeButton = document.getElementById("js-agreeButton");
-function enableAgreeButton() {
-  agreeButton.disabled = false;
-  agreeButton.classList.remove("bg-gray-300");
-  agreeButton.classList.add("bg-blue-300", "hover:bg-blue-700");
-}
-function disableAgreeButton() {
-  agreeButton.disabled = true;
-  agreeButton.classList.remove("bg-blue-300");
-  agreeButton.classList.add("bg-gray-300");
-}
-
 const submitButton = document.getElementById("js-submitButton");
-function enableSubmitButton() {
-  submitButton.disabled = false;
-  submitButton.classList.remove("bg-gray-300");
-  submitButton.classList.add("bg-blue-300", "hover:bg-blue-700");
-}
-function disableSubmitButton() {
-  submitButton.disabled = true;
-  submitButton.classList.remove("bg-blue-300", "hover:bg-blue-700");
-  submitButton.classList.add("bg-gray-300");
-}
-
 const submitCheckbox = document.getElementById("js-submitCheckbox");
+
 function checkboxNotToBeChecked() {
   submitCheckbox.disabled = true;
   submitCheckbox.checked = false;
@@ -77,20 +56,20 @@ function checkboxNotToBeChecked() {
 mask.addEventListener("click", () => {
   closeModal();
   checkboxNotToBeChecked();
-  disableSubmitButton();
+  submitButton.disabled = true;
 });
-
-function addClickAgreeToCloseModal() {
-  agreeButton.addEventListener("click", () => {
-    closeModal();
-    enableSubmitButton();
-  });
-}
 
 const cancelButton = document.getElementById("js-cancelButton");
 cancelButton.addEventListener("click", () => {
   mask.click();
 });
+
+function addClickAgreeToCloseModal() {
+  agreeButton.addEventListener("click", () => {
+    closeModal();
+    submitButton.disabled = false;
+  });
+}
 
 function checkboxToBeChecked() {
   submitCheckbox.disabled = false;
@@ -101,9 +80,9 @@ function checkboxToBeChecked() {
 function toggleSubmitCheckbox() {
   submitCheckbox.addEventListener("change", () => {
     if (submitCheckbox.checked) {
-      enableSubmitButton();
+      submitButton.disabled = false;
     } else {
-      disableSubmitButton();
+      submitButton.disabled = true;
     }
   });
 }
@@ -112,7 +91,7 @@ function changeAgreeToClickable(entries) {
   if (!entries[0].isIntersecting) {
     return;
   }
-  enableAgreeButton();
+  agreeButton.disabled = false;
   addClickAgreeToCloseModal();
   checkboxToBeChecked();
   toggleSubmitCheckbox();
