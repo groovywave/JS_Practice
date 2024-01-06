@@ -74,7 +74,6 @@ function addClickAgreeToCloseModal() {
 function checkboxToBeChecked() {
   submitCheckbox.disabled = false;
   submitCheckbox.checked = true;
-  submitCheckbox.classList.remove("cursor-not-allowed");
 }
 
 function toggleSubmitCheckbox() {
