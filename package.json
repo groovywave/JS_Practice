@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test-view": "npx playwright codegen http://localhost:3000/lesson24/index.html",
+    "test": "npx playwright test",
+    "test-report": "npx playwright show-report"
   },
   "author": "",
   "license": "ISC",
