@@ -16,35 +16,6 @@ test("test", async ({ page }) => {
     .frameLocator('iframe[title="Preview page"]')
     .getByRole("link", { name: "lesson24" })
     .click();
-  await page.locator("div:nth-child(6) > .mosaic-split-line").click();
-  await page
-    .frameLocator('iframe[title="Preview page"]')
-    .getByPlaceholder("Enter username")
-    .click();
-  await page
-    .frameLocator('iframe[title="Preview page"]')
-    .getByPlaceholder("Enter username")
-    .click();
-  await page
-    .frameLocator('iframe[title="Preview page"]')
-    .getByPlaceholder("Enter username")
-    .click();
-  await page
-    .frameLocator('iframe[title="Preview page"]')
-    .getByPlaceholder("Enter username")
-    .press("Tab");
-  await page
-    .frameLocator('iframe[title="Preview page"]')
-    .getByPlaceholder("Enter email")
-    .press("Tab");
-  await page
-    .frameLocator('iframe[title="Preview page"]')
-    .getByPlaceholder("Enter password", { exact: true })
-    .press("Tab");
-  await page
-    .frameLocator('iframe[title="Preview page"]')
-    .getByPlaceholder("Enter password again")
-    .press("Tab");
   await page
     .frameLocator('iframe[title="Preview page"]')
     .getByRole("link", { name: "利用規約" })
@@ -65,7 +36,6 @@ test("test", async ({ page }) => {
     .getByLabel("利用規約を読み、同意しました。")
     .check();
   await takeScreenshot("checkbox checked");
-
   await page
     .frameLocator('iframe[title="Preview page"]')
     .getByRole("button", { name: "Submit" })
