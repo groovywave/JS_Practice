@@ -18,6 +18,22 @@ test("test", async ({ page }) => {
     .click();
   await page
     .frameLocator('iframe[title="Preview page"]')
+    .getByPlaceholder("Enter username")
+    .press("Tab");
+  await page
+    .frameLocator('iframe[title="Preview page"]')
+    .getByPlaceholder("Enter email")
+    .press("Tab");
+  await page
+    .frameLocator('iframe[title="Preview page"]')
+    .getByPlaceholder("Enter password", { exact: true })
+    .press("Tab");
+  await page
+    .frameLocator('iframe[title="Preview page"]')
+    .getByPlaceholder("Enter password again")
+    .press("Tab");
+  await page
+    .frameLocator('iframe[title="Preview page"]')
     .getByRole("link", { name: "利用規約" })
     .press("Enter");
   await takeScreenshot("click 利用規約");
