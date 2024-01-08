@@ -7,7 +7,8 @@ test("test", async ({ page }) => {
     await page.screenshot({ path: `screenshot/${name}.png` });
   };
 
-  await page.goto("http://127.0.0.1:3000/lesson24/index.html");
+  await page.goto("localhost:3000/lesson24/index.html");
+  // await page.goto("http://127.0.0.1:3000/lesson24/index.html");
   // await page.getByRole("link", { name: "lesson24" }).click();
   await page.getByPlaceholder("Enter username").click();
   await page.getByPlaceholder("Enter username").press("Tab");
