@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="../input.css" rel="stylesheet" />
     <title>Registration Form</title>
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js" type="module"></script>
   </head>
   <body class="bg-gray-100 items-center flex justify-center m-0">
     <div
@@ -81,7 +81,8 @@
             name="checkbox"
             id="js-submitCheckbox"
             data-id="js-checkbox"
-            class="border-0 rounded ml-1 w-4 h-4 cursor-not-allowed"
+            class="border-0 rounded ml-1 w-4 h-4
+            disabled:cursor-not-allowed"
             value="agreement"
             disabled
           />
@@ -96,9 +97,9 @@
           id="js-submitButton"
           type="submit"
           class="w-full  bg-blue-300  text-white font-bold py-2 px-4 rounded-lg transition-colors
-          hover:bg-blue-700
+          hover:bg-blue-400
           disabled:bg-gray-300
-          disabled:hover:bg-none"
+          "
           disabled
         >
           Submit
@@ -113,12 +114,13 @@
       tabindex="-1"
     >
       <div
-        data-id="modal-inner"
+        id="js-modalInner"
         class="relative bg-white rounded-lg shadow overflow-y-auto h-96 p-4 w-full max-w-2xl"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
         aria-describedby="modal-summary"
+        tabindex="0"
       >
         <button
           type="button"
@@ -408,9 +410,9 @@
             data-modal-toggle="popup-modal"
             type="button"
             id="js-agreeButton"
-            class= "bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20
-            hover:bg-blue-700
-            disabled:bg-gray-300"
+            class= "bg-blue-300  text-white font-bold rounded px-4 py-2 mb-20
+            hover:bg-blue-400
+            disabled:bg-gray-300 "
             data-id="js-agreeButton"
             disabled
             data-id="focusable"
@@ -421,7 +423,7 @@
             data-modal-toggle="popup-modal"
             type="button"
             id="js-cancelButton"
-            class="bg-white hover:bg-gray-100 text-black border-2 border-gray-300 hover:border-gray-500 font-bold py-2 px-4 rounded"
+            class="bg-gray-100  text-black  font-bold py-2 px-4 rounded hover:bg-gray-200  "
             data-id="focusable"
           >
             キャンセル

@@ -28,15 +28,30 @@ document.getElementById("js-userName").focus();
 const linkToRule = document.getElementById("js-linkToRule");
 const mask = document.getElementById("js-mask");
 const modal = document.getElementById("js-modal");
-linkToRule.addEventListener("click", (e) => {
-  e.preventDefault();
+const modalInner = document.getElementById("js-modalInner");
+
+function keydownToScrollModal(event) {
+  if (modal.classList.contains("hidden")) return;
+  switch (event.key) {
+    case "ArrowUp":
+      return modalInner.scrollBy(0, -16);
+    case "ArrowDown":
+      return modalInner.scrollBy(0, 16);
+  }
+}
+
+linkToRule.addEventListener("click", (event) => {
+  event.preventDefault();
   mask.classList.remove("hidden");
   modal.classList.remove("hidden");
+  modalInner.focus();
+  modalInner.addEventListener("keydown", keydownToScrollModal);
 });
 
 function closeModal() {
   mask.classList.add("hidden");
   modal.classList.add("hidden");
+  modalInner.removeEventListener("keydown", keydownToScrollModal);
 }
 
 const closeButton = document.getElementById("js-closeButton");
@@ -74,7 +89,6 @@ function addClickAgreeToCloseModal() {
 function checkboxToBeChecked() {
   submitCheckbox.disabled = false;
   submitCheckbox.checked = true;
-  submitCheckbox.classList.remove("cursor-not-allowed");
 }
 
 function toggleSubmitCheckbox() {
