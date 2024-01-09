@@ -2,6 +2,43 @@
 
 import { test, expect } from "@playwright/test";
 
+test("focus on the link ", async ({ page }) => {
+  const takeScreenshot = async (name) => {
+    await page.screenshot({ path: `screenshot/${name}.png` });
+  };
+
+  await page.goto("localhost:3000/");
+  await page.getByRole("link", { name: "lesson24" }).click();
+  const locator = page.locator("#js-linkToRule");
+  await locator.focus();
+  await takeScreenshot("focus on the link ");
+});
+
+test("focus on the link and press Enter", async ({ page }) => {
+  const takeScreenshot = async (name) => {
+    await page.screenshot({ path: `screenshot/${name}.png` });
+  };
+
+  await page.goto("localhost:3000/");
+  await page.getByRole("link", { name: "lesson24" }).click();
+  const locator = page.locator("#js-linkToRule");
+  await locator.focus();
+  await locator.press("Enter");
+  await takeScreenshot("focus on the link and press enter");
+});
+
+test("focus on the link and click the link", async ({ page }) => {
+  const takeScreenshot = async (name) => {
+    await page.screenshot({ path: `screenshot/${name}.png` });
+  };
+
+  await page.goto("localhost:3000/");
+  await page.getByRole("link", { name: "lesson24" }).click();
+  const locator = page.locator("#js-linkToRule");
+  await locator.focus();
+  await locator.click();
+  await takeScreenshot("focus on the link and click the link");
+});
 test("transition to rule page", async ({ page }) => {
   const takeScreenshot = async (name) => {
     await page.screenshot({ path: `screenshot/${name}.png` });
