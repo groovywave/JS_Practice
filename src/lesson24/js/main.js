@@ -52,9 +52,7 @@ function closeModal() {
 }
 
 const closeButton = document.getElementById("js-closeButton");
-closeButton.addEventListener("click", () => {
-  closeModal();
-});
+closeButton.addEventListener("click", closeModal());
 
 const agreeButton = document.getElementById("js-agreeButton");
 const submitButton = document.getElementById("js-submitButton");
@@ -72,9 +70,7 @@ mask.addEventListener("click", () => {
 });
 
 const cancelButton = document.getElementById("js-cancelButton");
-cancelButton.addEventListener("click", () => {
-  mask.click();
-});
+cancelButton.addEventListener("click", mask.click());
 
 function addClickAgreeToCloseModal() {
   agreeButton.addEventListener("click", () => {
