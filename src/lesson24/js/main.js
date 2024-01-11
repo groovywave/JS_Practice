@@ -1,29 +1,26 @@
+import { doc } from "prettier";
+
 const form = document.getElementById("js-form");
 const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
+const focusableElements = [
+  ...form.querySelectorAll("a[href], input:not([disabled])"),
+];
 
-function tabAccessControl(target) {
-  const focusableElementsSelector = "a[href], input:not([disabled])";
-  target.focus();
-  target.addEventListener("keydown", (event) => {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      const focusableElements = [
-        ...target.querySelectorAll(focusableElementsSelector),
-      ];
-      const currentFocusedItemIndex = focusableElements.indexOf(
-        document.activeElement
-      );
-      const nextFocusedItemIndex =
-        (currentFocusedItemIndex + 1) % focusableElements.length;
-      focusableElements[nextFocusedItemIndex].focus();
-    }
-  });
-}
-tabAccessControl(document.getElementById("js-form"));
-document.getElementById("js-userName").focus();
+username.focus();
+//focus on only items in form
+form.addEventListener("keydown", (event) => {
+  if (event.key !== "Tab") return;
+  event.preventDefault();
+  const currentFocusedItemIndex = focusableElements.indexOf(
+    document.activeElement
+  );
+  focusableElements[
+    (currentFocusedItemIndex + 1) % focusableElements.length
+  ].focus();
+});
 
 const linkToRule = document.getElementById("js-linkToRule");
 const mask = document.getElementById("js-mask");
