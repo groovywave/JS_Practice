@@ -32,55 +32,13 @@ test("transition to form page", async ({ page }) => {
   await page.getByPlaceholder("Enter password again").press("Tab");
   await page.getByRole("link", { name: "利用規約" }).press("Enter");
   await takeScreenshot("click ruleButton");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByLabel("利用規約", { exact: true }).press("ArrowDown");
-  await page.getByText("利用規約を読み、同意しました", { exact: true }).click();
+  let target = await page.$$("text=利用規約を読み、同意しました");
+  while (!target.length) {
+    await page.mouse.wheel(0, 10000);
+    await page
+      .getByText("利用規約を読み、同意しました", { exact: true })
+      .click();
+  }
   await takeScreenshot("click agreeButton");
 });
 
