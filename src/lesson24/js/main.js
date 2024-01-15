@@ -15,7 +15,7 @@ form.addEventListener("keydown", (event) => {
   if (event.key !== "Tab") return;
   event.preventDefault();
   const currentFocusedItemIndex = focusableElements.indexOf(
-    document.activeElement
+    document.activeElement,
   );
   focusableElements[
     (currentFocusedItemIndex + 1) % focusableElements.length
@@ -25,15 +25,15 @@ form.addEventListener("keydown", (event) => {
 const linkToRule = document.getElementById("js-linkToRule");
 const mask = document.getElementById("js-mask");
 const modal = document.getElementById("js-modal");
-const modalInner = document.getElementById("js-modalInner");
+const modalBody = document.getElementById("js-modalBody");
 
 function keydownToScrollModal(event) {
   if (modal.classList.contains("hidden")) return;
   switch (event.key) {
     case "ArrowUp":
-      return modalInner.scrollBy(0, -16);
+      return modalBody.scrollBy(0, -16);
     case "ArrowDown":
-      return modalInner.scrollBy(0, 16);
+      return modalBody.scrollBy(0, 16);
   }
 }
 
@@ -41,14 +41,14 @@ linkToRule.addEventListener("click", (event) => {
   event.preventDefault();
   mask.classList.remove("hidden");
   modal.classList.remove("hidden");
-  modalInner.focus();
-  modalInner.addEventListener("keydown", keydownToScrollModal);
+  modalBody.focus();
+  modalBody.addEventListener("keydown", keydownToScrollModal);
 });
 
 function closeModal() {
   mask.classList.add("hidden");
   modal.classList.add("hidden");
-  modalInner.removeEventListener("keydown", keydownToScrollModal);
+  modalBody.removeEventListener("keydown", keydownToScrollModal);
 }
 
 const closeButton = document.getElementById("js-closeButton");

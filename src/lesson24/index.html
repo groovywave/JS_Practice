@@ -105,7 +105,8 @@
       tabindex="-1"
     >
       <div
-        id="js-modalInner"
+        id="js-modalBody"
+        data-testid="js-modalBody"
         class="relative bg-white rounded-lg shadow overflow-y-auto h-96 p-4 w-full max-w-2xl"
         role="dialog"
         aria-modal="true"
@@ -394,6 +395,7 @@
           <button
             type="button"
             id="js-agreeButton"
+            data-testid="js-agreeButton"
             class="bg-blue-300 text-white font-bold rounded px-4 py-2 mb-20 hover:bg-blue-400 disabled:bg-gray-300"
             disabled
           >
