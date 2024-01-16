@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-// import tailwind from "vite-plugin-tailwind";
 import { resolve } from "path";
 import { glob } from "glob";
 
