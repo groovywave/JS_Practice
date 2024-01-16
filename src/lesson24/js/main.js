@@ -1,5 +1,3 @@
-import { doc } from "prettier";
-
 const form = document.getElementById("js-form");
 const username = document.getElementById("username");
 const email = document.getElementById("email");
