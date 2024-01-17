@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
-  await page.goto("localhost:3000/");
-  await page.getByRole("link", { name: "lesson24" }).click();
+  await page.goto("http://localhost:3000/lesson24/index.html");
   await page.getByPlaceholder("Enter username").click();
   await page.getByPlaceholder("Enter username").press("Tab");
   await page.getByPlaceholder("Enter email").press("Tab");
