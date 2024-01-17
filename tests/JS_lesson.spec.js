@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByRole("link", { name: "利用規約" })).toBeFocused();
 });
 
-test("press tab-key and focus on 利用規約", async ({ page }) => {});
+test("press tab-key and focus on 利用規約", async () => {});
 
 test("press Enter on the link to rule-page", async ({ page }) => {
   await page.getByRole("link", { name: "利用規約" }).press("Enter");
