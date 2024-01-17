@@ -1,11 +1,12 @@
 import { test, expect } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:3000/lesson24/index.html");
-  await page.getByPlaceholder("Enter username").click();
-  await page.getByPlaceholder("Enter username").press("Tab");
-  await page.getByPlaceholder("Enter email").press("Tab");
-  await page.getByPlaceholder("Enter password", { exact: true }).press("Tab");
-  await page.getByPlaceholder("Enter password again").press("Tab");
+  // await page.getByLabel('Password').fill('secret');
+  await page.getByLabel("Username").click();
+  await page.getByLabel("Username").press("Tab");
+  await page.getByLabel("Email").press("Tab");
+  await page.getByLabel("Password", { exact: true }).press("Tab");
+  await page.getByLabel("Confirm Password").press("Tab");
   await expect(page.getByRole("link", { name: "利用規約" })).toBeFocused();
 });
 
