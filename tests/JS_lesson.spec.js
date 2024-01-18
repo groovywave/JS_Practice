@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:3000/lesson24/index.html");
-  // await page.getByLabel('Password').fill('secret');
   await page.getByLabel("Username").click();
   await page.getByLabel("Username").press("Tab");
   await page.getByLabel("Email").press("Tab");
@@ -14,6 +13,8 @@ test("press tab-key and focus on 利用規約", async () => {});
 
 test("press Enter on the link to rule-page", async ({ page }) => {
   await page.getByRole("link", { name: "利用規約" }).press("Enter");
+  // await page.getByTestId("js-modalBody").click();
+  await expect(page.getByTestId("js-modalBody")).toBeVisible();
 });
 
 test("Click the 'Agree' button to go to the form page", async ({ page }) => {
