@@ -6,7 +6,6 @@ const confirmPassword = document.getElementById("confirmPassword");
 const focusableElements = [
   ...form.querySelectorAll("a[href], input:not([disabled])"),
 ];
-console.log(focusableElements);
 username.focus();
 //focus only on the items in the form
 form.addEventListener("keydown", (event) => {
