@@ -51,7 +51,6 @@ linkToRule.addEventListener("click", (event) => {
 function closeModal() {
   mask.classList.add("hidden");
   modal.classList.add("hidden");
-  // getFocusableElements(form);
 }
 
 const closeButton = document.getElementById("js-closeButton");
@@ -74,7 +73,7 @@ mask.addEventListener("click", () => {
   closeModal();
   checkboxNotToBeChecked();
   submitButton.disabled = true;
-  modalBody.focus();
+  // modalBody.focus();
   getFocusableElements(form);
   username.focus();
 });
@@ -91,9 +90,7 @@ function addClickAgreeButtonToCloseModal() {
     closeModal();
     submitButton.disabled = false;
     getFocusableElements(form);
-    // form.removeEventListener("keydown", addPressTabEventOnElement);
     username.focus();
-    // form.addEventListener("keydown", addPressTabEventOnElement);
   });
 }
 
@@ -107,13 +104,9 @@ function toggleSubmitCheckbox() {
     if (submitCheckbox.checked) {
       submitButton.disabled = false;
       getFocusableElements(form);
-      // form.removeEventListener("keydown", addPressTabEventOnElement);
-      // form.addEventListener("keydown", addPressTabEventOnElement);
     } else {
       submitButton.disabled = true;
       getFocusableElements(form);
-      // form.removeEventListener("keydown", addPressTabEventOnElement);
-      // form.addEventListener("keydown", addPressTabEventOnElement);
     }
   });
 }
