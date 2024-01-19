@@ -3,53 +3,63 @@ const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
-const focusableElements = [
-  ...form.querySelectorAll("a[href], input:not([disabled])"),
-];
-username.focus();
-//focus only on the items in the form
-form.addEventListener("keydown", (event) => {
+let focusableElements;
+let currentFocusedItemIndex;
+function getFocusableElements(element) {
+  focusableElements = [
+    ...element.querySelectorAll(
+      "a[href], input:not([disabled]),button:not([disabled])",
+    ),
+  ];
+}
+function addPressTabEventOnElement(event) {
   if (event.key !== "Tab") return;
   event.preventDefault();
-  const currentFocusedItemIndex = focusableElements.indexOf(
-    document.activeElement,
-  );
+  currentFocusedItemIndex = focusableElements.indexOf(document.activeElement);
   focusableElements[
     (currentFocusedItemIndex + 1) % focusableElements.length
   ].focus();
-});
-
+}
+getFocusableElements(form);
+username.focus();
+form.addEventListener("keydown", addPressTabEventOnElement);
 const linkToRule = document.getElementById("js-linkToRule");
 const mask = document.getElementById("js-mask");
 const modal = document.getElementById("js-modal");
 const modalBody = document.getElementById("js-modalBody");
 
 function keydownToScrollModal(event) {
+  event.preventDefault();
   if (modal.classList.contains("hidden")) return;
   switch (event.key) {
     case "ArrowUp":
       return modalBody.scrollBy(0, -16);
     case "ArrowDown":
       return modalBody.scrollBy(0, 16);
+    case "Tab":
+      return;
   }
 }
-
+modalBody.addEventListener("keydown", keydownToScrollModal);
 linkToRule.addEventListener("click", (event) => {
   event.preventDefault();
   mask.classList.remove("hidden");
   modal.classList.remove("hidden");
   modalBody.focus();
-  modalBody.addEventListener("keydown", keydownToScrollModal);
 });
 
 function closeModal() {
   mask.classList.add("hidden");
   modal.classList.add("hidden");
-  modalBody.removeEventListener("keydown", keydownToScrollModal);
+  // getFocusableElements(form);
 }
 
 const closeButton = document.getElementById("js-closeButton");
-closeButton.addEventListener("click", closeModal());
+closeButton.addEventListener("click", () => {
+  closeModal();
+  getFocusableElements(form);
+  username.focus();
+});
 
 const agreeButton = document.getElementById("js-agreeButton");
 const submitButton = document.getElementById("js-submitButton");
@@ -64,15 +74,26 @@ mask.addEventListener("click", () => {
   closeModal();
   checkboxNotToBeChecked();
   submitButton.disabled = true;
+  modalBody.focus();
+  getFocusableElements(form);
+  username.focus();
 });
 
 const cancelButton = document.getElementById("js-cancelButton");
-cancelButton.addEventListener("click", mask.click());
+cancelButton.addEventListener("click", () => {
+  mask.click();
+  getFocusableElements(form);
+  username.focus();
+});
 
-function addClickAgreeToCloseModal() {
+function addClickAgreeButtonToCloseModal() {
   agreeButton.addEventListener("click", () => {
     closeModal();
     submitButton.disabled = false;
+    getFocusableElements(form);
+    // form.removeEventListener("keydown", addPressTabEventOnElement);
+    username.focus();
+    // form.addEventListener("keydown", addPressTabEventOnElement);
   });
 }
 
@@ -85,18 +106,24 @@ function toggleSubmitCheckbox() {
   submitCheckbox.addEventListener("change", () => {
     if (submitCheckbox.checked) {
       submitButton.disabled = false;
+      getFocusableElements(form);
+      // form.removeEventListener("keydown", addPressTabEventOnElement);
+      // form.addEventListener("keydown", addPressTabEventOnElement);
     } else {
       submitButton.disabled = true;
+      getFocusableElements(form);
+      // form.removeEventListener("keydown", addPressTabEventOnElement);
+      // form.addEventListener("keydown", addPressTabEventOnElement);
     }
   });
 }
 
-function changeAgreeToClickable(entries) {
+function changeAgreeButtonToClickable(entries) {
   if (!entries[0].isIntersecting) {
     return;
   }
   agreeButton.disabled = false;
-  addClickAgreeToCloseModal();
+  addClickAgreeButtonToCloseModal();
   checkboxToBeChecked();
   toggleSubmitCheckbox();
 }
@@ -111,5 +138,8 @@ const options = {
   threshold: 1,
 };
 
-const observer = new IntersectionObserver(changeAgreeToClickable, options);
+const observer = new IntersectionObserver(
+  changeAgreeButtonToClickable,
+  options,
+);
 observer.observe(agreeButton);
