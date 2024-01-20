@@ -73,7 +73,6 @@ mask.addEventListener("click", () => {
   closeModal();
   checkboxNotToBeChecked();
   submitButton.disabled = true;
-  // modalBody.focus();
   getFocusableElements(form);
   username.focus();
 });
