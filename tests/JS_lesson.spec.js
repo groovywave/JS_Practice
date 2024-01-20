@@ -31,7 +31,11 @@ test("Click the 'Submit' button to go to the registration complete page", async 
 }) => {
   await page.getByRole('link', { name: '利用規約' }).press('Enter');
   await page.getByTestId('js-agreeButton').scrollIntoViewIfNeeded();
-  // await page.getByLabel('利用規約', { exact: true }).press('ArrowDown');
   await page.getByText('利用規約を読み、同意しました', { exact: true }).click();
   await page.getByRole('button', { name: 'Submit' }).click();
+  await expect(
+    page.getByRole('heading', {
+      name: 'Your Registration Has Been Completed!'
+    })
+  ).toBeVisible();
 });
