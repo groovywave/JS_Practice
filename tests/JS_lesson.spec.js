@@ -12,7 +12,7 @@ test('press tab-key and focus on 利用規約', async ({ page }) => {
   await expect(page.getByRole('link', { name: '利用規約' })).toBeFocused();
 });
 
-test('press Enter on the link to rule-page', async ({ page }) => {
+test('press Enter on the link and open the modal', async ({ page }) => {
   await page.getByRole('link', { name: '利用規約' }).press('Enter');
   await expect(page.getByTestId('js-modalBody')).toBeVisible();
 });
