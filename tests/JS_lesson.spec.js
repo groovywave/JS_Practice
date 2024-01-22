@@ -21,9 +21,9 @@ test("Click the 'Agree' button to go to the form page", async ({ page }) => {
   await page.getByRole('link', { name: '利用規約' }).press('Enter');
   await page.getByTestId('js-agreeButton').scrollIntoViewIfNeeded();
   await page.getByLabel('利用規約', { exact: true }).press('ArrowDown');
+  await expect(page.getByLabel('Username')).toBeVisible();
   await page.getByText('利用規約を読み、同意しました', { exact: true }).click();
   await expect(page.getByTestId('js-modalBody')).toBeHidden();
-  await expect(page.getByLabel('Username')).toBeVisible();
 });
 
 test("Click the 'Submit' button to go to the registration complete page", async ({
