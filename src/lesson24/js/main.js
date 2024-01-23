@@ -3,54 +3,30 @@ const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
-let focusableElements;
-let currentFocusedItemIndex;
-function getFocusableElements(element) {
-  focusableElements = [
-    ...element.querySelectorAll(
-      'a[href], input:not([disabled]),button:not([disabled])'
-    )
-  ];
-}
-function addPressTabEventOnElement(event) {
-  if (event.key !== 'Tab') return;
-  event.preventDefault();
-  currentFocusedItemIndex = focusableElements.indexOf(document.activeElement);
-  focusableElements[
-    (currentFocusedItemIndex + 1) % focusableElements.length
-  ].focus();
-}
-getFocusableElements(form);
+
 username.focus();
-form.addEventListener('keydown', addPressTabEventOnElement);
+
 const linkToRule = document.getElementById('js-linkToRule');
 const mask = document.getElementById('js-mask');
 const modal = document.getElementById('js-modal');
 const modalBody = document.getElementById('js-modalBody');
 
-function tabKeyIsDisabled(event) {
-  if (modal.classList.contains('hidden')) return;
-  switch (event.key) {
-    case 'Tab':
-      return event.preventDefault();
-  }
-}
-modalBody.addEventListener('keydown', tabKeyIsDisabled);
 linkToRule.addEventListener('click', event => {
   event.preventDefault();
   mask.classList.remove('hidden');
   modal.classList.remove('hidden');
   modalBody.focus();
 });
+
 function closeModal() {
   mask.classList.add('hidden');
   modal.classList.add('hidden');
 }
 
 const closeButton = document.getElementById('js-closeButton');
+
 closeButton.addEventListener('click', () => {
   closeModal();
-  getFocusableElements(form);
   username.focus();
 });
 
@@ -67,14 +43,13 @@ mask.addEventListener('click', () => {
   closeModal();
   checkboxNotToBeChecked();
   submitButton.disabled = true;
-  getFocusableElements(form);
   username.focus();
 });
 
 const cancelButton = document.getElementById('js-cancelButton');
+
 cancelButton.addEventListener('click', () => {
   mask.click();
-  getFocusableElements(form);
   username.focus();
 });
 
@@ -82,7 +57,6 @@ function addClickAgreeButtonToCloseModal() {
   agreeButton.addEventListener('click', () => {
     closeModal();
     submitButton.disabled = false;
-    getFocusableElements(form);
     username.focus();
   });
 }
@@ -96,27 +70,20 @@ function toggleSubmitCheckbox() {
   submitCheckbox.addEventListener('change', () => {
     if (submitCheckbox.checked) {
       submitButton.disabled = false;
-      getFocusableElements(form);
     } else {
       submitButton.disabled = true;
-      getFocusableElements(form);
     }
   });
 }
 
 function changeAgreeButtonToClickable(entries) {
   if (!entries[0].isIntersecting) {
-    // modalBody.addEventListener('keydown', tabKeyIsDisabled);
-    // modalBody.removeEventListener('keydown', addPressTabEventOnElement);
     return;
   }
   agreeButton.disabled = false;
   addClickAgreeButtonToCloseModal();
   checkboxToBeChecked();
   toggleSubmitCheckbox();
-  modalBody.removeEventListener('keydown', tabKeyIsDisabled);
-  getFocusableElements(modalBody);
-  modalBody.addEventListener('keydown', addPressTabEventOnElement);
 }
 
 submitButton.addEventListener('click', e => {
@@ -133,4 +100,5 @@ const observer = new IntersectionObserver(
   changeAgreeButtonToClickable,
   options
 );
+
 observer.observe(agreeButton);
