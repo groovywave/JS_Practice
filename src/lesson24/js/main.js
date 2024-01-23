@@ -106,12 +106,17 @@ function toggleSubmitCheckbox() {
 
 function changeAgreeButtonToClickable(entries) {
   if (!entries[0].isIntersecting) {
+    // modalBody.addEventListener('keydown', tabKeyIsDisabled);
+    // modalBody.removeEventListener('keydown', addPressTabEventOnElement);
     return;
   }
   agreeButton.disabled = false;
   addClickAgreeButtonToCloseModal();
   checkboxToBeChecked();
   toggleSubmitCheckbox();
+  modalBody.removeEventListener('keydown', tabKeyIsDisabled);
+  getFocusableElements(modalBody);
+  modalBody.addEventListener('keydown', addPressTabEventOnElement);
 }
 
 submitButton.addEventListener('click', e => {
