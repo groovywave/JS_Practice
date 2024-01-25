@@ -101,7 +101,7 @@
     <div
       id="js-modal"
       class="absolute top-10 z-20 hidden rounded-lg bg-white p-8 shadow-md md:mx-auto"
-      aria-hidden="true"
+      aria-hidden="false"
       tabindex="-1"
     >
       <div
@@ -111,7 +111,7 @@
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        aria-describedby="modal-summary"
+        aria-describedby="terms-and-conditions"
         tabindex="0"
       >
         <button type="button" id="js-closeButton" class="close_btn">
@@ -130,7 +130,7 @@
 
           <span class="sr-only">Close modal</span>
         </button>
-        <div class="p-6">
+        <div class="p-6" id="terms-and-conditions" role="dialog">
           <div class="my-6">
             <h2 class="font-bold" id="modal-title">利用規約</h2>
             <p id="modal-summary" class="text-xs">
