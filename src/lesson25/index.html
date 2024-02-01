@@ -17,7 +17,7 @@
         <div class="relative mb-5">
           <label
             for="username"
-            id="js-userName"
+            id="js-userNameLabel"
             class="mb-1 block text-gray-700"
             >Username</label
           >
@@ -28,12 +28,19 @@
             placeholder="Enter username"
             required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block text-errorColor"
+            data-testid="js-usernameError"
             >Error message</small
           >
         </div>
         <div class="relative mb-5">
-          <label for="email" class="mb-1 block text-gray-700">Email</label>
+          <label
+            for="email"
+            class="mb-1 block text-gray-700"
+            data-testid="js-emailLabel"
+            >Email</label
+          >
           <input
             type="email"
             id="email"
@@ -41,12 +48,17 @@
             placeholder="Enter email"
             required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block text-errorColor"
+            data-testid="js-emailError"
             >Error message</small
           >
         </div>
         <div class="relative mb-5">
-          <label for="password" class="mb-1 block text-gray-700"
+          <label
+            for="password"
+            class="mb-1 block text-gray-700"
+            data-testid="js-passwordLabel"
             >Password</label
           >
           <input
@@ -56,12 +68,17 @@
             placeholder="Enter password"
             required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block text-errorColor"
+            data-testid="js-passwordError"
             >Error message</small
           >
         </div>
         <div class="relative mb-6">
-          <label for="confirmPassword" class="mb-1 block text-gray-700"
+          <label
+            for="confirmPassword"
+            class="mb-1 block text-gray-700"
+            data-testid="js-confirmPasswordLabel"
             >Confirm Password</label
           >
           <input
@@ -71,7 +88,9 @@
             placeholder="Enter password again"
             required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block text-errorColor"
+            data-testid="js-confirmPasswordError"
             >Error message</small
           >
         </div>
