@@ -55,7 +55,7 @@ test('input less than 8 characters into Password and show error message', async 
   await page.getByRole('button', { name: 'Submit' }).click();
   await expect(
     page.getByTestId('js-passwordError', {
-      name: 'Must be alphanumeric and at least 8 characters long'
+      name: 'at least 8 characters that include at least one uppercase letter, one lowercase letter, and one digit'
     })
   ).toBeVisible();
 });
@@ -63,8 +63,8 @@ test('input less than 8 characters into Password and show error message', async 
 test('input wrong password into Confirm Password and show error message', async ({
   page
 }) => {
-  await page.getByTestId('js-passwordLabel').fill('KevinDeBruyne');
-  await page.getByTestId('js-confirmPasswordLabel').fill('111');
+  await page.getByTestId('js-passwordLabel').fill('KevinDeBruyne17');
+  await page.getByTestId('js-confirmPasswordLabel').fill('KevinDeBruyne7');
   await page.getByRole('button', { name: 'Submit' }).click();
   await expect(
     page.getByTestId('js-confirmPasswordError', {
@@ -78,8 +78,8 @@ test('Show a completion message after the form is successfully submitted', async
 }) => {
   await page.getByLabel('Username').fill('Alexander');
   await page.getByLabel('Email').fill('Arnord@liverpool.com');
-  await page.getByTestId('js-passwordLabel').fill('KevinDeBruyne');
-  await page.getByTestId('js-confirmPasswordLabel').fill('KevinDeBruyne');
+  await page.getByTestId('js-passwordLabel').fill('KevinDeBruyne17');
+  await page.getByTestId('js-confirmPasswordLabel').fill('KevinDeBruyne17');
   await page.getByRole('button', { name: 'Submit' }).click();
   await expect(
     page.getByRole('heading', {

@@ -90,11 +90,15 @@ export function checkEmail(input) {
 
 export function checkPassword(input) {
   if (checkForUnfilled(input)) return;
-  const regularExpression = /^[a-zA-Z0-9]{8,}$/;
+  const regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  // https://genkichi.hateblo.jp/entry/2019/02/23/143527
   if (regularExpression.test(input.value.trim())) {
     showSuccess(input);
   } else {
-    showError(input, 'Must be alphanumeric and at least 8 characters long');
+    showError(
+      input,
+      'at least 8 characters that include at least one uppercase letter, one lowercase letter, and one digit'
+    );
   }
 }
 
