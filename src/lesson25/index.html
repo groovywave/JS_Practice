@@ -137,7 +137,12 @@
         aria-describedby="terms-and-conditions"
         tabindex="0"
       >
-        <button type="button" id="js-closeButton" class="close_btn fixed">
+        <button
+          type="button"
+          id="js-closeButton"
+          class="close_btn fixed"
+          data-testid="js-closeButton"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -408,7 +413,11 @@
               <li class="mb-1 text-xs">
                 本規約の解釈にあたっては，日本法を準拠法とします。
               </li>
-              <li id="js-lastSentence" class="mb-1 text-xs">
+              <li
+                id="js-lastSentence"
+                class="mb-1 text-xs"
+                data-testid="js-lastSentence"
+              >
                 本サービスに関して紛争が生じた場合には，当社の本店所在地を管轄する裁判所を専属的合意管轄とします。
               </li>
             </ol>

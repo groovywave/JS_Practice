@@ -7,9 +7,11 @@ test.beforeEach(async ({ page }) => {
   await page.getByLabel('Password', { exact: true }).press('Tab');
   await page.getByLabel('Confirm Password').press('Tab');
   await page.getByRole('link', { name: '利用規約' }).press('Enter');
-  await page.getByTestId('js-agreeButton').scrollIntoViewIfNeeded();
-  await page.getByLabel('利用規約', { exact: true }).press('ArrowDown');
-  await page.getByText('利用規約を読み、同意しました', { exact: true }).click();
+  await page.getByTestId('js-lastSentence').scrollIntoViewIfNeeded();
+  await page.getByTestId('js-lastSentence').press('ArrowDown');
+  // await page.getByLabel('利用規約', { exact: true }).press('ArrowDown');
+  await page.getByTestId('js-closeButton').click();
+  // await page.getByText('利用規約を読み、同意しました', { exact: true }).click();
 });
 
 test('input less than 3 characters into username and show error message', async ({
