@@ -27,43 +27,35 @@ closeButton.addEventListener('click', () => {
   username.focus();
 });
 
-const agreeButton = document.getElementById('js-agreeButton');
 const submitButton = document.getElementById('js-submitButton');
 const submitCheckbox = document.getElementById('js-submitCheckbox');
 
-function checkboxNotToBeChecked() {
+function submitButtonToBeClickable() {
+  submitCheckbox.disabled = false;
+  submitCheckbox.checked = true;
+  submitButton.disabled = false;
+}
+
+function submitButtonNotToBeClickable() {
   submitCheckbox.disabled = true;
   submitCheckbox.checked = false;
+  submitButton.disabled = true;
 }
+
+let isReadUpToTheLastSentence = false;
 
 mask.addEventListener('click', () => {
   closeModal();
-  checkboxNotToBeChecked();
-  submitButton.disabled = true;
   username.focus();
+  if (isReadUpToTheLastSentence) {
+    submitButtonToBeClickable();
+    addToggleToTheSubmitCheckbox();
+  } else {
+    submitButtonNotToBeClickable();
+  }
 });
 
-const cancelButton = document.getElementById('js-cancelButton');
-
-cancelButton.addEventListener('click', () => {
-  mask.click();
-  username.focus();
-});
-
-function addClickAgreeButtonToCloseModal() {
-  agreeButton.addEventListener('click', () => {
-    closeModal();
-    submitButton.disabled = false;
-    username.focus();
-  });
-}
-
-function checkboxToBeChecked() {
-  submitCheckbox.disabled = false;
-  submitCheckbox.checked = true;
-}
-
-function toggleSubmitCheckbox() {
+function addToggleToTheSubmitCheckbox() {
   submitCheckbox.addEventListener('change', () => {
     if (submitCheckbox.checked) {
       submitButton.disabled = false;
@@ -73,14 +65,13 @@ function toggleSubmitCheckbox() {
   });
 }
 
-function changeAgreeButtonToClickable(entries) {
+function readUpToTheLastSentence(entries) {
   if (!entries[0].isIntersecting) {
     return;
   }
-  agreeButton.disabled = false;
-  addClickAgreeButtonToCloseModal();
-  checkboxToBeChecked();
-  toggleSubmitCheckbox();
+  isReadUpToTheLastSentence = true;
+  submitButtonToBeClickable();
+  addToggleToTheSubmitCheckbox();
 }
 
 submitButton.addEventListener('click', e => {
@@ -90,14 +81,13 @@ submitButton.addEventListener('click', e => {
   window.location.href = 'registration.html';
 });
 
+const lastSentence = document.getElementById('js-lastSentence');
+
 const options = {
   root: modal,
   threshold: 1
 };
 
-const observer = new IntersectionObserver(
-  changeAgreeButtonToClickable,
-  options
-);
+const observer = new IntersectionObserver(readUpToTheLastSentence, options);
 
-observer.observe(agreeButton);
+observer.observe(lastSentence);

@@ -137,7 +137,7 @@
         aria-describedby="terms-and-conditions"
         tabindex="0"
       >
-        <button type="button" id="js-closeButton" class="close_btn">
+        <button type="button" id="js-closeButton" class="close_btn fixed">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -408,29 +408,11 @@
               <li class="mb-1 text-xs">
                 本規約の解釈にあたっては，日本法を準拠法とします。
               </li>
-              <li class="mb-1 text-xs">
+              <li id="js-lastSentence" class="mb-1 text-xs">
                 本サービスに関して紛争が生じた場合には，当社の本店所在地を管轄する裁判所を専属的合意管轄とします。
               </li>
             </ol>
           </div>
-        </div>
-        <div class="flex-auto items-center justify-center text-center">
-          <button
-            type="button"
-            id="js-agreeButton"
-            data-testid="js-agreeButton"
-            class="mb-20 rounded bg-green-200 px-4 py-2 font-bold text-white hover:bg-green-300 disabled:bg-gray-300"
-            disabled
-          >
-            利用規約を読み、同意しました
-          </button>
-          <button
-            type="button"
-            id="js-cancelButton"
-            class="rounded bg-gray-100 px-4 py-2 font-bold text-black hover:bg-gray-200"
-          >
-            キャンセル
-          </button>
         </div>
       </div>
     </div>
