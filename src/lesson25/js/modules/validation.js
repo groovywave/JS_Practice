@@ -35,16 +35,19 @@ export function showSuccess(input) {
   small.classList.add('invisible');
 }
 
-export function checkRequired(inputArr) {
-  inputArr.forEach(input => {
-    const stateOfItem = getStateOfItem(input);
-    if (input.value.trim() === '') {
-      stateOfItem.empty = true;
-      showError(input, `${getFieldName(input)} is required`);
-    } else {
-      stateOfItem.empty = false;
-    }
-  });
+// export function checkRequired(inputArr) {
+export function isEmptyForRequired(input) {
+  // inputArr.forEach(input => {
+  const stateOfItem = getStateOfItem(input);
+  if (input.value.trim() === '') {
+    stateOfItem.empty = true;
+    showError(input, `${getFieldName(input)} is required`);
+    return true;
+  } else {
+    stateOfItem.empty = false;
+    return false;
+  }
+  // });
 }
 
 export function removeErrorMessages(inputArr) {
@@ -57,58 +60,73 @@ export function removeErrorMessages(inputArr) {
 }
 
 export function checkForUnfilled(input) {
+  console.log(input);
+  console.log(input.value);
   const stateOfItem = getStateOfItem(input);
   if (stateOfItem.empty === true) return true;
 }
-export function checkLength(input, min, max) {
+
+export function isInvalidForLength(input, min, max) {
+  console.log(input.value, input, min, max);
+  console.log('Checking length');
   if (checkForUnfilled(input)) return;
+  console.log('Check for filled');
   if (input.value.length < min) {
     showError(
       input,
       `${getFieldName(input)} must be at least ${min} characters`
     );
+    return true;
   } else if (input.value.length > max) {
     showError(
       input,
       `${getFieldName(input)} must be less than ${max} characters`
     );
+    return true;
   } else {
     showSuccess(input);
+    return false;
   }
 }
 
-export function checkEmail(input) {
+export function isInvalidForMail(input) {
   if (checkForUnfilled(input)) return;
   const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
   if (regularExpression.test(input.value.trim())) {
     showSuccess(input);
+    return false;
   } else {
     showError(input, 'Email is not valid');
+    return true;
   }
 }
 
-export function checkPassword(input) {
+export function isInvalidForPassword(input) {
   if (checkForUnfilled(input)) return;
   const regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
   // https://genkichi.hateblo.jp/entry/2019/02/23/143527
   if (regularExpression.test(input.value.trim())) {
     showSuccess(input);
+    return false;
   } else {
     showError(
       input,
       'at least 8 characters that include at least one uppercase letter, one lowercase letter, and one digit'
     );
+    return true;
   }
 }
 
-export function checkPasswordsMatch(input, confirmInput) {
+export function isNotMatchPasswords(input, confirmInput) {
   const stateOfItem = getStateOfItem(input);
   if (stateOfItem.result === false) return;
   if (input.value === confirmInput.value) {
     showSuccess(confirmInput);
+    return false;
   } else {
     showError(confirmInput, 'Passwords do not match');
+    return true;
   }
 }
 
@@ -117,13 +135,13 @@ export function getFieldName(input) {
 }
 export function checkTheValidation() {
   removeErrorMessages([username, email, password, confirmPassword]);
-  checkRequired([username, email, password, confirmPassword]);
-  checkLength(username, 3, 15);
+  // checkRequired([username, email, password, confirmPassword]);
+  isInvalidForLength(username, 3, 15);
   checkEmail(email);
   checkPassword(password);
   checkPasswordsMatch(password, confirmPassword);
 }
 
-export function checkAllResultsOfValidation() {
+export function isEveryRequiredItemValid() {
   return stateOfItems.every(obj => obj.result === true);
 }
