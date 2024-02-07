@@ -107,17 +107,31 @@ email.addEventListener('input', () => {
 password.addEventListener('input', () => {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(password)) return;
+  console.log(submitButton.disabled, 'isEmpty');
   if (validation.isInvalidForPassword(password)) return;
+  console.log(submitButton.disabled, 'isInvalid');
   if (!validation.isEveryRequiredItemValid()) return;
+  console.log(submitButton.disabled, 'isEvery');
   if (!submitCheckbox.checked) return;
+  console.log(submitButton.disabled, 'checkbox');
   submitButton.disabled = false;
 });
 
-confirmPassword.addEventListener('input', () => {
+function checkMatchingPasswordsAndChangeClickableOfSubmitButton() {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(confirmPassword)) return;
   if (validation.isNotMatchPasswords(password, confirmPassword)) return;
   if (!validation.isEveryRequiredItemValid()) return;
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
-});
+}
+
+confirmPassword.addEventListener(
+  'input',
+  checkMatchingPasswordsAndChangeClickableOfSubmitButton
+);
+
+password.addEventListener(
+  'input',
+  checkMatchingPasswordsAndChangeClickableOfSubmitButton
+);
