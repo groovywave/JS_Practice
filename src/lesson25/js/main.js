@@ -33,10 +33,10 @@ function closeModal() {
 
 function addToggleToTheSubmitCheckbox() {
   submitCheckbox.addEventListener('change', () => {
+    if (!validation.isEveryRequiredItemValid()) return;
     if (!submitCheckbox.checked) {
       submitButton.disabled = true;
     } else {
-      if (!validation.isEveryRequiredItemValid()) return;
       submitButton.disabled = false;
     }
   });
@@ -86,38 +86,40 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
 
-username.addEventListener('input', () => {
+function checkUsernameAndToggleSubmitButton() {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(username)) return;
   if (validation.isInvalidForLength(username, 3, 15)) return;
   if (!validation.isEveryRequiredItemValid()) return;
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
-});
+}
 
-email.addEventListener('input', () => {
+username.addEventListener('input', checkUsernameAndToggleSubmitButton);
+
+function checkEmailAndToggleSubmitButton() {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(email)) return;
   if (validation.isInvalidForMail(email)) return;
   if (!validation.isEveryRequiredItemValid()) return;
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
-});
+}
 
-password.addEventListener('input', () => {
+email.addEventListener('input', checkEmailAndToggleSubmitButton);
+
+function checkPasswordAndToggleSubmitButton() {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(password)) return;
-  console.log(submitButton.disabled, 'isEmpty');
   if (validation.isInvalidForPassword(password)) return;
-  console.log(submitButton.disabled, 'isInvalid');
   if (!validation.isEveryRequiredItemValid()) return;
-  console.log(submitButton.disabled, 'isEvery');
   if (!submitCheckbox.checked) return;
-  console.log(submitButton.disabled, 'checkbox');
   submitButton.disabled = false;
-});
+}
 
-function checkMatchingPasswordsAndChangeClickableOfSubmitButton() {
+password.addEventListener('input', checkPasswordAndToggleSubmitButton);
+
+function checkMatchingPasswordsAndToggleSubmitButton() {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(confirmPassword)) return;
   if (validation.isNotMatchPasswords(password, confirmPassword)) return;
@@ -128,10 +130,7 @@ function checkMatchingPasswordsAndChangeClickableOfSubmitButton() {
 
 confirmPassword.addEventListener(
   'input',
-  checkMatchingPasswordsAndChangeClickableOfSubmitButton
+  checkMatchingPasswordsAndToggleSubmitButton
 );
 
-password.addEventListener(
-  'input',
-  checkMatchingPasswordsAndChangeClickableOfSubmitButton
-);
+password.addEventListener('input', checkMatchingPasswordsAndToggleSubmitButton);

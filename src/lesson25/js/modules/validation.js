@@ -10,18 +10,20 @@ let stateOfItems = [
   { item: confirmPassword, empty: true, result: false }
 ];
 
+export function getStateOfItem(input) {
+  return stateOfItems.find(obj => obj.item === input);
+}
+
 export function showError(input, message) {
   input.classList.remove('border-gray-200');
   input.classList.remove('border-successColor');
   input.classList.add('border-errorColor');
+  const stateOfItem = getStateOfItem(input);
+  stateOfItem.result = false;
   const parentElement = input.parentElement;
   const small = parentElement.querySelector('small');
   small.innerText = message;
   small.classList.remove('invisible');
-}
-
-export function getStateOfItem(input) {
-  return stateOfItems.find(obj => obj.item === input);
 }
 
 export function showSuccess(input) {
@@ -35,9 +37,7 @@ export function showSuccess(input) {
   small.classList.add('invisible');
 }
 
-// export function checkRequired(inputArr) {
 export function isEmptyForRequired(input) {
-  // inputArr.forEach(input => {
   const stateOfItem = getStateOfItem(input);
   if (input.value.trim() === '') {
     stateOfItem.empty = true;
@@ -47,7 +47,6 @@ export function isEmptyForRequired(input) {
     stateOfItem.empty = false;
     return false;
   }
-  // });
 }
 
 export function removeErrorMessages(inputArr) {
@@ -135,7 +134,6 @@ export function getFieldName(input) {
 }
 export function checkTheValidation() {
   removeErrorMessages([username, email, password, confirmPassword]);
-  // checkRequired([username, email, password, confirmPassword]);
   isInvalidForLength(username, 3, 15);
   checkEmail(email);
   checkPassword(password);
