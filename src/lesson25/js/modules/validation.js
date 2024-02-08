@@ -124,9 +124,13 @@ export function isNotMatchPasswords(input, confirmInput) {
 export function getFieldName(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
+
+const minCharCount = 3;
+const maxCharCount = 15;
+
 export function checkTheValidation() {
   removeErrorMessages([username, email, password, confirmPassword]);
-  isInvalidForLength(username, 3, 15);
+  isInvalidForLength(username, minCharCount, maxCharCount);
   checkEmail(email);
   checkPassword(password);
   checkPasswordsMatch(password, confirmPassword);
