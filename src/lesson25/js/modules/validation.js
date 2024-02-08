@@ -59,17 +59,12 @@ export function removeErrorMessages(inputArr) {
 }
 
 export function checkForUnfilled(input) {
-  console.log(input);
-  console.log(input.value);
   const stateOfItem = getStateOfItem(input);
   if (stateOfItem.empty === true) return true;
 }
 
 export function isInvalidForLength(input, min, max) {
-  console.log(input.value, input, min, max);
-  console.log('Checking length');
   if (checkForUnfilled(input)) return;
-  console.log('Check for filled');
   if (input.value.length < min) {
     showError(
       input,
