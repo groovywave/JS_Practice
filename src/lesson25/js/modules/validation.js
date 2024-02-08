@@ -60,7 +60,7 @@ export function removeErrorMessages(inputArr) {
 
 export function checkForUnfilled(input) {
   const stateOfItem = getStateOfItem(input);
-  if (stateOfItem.empty === true) return true;
+  if (stateOfItem.empty) return true;
 }
 
 export function isInvalidForLength(input, min, max) {
