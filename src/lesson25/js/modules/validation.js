@@ -104,10 +104,7 @@ export function isInvalidForPassword(input) {
     showSuccess(input);
     return false;
   } else {
-    showError(
-      input,
-      'at least 8 characters that include at least one uppercase letter, one lowercase letter, and one digit'
-    );
+    showError(input, 'Min 8 chars, including 1 uppercase and 1 number');
     return true;
   }
 }
