@@ -1,8 +1,3 @@
-const username = document.getElementById('username');
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirmPassword');
-
 let stateOfItems = [
   { item: username, empty: true, result: false },
   { item: email, empty: true, result: false },
