@@ -106,7 +106,6 @@ export function isInvalidForPassword(input) {
 
 export function isNotMatchPasswords(input, confirmInput) {
   const stateOfItem = getStateOfItem(input);
-  if (stateOfItem.result === false) return;
   if (input.value === confirmInput.value) {
     showSuccess(confirmInput);
     return false;
