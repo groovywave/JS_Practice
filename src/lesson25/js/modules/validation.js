@@ -36,7 +36,7 @@ export function isEmptyForRequired(input) {
   const stateOfItem = getStateOfItem(input);
   if (input.value.trim() === '') {
     stateOfItem.empty = true;
-    showError(input, `${getFieldName(input)} is required`);
+    showError(input, `${capitalizeTheFirstLetter(input)} is required`);
     return true;
   } else {
     stateOfItem.empty = false;
@@ -63,13 +63,13 @@ export function isInvalidForLength(input, min, max) {
   if (input.value.length < min) {
     showError(
       input,
-      `${getFieldName(input)} must be at least ${min} characters`
+      `${capitalizeTheFirstLetter(input)} must be at least ${min} characters`
     );
     return true;
   } else if (input.value.length > max) {
     showError(
       input,
-      `${getFieldName(input)} must be less than ${max} characters`
+      `${capitalizeTheFirstLetter(input)} must be less than ${max} characters`
     );
     return true;
   } else {
@@ -116,7 +116,7 @@ export function isNotMatchPasswords(input, confirmInput) {
   }
 }
 
-export function getFieldName(input) {
+export function capitalizeTheFirstLetter(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
