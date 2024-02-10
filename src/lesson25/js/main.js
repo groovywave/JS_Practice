@@ -86,6 +86,21 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
 
+function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
+  submitButton.disabled = true;
+  if (validation.isEmptyForRequired(arg)) return;
+  if (func(arg, ...anotherArgs)) return;
+  if (!validation.isEveryRequiredItemValid()) return;
+  if (!submitCheckbox.checked) return;
+  submitButton.disabled = false;
+}
+
+// checkItemAndToggleSubmitButton(validation.isInvalidForLength, [
+//   username,
+//   3,
+//   15
+// ]);
+/* 
 function checkUsernameAndToggleSubmitButton() {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(username)) return;
@@ -94,20 +109,42 @@ function checkUsernameAndToggleSubmitButton() {
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
 }
+ */
+// username.addEventListener('input', checkUsernameAndToggleSubmitButton);
 
-username.addEventListener('input', checkUsernameAndToggleSubmitButton);
+// username.addEventListener('input', function () {
+//   checkItemAndToggleSubmitButton(validation.isInvalidForLength, [
+//     username,
+//     3,
+//     15
+//   ]);
+// });
 
-function checkEmailAndToggleSubmitButton() {
-  submitButton.disabled = true;
-  if (validation.isEmptyForRequired(email)) return;
-  if (validation.isInvalidForMail(email)) return;
-  if (!validation.isEveryRequiredItemValid()) return;
-  if (!submitCheckbox.checked) return;
-  submitButton.disabled = false;
-}
+// 正しいアプローチ: イベントリスナー内で関数を呼び出すためのラッパー関数を使用
+username.addEventListener('input', () => {
+  checkItemAndToggleSubmitButton(
+    validation.isInvalidForLength,
+    username,
+    [3, 15]
+  );
+});
 
-email.addEventListener('input', checkEmailAndToggleSubmitButton);
+// function checkEmailAndToggleSubmitButton() {
+//   submitButton.disabled = true;
+//   if (validation.isEmptyForRequired(email)) return;
+//   if (validation.isInvalidForMail(email)) return;
+//   if (!validation.isEveryRequiredItemValid()) return;
+//   if (!submitCheckbox.checked) return;
+//   submitButton.disabled = false;
+// }
 
+// email.addEventListener('input', checkEmailAndToggleSubmitButton);
+
+email.addEventListener('input', () => {
+  checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, []);
+});
+
+/* 
 function checkMatchingPasswordsAndToggleSubmitButton() {
   submitButton.disabled = true;
   if (validation.isEmptyForRequired(confirmPassword)) return;
@@ -115,6 +152,13 @@ function checkMatchingPasswordsAndToggleSubmitButton() {
   if (!validation.isEveryRequiredItemValid()) return;
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
+}
+ */
+
+function checkMatchingPasswordsAndToggleSubmitButton() {
+  checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
+    confirmPassword
+  ]);
 }
 
 function checkPasswordAndToggleSubmitButton() {
