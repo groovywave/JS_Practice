@@ -109,7 +109,7 @@ email.addEventListener('input', () => {
 });
 
 function checkMatchingPasswordsAndToggleSubmitButton() {
-  if (!validation.getStateOfItem(password).result) return;
+  // if (!validation.getStateOfItem(password).result) return;
   checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
     confirmPassword
   ]);
@@ -117,17 +117,16 @@ function checkMatchingPasswordsAndToggleSubmitButton() {
 
 function checkPasswordAndToggleSubmitButton() {
   checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, []);
+  if (!validation.getStateOfItem(password).result) return;
   if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
+  confirmPassword.addEventListener('input', () => {
+    checkMatchingPasswordsAndToggleSubmitButton();
+  });
+  password.addEventListener('input', () => {
+    checkMatchingPasswordsAndToggleSubmitButton();
+  });
 }
 
 password.addEventListener('input', () => {
   checkPasswordAndToggleSubmitButton();
-});
-
-confirmPassword.addEventListener('input', () => {
-  checkMatchingPasswordsAndToggleSubmitButton();
-});
-
-password.addEventListener('input', () => {
-  checkMatchingPasswordsAndToggleSubmitButton();
 });
