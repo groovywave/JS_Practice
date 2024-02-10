@@ -95,32 +95,6 @@ function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
   submitButton.disabled = false;
 }
 
-// checkItemAndToggleSubmitButton(validation.isInvalidForLength, [
-//   username,
-//   3,
-//   15
-// ]);
-/* 
-function checkUsernameAndToggleSubmitButton() {
-  submitButton.disabled = true;
-  if (validation.isEmptyForRequired(username)) return;
-  if (validation.isInvalidForLength(username, 3, 15)) return;
-  if (!validation.isEveryRequiredItemValid()) return;
-  if (!submitCheckbox.checked) return;
-  submitButton.disabled = false;
-}
- */
-// username.addEventListener('input', checkUsernameAndToggleSubmitButton);
-
-// username.addEventListener('input', function () {
-//   checkItemAndToggleSubmitButton(validation.isInvalidForLength, [
-//     username,
-//     3,
-//     15
-//   ]);
-// });
-
-// 正しいアプローチ: イベントリスナー内で関数を呼び出すためのラッパー関数を使用
 username.addEventListener('input', () => {
   checkItemAndToggleSubmitButton(
     validation.isInvalidForLength,
@@ -129,31 +103,9 @@ username.addEventListener('input', () => {
   );
 });
 
-// function checkEmailAndToggleSubmitButton() {
-//   submitButton.disabled = true;
-//   if (validation.isEmptyForRequired(email)) return;
-//   if (validation.isInvalidForMail(email)) return;
-//   if (!validation.isEveryRequiredItemValid()) return;
-//   if (!submitCheckbox.checked) return;
-//   submitButton.disabled = false;
-// }
-
-// email.addEventListener('input', checkEmailAndToggleSubmitButton);
-
 email.addEventListener('input', () => {
   checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, []);
 });
-
-/* 
-function checkMatchingPasswordsAndToggleSubmitButton() {
-  submitButton.disabled = true;
-  if (validation.isEmptyForRequired(confirmPassword)) return;
-  if (validation.isNotMatchPasswords(password, confirmPassword)) return;
-  if (!validation.isEveryRequiredItemValid()) return;
-  if (!submitCheckbox.checked) return;
-  submitButton.disabled = false;
-}
- */
 
 function checkMatchingPasswordsAndToggleSubmitButton() {
   checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
