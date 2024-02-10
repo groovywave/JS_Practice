@@ -107,28 +107,26 @@ email.addEventListener('input', () => {
   checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, []);
 });
 
+function checkPasswordAndToggleSubmitButton() {
+  checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, []);
+  if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
+}
+
+password.addEventListener('input', () => {
+  checkPasswordAndToggleSubmitButton();
+});
+
 function checkMatchingPasswordsAndToggleSubmitButton() {
+  if (!validation.getStateOfItem(password).result) return;
   checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
     confirmPassword
   ]);
 }
 
-function checkPasswordAndToggleSubmitButton() {
-  submitButton.disabled = true;
-  if (validation.isEmptyForRequired(password)) return;
-  if (validation.isInvalidForPassword(password)) return;
-  if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
-  confirmPassword.addEventListener(
-    'input',
-    checkMatchingPasswordsAndToggleSubmitButton
-  );
-  password.addEventListener(
-    'input',
-    checkMatchingPasswordsAndToggleSubmitButton
-  );
-  if (!validation.isEveryRequiredItemValid()) return;
-  if (!submitCheckbox.checked) return;
-  submitButton.disabled = false;
-}
+confirmPassword.addEventListener('input', () => {
+  checkMatchingPasswordsAndToggleSubmitButton();
+});
 
-password.addEventListener('input', checkPasswordAndToggleSubmitButton);
+password.addEventListener('input', () => {
+  checkMatchingPasswordsAndToggleSubmitButton();
+});
