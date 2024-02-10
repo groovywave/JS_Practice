@@ -108,19 +108,9 @@ function checkEmailAndToggleSubmitButton() {
 
 email.addEventListener('input', checkEmailAndToggleSubmitButton);
 
-function checkPasswordAndToggleSubmitButton() {
-  submitButton.disabled = true;
-  if (validation.isEmptyForRequired(password)) return;
-  if (validation.isInvalidForPassword(password)) return;
-  if (!validation.isEveryRequiredItemValid()) return;
-  if (!submitCheckbox.checked) return;
-  submitButton.disabled = false;
-}
-
-password.addEventListener('input', checkPasswordAndToggleSubmitButton);
-
 function checkMatchingPasswordsAndToggleSubmitButton() {
   submitButton.disabled = true;
+  console.log(confirmPassword.value);
   if (validation.isEmptyForRequired(confirmPassword)) return;
   if (validation.isNotMatchPasswords(password, confirmPassword)) return;
   if (!validation.isEveryRequiredItemValid()) return;
@@ -128,9 +118,22 @@ function checkMatchingPasswordsAndToggleSubmitButton() {
   submitButton.disabled = false;
 }
 
-confirmPassword.addEventListener(
-  'input',
-  checkMatchingPasswordsAndToggleSubmitButton
-);
+function checkPasswordAndToggleSubmitButton() {
+  submitButton.disabled = true;
+  if (validation.isEmptyForRequired(password)) return;
+  if (validation.isInvalidForPassword(password)) return;
+  if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
+  confirmPassword.addEventListener(
+    'input',
+    checkMatchingPasswordsAndToggleSubmitButton
+  );
+  password.addEventListener(
+    'input',
+    checkMatchingPasswordsAndToggleSubmitButton
+  );
+  if (!validation.isEveryRequiredItemValid()) return;
+  if (!submitCheckbox.checked) return;
+  submitButton.disabled = false;
+}
 
-password.addEventListener('input', checkMatchingPasswordsAndToggleSubmitButton);
+password.addEventListener('input', checkPasswordAndToggleSubmitButton);
