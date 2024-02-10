@@ -109,7 +109,6 @@ email.addEventListener('input', () => {
 });
 
 function checkMatchingPasswordsAndToggleSubmitButton() {
-  // if (!validation.getStateOfItem(password).result) return;
   checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
     confirmPassword
   ]);
