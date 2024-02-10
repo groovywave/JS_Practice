@@ -110,7 +110,6 @@ email.addEventListener('input', checkEmailAndToggleSubmitButton);
 
 function checkMatchingPasswordsAndToggleSubmitButton() {
   submitButton.disabled = true;
-  console.log(confirmPassword.value);
   if (validation.isEmptyForRequired(confirmPassword)) return;
   if (validation.isNotMatchPasswords(password, confirmPassword)) return;
   if (!validation.isEveryRequiredItemValid()) return;
