@@ -1,4 +1,4 @@
-let stateOfItems = [
+export let stateOfItems = [
   { item: username, empty: true, result: false },
   { item: email, empty: true, result: false },
   { item: password, empty: true, result: false },
@@ -105,7 +105,6 @@ export function isInvalidForPassword(input) {
 }
 
 export function isNotMatchPasswords(input, confirmInput) {
-  const stateOfItem = getStateOfItem(input);
   if (input.value === confirmInput.value) {
     showSuccess(confirmInput);
     return false;
@@ -117,17 +116,6 @@ export function isNotMatchPasswords(input, confirmInput) {
 
 export function capitalizeTheFirstLetter(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
-
-const minCharCount = 3;
-const maxCharCount = 15;
-
-export function checkTheValidation() {
-  removeErrorMessages([username, email, password, confirmPassword]);
-  isInvalidForLength(username, minCharCount, maxCharCount);
-  checkEmail(email);
-  checkPassword(password);
-  checkPasswordsMatch(password, confirmPassword);
 }
 
 export function isEveryRequiredItemValid() {

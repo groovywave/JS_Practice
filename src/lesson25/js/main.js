@@ -96,16 +96,24 @@ function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
 }
 
 username.addEventListener('input', () => {
-  checkItemAndToggleSubmitButton(
-    validation.isInvalidForLength,
-    username,
-    [3, 15]
-  );
+  const minCharCount = 3;
+  const maxCharCount = 15;
+  checkItemAndToggleSubmitButton(validation.isInvalidForLength, username, [
+    minCharCount,
+    maxCharCount
+  ]);
 });
 
 email.addEventListener('input', () => {
   checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, []);
 });
+
+function checkMatchingPasswordsAndToggleSubmitButton() {
+  if (!validation.getStateOfItem(password).result) return;
+  checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
+    confirmPassword
+  ]);
+}
 
 function checkPasswordAndToggleSubmitButton() {
   checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, []);
@@ -115,13 +123,6 @@ function checkPasswordAndToggleSubmitButton() {
 password.addEventListener('input', () => {
   checkPasswordAndToggleSubmitButton();
 });
-
-function checkMatchingPasswordsAndToggleSubmitButton() {
-  if (!validation.getStateOfItem(password).result) return;
-  checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
-    confirmPassword
-  ]);
-}
 
 confirmPassword.addEventListener('input', () => {
   checkMatchingPasswordsAndToggleSubmitButton();
