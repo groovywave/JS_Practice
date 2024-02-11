@@ -17,7 +17,6 @@ linkToRule.addEventListener('click', event => {
 
 const submitCheckbox = document.getElementById('js-submitCheckbox');
 const submitButton = document.getElementById('js-submitButton');
-let isReadUpToTheLastSentence = false;
 
 function checkboxToBeChecked() {
   submitCheckbox.disabled = false;
@@ -45,10 +44,6 @@ function addToggleToTheSubmitCheckbox() {
 mask.addEventListener('click', () => {
   closeModal();
   username.focus();
-  if (isReadUpToTheLastSentence) {
-    checkboxToBeChecked();
-    addToggleToTheSubmitCheckbox();
-  }
 });
 
 const closeButton = document.getElementById('js-closeButton');
@@ -61,9 +56,8 @@ function readUpToTheLastSentence(entries) {
   if (!entries[0].isIntersecting) {
     return;
   }
-  isReadUpToTheLastSentence = true;
-  submitCheckbox.disabled = false;
-  submitCheckbox.checked = true;
+  checkboxToBeChecked();
+  addToggleToTheSubmitCheckbox();
 }
 
 submitButton.addEventListener('click', e => {
