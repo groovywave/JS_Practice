@@ -10,64 +10,87 @@
   </head>
   <body class="m-0 flex items-center justify-center bg-gray-100">
     <div
-      class="container mx-auto min-h-screen w-full max-w-md overflow-y-auto rounded-lg bg-white p-8 shadow-lg"
+      class="container mx-auto min-h-screen w-full max-w-md overflow-y-auto rounded-lg bg-gray-100 p-8 shadow-lg"
     >
-      <form id="js-form" class="px-10 py-8">
+      <form id="js-form" class="bg-gray-100 px-10 py-8">
         <h2 class="mb-6 text-center text-lg">Register With Us</h2>
         <div class="relative mb-5">
           <label
             for="username"
-            id="js-userName"
+            id="js-userNameLabel"
             class="mb-1 block text-gray-700"
             >Username</label
           >
           <input
             type="text"
             id="username"
-            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:border-gray-700 focus:outline-none"
+            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
             placeholder="Enter username"
+            required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
+            data-testid="js-usernameError"
             >Error message</small
           >
         </div>
         <div class="relative mb-5">
-          <label for="email" class="mb-1 block text-gray-700">Email</label>
+          <label
+            for="email"
+            class="mb-1 block pt-1 text-gray-700"
+            data-testid="js-emailLabel"
+            >Email</label
+          >
           <input
             type="email"
             id="email"
-            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:border-gray-700 focus:outline-none"
+            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
             placeholder="Enter email"
+            required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
+            data-testid="js-emailError"
             >Error message</small
           >
         </div>
         <div class="relative mb-5">
-          <label for="password" class="mb-1 block text-gray-700"
+          <label
+            for="password"
+            class="mb-1 block pt-1 text-gray-700"
+            data-testid="js-passwordLabel"
             >Password</label
           >
           <input
             type="password"
             id="password"
-            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:border-gray-700 focus:outline-none"
+            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
             placeholder="Enter password"
+            required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
+            data-testid="js-passwordError"
             >Error message</small
           >
         </div>
         <div class="relative mb-6">
-          <label for="confirmPassword" class="mb-1 block text-gray-700"
+          <label
+            for="confirmPassword"
+            class="mb-1 block pt-1 text-gray-700"
+            data-testid="js-confirmPasswordLabel"
             >Confirm Password</label
           >
           <input
             type="password"
             id="confirmPassword"
-            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:border-gray-700 focus:outline-none"
+            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
             placeholder="Enter password again"
+            required
           />
-          <small class="invisible absolute mb-0 ml-0 block text-errorColor"
+          <small
+            class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
+            data-testid="js-confirmPasswordError"
             >Error message</small
           >
         </div>
@@ -76,12 +99,16 @@
             type="checkbox"
             name="checkbox"
             id="js-submitCheckbox"
-            class="ml-1 h-4 w-4 rounded border-0 disabled:cursor-not-allowed"
+            class="ml-1 h-4 w-4 rounded border-0 pt-1 disabled:cursor-not-allowed"
             value="agreement"
             disabled
           />
           <label for="js-submitCheckbox"
-            ><a id="js-linkToRule" href="#" class="ml-1 text-blue-300 underline"
+            ><a
+              id="js-linkToRule"
+              data-testid="js-linkToRule"
+              href="#"
+              class="ml-1 text-black underline"
               >利用規約</a
             >を読み、同意しました。</label
           >
@@ -90,7 +117,7 @@
         <button
           id="js-submitButton"
           type="submit"
-          class="w-full rounded-lg bg-blue-300 px-4 py-2 font-bold text-white transition-colors hover:bg-blue-400 disabled:bg-gray-300"
+          class="w-full rounded-lg border-2 bg-green-300 px-4 py-2 font-bold text-white transition-colors duration-300 before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-300 disabled:bg-gray-300 disabled:text-white"
           disabled
         >
           Submit
@@ -114,7 +141,12 @@
         aria-describedby="terms-and-conditions"
         tabindex="0"
       >
-        <button type="button" id="js-closeButton" class="close_btn">
+        <button
+          type="button"
+          id="js-closeButton"
+          class="close_btn fixed"
+          data-testid="js-closeButton"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -385,29 +417,15 @@
               <li class="mb-1 text-xs">
                 本規約の解釈にあたっては，日本法を準拠法とします。
               </li>
-              <li class="mb-1 text-xs">
+              <li
+                id="js-lastSentence"
+                class="mb-1 text-xs"
+                data-testid="js-lastSentence"
+              >
                 本サービスに関して紛争が生じた場合には，当社の本店所在地を管轄する裁判所を専属的合意管轄とします。
               </li>
             </ol>
           </div>
-        </div>
-        <div class="flex-auto items-center justify-center text-center">
-          <button
-            type="button"
-            id="js-agreeButton"
-            data-testid="js-agreeButton"
-            class="mb-20 rounded bg-blue-300 px-4 py-2 font-bold text-white hover:bg-blue-400 disabled:bg-gray-300"
-            disabled
-          >
-            利用規約を読み、同意しました
-          </button>
-          <button
-            type="button"
-            id="js-cancelButton"
-            class="rounded bg-gray-100 px-4 py-2 font-bold text-black hover:bg-gray-200"
-          >
-            キャンセル
-          </button>
         </div>
       </div>
     </div>

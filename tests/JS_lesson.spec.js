@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000/lesson24/index.html');
   await page.getByLabel('Username').click();
@@ -9,6 +10,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('press tab-key and focus on 利用規約', async ({ page }) => {
+  // await page.getByRole('checkbox').press('Tab');
   await expect(page.getByRole('link', { name: '利用規約' })).toBeFocused();
 });
 
@@ -20,6 +22,8 @@ test('press Enter on the link and open the modal', async ({ page }) => {
 test("Click the 'Agree' button to go to the form page", async ({ page }) => {
   await page.getByRole('link', { name: '利用規約' }).press('Enter');
   await page.getByTestId('js-agreeButton').scrollIntoViewIfNeeded();
+  // await page.getByTestId('js-agreeButton').press('ArrowDown');
+  // await page.getByTestId('js-agreeButton').click();
   await page.getByLabel('利用規約', { exact: true }).press('ArrowDown');
   await expect(page.getByLabel('Username')).toBeVisible();
   await page.getByText('利用規約を読み、同意しました', { exact: true }).click();
