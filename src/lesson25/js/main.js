@@ -48,6 +48,21 @@ function readUpToTheLastSentence(entries) {
   }
   checkboxToBeChecked();
   addToggleToTheSubmitCheckbox();
+  mask.addEventListener('click', () => {
+    checkItemAndToggleSubmitButton(validation.isInvalidForLength, username, [
+      getStateOfItem(username),
+      minCharCount,
+      maxCharCount
+    ]);
+    checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, [
+      getStateOfItem(email)
+    ]);
+    checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
+      confirmPassword,
+      getStateOfItem(confirmPassword)
+    ]);
+    checkPasswordAndToggleSubmitButton();
+  });
 }
 submitButton.addEventListener('click', e => {
   e.preventDefault();
@@ -83,9 +98,11 @@ function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
 }
+
+const minCharCount = 3;
+const maxCharCount = 15;
+
 username.addEventListener('input', () => {
-  const minCharCount = 3;
-  const maxCharCount = 15;
   checkItemAndToggleSubmitButton(validation.isInvalidForLength, username, [
     getStateOfItem(username),
     minCharCount,
