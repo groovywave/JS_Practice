@@ -21,7 +21,7 @@ const submitButton = document.getElementById('js-submitButton');
 function checkboxToBeChecked() {
   submitCheckbox.disabled = false;
   submitCheckbox.checked = true;
-  if (!validation.isEveryRequiredItemValid()) return;
+  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
   submitButton.disabled = false;
 }
 
@@ -32,7 +32,7 @@ function closeModal() {
 
 function addToggleToTheSubmitCheckbox() {
   submitCheckbox.addEventListener('change', () => {
-    if (!validation.isEveryRequiredItemValid()) return;
+    if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
     if (!submitCheckbox.checked) {
       submitButton.disabled = true;
     } else {
@@ -80,11 +80,22 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
 
+let stateOfItems = [
+  { item: username, empty: true, result: false },
+  { item: email, empty: true, result: false },
+  { item: password, empty: true, result: false },
+  { item: confirmPassword, empty: true, result: false }
+];
+
+function getStateOfItem(input) {
+  return stateOfItems.find(obj => obj.item === input);
+}
+
 function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
   submitButton.disabled = true;
-  if (validation.isEmptyForRequired(arg)) return;
+  if (validation.isEmptyForRequired(arg, getStateOfItem(arg))) return;
   if (func(arg, ...anotherArgs)) return;
-  if (!validation.isEveryRequiredItemValid()) return;
+  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
 }
@@ -93,24 +104,31 @@ username.addEventListener('input', () => {
   const minCharCount = 3;
   const maxCharCount = 15;
   checkItemAndToggleSubmitButton(validation.isInvalidForLength, username, [
+    getStateOfItem(username),
     minCharCount,
     maxCharCount
   ]);
 });
 
 email.addEventListener('input', () => {
-  checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, []);
+  checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, [
+    getStateOfItem(email)
+  ]);
 });
 
 function checkMatchingPasswordsAndToggleSubmitButton() {
   checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
-    confirmPassword
+    confirmPassword,
+    getStateOfItem(confirmPassword)
   ]);
 }
 
 function checkPasswordAndToggleSubmitButton() {
-  checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, []);
-  if (!validation.getStateOfItem(password).result) return;
+  checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, [
+    getStateOfItem(password)
+  ]);
+  // if (!validation.getStateOfItem(password).result) return;
+  if (!getStateOfItem(password).result) return;
   if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
   confirmPassword.addEventListener('input', () => {
     checkMatchingPasswordsAndToggleSubmitButton();
