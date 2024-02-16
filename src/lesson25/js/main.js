@@ -1,17 +1,20 @@
 import * as validation from './modules/validation.js';
 
 const username = document.getElementById('username');
+
 username.focus();
 
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
+
 let stateOfItems = [
   { item: username, empty: true, result: false },
   { item: email, empty: true, result: false },
   { item: password, empty: true, result: false },
   { item: confirmPassword, empty: true, result: false }
 ];
+
 function getStateOfItem(input) {
   return stateOfItems.find(obj => obj.item === input);
 }
@@ -31,8 +34,10 @@ function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
 }
+
 const minCharCount = 3;
 const maxCharCount = 15;
+
 username.addEventListener('input', () => {
   checkItemAndToggleSubmitButton(validation.isInvalidForLength, username, [
     getStateOfItem(username),
@@ -40,6 +45,7 @@ username.addEventListener('input', () => {
     maxCharCount
   ]);
 });
+
 email.addEventListener('input', () => {
   checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, [
     getStateOfItem(email)
@@ -51,6 +57,7 @@ function checkMatchingPasswordsAndToggleSubmitButton() {
     getStateOfItem(confirmPassword)
   ]);
 }
+
 function checkPasswordAndToggleSubmitButton() {
   checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, [
     getStateOfItem(password)
@@ -64,6 +71,7 @@ function checkPasswordAndToggleSubmitButton() {
     checkMatchingPasswordsAndToggleSubmitButton();
   });
 }
+
 password.addEventListener('input', () => {
   checkPasswordAndToggleSubmitButton();
 });
