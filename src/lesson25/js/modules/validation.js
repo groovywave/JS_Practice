@@ -114,5 +114,5 @@ export function capitalizeTheFirstLetter(input) {
 }
 
 export function isEveryRequiredItemValid(stateOfItems) {
-  return stateOfItems.every(obj => obj.result === true);
+  return stateOfItems.every(obj => obj.isValid);
 }
