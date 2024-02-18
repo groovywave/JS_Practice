@@ -9,10 +9,10 @@ const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
 
 let stateOfItems = [
-  { item: username, empty: true, result: false },
-  { item: email, empty: true, result: false },
-  { item: password, empty: true, result: false },
-  { item: confirmPassword, empty: true, result: false }
+  { item: username, empty: true, isValid: false },
+  { item: email, empty: true, isValid: false },
+  { item: password, empty: true, isValid: false },
+  { item: confirmPassword, empty: true, isValid: false }
 ];
 
 function getStateOfItem(input) {
@@ -62,7 +62,7 @@ function checkPasswordAndToggleSubmitButton() {
   checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, [
     getStateOfItem(password)
   ]);
-  if (!getStateOfItem(password).result) return;
+  if (!getStateOfItem(password).isValid) return;
   if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
   confirmPassword.addEventListener('input', () => {
     checkMatchingPasswordsAndToggleSubmitButton();
