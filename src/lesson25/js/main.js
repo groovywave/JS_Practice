@@ -51,6 +51,7 @@ email.addEventListener('input', () => {
     getStateOfItem(email)
   ]);
 });
+
 function checkMatchingPasswordsAndToggleSubmitButton() {
   checkItemAndToggleSubmitButton(
     validation.showResultMatchingPasswords,
