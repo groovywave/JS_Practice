@@ -28,7 +28,7 @@ submitButton.addEventListener('click', e => {
 
 function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
   submitButton.disabled = true;
-  if (validation.isEmptyForRequired(arg, getStateOfItem(arg))) return;
+  if (validation.showEmptyError(arg, getStateOfItem(arg))) return;
   if (func(arg, ...anotherArgs)) return;
   if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
   if (!submitCheckbox.checked) return;
@@ -39,29 +39,32 @@ const minCharCount = 3;
 const maxCharCount = 15;
 
 username.addEventListener('input', () => {
-  checkItemAndToggleSubmitButton(validation.isInvalidForLength, username, [
-    getStateOfItem(username),
-    minCharCount,
-    maxCharCount
-  ]);
+  checkItemAndToggleSubmitButton(
+    validation.showResultUsernameValidation,
+    username,
+    [getStateOfItem(username), minCharCount, maxCharCount]
+  );
 });
 
 email.addEventListener('input', () => {
-  checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, [
+  checkItemAndToggleSubmitButton(validation.showResultEmailValidation, email, [
     getStateOfItem(email)
   ]);
 });
 function checkMatchingPasswordsAndToggleSubmitButton() {
-  checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
-    confirmPassword,
-    getStateOfItem(confirmPassword)
-  ]);
+  checkItemAndToggleSubmitButton(
+    validation.showResultMatchingPasswords,
+    password,
+    [confirmPassword, getStateOfItem(confirmPassword)]
+  );
 }
 
 function checkPasswordAndToggleSubmitButton() {
-  checkItemAndToggleSubmitButton(validation.isInvalidForPassword, password, [
-    getStateOfItem(password)
-  ]);
+  checkItemAndToggleSubmitButton(
+    validation.showResultPasswordValidation,
+    password,
+    [getStateOfItem(password)]
+  );
   if (!getStateOfItem(password).isValid) return;
   if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
   confirmPassword.addEventListener('input', () => {
@@ -125,18 +128,19 @@ function addToggleToTheSubmitCheckbox() {
 }
 
 function checkAllItems() {
-  checkItemAndToggleSubmitButton(validation.isInvalidForLength, username, [
-    getStateOfItem(username),
-    minCharCount,
-    maxCharCount
-  ]);
-  checkItemAndToggleSubmitButton(validation.isInvalidForMail, email, [
+  checkItemAndToggleSubmitButton(
+    validation.showResultUsernameValidation,
+    username,
+    [getStateOfItem(username), minCharCount, maxCharCount]
+  );
+  checkItemAndToggleSubmitButton(validation.showResultEmailValidation, email, [
     getStateOfItem(email)
   ]);
-  checkItemAndToggleSubmitButton(validation.isNotMatchPasswords, password, [
-    confirmPassword,
-    getStateOfItem(confirmPassword)
-  ]);
+  checkItemAndToggleSubmitButton(
+    validation.showResultMatchingPasswords,
+    password,
+    [confirmPassword, getStateOfItem(confirmPassword)]
+  );
   checkPasswordAndToggleSubmitButton();
 }
 
