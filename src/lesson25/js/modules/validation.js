@@ -43,12 +43,12 @@ export function removeErrorMessages(inputArr) {
   });
 }
 
-export function checkForUnfilled(stateOfItem) {
+export function isEmpty(stateOfItem) {
   if (stateOfItem.empty) return true;
 }
 
 export function isInvalidForLength(input, stateOfItem, min, max) {
-  if (checkForUnfilled(input)) return;
+  if (isEmpty(input)) return;
   if (input.value.length < min) {
     showError(
       input,
@@ -70,7 +70,7 @@ export function isInvalidForLength(input, stateOfItem, min, max) {
 }
 
 export function isInvalidForMail(input, stateOfItem) {
-  if (checkForUnfilled(input)) return;
+  if (isEmpty(input)) return;
   const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
   if (regularExpression.test(input.value.trim())) {
@@ -83,7 +83,7 @@ export function isInvalidForMail(input, stateOfItem) {
 }
 
 export function isInvalidForPassword(input, stateOfItem) {
-  if (checkForUnfilled(input)) return;
+  if (isEmpty(input)) return;
   const regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
   // https://genkichi.hateblo.jp/entry/2019/02/23/143527
   if (regularExpression.test(input.value.trim())) {
