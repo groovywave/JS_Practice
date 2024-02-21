@@ -26,10 +26,10 @@ submitButton.addEventListener('click', e => {
   window.location.href = 'registration.html';
 });
 
-function checkItemAndToggleSubmitButton(func, arg, anotherArgs) {
+function checkItemAndToggleSubmitButton(func, arg, theOtherArgs) {
   submitButton.disabled = true;
   if (validation.showEmptyError(arg, getStateOfItem(arg))) return;
-  if (func(arg, ...anotherArgs)) return;
+  if (func(arg, ...theOtherArgs)) return;
   if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
   if (!submitCheckbox.checked) return;
   submitButton.disabled = false;
