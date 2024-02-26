@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:3000/lesson25/index.html");
 });
 
-describe("tab-key navigation", () => {
+test.describe("tab-key navigation", () => {
   test.beforeEach(async ({ page }) => {
     await page.getByLabel("Username").click();
     await page.getByLabel("Username").press("Tab");
@@ -15,8 +15,7 @@ describe("tab-key navigation", () => {
   });
 
   test("press tab-key and focus on 利用規約", async ({ page }) => {
-    // await expect(page.getByRole("link", { name: "利用規約" })).toBeFocused();
-    await expect(page.getByTestId("js-linkToRule")).toBeFocused();
+    await expect(page.getByRole("link", { name: "利用規約" })).toBeFocused();
   });
 
   test("press Enter on the link and open the modal", async ({ page }) => {
@@ -25,14 +24,8 @@ describe("tab-key navigation", () => {
   });
 });
 
-describe("form validation", () => {
+test.describe("form validation", () => {
   test.beforeEach(async ({ page }) => {
-    // await page.goto('http://localhost:3000/lesson25/index.html');
-    // await page.getByLabel('Username').click();
-    // await page.getByLabel('Username').press('Tab');
-    // await page.getByLabel('Email').press('Tab');
-    // await page.getByLabel('Password', { exact: true }).press('Tab');
-    // await page.getByLabel('Confirm Password').press('Tab');
     await page.getByRole("link", { name: "利用規約" }).press("Enter");
     await page.getByTestId("js-lastSentence").scrollIntoViewIfNeeded();
     await page.getByTestId("js-lastSentence").press("ArrowDown");
