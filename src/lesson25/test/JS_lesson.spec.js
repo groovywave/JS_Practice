@@ -24,13 +24,6 @@ test.describe("tab-key navigation", () => {
 });
 
 test.describe("form validation", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.getByRole("link", { name: "利用規約" }).press("Enter");
-    await page.getByTestId("js-lastSentence").scrollIntoViewIfNeeded();
-    await page.getByTestId("js-lastSentence").press("ArrowDown");
-    await page.getByTestId("js-closeButton").click();
-  });
-
   test("input less than 3 characters into username and show error message", async ({
     page,
   }) => {
@@ -90,6 +83,10 @@ test.describe("form validation", () => {
   test("Show a completion message after the form is successfully submitted", async ({
     page,
   }) => {
+    await page.getByRole("link", { name: "利用規約" }).press("Enter");
+    await page.getByTestId("js-lastSentence").scrollIntoViewIfNeeded();
+    await page.getByTestId("js-lastSentence").press("ArrowDown");
+    await page.getByTestId("js-closeButton").click();
     await page.getByLabel("Username").fill("Alexander");
     await page.getByLabel("Email").fill("Arnord@liverpool.com");
     await page.getByTestId("js-passwordLabel").fill("KevinDeBruyne17");
