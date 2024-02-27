@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import { describe } from "node:test";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:3000/lesson25/index.html");
