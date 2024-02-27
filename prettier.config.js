@@ -1,12 +1,12 @@
 // prettier.config.js
 module.exports = {
-  plugins: ['prettier-plugin-tailwindcss'],
-  singleQuote: false,
-  trailingComma: 'es5',
-  arrowParens: 'avoid',
-  proseWrap: 'preserve',
-  quoteProps: 'as-needed',
+  singleQuote: true,
+  trailingComma: "none",
+  arrowParens: "avoid",
+  proseWrap: "preserve",
+  quoteProps: "as-needed",
   bracketSameLine: false,
   bracketSpacing: true,
-  tabWidth: 2
+  tabWidth: 2,
+  plugins: ["prettier-plugin-tailwindcss"],
 };
