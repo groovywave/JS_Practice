@@ -2,6 +2,7 @@ import * as validation from './modules/validation.js';
 
 const username = document.getElementById('username');
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 username.focus();
 
@@ -84,6 +85,10 @@ password.addEventListener('input', () => {
 username.focus();
 >>>>>>> parent of be33949 (WIP on lesson26: 49f6b0a mkdir lesson26)
 
+=======
+username.focus();
+
+>>>>>>> cc14d8bfbed31885f6079e3c41a1b655953057c5
 const linkToRule = document.getElementById('js-linkToRule');
 const mask = document.getElementById('js-mask');
 const modal = document.getElementById('js-modal');
@@ -96,34 +101,22 @@ linkToRule.addEventListener('click', event => {
   modalBody.focus();
 });
 
-function closeModal() {
-  mask.classList.add('hidden');
-  modal.classList.add('hidden');
-}
-
-mask.addEventListener('click', () => {
-  closeModal();
-  username.focus();
-});
-
-const closeButton = document.getElementById('js-closeButton');
-
-closeButton.addEventListener('click', () => {
-  mask.click();
-});
-
 const submitCheckbox = document.getElementById('js-submitCheckbox');
+const submitButton = document.getElementById('js-submitButton');
 
 function checkboxToBeChecked() {
   submitCheckbox.disabled = false;
   submitCheckbox.checked = true;
-  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
+  if (!validation.isEveryRequiredItemValid()) return;
   submitButton.disabled = false;
 }
-
+function closeModal() {
+  mask.classList.add('hidden');
+  modal.classList.add('hidden');
+}
 function addToggleToTheSubmitCheckbox() {
   submitCheckbox.addEventListener('change', () => {
-    if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
+    if (!validation.isEveryRequiredItemValid()) return;
     if (!submitCheckbox.checked) {
       submitButton.disabled = true;
     } else {
@@ -132,53 +125,47 @@ function addToggleToTheSubmitCheckbox() {
   });
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> cc14d8bfbed31885f6079e3c41a1b655953057c5
 mask.addEventListener('click', () => {
   closeModal();
   username.focus();
 });
+<<<<<<< HEAD
 >>>>>>> parent of be33949 (WIP on lesson26: 49f6b0a mkdir lesson26)
+=======
+>>>>>>> cc14d8bfbed31885f6079e3c41a1b655953057c5
 
-function checkAllItems() {
-  checkItemAndToggleSubmitButton(
-    validation.showResultUsernameValidation,
-    username,
-    [getStateOfItem(username), minCharCount, maxCharCount]
-  );
-  checkItemAndToggleSubmitButton(validation.showResultEmailValidation, email, [
-    getStateOfItem(email)
-  ]);
-  checkItemAndToggleSubmitButton(
-    validation.showResultMatchingPasswords,
-    password,
-    [confirmPassword, getStateOfItem(confirmPassword)]
-  );
-  checkPasswordAndToggleSubmitButton();
-}
-
+const closeButton = document.getElementById('js-closeButton');
+closeButton.addEventListener('click', () => {
+  mask.click();
+});
 function readUpToTheLastSentence(entries) {
   if (!entries[0].isIntersecting) {
     return;
   }
   checkboxToBeChecked();
   addToggleToTheSubmitCheckbox();
-  mask.addEventListener('click', () => {
-    checkAllItems();
-  });
 }
 
+submitButton.addEventListener('click', e => {
+  e.preventDefault();
+  window.location.href = 'registration.html';
+});
+const lastSentence = document.getElementById('js-lastSentence');
 const options = {
   root: modal,
   threshold: 1
 };
-
 const observer = new IntersectionObserver(readUpToTheLastSentence, options);
-
-const lastSentence = document.getElementById('js-lastSentence');
-
 observer.observe(lastSentence);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> cc14d8bfbed31885f6079e3c41a1b655953057c5
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
@@ -220,4 +207,7 @@ function checkPasswordAndToggleSubmitButton() {
 password.addEventListener('input', () => {
   checkPasswordAndToggleSubmitButton();
 });
+<<<<<<< HEAD
 >>>>>>> parent of be33949 (WIP on lesson26: 49f6b0a mkdir lesson26)
+=======
+>>>>>>> cc14d8bfbed31885f6079e3c41a1b655953057c5
