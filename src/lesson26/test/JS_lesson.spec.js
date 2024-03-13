@@ -1,15 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/lesson25/index.html');
+  await page.goto('http://localhost:3000/lesson26/index.html');
 });
 
 test.describe('tab-key navigation', () => {
   test.beforeEach(async ({ page }) => {
-    await page.getByLabel('Username').click();
-    await page.getByLabel('Username').press('Tab');
-    await page.getByLabel('Email').press('Tab');
-    await page.getByLabel('Password', { exact: true }).press('Tab');
+    await page.getByLabel('Username or Email').click();
+    await page.getByLabel('Username or Email').press('Tab');
+    await page.getByLabel('Password').press('Tab');
     await page.getByLabel('Confirm Password').press('Tab');
   });
 

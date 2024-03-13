@@ -1,35 +1,41 @@
-export function showError(input, stateOfItem, message) {
-  input.classList.remove('border-gray-200');
-  input.classList.remove('border-successColor');
-  input.classList.add('border-errorColor');
-  stateOfItem.isValid = false;
-  const parentElement = input.parentElement;
+export function showError(item, errorMessage) {
+  item.classList.remove('border-gray-200');
+  item.classList.remove('border-successColor');
+  item.classList.add('border-errorColor');
+  const parentElement = item.parentElement;
   const small = parentElement.querySelector('small');
-  small.innerText = message;
+  small.innerText = errorMessage;
   small.classList.remove('invisible');
 }
 
-export function showSuccess(input, stateOfItem) {
-  input.classList.remove('border-gray-200');
-  input.classList.remove('border-errorColor');
-  input.classList.add('border-successColor');
-  stateOfItem.isValid = true;
-  const parentElement = input.parentElement;
+export function showSuccess(item) {
+  item.classList.remove('border-gray-200');
+  item.classList.remove('border-errorColor');
+  item.classList.add('border-successColor');
+  const parentElement = item.parentElement;
   const small = parentElement.querySelector('small');
   small.classList.add('invisible');
 }
-
-export function showEmptyError(input, stateOfItem) {
+/* export function showEmptyError(input) {
   if (input.value.trim() === '') {
-    stateOfItem.empty = true;
+    const stateOfItem = getStateOfItem(input);
     showError(
       input,
-      stateOfItem,
       `${capitalizeTheFirstLetter(input)} is required`
     );
+  }
+} */
+
+export function isEmpty(input, stateOfItem) {
+  console.log(input);
+  console.log(typeof input);
+  // console.log('🚀 ~ isEmpty ~ input.trim() :', input.trim());
+  if (input.trim() === '') {
+    stateOfItem.errorMessage = `${capitalizeTheFirstLetter(stateOfItem.name)} is required`;
+    stateOfItem.isEmpty = true;
     return true;
   } else {
-    stateOfItem.empty = false;
+    stateOfItem.isEmpty = false;
     return false;
   }
 }
@@ -43,65 +49,75 @@ export function removeErrorMessages(inputArr) {
   });
 }
 
-export function isEmpty(stateOfItem) {
-  if (stateOfItem.empty) return true;
-}
-
-export function showResultUsernameValidation(input, stateOfItem, min, max) {
-  if (isEmpty(input)) return;
-  if (input.value.length < min) {
-    showError(
-      input,
-      stateOfItem,
-      `${capitalizeTheFirstLetter(input)} must be at least ${min} characters`
-    );
-  } else if (input.value.length > max) {
-    showError(
-      input,
-      stateOfItem,
-      `${capitalizeTheFirstLetter(input)} must be less than ${max} characters`
-    );
-  } else {
-    showSuccess(input, stateOfItem);
+export function isValidUsername(input, stateOfItem, min, max) {
+  if (isEmpty(input, stateOfItem)) return false;
+  if (input.length < min) {
+    // stateOfItem.isValid = false;
+    stateOfItem.errorMessage = `Username must be at least ${min} characters`;
+    return false;
   }
+  if (input.length > max) {
+    // stateOfItem.isValid = false;
+    stateOfItem.errorMessage = `Username must be less than ${max} characters`;
+    return false;
+  }
+  // stateOfItem.isValid = true;
+  return true;
 }
 
-export function showResultEmailValidation(input, stateOfItem) {
-  if (isEmpty(input)) return;
+export function isValidEmail(input, stateOfItem) {
+  if (isEmpty(input, stateOfItem)) return false;
   const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
-  if (regularExpression.test(input.value.trim())) {
-    showSuccess(input, stateOfItem);
-  } else {
-    showError(input, stateOfItem, 'Email is not valid');
+  if (!regularExpression.test(input.trim())) {
+    // stateOfItem.isValid = false;
+    stateOfItem.theOtherErrorMessage = 'Email is not valid';
+    return false;
   }
+  // stateOfItem.isValid = true;
+  return true;
 }
 
-export function showResultPasswordValidation(input, stateOfItem) {
-  if (isEmpty(input)) return;
+export function isValidPassword(input, stateOfItem) {
+  // if (isEmpty(item)) return;
   const regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
   // https://genkichi.hateblo.jp/entry/2019/02/23/143527
-  if (regularExpression.test(input.value.trim())) {
-    showSuccess(input, stateOfItem);
+  if (regularExpression.test(input.trim())) {
+    // showSuccess(item, stateOfItem);
+    return true;
   } else {
-    showError(
-      input,
-      stateOfItem,
-      'Min 8 chars, including 1 uppercase and 1 number'
-    );
+    stateOfItem.errorMessage =
+      'Min 8 chars, including 1 uppercase and 1 number';
+    return false;
+    // showError(
+    // item,
+    // stateOfItem
+    // 'Min 8 chars, including 1 uppercase and 1 number'
+    // );
   }
 }
 
-export function showResultMatchingPasswords(input, confirmInput, stateOfItem) {
-  if (input.value === confirmInput.value) {
-    showSuccess(confirmInput, stateOfItem);
+// export function showResultMatchingPasswords(input, confirmInput, stateOfItem) {
+export function isMatchingPasswords(input, confirmInput, stateOfItem) {
+  if (input === confirmInput) {
+    return true;
+    // showSuccess(confirmInput, stateOfItem);
   } else {
-    showError(confirmInput, stateOfItem, 'Passwords do not match');
+    // showError(confirmInput, stateOfItem, 'Passwords do not match');
+    stateOfItem.errorMessage = 'Passwords do not match';
+    return false;
   }
 }
 
-export function capitalizeTheFirstLetter(input) {
-  return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+export function capitalizeTheFirstLetter(string) {
+  // const stateOfItem = getStateOfItem(input);
+  // Item(input);
+  // return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function isSomeRequiredItemEmpty(stateOfItems) {
+  return stateOfItems.some(obj => obj.isEmpty);
 }
 
 export function isEveryRequiredItemValid(stateOfItems) {

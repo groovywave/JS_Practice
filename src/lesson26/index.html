@@ -16,16 +16,16 @@
         <h2 class="mb-6 text-center text-lg">Register With Us</h2>
         <div class="relative mb-5">
           <label
-            for="username"
-            id="js-userNameLabel"
+            for="js-usernameOrEmailLabel"
+            id="usernameOrEmailLabel"
             class="mb-1 block text-gray-700"
-            >Username</label
+            >Username or Email</label
           >
           <input
             type="text"
-            id="username"
+            id="js-usernameOrEmailLabel"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
-            placeholder="Enter username"
+            placeholder="Enter username or email"
             required
           />
           <small
@@ -34,7 +34,7 @@
             >Error message</small
           >
         </div>
-        <div class="relative mb-5">
+        <!-- <div class="relative mb-5">
           <label
             for="email"
             class="mb-1 block pt-1 text-gray-700"
@@ -53,7 +53,7 @@
             data-testid="js-emailError"
             >Error message</small
           >
-        </div>
+        </div> -->
         <div class="relative mb-5">
           <label
             for="password"
