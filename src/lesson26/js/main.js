@@ -52,6 +52,8 @@ function checkboxToBeChecked() {
 
 function toggleSubmitButton() {
   if (submitCheckbox.checked) {
+    // checkAllItems();
+    // if (validation.isEveryRequiredItemValid(stateOfItems))
     submitButton.disabled = false;
   } else {
     submitButton.disabled = true;
@@ -105,6 +107,7 @@ function checkAndShowUsernameOrEmailValidation() {
     return;
   }
   stateOfUsernameOrEmail.isValid = true;
+  if (intervalIdForErrorMessages) clearInterval(intervalIdForErrorMessages);
   validation.showSuccess(usernameOrEmail);
 }
 
@@ -224,7 +227,7 @@ function readUpToTheLastSentence(entries) {
     return;
   }
   checkboxToBeChecked();
-  addToggleToTheSubmitCheckbox();
+  // addToggleToTheSubmitCheckbox();
   mask.addEventListener('click', () => {
     // if (!validation.isSomeRequiredItemEmpty(stateOfItems))
     checkAllItemsAndToggleSubmitButton();
