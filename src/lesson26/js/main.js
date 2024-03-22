@@ -1,15 +1,24 @@
 import * as validation from './modules/validation.js';
 
-const usernameOrEmail = document.getElementById('js-usernameOrEmailLabel');
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirmPassword');
+const username = document.getElementById('js-username');
+const email = document.getElementById('js-email');
+const password = document.getElementById('js-password');
+const confirmPassword = document.getElementById('js-confirmPassword');
 
-usernameOrEmail.focus();
+username.focus();
 
 let stateOfItems = [
   {
-    item: usernameOrEmail,
-    name: 'usernameOrEmail',
+    item: username,
+    name: 'username',
+    isEmpty: true,
+    isValid: false,
+    errorMessage: 'none',
+    theOtherErrorMessage: 'none'
+  },
+  {
+    item: email,
+    name: 'email',
     isEmpty: true,
     isValid: false,
     errorMessage: 'none',
@@ -52,8 +61,6 @@ function checkboxToBeChecked() {
 
 function toggleSubmitButton() {
   if (submitCheckbox.checked) {
-    // checkAllItems();
-    // if (validation.isEveryRequiredItemValid(stateOfItems))
     submitButton.disabled = false;
   } else {
     submitButton.disabled = true;
@@ -66,49 +73,51 @@ function addToggleToTheSubmitCheckbox() {
   });
 }
 
+const stateOfUsername = getStateOfItem(username);
+
 const minCharCount = 3;
 const maxCharCount = 15;
-const stateOfUsernameOrEmail = getStateOfItem(usernameOrEmail);
-let intervalIdForErrorMessages;
 
-function checkAndShowUsernameOrEmailValidation() {
-  if (validation.isEmpty(usernameOrEmail.value, stateOfUsernameOrEmail)) {
-    validation.showError(usernameOrEmail, stateOfUsernameOrEmail.errorMessage);
+function checkAndShowUsernameValidation() {
+  if (validation.isEmpty(username.value, stateOfUsername)) {
+    validation.showError(username, stateOfUsername.errorMessage);
     return;
   }
   const isValidUsername = validation.isValidUsername(
-    usernameOrEmail.value,
-    stateOfUsernameOrEmail,
+    username.value,
+    stateOfUsername,
     minCharCount,
     maxCharCount
   );
-  const isValidEmail = validation.isValidEmail(
-    usernameOrEmail.value,
-    stateOfUsernameOrEmail
+  console.log(
+    '🚀 ~ checkAndShowUsernameValidation ~ isValidUsername:',
+    isValidUsername
   );
-  if (!isValidUsername && !isValidEmail) {
-    stateOfUsernameOrEmail.isValid = false;
-    validation.showError(usernameOrEmail, stateOfUsernameOrEmail.errorMessage);
-    let toggle = true;
-    intervalIdForErrorMessages = setInterval(() => {
-      if (toggle) {
-        validation.showError(
-          usernameOrEmail,
-          stateOfUsernameOrEmail.errorMessage
-        );
-      } else {
-        validation.showError(
-          usernameOrEmail,
-          stateOfUsernameOrEmail.theOtherErrorMessage
-        );
-      }
-      toggle = !toggle;
-    }, 2000);
+  if (!isValidUsername) {
+    console.log('here is in if(!isValidUsername)');
+    stateOfUsername.isValid = false;
+    validation.showError(username, stateOfUsername.errorMessage);
     return;
   }
-  stateOfUsernameOrEmail.isValid = true;
-  if (intervalIdForErrorMessages) clearInterval(intervalIdForErrorMessages);
-  validation.showSuccess(usernameOrEmail);
+  stateOfUsername.isValid = true;
+  validation.showSuccess(username);
+}
+
+const stateOfEmail = getStateOfItem(email);
+
+function checkAndShowEmailValidation() {
+  if (validation.isEmpty(email.value, stateOfEmail)) {
+    validation.showError(email, stateOfEmail.errorMessage);
+    return;
+  }
+  const isValidEmail = validation.isValidEmail(email.value, stateOfEmail);
+  if (!isValidEmail) {
+    stateOfEmail.isValid = false;
+    validation.showError(email, stateOfEmail.errorMessage);
+    return;
+  }
+  stateOfEmail.isValid = true;
+  validation.showSuccess(email);
 }
 
 const stateOfPassword = getStateOfItem(password);
@@ -149,7 +158,8 @@ function checkAndShowConfirmPasswordValidation() {
 }
 
 function checkAllItems() {
-  checkAndShowUsernameOrEmailValidation();
+  checkAndShowUsernameValidation();
+  checkAndShowEmailValidation();
   checkAndShowPasswordValidation();
   checkAndShowConfirmPasswordValidation();
 }
@@ -163,17 +173,23 @@ function checkAllItemsAndToggleSubmitButton() {
   toggleSubmitButton();
 }
 
-usernameOrEmail.addEventListener('input', () => {
+username.addEventListener('input', () => {
+  console.log('input in username', username.value);
   submitButton.disabled = true;
-  clearInterval(intervalIdForErrorMessages);
-  checkAndShowUsernameOrEmailValidation();
+  checkAndShowUsernameValidation();
   if (
-    stateOfUsernameOrEmail.isValid &&
+    stateOfUsername.isValid &&
     !validation.isSomeRequiredItemEmpty(stateOfItems)
   )
     checkAllItemsAndToggleSubmitButton();
 });
 
+email.addEventListener('input', () => {
+  submitButton.disabled = true;
+  checkAndShowEmailValidation();
+  if (stateOfEmail.isValid && !validation.isSomeRequiredItemEmpty(stateOfItems))
+    checkAllItemsAndToggleSubmitButton();
+});
 password.addEventListener('input', () => {
   submitButton.disabled = true;
   checkAndShowPasswordValidation();
@@ -213,7 +229,7 @@ function closeModal() {
 
 mask.addEventListener('click', () => {
   closeModal();
-  usernameOrEmail.focus();
+  username.focus();
 });
 
 const closeButton = document.getElementById('js-closeButton');

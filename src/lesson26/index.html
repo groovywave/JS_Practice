@@ -16,16 +16,16 @@
         <h2 class="mb-6 text-center text-lg">Register With Us</h2>
         <div class="relative mb-5">
           <label
-            for="js-usernameOrEmailLabel"
-            id="usernameOrEmailLabel"
+            for="js-username"
+            id="usernameLabel"
             class="mb-1 block text-gray-700"
-            >Username or Email</label
+            >Username</label
           >
           <input
             type="text"
-            id="js-usernameOrEmailLabel"
+            id="js-username"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
-            placeholder="Enter username or email"
+            placeholder="Enter username"
             required
           />
           <small
@@ -36,14 +36,36 @@
         </div>
         <div class="relative mb-5">
           <label
-            for="password"
+            for="js-email"
+            id="emailLabel"
+            class="mb-1 block pt-1 text-gray-700"
+            data-testid="js-emailLabel"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="js-email"
+            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            placeholder="Enter email"
+            required
+          />
+          <small
+            class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
+            data-testid="js-emailError"
+            >Error message</small
+          >
+        </div>
+        <div class="relative mb-5">
+          <label
+            for="js-password"
+            id="passwordLabel"
             class="mb-1 block pt-1 text-gray-700"
             data-testid="js-passwordLabel"
             >Password</label
           >
           <input
             type="password"
-            id="password"
+            id="js-password"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
             placeholder="Enter password"
             required
@@ -56,14 +78,15 @@
         </div>
         <div class="relative mb-6">
           <label
-            for="confirmPassword"
+            for="js-confirmPassword"
+            id="confirmPasswordLabel"
             class="mb-1 block pt-1 text-gray-700"
             data-testid="js-confirmPasswordLabel"
             >Confirm Password</label
           >
           <input
             type="password"
-            id="confirmPassword"
+            id="js-confirmPassword"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
             placeholder="Enter password again"
             required
