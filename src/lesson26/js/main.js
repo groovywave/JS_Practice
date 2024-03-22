@@ -89,12 +89,7 @@ function checkAndShowUsernameValidation() {
     minCharCount,
     maxCharCount
   );
-  console.log(
-    '🚀 ~ checkAndShowUsernameValidation ~ isValidUsername:',
-    isValidUsername
-  );
   if (!isValidUsername) {
-    console.log('here is in if(!isValidUsername)');
     stateOfUsername.isValid = false;
     validation.showError(username, stateOfUsername.errorMessage);
     return;
@@ -174,7 +169,6 @@ function checkAllItemsAndToggleSubmitButton() {
 }
 
 username.addEventListener('input', () => {
-  console.log('input in username', username.value);
   submitButton.disabled = true;
   checkAndShowUsernameValidation();
   if (
@@ -243,9 +237,7 @@ function readUpToTheLastSentence(entries) {
     return;
   }
   checkboxToBeChecked();
-  // addToggleToTheSubmitCheckbox();
   mask.addEventListener('click', () => {
-    // if (!validation.isSomeRequiredItemEmpty(stateOfItems))
     checkAllItemsAndToggleSubmitButton();
   });
 }
