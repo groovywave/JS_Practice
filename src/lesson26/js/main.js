@@ -184,10 +184,12 @@ email.addEventListener('input', () => {
   if (stateOfEmail.isValid && !validation.isSomeRequiredItemEmpty(stateOfItems))
     checkAllItemsAndToggleSubmitButton();
 });
+
 password.addEventListener('input', () => {
   submitButton.disabled = true;
   checkAndShowPasswordValidation();
   confirmPassword.addEventListener('input', () => {
+    submitButton.disabled = true;
     checkAndShowConfirmPasswordValidation();
     if (
       stateOfConfirmPassword.isValid &&
