@@ -9,11 +9,8 @@ test.describe('tab-key navigation', () => {
     await page.getByLabel('Username').click();
     await page.getByLabel('Username').press('Tab');
     await page.getByLabel('Email').press('Tab');
-    // await page.getByTestId('js-password').press('Tab');
     await page.getByTestId('js-passwordLabel').press('Tab');
     await page.getByTestId('js-confirmPasswordLabel').press('Tab');
-    // await page.getByLabel('Password').press('Tab');
-    // await page.getByLabel('Confirm Password').press('Tab');
   });
 
   test('press tab-key and focus on 利用規約', async ({ page }) => {

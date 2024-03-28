@@ -11,7 +11,7 @@
     "test": "npx playwright test",
     "test-report": "npx playwright show-report"
   },
-  "author": "",
+  "author": "\"hasegawa noritaka <vacation555@gmai.com>",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.42.1",
@@ -29,5 +29,13 @@
     "path": "^0.12.7",
     "playwright": "^1.41.2"
   },
-  "keywords": []
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/groovywave/JS_Practice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/groovywave/JS_Practice/issues"
+  },
+  "homepage": "https://github.com/groovywave/JS_Practice#readme"
 }

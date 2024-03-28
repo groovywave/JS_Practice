@@ -1,3 +1,4 @@
+// @ts-check
 const { defineConfig, devices } = require('@playwright/test');
 
 /**
@@ -35,17 +36,17 @@ module.exports = defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] }
-    }
+    },
 
-    /*  {
+    {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Firefox'] }
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    }, */
+      use: { ...devices['Desktop Safari'] }
+    }
 
     /* Test against mobile viewports. */
     // {
@@ -69,13 +70,8 @@ module.exports = defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
   webServer: {
-    command: 'npm run dev',
+    command: 'npm run start',
     port: 3000,
     reuseExistingServer: !process.env.CI
     // timeout: 6000
