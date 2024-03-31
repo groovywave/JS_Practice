@@ -7,38 +7,33 @@ const confirmPassword = document.getElementById('js-confirmPassword');
 
 username.focus();
 
+let baseStateOfItems = {
+  isEmpty: true,
+  isValid: false,
+  errorMessage: null,
+  theOtherErrorMessage: null
+};
+
 let stateOfItems = [
   {
     item: username,
     name: 'username',
-    isEmpty: true,
-    isValid: false,
-    errorMessage: 'none',
-    theOtherErrorMessage: 'none'
+    ...baseStateOfItems
   },
   {
     item: email,
     name: 'email',
-    isEmpty: true,
-    isValid: false,
-    errorMessage: 'none',
-    theOtherErrorMessage: 'none'
+    ...baseStateOfItems
   },
   {
     item: password,
     name: 'password',
-    isEmpty: true,
-    isValid: false,
-    errorMessage: 'none',
-    theOtherErrorMessage: 'none'
+    ...baseStateOfItems
   },
   {
     item: confirmPassword,
     name: 'confirmPassword',
-    isEmpty: true,
-    isValid: false,
-    errorMessage: 'none',
-    theOtherErrorMessage: 'none'
+    ...baseStateOfItems
   }
 ];
 
