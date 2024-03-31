@@ -40,7 +40,7 @@ function getStateOfItem(input) {
   return stateOfItems.find(obj => obj.item === input);
 }
 
-const submitCheckbox = document.getElementById('js-submitCheckbox');
+const confirmCheckbox = document.getElementById('js-confirmCheckbox');
 const submitButton = document.getElementById('js-submitButton');
 
 submitButton.addEventListener('click', e => {
@@ -49,12 +49,12 @@ submitButton.addEventListener('click', e => {
 });
 
 function checkboxToBeChecked() {
-  submitCheckbox.disabled = false;
-  submitCheckbox.checked = true;
+  confirmCheckbox.disabled = false;
+  confirmCheckbox.checked = true;
 }
 
 function toggleSubmitButton() {
-  if (submitCheckbox.checked) {
+  if (confirmCheckbox.checked) {
     submitButton.disabled = false;
   } else {
     submitButton.disabled = true;
@@ -62,7 +62,7 @@ function toggleSubmitButton() {
 }
 
 function addToggleToTheSubmitCheckbox() {
-  submitCheckbox.addEventListener('change', () => {
+  confirmCheckbox.addEventListener('change', () => {
     toggleSubmitButton();
   });
 }
@@ -157,7 +157,7 @@ function checkAllItemsAndToggleSubmitButton() {
   submitButton.disabled = true;
   checkAllItems();
   if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
-  if (!submitCheckbox.checked) return;
+  if (!confirmCheckbox.checked) return;
   addToggleToTheSubmitCheckbox();
   toggleSubmitButton();
 }
