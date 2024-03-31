@@ -55,7 +55,7 @@ export function isValidEmail(input, stateOfItem) {
   const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
   if (!regularExpression.test(input.trim())) {
-    stateOfItem.theOtherErrorMessage = 'Email is not valid';
+    stateOfItem.errorMessage = 'Email is not valid';
     return false;
   }
   return true;

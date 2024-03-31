@@ -10,8 +10,7 @@ username.focus();
 let baseStateOfItems = {
   isEmpty: true,
   isValid: false,
-  errorMessage: null,
-  theOtherErrorMessage: null
+  errorMessage: null
 };
 
 let stateOfItems = [
