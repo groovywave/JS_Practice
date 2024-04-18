@@ -45,7 +45,7 @@ const submitButton = document.getElementById('js-submitButton');
 
 submitButton.addEventListener('click', e => {
   e.preventDefault();
-  window.location.href = 'registration.html';
+  window.location.href = 'has-registered.html';
 });
 
 function checkboxToBeChecked() {
@@ -242,9 +242,7 @@ const options = {
   root: modal,
   threshold: 1
 };
-
 const observer = new IntersectionObserver(readUpToTheLastSentence, options);
-
 const lastSentence = document.getElementById('js-lastSentence');
 
 observer.observe(lastSentence);

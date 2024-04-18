@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="../input.css" rel="stylesheet" />
+    <title>Login</title>
+    <script type="module" src="js/login.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  </head>
+  <body class="m-0 flex items-center justify-center bg-gray-100">
+    <script>
+      const token = localStorage.getItem('token');
+      if (token && token !== 'undefined') {
+        console.log(localStorage.getItem('token'));
+        window.location.href = './contents.html';
+      }
+    </script>
+    <div
+      class="mx-auto min-h-screen w-full max-w-md overflow-y-auto rounded-lg bg-gray-100 p-8 shadow-lg"
+    >
+      <form id="js-loginForm" class="bg-gray-100 px-10 py-8">
+        <h2 class="mb-6 text-center text-lg font-bold">Login</h2>
+        <div class="mb-5">
+          <label
+            for="js-usernameOrEmail"
+            id="usernameOrEmailLabel"
+            class="mb-1 block text-gray-700"
+            >Username or Email</label
+          >
+          <input
+            type="text"
+            id="js-usernameOrEmail"
+            class="autocomplete='current-password' w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            placeholder="Enter username or email address"
+            required
+          />
+        </div>
+        <div>
+          <div class="mb-5 flex items-center justify-between">
+            <label
+              for="js-password"
+              id="passwordLabel"
+              class="mb-1 block pt-1 text-sm font-medium leading-6 text-gray-700"
+              data-testid="js-passwordLabel"
+              >Password</label
+            >
+            <div class="text-sm">
+              <a
+                href="forgot-password.html"
+                class="font-semibold text-indigo-600 hover:text-indigo-500"
+                >Forgot password?</a
+              >
+            </div>
+          </div>
+          <div class="mt-2">
+            <input
+              type="password"
+              id="js-password"
+              class="autocomplete='current-password' w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+              placeholder="Enter password"
+              required
+            />
+          </div>
+        </div>
+
+        <button
+          id="js-loginButton"
+          type="submit"
+          class="mt-8 w-full rounded-lg border-2 bg-black px-4 py-2 font-bold text-white transition-colors duration-300 before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-black"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
