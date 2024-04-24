@@ -1,29 +1,35 @@
-export function showError(item, errorMessage) {
-  item.classList.remove('border-gray-200');
-  item.classList.remove('border-successColor');
-  item.classList.add('border-errorColor');
-  const parentElement = item.parentElement;
+export function showError(input, stateOfItem, message) {
+  input.classList.remove('border-gray-200');
+  input.classList.remove('border-successColor');
+  input.classList.add('border-errorColor');
+  stateOfItem.isValid = false;
+  const parentElement = input.parentElement;
   const small = parentElement.querySelector('small');
-  small.innerText = errorMessage;
+  small.innerText = message;
   small.classList.remove('invisible');
 }
 
-export function showSuccess(item) {
-  item.classList.remove('border-gray-200');
-  item.classList.remove('border-errorColor');
-  item.classList.add('border-successColor');
-  const parentElement = item.parentElement;
+export function showSuccess(input, stateOfItem) {
+  input.classList.remove('border-gray-200');
+  input.classList.remove('border-errorColor');
+  input.classList.add('border-successColor');
+  stateOfItem.isValid = true;
+  const parentElement = input.parentElement;
   const small = parentElement.querySelector('small');
   small.classList.add('invisible');
 }
 
-export function isEmpty(input, stateOfItem) {
-  if (input.trim() === '') {
-    stateOfItem.errorMessage = `${capitalizeTheFirstLetter(stateOfItem.name)} is required`;
-    stateOfItem.isEmpty = true;
+export function showEmptyError(input, stateOfItem) {
+  if (input.value.trim() === '') {
+    stateOfItem.empty = true;
+    showError(
+      input,
+      stateOfItem,
+      `${capitalizeTheFirstLetter(input)} is required`
+    );
     return true;
   } else {
-    stateOfItem.isEmpty = false;
+    stateOfItem.empty = false;
     return false;
   }
 }
@@ -37,57 +43,65 @@ export function removeErrorMessages(inputArr) {
   });
 }
 
-export function isValidUsername(input, stateOfItem, min, max) {
-  if (isEmpty(input, stateOfItem)) return false;
-  if (input.length < min) {
-    stateOfItem.errorMessage = `Username must be at least ${min} characters`;
-    return false;
-  }
-  if (input.length > max) {
-    stateOfItem.errorMessage = `Username must be less than ${max} characters`;
-    return false;
-  }
-  return true;
+export function isEmpty(stateOfItem) {
+  if (stateOfItem.empty) return true;
 }
 
-export function isValidEmail(input, stateOfItem) {
-  if (isEmpty(input, stateOfItem)) return false;
+export function showResultUsernameValidation(input, stateOfItem, min, max) {
+  if (isEmpty(input)) return;
+  if (input.value.length < min) {
+    showError(
+      input,
+      stateOfItem,
+      `${capitalizeTheFirstLetter(input)} must be at least ${min} characters`
+    );
+  } else if (input.value.length > max) {
+    showError(
+      input,
+      stateOfItem,
+      `${capitalizeTheFirstLetter(input)} must be less than ${max} characters`
+    );
+  } else {
+    showSuccess(input, stateOfItem);
+  }
+}
+
+export function showResultEmailValidation(input, stateOfItem) {
+  if (isEmpty(input)) return;
   const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
-  if (!regularExpression.test(input.trim())) {
-    stateOfItem.errorMessage = 'Email is not valid';
-    return false;
+  if (regularExpression.test(input.value.trim())) {
+    showSuccess(input, stateOfItem);
+  } else {
+    showError(input, stateOfItem, 'Email is not valid');
   }
-  return true;
 }
 
-export function isValidPassword(input, stateOfItem) {
+export function showResultPasswordValidation(input, stateOfItem) {
+  if (isEmpty(input)) return;
   const regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
   // https://genkichi.hateblo.jp/entry/2019/02/23/143527
-  if (regularExpression.test(input.trim())) {
-    return true;
+  if (regularExpression.test(input.value.trim())) {
+    showSuccess(input, stateOfItem);
   } else {
-    stateOfItem.errorMessage =
-      'Min 8 chars, including 1 uppercase and 1 number';
-    return false;
+    showError(
+      input,
+      stateOfItem,
+      'Min 8 chars, including 1 uppercase and 1 number'
+    );
   }
 }
 
-export function isMatchingPasswords(input, confirmInput, stateOfItem) {
-  if (input === confirmInput) {
-    return true;
+export function showResultMatchingPasswords(input, confirmInput, stateOfItem) {
+  if (input.value === confirmInput.value) {
+    showSuccess(confirmInput, stateOfItem);
   } else {
-    stateOfItem.errorMessage = 'Passwords do not match';
-    return false;
+    showError(confirmInput, stateOfItem, 'Passwords do not match');
   }
 }
 
-export function capitalizeTheFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-export function isSomeRequiredItemEmpty(stateOfItems) {
-  return stateOfItems.some(obj => obj.isEmpty);
+export function capitalizeTheFirstLetter(input) {
+  return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
 export function isEveryRequiredItemValid(stateOfItems) {
