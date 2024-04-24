@@ -33,32 +33,34 @@
             type="text"
             id="js-usernameOrEmail"
             class="autocomplete='current-password' w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            data-testId="test-usernameOrEmail"
             placeholder="Enter username or email address"
             required
           />
         </div>
         <div>
-          <div class="mb-5 flex items-center justify-between">
-            <label
-              for="js-password"
-              id="passwordLabel"
-              class="mb-1 block pt-1 text-sm font-medium leading-6 text-gray-700"
-              data-testid="js-passwordLabel"
-              >Password</label
-            >
-            <div class="text-sm">
-              <a
-                href="forgot-password.html"
-                class="font-semibold text-indigo-600 hover:text-indigo-500"
-                >Forgot password?</a
+          <!-- <div class="mb-5 flex items-center justify-between"> -->
+          <div class="mb-5">
+            <div class="flex items-center justify-between">
+              <label
+                for="js-password"
+                id="passwordLabel"
+                class="mb-1 block pt-1 text-sm font-medium leading-6 text-gray-700"
+                >Password</label
               >
+              <div class="text-sm">
+                <a
+                  href="forgot-password.html"
+                  class="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >Forgot password?</a
+                >
+              </div>
             </div>
-          </div>
-          <div class="mt-2">
             <input
               type="password"
               id="js-password"
               class="autocomplete='current-password' w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+              data-testId="test-password"
               placeholder="Enter password"
               required
             />
@@ -69,6 +71,7 @@
           id="js-loginButton"
           type="submit"
           class="mt-8 w-full rounded-lg border-2 bg-black px-4 py-2 font-bold text-white transition-colors duration-300 before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-black"
+          data-testId="test-loginButton"
         >
           Login
         </button>

@@ -7,33 +7,30 @@
     <title>Contents</title>
   </head>
   <body>
-    <div class="mx-auto flex flex-col gap-4 p-4">
-      <div class="mx-auto w-[300px] @container">
-        <h2 class="p-8 text-center text-lg font-bold @[400px]:bg-gray-300">
-          contents
-        </h2>
-        <div class="text-right text-sm">
-          <a
-            id="js-logoutLink"
-            href="./"
-            class="font-semibold text-indigo-600 hover:text-indigo-500"
-            >← Logout</a
-          >
-        </div>
-        <!-- <button
-          id="js-logoutButton"
-          class="hover:text-black-300 w-40 rounded-lg border-2 bg-black px-4 py-2 font-bold text-white transition-colors duration-300 before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-black"
+    <div class="flex w-full flex-col p-4 @container">
+      <div class="text-center">
+        <h2
+          class="p-8 text-sm font-bold @md:text-base @lg:text-lg @xl:text-xl @2xl:text-2xl @3xl:text-3xl"
         >
-          logout
-        </button> -->
+          Contents
+        </h2>
       </div>
-      <script>
-        const logoutLink = document.getElementById('js-logoutLink');
-        logoutLink.addEventListener('click', () => {
-          localStorage.clear();
-          window.location.href = './index.html';
-        });
-      </script>
+      <div class="text-center">
+        <a
+          id="js-logoutLink"
+          href="./"
+          class="text-sm font-bold text-indigo-600 hover:text-indigo-500 @md:text-base @lg:text-lg @xl:text-xl @2xl:text-2xl @3xl:text-3xl"
+          data-testId="test-logout"
+          >← Logout</a
+        >
+        <script>
+          const logoutLink = document.getElementById('js-logoutLink');
+          logoutLink.addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = './index.html';
+          });
+        </script>
+      </div>
     </div>
   </body>
 </html>
