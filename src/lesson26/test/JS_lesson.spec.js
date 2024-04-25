@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/lesson26/index.html');
+  await page.goto('http://localhost:3000/lesson25/index.html');
 });
 
 test.describe('tab-key navigation', () => {
@@ -9,8 +9,8 @@ test.describe('tab-key navigation', () => {
     await page.getByLabel('Username').click();
     await page.getByLabel('Username').press('Tab');
     await page.getByLabel('Email').press('Tab');
-    await page.getByTestId('js-passwordLabel').press('Tab');
-    await page.getByTestId('js-confirmPasswordLabel').press('Tab');
+    await page.getByLabel('Password', { exact: true }).press('Tab');
+    await page.getByLabel('Confirm Password').press('Tab');
   });
 
   test('press tab-key and focus on 利用規約', async ({ page }) => {

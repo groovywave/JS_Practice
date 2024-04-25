@@ -1,46 +1,24 @@
 import * as validation from './modules/validation.js';
 
-const username = document.getElementById('js-username');
-const email = document.getElementById('js-email');
-const password = document.getElementById('js-password');
-const confirmPassword = document.getElementById('js-confirmPassword');
+const username = document.getElementById('username');
 
 username.focus();
 
-let baseStateOfItems = {
-  isEmpty: true,
-  isValid: false,
-  errorMessage: null
-};
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirmPassword');
 
 let stateOfItems = [
-  {
-    item: username,
-    name: 'username',
-    ...baseStateOfItems
-  },
-  {
-    item: email,
-    name: 'email',
-    ...baseStateOfItems
-  },
-  {
-    item: password,
-    name: 'password',
-    ...baseStateOfItems
-  },
-  {
-    item: confirmPassword,
-    name: 'confirmPassword',
-    ...baseStateOfItems
-  }
+  { item: username, empty: true, isValid: false },
+  { item: email, empty: true, isValid: false },
+  { item: password, empty: true, isValid: false },
+  { item: confirmPassword, empty: true, isValid: false }
 ];
 
 function getStateOfItem(input) {
   return stateOfItems.find(obj => obj.item === input);
 }
 
-const confirmCheckbox = document.getElementById('js-confirmCheckbox');
 const submitButton = document.getElementById('js-submitButton');
 
 submitButton.addEventListener('click', e => {
@@ -48,156 +26,58 @@ submitButton.addEventListener('click', e => {
   window.location.href = 'registration.html';
 });
 
-function checkboxToBeChecked() {
-  confirmCheckbox.disabled = false;
-  confirmCheckbox.checked = true;
+function checkItemAndToggleSubmitButton(func, arg, theOtherArgs) {
+  submitButton.disabled = true;
+  if (validation.showEmptyError(arg, getStateOfItem(arg))) return;
+  if (func(arg, ...theOtherArgs)) return;
+  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
+  if (!submitCheckbox.checked) return;
+  submitButton.disabled = false;
 }
-
-function toggleSubmitButton() {
-  if (confirmCheckbox.checked) {
-    submitButton.disabled = false;
-  } else {
-    submitButton.disabled = true;
-  }
-}
-
-function addToggleToTheSubmitCheckbox() {
-  confirmCheckbox.addEventListener('change', () => {
-    toggleSubmitButton();
-  });
-}
-
-const stateOfUsername = getStateOfItem(username);
 
 const minCharCount = 3;
 const maxCharCount = 15;
 
-function checkAndShowUsernameValidation() {
-  if (validation.isEmpty(username.value, stateOfUsername)) {
-    validation.showError(username, stateOfUsername.errorMessage);
-    return;
-  }
-  const isValidUsername = validation.isValidUsername(
-    username.value,
-    stateOfUsername,
-    minCharCount,
-    maxCharCount
-  );
-  if (!isValidUsername) {
-    stateOfUsername.isValid = false;
-    validation.showError(username, stateOfUsername.errorMessage);
-    return;
-  }
-  stateOfUsername.isValid = true;
-  validation.showSuccess(username);
-}
-
-const stateOfEmail = getStateOfItem(email);
-
-function checkAndShowEmailValidation() {
-  if (validation.isEmpty(email.value, stateOfEmail)) {
-    validation.showError(email, stateOfEmail.errorMessage);
-    return;
-  }
-  const isValidEmail = validation.isValidEmail(email.value, stateOfEmail);
-  if (!isValidEmail) {
-    stateOfEmail.isValid = false;
-    validation.showError(email, stateOfEmail.errorMessage);
-    return;
-  }
-  stateOfEmail.isValid = true;
-  validation.showSuccess(email);
-}
-
-const stateOfPassword = getStateOfItem(password);
-const stateOfConfirmPassword = getStateOfItem(confirmPassword);
-
-function checkAndShowPasswordValidation() {
-  if (validation.isEmpty(password.value, stateOfPassword)) {
-    validation.showError(password, stateOfPassword.errorMessage);
-    return;
-  }
-  if (!validation.isValidPassword(password.value, stateOfPassword)) {
-    stateOfPassword.isValid = false;
-    validation.showError(password, stateOfPassword.errorMessage);
-    return;
-  }
-  stateOfPassword.isValid = true;
-  validation.showSuccess(password);
-}
-
-function checkAndShowConfirmPasswordValidation() {
-  if (validation.isEmpty(confirmPassword.value, stateOfConfirmPassword)) {
-    validation.showError(confirmPassword, stateOfConfirmPassword.errorMessage);
-    return;
-  }
-  if (
-    !validation.isMatchingPasswords(
-      password.value,
-      confirmPassword.value,
-      stateOfConfirmPassword
-    )
-  ) {
-    stateOfConfirmPassword.isValid = false;
-    validation.showError(confirmPassword, stateOfConfirmPassword.errorMessage);
-    return;
-  }
-  stateOfConfirmPassword.isValid = true;
-  validation.showSuccess(confirmPassword);
-}
-
-function checkAllItems() {
-  checkAndShowUsernameValidation();
-  checkAndShowEmailValidation();
-  checkAndShowPasswordValidation();
-  checkAndShowConfirmPasswordValidation();
-}
-
-function checkAllItemsAndToggleSubmitButton() {
-  submitButton.disabled = true;
-  checkAllItems();
-  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
-  if (!confirmCheckbox.checked) return;
-  addToggleToTheSubmitCheckbox();
-  toggleSubmitButton();
-}
-
 username.addEventListener('input', () => {
-  submitButton.disabled = true;
-  checkAndShowUsernameValidation();
-  if (
-    stateOfUsername.isValid &&
-    !validation.isSomeRequiredItemEmpty(stateOfItems)
-  )
-    checkAllItemsAndToggleSubmitButton();
+  checkItemAndToggleSubmitButton(
+    validation.showResultUsernameValidation,
+    username,
+    [getStateOfItem(username), minCharCount, maxCharCount]
+  );
 });
 
 email.addEventListener('input', () => {
-  submitButton.disabled = true;
-  checkAndShowEmailValidation();
-  if (stateOfEmail.isValid && !validation.isSomeRequiredItemEmpty(stateOfItems))
-    checkAllItemsAndToggleSubmitButton();
+  checkItemAndToggleSubmitButton(validation.showResultEmailValidation, email, [
+    getStateOfItem(email)
+  ]);
 });
 
-password.addEventListener('input', () => {
-  submitButton.disabled = true;
-  checkAndShowPasswordValidation();
+function checkMatchingPasswordsAndToggleSubmitButton() {
+  checkItemAndToggleSubmitButton(
+    validation.showResultMatchingPasswords,
+    password,
+    [confirmPassword, getStateOfItem(confirmPassword)]
+  );
+}
+
+function checkPasswordAndToggleSubmitButton() {
+  checkItemAndToggleSubmitButton(
+    validation.showResultPasswordValidation,
+    password,
+    [getStateOfItem(password)]
+  );
+  if (!getStateOfItem(password).isValid) return;
+  if (confirmPassword.value) checkMatchingPasswordsAndToggleSubmitButton();
   confirmPassword.addEventListener('input', () => {
-    submitButton.disabled = true;
-    checkAndShowConfirmPasswordValidation();
-    if (
-      stateOfConfirmPassword.isValid &&
-      !validation.isSomeRequiredItemEmpty(stateOfItems)
-    )
-      checkAllItemsAndToggleSubmitButton();
+    checkMatchingPasswordsAndToggleSubmitButton();
   });
-  if (!confirmPassword.value) return;
-  checkAndShowConfirmPasswordValidation();
-  if (
-    stateOfConfirmPassword.isValid &&
-    !validation.isSomeRequiredItemEmpty(stateOfItems)
-  )
-    checkAllItemsAndToggleSubmitButton();
+  password.addEventListener('input', () => {
+    checkMatchingPasswordsAndToggleSubmitButton();
+  });
+}
+
+password.addEventListener('input', () => {
+  checkPasswordAndToggleSubmitButton();
 });
 
 const linkToRule = document.getElementById('js-linkToRule');
@@ -228,13 +108,51 @@ closeButton.addEventListener('click', () => {
   mask.click();
 });
 
+const submitCheckbox = document.getElementById('js-submitCheckbox');
+
+function checkboxToBeChecked() {
+  submitCheckbox.disabled = false;
+  submitCheckbox.checked = true;
+  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
+  submitButton.disabled = false;
+}
+
+function addToggleToTheSubmitCheckbox() {
+  submitCheckbox.addEventListener('change', () => {
+    if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
+    if (!submitCheckbox.checked) {
+      submitButton.disabled = true;
+    } else {
+      submitButton.disabled = false;
+    }
+  });
+}
+
+function checkAllItems() {
+  checkItemAndToggleSubmitButton(
+    validation.showResultUsernameValidation,
+    username,
+    [getStateOfItem(username), minCharCount, maxCharCount]
+  );
+  checkItemAndToggleSubmitButton(validation.showResultEmailValidation, email, [
+    getStateOfItem(email)
+  ]);
+  checkItemAndToggleSubmitButton(
+    validation.showResultMatchingPasswords,
+    password,
+    [confirmPassword, getStateOfItem(confirmPassword)]
+  );
+  checkPasswordAndToggleSubmitButton();
+}
+
 function readUpToTheLastSentence(entries) {
   if (!entries[0].isIntersecting) {
     return;
   }
   checkboxToBeChecked();
+  addToggleToTheSubmitCheckbox();
   mask.addEventListener('click', () => {
-    checkAllItemsAndToggleSubmitButton();
+    checkAllItems();
   });
 }
 
