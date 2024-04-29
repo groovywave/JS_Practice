@@ -24,8 +24,9 @@ loginButton.addEventListener('click', async e => {
     }
     new Promise((resolve, reject) => {
       if (
-        responseData[0].name === usernameOrEmail.value ||
-        responseData[0].email === usernameOrEmail.value
+        responseData[0].password === password.value &&
+        (responseData[0].name === usernameOrEmail.value ||
+          responseData[0].email === usernameOrEmail.value)
       ) {
         resolve({ token: 'ae2efaa8fd0255cfafda76a7', ok: true, code: 200 });
       } else {
