@@ -1,9 +1,3 @@
-Swal.fire({
-  position: 'bottom-end',
-  toast: true,
-  title: 'You can use the following',
-  html: 'name:<br>Hoeger<br>email:<br>Zella_Homenick38@example.net<br>password:<br>HQnmjPKBWkqzjeB'
-});
 const usernameOrEmail = document.getElementById('js-usernameOrEmail');
 const password = document.getElementById('js-password');
 const loginButton = document.getElementById('js-loginButton');
