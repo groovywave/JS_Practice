@@ -6,7 +6,8 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('tab-key navigation', () => {
   test.beforeEach(async ({ page }) => {
-    await page.getByRole('button', { name: 'Registration' }).click();
+    await page.getByTestId('test-registrationButton').click();
+    // await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByText('Username').click();
     await page.getByLabel('Username').press('Tab');
     await page.getByLabel('Email').press('Tab');
@@ -129,7 +130,7 @@ test.describe('input for registration', () => {
 
 test.describe('input for login', () => {
   test.beforeEach(async ({ page }) => {
-    await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('button', { name: 'Login Page' }).click();
   });
   test('show login form', async ({ page }) => {
     await expect(page.getByText('Username or Email')).toBeVisible();
@@ -166,7 +167,7 @@ test.describe('input for login', () => {
 
 test.describe('behavior of local storage', () => {
   test.beforeEach(async ({ page }) => {
-    await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('button', { name: 'Login Page' }).click();
   });
   test('input required items and click login button', async ({ page }) => {
     await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
@@ -182,7 +183,9 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
     await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
     await page.getByTestId('test-loginButton').click();
-    await page.goBack;
+    // await page.getByRole('button', { name: 'Login' }).click();
+    // await page.getByText('Login').click();
+    await page.goBack();
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {

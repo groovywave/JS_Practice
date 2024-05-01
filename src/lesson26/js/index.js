@@ -1,6 +1,6 @@
-const loginButton = document.getElementById('js-loginButton');
+const loginPageButton = document.getElementById('js-loginPageButton');
 const registrationButton = document.getElementById('js-registrationButton');
-loginButton.addEventListener('click', e => {
+loginPageButton.addEventListener('click', e => {
   e.preventDefault();
   window.location.href = 'login.html';
 });
