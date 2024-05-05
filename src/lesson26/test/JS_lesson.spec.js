@@ -8,10 +8,10 @@ test.describe('tab-key navigation', () => {
   test.beforeEach(async ({ page }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByText('Username').click();
-    await page.getByLabel('Username').press('Tab');
-    await page.getByLabel('Email').press('Tab');
-    await page.getByTestId('js-passwordLabel').press('Tab');
-    await page.getByTestId('js-confirmPasswordLabel').press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
   });
 
   test('press tab-key and focus on 利用規約', async ({ page }) => {
