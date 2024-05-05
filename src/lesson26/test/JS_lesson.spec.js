@@ -19,7 +19,7 @@ test.describe('tab-key navigation', () => {
   });
 
   test('press Enter on the link and open the modal', async ({ page }) => {
-    await page.getByRole('link', { name: '利用規約' }).press('Enter');
+    await page.keyboard.press('Enter');
     await expect(page.getByTestId('js-modalBody')).toBeVisible();
   });
 });
