@@ -187,8 +187,7 @@ test.describe('behavior of local storage', () => {
         name: 'Contents'
       })
     ).toBeVisible();
-    await page.goBack();
-    await page.goBack();
+    await page.goto('http://localhost:3000/lesson26/index.html');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {
