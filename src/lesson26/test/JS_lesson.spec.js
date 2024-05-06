@@ -7,19 +7,20 @@ test.beforeEach(async ({ page }) => {
 test.describe('tab-key navigation', () => {
   test.beforeEach(async ({ page }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
+  });
+
+  test('press tab-key and focus on 利用規約', async ({ page }) => {
     await page.getByText('Username').click();
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-  });
-
-  test('press tab-key and focus on 利用規約', async ({ page }) => {
     await expect(page.getByRole('link', { name: '利用規約' })).toBeFocused();
   });
 
   test('press Enter on the link and open the modal', async ({ page }) => {
-    await page.keyboard.press('Enter');
+    await page.getByRole('link', { name: '利用規約' }).press('Enter');
+    // await page.keyboard.press('Enter');
     await expect(page.getByTestId('js-modalBody')).toBeVisible();
   });
 });
