@@ -25,12 +25,13 @@
             type="text"
             id="js-username"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            data-testId="test-username"
             placeholder="Enter username"
             required
           />
           <small
             class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
-            data-testid="js-usernameError"
+            data-testId="js-usernameError"
             >Error message</small
           >
         </div>
@@ -46,12 +47,13 @@
             type="email"
             id="js-email"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            data-testId="test-email"
             placeholder="Enter email"
             required
           />
           <small
             class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
-            data-testid="js-emailError"
+            data-testId="js-emailError"
             >Error message</small
           >
         </div>
@@ -67,6 +69,7 @@
             type="password"
             id="js-password"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            data-testId="test-password"
             placeholder="Enter password"
             required
           />
@@ -81,13 +84,14 @@
             for="js-confirmPassword"
             id="confirmPasswordLabel"
             class="mb-1 block pt-1 text-gray-700"
-            data-testid="js-confirmPasswordLabel"
+            data-testId="js-confirmPasswordLabel"
             >Confirm Password</label
           >
           <input
             type="password"
             id="js-confirmPassword"
             class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            data-testId="test-confirmPassword"
             placeholder="Enter password again"
             required
           />
