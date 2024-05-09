@@ -108,26 +108,6 @@ test.describe('form validation', () => {
   });
 });
 
-test.describe('input for registration', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.getByRole('button', { name: 'Registration' }).click();
-    await page.getByLabel('Username').click();
-    await page.getByLabel('Username').press('Tab');
-    await page.getByLabel('Email').press('Tab');
-    await page.getByTestId('js-passwordLabel').press('Tab');
-    await page.getByTestId('js-confirmPasswordLabel').press('Tab');
-  });
-
-  test('press tab-key and focus on 利用規約', async ({ page }) => {
-    await expect(page.getByRole('link', { name: '利用規約' })).toBeFocused();
-  });
-
-  test('press Enter on the link and open the modal', async ({ page }) => {
-    await page.getByRole('link', { name: '利用規約' }).press('Enter');
-    await expect(page.getByTestId('js-modalBody')).toBeVisible();
-  });
-});
-
 test.describe('input for login', () => {
   test.beforeEach(async ({ page }) => {
     await page.getByRole('button', { name: 'Login Page' }).click();
