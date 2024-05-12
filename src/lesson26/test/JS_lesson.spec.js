@@ -5,21 +5,22 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('tab-key navigation', () => {
-  test.beforeEach(async ({ page }) => {
+  test('press tab-key and focus on 利用規約', async ({ page }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByText('Username').click();
     await page.keyboard.press('Tab');
+    await expect(page.getByTestId('test-email')).toBeFocused();
     await page.keyboard.press('Tab');
+    await expect(page.getByTestId('test-password')).toBeFocused();
     await page.keyboard.press('Tab');
+    await expect(page.getByTestId('test-confirmPassword')).toBeFocused();
     await page.keyboard.press('Tab');
-  });
-
-  test('press tab-key and focus on 利用規約', async ({ page }) => {
     await expect(page.getByRole('link', { name: '利用規約' })).toBeFocused();
   });
 
   test('press Enter on the link and open the modal', async ({ page }) => {
-    await page.keyboard.press('Enter');
+    await page.getByRole('button', { name: 'Registration' }).click();
+    await page.getByRole('link', { name: '利用規約' }).press('Enter');
     await expect(page.getByTestId('js-modalBody')).toBeVisible();
   });
 });
@@ -104,26 +105,6 @@ test.describe('form validation', () => {
         name: 'Your Registration Has Been Completed!'
       })
     ).toBeVisible();
-  });
-});
-
-test.describe('input for registration', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.getByRole('button', { name: 'Registration' }).click();
-    await page.getByLabel('Username').click();
-    await page.getByLabel('Username').press('Tab');
-    await page.getByLabel('Email').press('Tab');
-    await page.getByTestId('js-passwordLabel').press('Tab');
-    await page.getByTestId('js-confirmPasswordLabel').press('Tab');
-  });
-
-  test('press tab-key and focus on 利用規約', async ({ page }) => {
-    await expect(page.getByRole('link', { name: '利用規約' })).toBeFocused();
-  });
-
-  test('press Enter on the link and open the modal', async ({ page }) => {
-    await page.getByRole('link', { name: '利用規約' }).press('Enter');
-    await expect(page.getByTestId('js-modalBody')).toBeVisible();
   });
 });
 

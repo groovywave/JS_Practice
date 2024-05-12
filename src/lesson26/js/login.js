@@ -7,7 +7,6 @@ const queryString = `password=${encodeURIComponent(password.value)}`;
 loginButton.addEventListener('click', async e => {
   e.preventDefault();
   try {
-    const queryString = `password=${encodeURIComponent(password.value)}`;
     const response = await fetch(`${url}?${queryString}`);
     const responseData = await response.json();
     if (!response.ok) {
