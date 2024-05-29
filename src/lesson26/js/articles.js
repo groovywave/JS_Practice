@@ -4,11 +4,11 @@ import { removeCircle } from '../js/modules/removeCircle.js';
 import { withinThreeDays } from '../js/modules/withinThreeDays.js';
 
 const articlesAPI = {
-  main: 'https://mocki.io/v1/075c2cc1-6b20-47f1-9b3c-a6dd184eef6b',
-  economy: 'https://mocki.io/v1/713bb820-066a-40b4-a36d-8eaa1646adb3',
-  entertainment: 'https://mocki.io/v1/c496fb00-f8ef-4eaf-b080-15a09a1215e7',
-  sports: 'https://mocki.io/v1/21407eaa-d5c9-455a-ab20-924f6b9759a4',
-  domestic: 'https://mocki.io/v1/b5cfcf3b-056a-44b9-80b8-4f3596c9c8bc'
+  main: 'https://mocki.io/v1/4d6f2884-94ae-461c-980e-e9164d03822b',
+  economy: 'https://mocki.io/v1/da690b37-3c74-4bac-b34d-8ab5d1ced7c3',
+  entertainment: 'https://mocki.io/v1/26130b41-6e90-4ee5-8a05-d34ad43676bb',
+  sports: 'https://mocki.io/v1/2fe4cf76-9c80-4490-86cb-e083c0e538d2',
+  domestic: 'https://mocki.io/v1/91e008aa-77da-4573-9317-d53754c5bf86'
 };
 
 async function fetchDataSet(urlProps) {
@@ -29,7 +29,11 @@ async function fetchDataSet(urlProps) {
 
 async function fetchData(url) {
   try {
-    const response = await fetch(url);
+    const response = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve(fetch(url));
+      }, 1000);
+    });
     const responseData = await response.json();
     if (!response.ok) {
       displayInfo(response);
@@ -44,6 +48,7 @@ async function fetchData(url) {
 }
 
 const tabArea = document.getElementById('js-tabArea');
+tabArea.classList.add('tab-area');
 
 const fragmentTabs = document.createDocumentFragment();
 const fragmentGenres = document.createDocumentFragment();

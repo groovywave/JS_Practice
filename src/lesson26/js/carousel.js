@@ -3,7 +3,7 @@ import { removeCircle } from '../js/modules/removeCircle.js';
 import { displayInfo } from '../js/modules/displayInfo.js';
 
 let slides = [];
-const url = 'https://mocki.io/v1/3fc35b83-50ff-4727-92a7-7a81d8fe7db8';
+const url = 'https://mocki.io/v1/0fe62aed-0b40-44ba-9611-bc28ce48c6b1';
 let currentIndex = 0;
 let dots = [];
 
@@ -65,7 +65,8 @@ function makePrevButton() {
   const prevButton = document.createElement('button');
   prevButton.type = 'button';
   prevButton.id = 'js-prev';
-  prevButton.className = 'prev';
+  // prevButton.className = 'prev';
+  prevButton.classList.add('prev');
   prevButton.style.zIndex = 100;
   const prevIcon = document.createElement('i');
   prevIcon.className = 'fa-solid fa-backward';
@@ -88,6 +89,7 @@ function makeNextButton() {
 function makeSlidesNumber() {
   const slidesNumber = document.createElement('p');
   slidesNumber.id = 'js-slidesNumber';
+  slidesNumber.classList.add('slidesNumber');
   slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }

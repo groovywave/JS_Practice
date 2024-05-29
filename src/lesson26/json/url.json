@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "img": "./img/carousel/01_main.jpg",
+      "alt": "画像１"
+    },
+    {
+      "img": "./img/carousel/01_main.jpg",
+      "alt": "画像２"
+    },
+    {
+      "img": "./img/carousel/01_main.jpg",
+      "alt": "画像3"
+    },
+    {
+      "img": "./img/carousel/01_main.jpg",
+      "alt": "画像4"
+    },
+    {
+      "img": "./img/carousel/01_main.jpg",
+      "alt": "画像5"
+    }
+  ]
+}

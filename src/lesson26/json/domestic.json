@@ -1,0 +1,144 @@
+{
+  "id": "domestic",
+  "category": "domestic",
+  "select": false,
+  "image": "https://i.postimg.cc/TPrGKms4/syougatsu-hatsuhinode-fujisan.png",
+  "articles": [
+    {
+      "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+      "date": "2023-07-05",
+      "title": "政府、少子化テコ入れ",
+      "comments": [
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "一男",
+          "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
+          "detail": "最優先課題なので、子供を産みやすい、育てやすい環境をしっかり整備してもらいたい。"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "一花",
+          "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
+          "detail": "一花さんのコメント,"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "四郎",
+          "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
+          "detail": "四郎さんのコメント,"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "五木",
+          "icon": "https://i.postimg.cc/G3DLcg2f/business-man1-1-smile.png",
+          "detail": "五木さんのコメント,"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "六",
+          "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
+          "detail": "六さんのコメント"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "七",
+          "icon": "https://i.postimg.cc/6pRSsZ3M/icon-business-woman09.png",
+          "detail": "七さんのコメント"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "八",
+          "icon": "https://i.postimg.cc/KYjMkPMN/cat2-1-idea.png",
+          "detail": "八さんのコメント"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "九郎",
+          "icon": "https://i.postimg.cc/VN2WzGVM/icon-medical-man12.png",
+          "detail": "九郎さんのコメント"
+        },
+        {
+          "id": "4814a642-090a-4c59-98ec-5f1f62ceec6d",
+          "name": "十和",
+          "icon": "https://i.postimg.cc/vZBrfwRf/icon-business-woman11.png",
+          "detail": "十和さんのコメント"
+        }
+      ]
+    },
+    {
+      "id": "5d094656-8870-41e4-8c3a-d56a72b9c6a5",
+      "date": "2023-07-05",
+      "title": "国産ロケット月面着陸",
+      "comments": [
+        {
+          "id": "5d094656-8870-41e4-8c3a-d56a72b9c6a5",
+          "name": "一男",
+          "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
+          "detail": "日本産ロケットもようやくここまでたどり着きましたね。"
+        },
+        {
+          "id": "5d094656-8870-41e4-8c3a-d56a72b9c6a5",
+          "name": "一花",
+          "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
+          "detail": "一花さんのコメント,"
+        },
+        {
+          "id": "5d094656-8870-41e4-8c3a-d56a72b9c6a5",
+          "name": "四郎",
+          "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
+          "detail": "四郎さんのコメント,"
+        }
+      ]
+    },
+    {
+      "id": "405e326e-215a-44ab-8cbe-cd8ee36c371e",
+      "date": "2023-08-05",
+      "title": "国産うなぎ復活",
+      "comments": [
+        {
+          "id": "405e326e-215a-44ab-8cbe-cd8ee36c371e",
+          "name": "一男",
+          "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
+          "detail": "ここ数年、日本国内に生息するうなぎの個体数が増えてきましたね。このまま順調に増えて、我々の食卓にも戻ってきて欲しいですね。"
+        },
+        {
+          "id": "405e326e-215a-44ab-8cbe-cd8ee36c371e",
+          "name": "一花",
+          "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
+          "detail": "一花さんのコメント,"
+        },
+        {
+          "id": "405e326e-215a-44ab-8cbe-cd8ee36c371e",
+          "name": "四郎",
+          "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
+          "detail": "四郎さんのコメント,"
+        }
+      ]
+    },
+    {
+      "id": "8e2fae3d-ba5c-447d-ab9b-c940e6450bbf",
+      "date": "2023-08-05",
+      "title": "ドローン宅配順次拡大",
+      "comments": [
+        {
+          "id": "8e2fae3d-ba5c-447d-ab9b-c940e6450bbf",
+          "name": "一男",
+          "icon": "https://i.postimg.cc/xdHXWfWs/icon-medical-man07.png",
+          "detail": "事故を未然に防ぐためのルール作りや法整備が追い付いていないですね。"
+        },
+        {
+          "id": "8e2fae3d-ba5c-447d-ab9b-c940e6450bbf",
+          "name": "一花",
+          "icon": "https://i.postimg.cc/7PQqnvRb/icon-business-woman09.png",
+          "detail": "一花さんのコメント,"
+        },
+        {
+          "id": "8e2fae3d-ba5c-447d-ab9b-c940e6450bbf",
+          "name": "四郎",
+          "icon": "https://i.postimg.cc/W4WsWQ49/icon-medical-man12.png",
+          "detail": "四郎さんのコメント,"
+        }
+      ]
+    }
+  ]
+}
