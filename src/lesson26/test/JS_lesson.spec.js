@@ -121,7 +121,7 @@ test.describe('input for login', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'Contents'
+        name: 'HOT NEWS'
       })
     ).toBeVisible();
   });
@@ -155,7 +155,7 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'Contents'
+        name: 'HOT NEWS'
       })
     ).toBeVisible();
   });
@@ -165,14 +165,14 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'Contents'
+        name: 'HOT NEWS'
       })
     ).toBeVisible();
     await page.goto('http://localhost:3000/lesson26/index.html');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Contents'
+        name: 'HOT NEWS'
       })
     ).toBeVisible();
   });

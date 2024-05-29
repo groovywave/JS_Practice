@@ -1,40 +1,40 @@
-import { renderCircle } from "../modules/renderCircle.js";
-import { removeCircle } from "../modules/removeCircle.js";
-import { displayInfo } from "../modules/displayInfo.js";
+import { renderCircle } from '../modules/renderCircle.js';
+import { removeCircle } from '../modules/removeCircle.js';
+import { displayInfo } from '../modules/displayInfo.js';
 
 let slides = [];
-const url = "https://mocki.io/v1/3fc35b83-50ff-4727-92a7-7a81d8fe7db8";
+const url = 'https://mocki.io/v1/3fc35b83-50ff-4727-92a7-7a81d8fe7db8';
 let currentIndex = 0;
 let dots = [];
 
 function renderStatus(response) {
-  const errorMessage = document.createElement("p");
+  const errorMessage = document.createElement('p');
   errorMessage.textContent = `${response.status}:${response.statusText}`;
   document.body.appendChild(errorMessage);
 }
 
 function updateSlides() {
-  document.getElementById("js-currentSlide").id = "";
-  slides[currentIndex].id = "js-currentSlide";
+  document.getElementById('js-currentSlide').id = '';
+  slides[currentIndex].id = 'js-currentSlide';
   document
-    .getElementsByClassName("current-slide")[0]
-    .classList.remove("current-slide");
-  slides[currentIndex].classList.add("current-slide");
+    .getElementsByClassName('current-slide')[0]
+    .classList.remove('current-slide');
+  slides[currentIndex].classList.add('current-slide');
 }
 
 function updateButtons() {
-  document.getElementById("js-prev").disabled = false;
-  document.getElementById("js-next").disabled = false;
+  document.getElementById('js-prev').disabled = false;
+  document.getElementById('js-next').disabled = false;
   if (currentIndex === 0) {
-    document.getElementById("js-prev").disabled = true;
+    document.getElementById('js-prev').disabled = true;
   }
   if (currentIndex === slides.length - 1) {
-    document.getElementById("js-next").disabled = true;
+    document.getElementById('js-next').disabled = true;
   }
 }
 
 function updateSlideNumber() {
-  document.getElementById("js-slidesNumber").textContent = `${
+  document.getElementById('js-slidesNumber').textContent = `${
     currentIndex + 1
   }/${slides.length}`;
 }
@@ -58,50 +58,50 @@ function slidesMoveNext() {
 }
 
 const fragment = document.createDocumentFragment();
-const carousel = document.createElement("div");
-carousel.className = "carousel";
+const carousel = document.createElement('div');
+carousel.className = 'carousel';
 
 function makePrevButton() {
-  const prevButton = document.createElement("button");
-  prevButton.type = "button";
-  prevButton.id = "js-prev";
-  prevButton.className = "prev";
+  const prevButton = document.createElement('button');
+  prevButton.type = 'button';
+  prevButton.id = 'js-prev';
+  prevButton.className = 'prev';
   prevButton.style.zIndex = 100;
-  const prevIcon = document.createElement("i");
-  prevIcon.className = "fa-solid fa-backward";
-  prevButton.addEventListener("click", slidesMovePrev);
+  const prevIcon = document.createElement('i');
+  prevIcon.className = 'fa-solid fa-backward';
+  prevButton.addEventListener('click', slidesMovePrev);
   fragment.appendChild(prevButton).appendChild(prevIcon);
 }
 
 function makeNextButton() {
-  const nextButton = document.createElement("button");
-  nextButton.type = "button";
-  nextButton.id = "js-next";
-  nextButton.className = "next";
+  const nextButton = document.createElement('button');
+  nextButton.type = 'button';
+  nextButton.id = 'js-next';
+  nextButton.className = 'next';
   nextButton.style.zIndex = 100;
-  const nextIcon = document.createElement("i");
-  nextIcon.className = "fa-solid fa-forward";
-  nextButton.addEventListener("click", slidesMoveNext);
+  const nextIcon = document.createElement('i');
+  nextIcon.className = 'fa-solid fa-forward';
+  nextButton.addEventListener('click', slidesMoveNext);
   fragment.appendChild(nextButton).appendChild(nextIcon);
 }
 
 function makeSlidesNumber() {
-  const slidesNumber = document.createElement("p");
-  slidesNumber.id = "js-slidesNumber";
+  const slidesNumber = document.createElement('p');
+  slidesNumber.id = 'js-slidesNumber';
   slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }
 
 function makeDots() {
-  const dotsContainer = document.createElement("div");
-  dotsContainer.classList.add("dots-container");
+  const dotsContainer = document.createElement('div');
+  dotsContainer.classList.add('dots-container');
   for (let i = 0; i < slides.length; i++) {
-    const dot = document.createElement("button");
+    const dot = document.createElement('button');
     dot.dataset.index = i;
     dots.push(dot);
     dotsContainer.appendChild(dot);
   }
-  dotsContainer.addEventListener("click", (e) => {
+  dotsContainer.addEventListener('click', e => {
     if (e.target === e.currentTarget) return;
     currentIndex = parseInt(e.target.dataset.index, 10);
     updateDots();
@@ -111,37 +111,37 @@ function makeDots() {
     resetSlideshowInterval();
   });
 
-  dots[0].id = "js-currentDot";
-  dots[0].classList.add("current-dot");
+  dots[0].id = 'js-currentDot';
+  dots[0].classList.add('current-dot');
   carousel.appendChild(dotsContainer);
 }
 
 function updateDots() {
-  document.getElementById("js-currentDot").id = "";
-  dots[currentIndex].id = "js-currentDot";
+  document.getElementById('js-currentDot').id = '';
+  dots[currentIndex].id = 'js-currentDot';
   document
-    .getElementsByClassName("current-dot")[0]
-    .classList.remove("current-dot");
-  dots[currentIndex].classList.add("current-dot");
+    .getElementsByClassName('current-dot')[0]
+    .classList.remove('current-dot');
+  dots[currentIndex].classList.add('current-dot');
 }
 
 function makeSlide(images) {
-  const slidesContainer = document.createElement("div");
-  slidesContainer.className = "slides-container";
-  images.forEach((image) => {
-    const slide = document.createElement("img");
-    slide.className = "slide-img";
+  const slidesContainer = document.createElement('div');
+  slidesContainer.className = 'slides-container';
+  images.forEach(image => {
+    const slide = document.createElement('img');
+    slide.className = 'slide-img';
     slide.src = image.img;
     slide.alt = image.alt;
     fragment.appendChild(slide);
     slides.push(slide);
   });
-  slides[currentIndex].id = "js-currentSlide";
-  slides[currentIndex].classList.add("current-slide");
+  slides[currentIndex].id = 'js-currentSlide';
+  slides[currentIndex].classList.add('current-slide');
   makePrevButton();
   makeNextButton();
   document
-    .getElementById("js-carouselArea")
+    .getElementById('js-carouselArea')
     .appendChild(carousel)
     .appendChild(slidesContainer)
     .appendChild(fragment);
@@ -153,7 +153,7 @@ function makeSlide(images) {
 async function fetchData(url) {
   renderCircle(document.body);
   try {
-    const response = await new Promise((resolve) => {
+    const response = await new Promise(resolve => {
       setTimeout(() => {
         resolve(fetch(url));
       }, 3000);
@@ -165,7 +165,7 @@ async function fetchData(url) {
     const jsonResponse = await response.json();
     const responseData = jsonResponse.data;
     if (!responseData.length) {
-      displayInfo("no data");
+      displayInfo('no data');
     }
     return responseData;
   } catch (error) {
