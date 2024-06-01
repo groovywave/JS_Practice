@@ -165,11 +165,11 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
     await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
     await page.getByTestId('test-loginButton').click();
-    await expect(
-      page.getByRole('heading', {
+    await page
+      .getByRole('heading', {
         name: header
       })
-    ).toBeVisible();
+      .waitFor();
     await page.goto('http://localhost:3000/lesson26/index.html');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
