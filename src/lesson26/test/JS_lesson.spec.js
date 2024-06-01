@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+const header = 'HOT NEWS';
+
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000/lesson26/index.html');
 });
@@ -121,7 +123,7 @@ test.describe('input for login', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'HOT NEWS'
+        name: header
       })
     ).toBeVisible();
   });
@@ -155,7 +157,7 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'HOT NEWS'
+        name: header
       })
     ).toBeVisible();
   });
@@ -165,14 +167,14 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'HOT NEWS'
+        name: header
       })
     ).toBeVisible();
     await page.goto('http://localhost:3000/lesson26/index.html');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'HOT NEWS'
+        name: header
       })
     ).toBeVisible();
   });
