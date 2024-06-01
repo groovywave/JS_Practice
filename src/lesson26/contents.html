@@ -11,6 +11,7 @@
     />
     <script src="./js/carousel.js" type="module"></script>
     <script src="./js/articles.js" type="module"></script>
+    <script src="./js/logout.js" type="module"></script>
   </head>
   <body class="min-w-[520px] max-w-screen-md text-base">
     <div class="@container">
@@ -28,13 +29,6 @@
         data-testId="test-logout"
         >← Logout</a
       >
-      <script>
-        const logoutLink = document.getElementById('js-logoutLink');
-        logoutLink.addEventListener('click', () => {
-          localStorage.removeItem('token');
-          window.location.href = './index.html';
-        });
-      </script>
     </div>
     <div class="mx-auto w-full flex-col p-4 @container">
       <ul class="" id="js-carouselArea"></ul>
