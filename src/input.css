@@ -3,19 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  /* style.css */
-  .loading-circle-container {
-    @apply flex;
-  }
-
-  .loading-circle {
-    @apply mx-auto;
-  }
-
-  .carousel-area {
-    @apply mb-4;
-  }
-
   /* slide.css */
   .carousel {
     @apply my-8 flex flex-col justify-center align-middle;
