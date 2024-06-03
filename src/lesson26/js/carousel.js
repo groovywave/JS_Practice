@@ -59,17 +59,16 @@ function slidesMoveNext() {
 
 const fragment = document.createDocumentFragment();
 const carousel = document.createElement('div');
-carousel.className = 'carousel';
+carousel.classList.add('carousel');
 
 function makePrevButton() {
   const prevButton = document.createElement('button');
   prevButton.type = 'button';
   prevButton.id = 'js-prev';
-  // prevButton.className = 'prev';
   prevButton.classList.add('prev');
   prevButton.style.zIndex = 100;
   const prevIcon = document.createElement('i');
-  prevIcon.className = 'fa-solid fa-backward';
+  prevIcon.classList.add('fa-solid', 'fa-backward');
   prevButton.addEventListener('click', slidesMovePrev);
   fragment.appendChild(prevButton).appendChild(prevIcon);
 }
@@ -78,10 +77,10 @@ function makeNextButton() {
   const nextButton = document.createElement('button');
   nextButton.type = 'button';
   nextButton.id = 'js-next';
-  nextButton.className = 'next';
+  nextButton.classList.add('next');
   nextButton.style.zIndex = 100;
   const nextIcon = document.createElement('i');
-  nextIcon.className = 'fa-solid fa-forward';
+  nextIcon.classList.add('fa-solid', 'fa-forward');
   nextButton.addEventListener('click', slidesMoveNext);
   fragment.appendChild(nextButton).appendChild(nextIcon);
 }
@@ -129,10 +128,10 @@ function updateDots() {
 
 function makeSlide(images) {
   const slidesContainer = document.createElement('div');
-  slidesContainer.className = 'slides-container';
+  slidesContainer.classList.add('slides-container');
   images.forEach(image => {
     const slide = document.createElement('img');
-    slide.className = 'slide-img';
+    slide.classList.add('slide-img');
     slide.src = image.img;
     slide.alt = image.alt;
     fragment.appendChild(slide);
