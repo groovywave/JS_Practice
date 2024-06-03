@@ -1,5 +1,5 @@
-const logoutLink = document.getElementById('js-logoutLink');
-logoutLink.addEventListener('click', () => {
+const logoutButton = document.getElementById('js-logoutButton');
+logoutButton.addEventListener('click', () => {
   localStorage.removeItem('token');
   window.location.href = './index.html';
 });
