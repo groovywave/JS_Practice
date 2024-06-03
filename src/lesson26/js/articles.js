@@ -1,6 +1,5 @@
-import { renderCircle } from '../js/modules/renderCircle.js';
+import { renderCircle, removeCircle } from '../js/modules/loadingIcon.js';
 import { displayInfo } from '../js/modules/displayInfo.js';
-import { removeCircle } from '../js/modules/removeCircle.js';
 import { withinThreeDays } from '../js/modules/withinThreeDays.js';
 
 const articlesAPI = {

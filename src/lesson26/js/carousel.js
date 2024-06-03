@@ -1,5 +1,4 @@
-import { renderCircle } from '../js/modules/renderCircle.js';
-import { removeCircle } from '../js/modules/removeCircle.js';
+import { renderCircle, removeCircle } from '../js/modules/loadingIcon.js';
 import { displayInfo } from '../js/modules/displayInfo.js';
 
 let slides = [];
