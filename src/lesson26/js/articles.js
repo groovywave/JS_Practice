@@ -1,4 +1,4 @@
-import { renderCircle, removeCircle } from '../js/modules/loadingIcon.js';
+import { renderCircle, removeCircle } from './modules/renderRemoveCircle.js';
 import { displayInfo } from '../js/modules/displayInfo.js';
 import { withinThreeDays } from '../js/modules/withinThreeDays.js';
 
