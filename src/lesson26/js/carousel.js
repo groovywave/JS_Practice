@@ -1,9 +1,8 @@
-import { renderCircle } from '../modules/renderCircle.js';
-import { removeCircle } from '../modules/removeCircle.js';
-import { displayInfo } from '../modules/displayInfo.js';
+import { renderCircle, removeCircle } from './modules/renderRemoveCircle.js';
+import { displayInfo } from '../js/modules/displayInfo.js';
 
 let slides = [];
-const url = 'https://mocki.io/v1/3fc35b83-50ff-4727-92a7-7a81d8fe7db8';
+const url = 'https://mocki.io/v1/0fe62aed-0b40-44ba-9611-bc28ce48c6b1';
 let currentIndex = 0;
 let dots = [];
 
@@ -59,16 +58,16 @@ function slidesMoveNext() {
 
 const fragment = document.createDocumentFragment();
 const carousel = document.createElement('div');
-carousel.className = 'carousel';
+carousel.classList.add('carousel');
 
 function makePrevButton() {
   const prevButton = document.createElement('button');
   prevButton.type = 'button';
   prevButton.id = 'js-prev';
-  prevButton.className = 'prev';
+  prevButton.classList.add('prev');
   prevButton.style.zIndex = 100;
   const prevIcon = document.createElement('i');
-  prevIcon.className = 'fa-solid fa-backward';
+  prevIcon.classList.add('fa-solid', 'fa-backward');
   prevButton.addEventListener('click', slidesMovePrev);
   fragment.appendChild(prevButton).appendChild(prevIcon);
 }
@@ -77,10 +76,10 @@ function makeNextButton() {
   const nextButton = document.createElement('button');
   nextButton.type = 'button';
   nextButton.id = 'js-next';
-  nextButton.className = 'next';
+  nextButton.classList.add('next');
   nextButton.style.zIndex = 100;
   const nextIcon = document.createElement('i');
-  nextIcon.className = 'fa-solid fa-forward';
+  nextIcon.classList.add('fa-solid', 'fa-forward');
   nextButton.addEventListener('click', slidesMoveNext);
   fragment.appendChild(nextButton).appendChild(nextIcon);
 }
@@ -88,6 +87,7 @@ function makeNextButton() {
 function makeSlidesNumber() {
   const slidesNumber = document.createElement('p');
   slidesNumber.id = 'js-slidesNumber';
+  slidesNumber.classList.add('slidesNumber');
   slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }
@@ -127,10 +127,10 @@ function updateDots() {
 
 function makeSlide(images) {
   const slidesContainer = document.createElement('div');
-  slidesContainer.className = 'slides-container';
+  slidesContainer.classList.add('slides-container');
   images.forEach(image => {
     const slide = document.createElement('img');
-    slide.className = 'slide-img';
+    slide.classList.add('slide-img');
     slide.src = image.img;
     slide.alt = image.alt;
     fragment.appendChild(slide);

@@ -9,3 +9,4 @@ registrationButton.addEventListener('click', e => {
   e.preventDefault();
   window.location.href = 'registration.html';
 });
+

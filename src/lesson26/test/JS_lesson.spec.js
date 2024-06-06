@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+const headerTitle = 'HOT NEWS';
+
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000/lesson26/index.html');
 });
@@ -121,7 +123,7 @@ test.describe('input for login', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'Contents'
+        name: headerTitle
       })
     ).toBeVisible();
   });
@@ -155,7 +157,7 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'Contents'
+        name: headerTitle
       })
     ).toBeVisible();
   });
@@ -163,16 +165,16 @@ test.describe('behavior of local storage', () => {
     await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
     await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
     await page.getByTestId('test-loginButton').click();
-    await expect(
-      page.getByRole('heading', {
-        name: 'Contents'
+    await page
+      .getByRole('heading', {
+        name: headerTitle
       })
-    ).toBeVisible();
+      .waitFor();
     await page.goto('http://localhost:3000/lesson26/index.html');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Contents'
+        name: headerTitle
       })
     ).toBeVisible();
   });

@@ -1,3 +1,154 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* slide.css */
+  .carousel {
+    @apply my-8 flex flex-col justify-center align-middle;
+  }
+
+  .slides-container {
+    @apply relative mx-auto my-4 h-52 w-80;
+  }
+
+  .slide-img {
+    @apply absolute z-[-1] h-full w-full object-cover;
+  }
+
+  .prev,
+  .next {
+    @apply absolute top-1/2 -translate-y-1/2 transform cursor-pointer border-none bg-white bg-opacity-30 px-2 pb-1 text-2xl text-gray-500 text-opacity-50;
+  }
+
+  .prev:hover,
+  .next:hover {
+    @apply opacity-80;
+  }
+
+  .prev:disabled,
+  .next:disabled {
+    @apply cursor-default opacity-100;
+  }
+
+  .prev {
+    @apply left-0;
+  }
+
+  .next {
+    @apply right-0;
+  }
+
+  .current-slide {
+    @apply z-10;
+  }
+
+  .slidesNumber {
+    @apply justify-center text-center;
+  }
+
+  .dots-container {
+    @apply mt-4 text-center;
+  }
+
+  .dots-container button + button {
+    @apply ml-2;
+  }
+
+  .dots-container button {
+    @apply h-4 w-4 cursor-pointer rounded-full border-none bg-slate-300;
+  }
+
+  .dots-container .current-dot {
+    @apply bg-slate-400;
+  }
+
+  /* article.css */
+  body {
+    font-size: 14px;
+  }
+
+  .page-title {
+    @apply text-center align-middle;
+  }
+
+  .container {
+    @apply mx-auto my-8 w-[500px];
+  }
+
+  .tab-area {
+    @apply flex;
+  }
+
+  .tab-area > li {
+    @apply flex-1;
+  }
+
+  .tab {
+    @apply inline-block w-full rounded-t-lg  py-2 text-center text-gray-800 no-underline;
+  }
+
+  .tab.active {
+    @apply inline-block w-full rounded-t-lg bg-sky-400 py-2 text-center text-white no-underline;
+  }
+
+  .tab:not(.active):hover {
+    @apply opacity-50 transition-opacity duration-300;
+  }
+
+  .genre-container.active {
+    @apply flex min-h-[150px] items-center bg-sky-400 p-3 text-white;
+  }
+
+  .genre-container {
+    @apply hidden;
+  }
+
+  .content {
+    @apply flex-1 py-2;
+  }
+
+  .article-container {
+    @apply flex;
+  }
+
+  .comment-icon-container {
+    @apply flex;
+  }
+  .new,
+  .comment-icon {
+    @apply mt-1 h-[14px];
+  }
+  .comment-num {
+    @apply mt-1 text-xs;
+  }
+
+  .image-area {
+    @apply flex justify-center;
+  }
+
+  .article-image {
+    @apply h-[100px];
+  }
+
+  .icon-name-container {
+    @apply flex h-[30px];
+  }
+
+  .comment-container.active {
+    @apply block h-[150px] overflow-y-scroll bg-sky-400 p-3 text-white;
+  }
+
+  .comment-container {
+    @apply hidden;
+  }
+
+  .a-comment-container {
+    @apply mb-4;
+  }
+
+  .comment-icon:hover,
+  .comment-num:hover {
+    @apply mt-1 cursor-pointer text-xs transition-opacity duration-300 hover:opacity-50;
+  }
+}
