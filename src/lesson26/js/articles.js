@@ -95,7 +95,7 @@ function createTab(category, id, select) {
 function createTitleAndIcon(articles) {
   for (const { id, date, title, comments } of articles) {
     const articleContainer = document.createElement('div');
-    articleContainer.classList.add('article-container');
+    articleContainer.classList.add('flex');
     articleContainer.dataset.id = id;
     const articleTitle = createTitle(title);
     const newIconContainer = createNewIconContainer(date);
@@ -124,7 +124,7 @@ function createNewIconContainer(date) {
     const newIcon = document.createElement('img');
     newIcon.src = './img/article/new.png';
     newIcon.alt = '新着';
-    newIcon.classList.add('new');
+    newIcon.className = 'mt-1 h-[14px]';
     newIconContainer.appendChild(newIcon);
   }
   return newIconContainer;
@@ -196,7 +196,7 @@ function combineArticlesThumbnail(id, select, img) {
   genreContainer.classList.add('genre-container');
   const titleArea = document.createElement('div');
   const imageArea = document.createElement('div');
-  titleArea.classList.add('content', 'title-area');
+  titleArea.classList.add('content');
   imageArea.classList.add('content', 'image-area');
   genreContainer.id = id;
   genreContainer.appendChild(titleArea).appendChild(fragmentTitles);

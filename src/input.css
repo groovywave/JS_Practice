@@ -4,13 +4,6 @@
 
 @layer components {
   /* slide.css */
-  .carousel {
-    @apply my-8 flex flex-col justify-center align-middle;
-  }
-
-  .slides-container {
-    @apply relative mx-auto my-4 h-52 w-80;
-  }
 
   .slide-img {
     @apply absolute z-[-1] h-full w-full object-cover;
@@ -43,10 +36,6 @@
     @apply z-10;
   }
 
-  .slidesNumber {
-    @apply justify-center text-center;
-  }
-
   .dots-container {
     @apply mt-4 text-center;
   }
@@ -66,14 +55,6 @@
   /* article.css */
   body {
     font-size: 14px;
-  }
-
-  .page-title {
-    @apply text-center align-middle;
-  }
-
-  .container {
-    @apply mx-auto my-8 w-[500px];
   }
 
   .tab-area {
@@ -106,10 +87,6 @@
 
   .content {
     @apply flex-1 py-2;
-  }
-
-  .article-container {
-    @apply flex;
   }
 
   .comment-icon-container {
