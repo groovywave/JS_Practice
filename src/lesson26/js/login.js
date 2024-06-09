@@ -4,8 +4,8 @@ const loginButton = document.getElementById('js-loginButton');
 const url = 'https://660d2d926ddfa2943b337888.mockapi.io/api/v1/tasks';
 
 loginButton.addEventListener('click', async e => {
-  const queryString = `password=${encodeURIComponent(password.value)}`;
   e.preventDefault();
+  const queryString = `password=${encodeURIComponent(password.value)}`;
   try {
     const response = await fetch(`${url}?${queryString}`);
     const responseData = await response.json();
