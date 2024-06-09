@@ -58,7 +58,7 @@ function slidesMoveNext() {
 
 const fragment = document.createDocumentFragment();
 const carousel = document.createElement('div');
-carousel.classList.add('carousel');
+carousel.className = 'my-8 flex flex-col justify-center align-middle';
 
 function makePrevButton() {
   const prevButton = document.createElement('button');
@@ -87,7 +87,7 @@ function makeNextButton() {
 function makeSlidesNumber() {
   const slidesNumber = document.createElement('p');
   slidesNumber.id = 'js-slidesNumber';
-  slidesNumber.classList.add('slidesNumber');
+  slidesNumber.className = 'justify-center text-center';
   slidesNumber.textContent = `${currentIndex + 1}/${slides.length}`;
   carousel.appendChild(slidesNumber);
 }
@@ -127,7 +127,7 @@ function updateDots() {
 
 function makeSlide(images) {
   const slidesContainer = document.createElement('div');
-  slidesContainer.classList.add('slides-container');
+  slidesContainer.className = 'relative mx-auto my-4 h-52 w-80';
   images.forEach(image => {
     const slide = document.createElement('img');
     slide.classList.add('slide-img');
