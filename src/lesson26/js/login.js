@@ -5,7 +5,6 @@ const url = 'https://660d2d926ddfa2943b337888.mockapi.io/api/v1/tasks';
 
 loginButton.addEventListener('click', async e => {
   e.preventDefault();
-  // const queryString = `password=${encodeURIComponent(password.value)}`;
   const queryString = encodeURIComponent(usernameOrEmail.value);
   const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   let response;
