@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOT NEWS</title>
+    <link href="../input.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.4.2/css/all.css"
+    />
+    <script src="./js/carousel.js" type="module"></script>
+    <script src="./js/articles.js" type="module"></script>
+    <script src="./js/logout.js" type="module"></script>
+  </head>
+  <body class="min-w-[520px] max-w-screen-md text-base">
+    <header class="@container">
+      <h1
+        class="justify-center text-center text-xl @2xl:text-2xl @3xl:text-3xl"
+      >
+        HOT NEWS
+      </h1>
+    </header>
+    <div class="flex @container">
+      <button
+        id="js-logoutButton"
+        class="ml-auto justify-items-end text-right text-sm font-bold text-indigo-600 hover:text-indigo-500 @md:text-base @lg:text-lg @xl:text-xl @2xl:text-2xl @3xl:text-3xl"
+        data-testId="test-logout"
+      >
+        ← Logout
+      </button>
+    </div>
+    <div class="mx-auto w-full flex-col p-4 @container">
+      <div class="" id="js-carouselArea"></div>
+      <ul class="" id="js-tabArea"></ul>
+    </div>
+  </body>
+</html>
