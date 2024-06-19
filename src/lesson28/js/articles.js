@@ -3,11 +3,11 @@ import { displayInfo } from '../js/modules/displayInfo.js';
 import { withinThreeDays } from '../js/modules/withinThreeDays.js';
 
 const articlesAPI = {
-  main: 'https://mocki.io/v1/4d6f2884-94ae-461c-980e-e9164d03822b',
-  economy: 'https://mocki.io/v1/da690b37-3c74-4bac-b34d-8ab5d1ced7c3',
-  entertainment: 'https://mocki.io/v1/26130b41-6e90-4ee5-8a05-d34ad43676bb',
-  sports: 'https://mocki.io/v1/2fe4cf76-9c80-4490-86cb-e083c0e538d2',
-  domestic: 'https://mocki.io/v1/91e008aa-77da-4573-9317-d53754c5bf86'
+  main: 'https://mocki.io/v1/fb4df95f-e407-4cfb-b01a-33c98b93348a',
+  economy: 'https://mocki.io/v1/8067746a-e7a9-4859-a329-ef5904eaf9ae',
+  entertainment: 'https://mocki.io/v1/dbddf245-3014-423f-9351-929c9349b268',
+  sports: 'https://mocki.io/v1/c9b774a9-6a35-4a3c-a823-691f72cdeb9b',
+  domestic: 'https://mocki.io/v1/a37912f8-f6fc-41e7-b7a4-4f7a2534aeab'
 };
 
 async function fetchDataSet(urlProps) {
