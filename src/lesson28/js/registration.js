@@ -45,7 +45,23 @@ const submitButton = document.getElementById('js-submitButton');
 
 submitButton.addEventListener('click', e => {
   e.preventDefault();
-  window.location.href = 'has-registered.html';
+
+  const isRegisteredUsername = Object.keys(localStorage).find(key => {
+    return key === username.value;
+  });
+  const isRegisteredEmail = Object.values(localStorage).find(value => {
+    return value === email.value;
+  });
+  if (isRegisteredUsername)
+    validation.showError(username, 'This username is already in use');
+
+  if (isRegisteredEmail)
+    validation.showError(email, 'This email is already in use');
+
+  if (!isRegisteredUsername && !isRegisteredEmail) {
+    localStorage.setItem(username.value, email.value);
+    window.location.href = 'has-registered.html';
+  }
 });
 
 function checkboxToBeChecked() {
