@@ -46,11 +46,16 @@ const submitButton = document.getElementById('js-submitButton');
 submitButton.addEventListener('click', e => {
   e.preventDefault();
   let users = JSON.parse(localStorage.getItem('users')) || {};
-  const isRegisteredEmail = users.hasOwnProperty(email.value);
-  if (isRegisteredEmail) {
+  const isRegisteredUsername = users.hasOwnProperty(username.value);
+  const isRegisteredEmail = Object.values(users).find(value => {
+    return value === email.value;
+  });
+  if (isRegisteredUsername)
+    validation.showError(username, 'This username is already in use');
+  if (isRegisteredEmail)
     validation.showError(email, 'This email is already in use');
-  } else {
-    users = Object.assign(users, { [email.value]: username.value });
+  if (!isRegisteredUsername && !isRegisteredEmail) {
+    users = Object.assign(users, { [username.value]: email.value });
     localStorage.setItem('users', JSON.stringify(users));
     window.location.href = 'has-registered.html';
   }
