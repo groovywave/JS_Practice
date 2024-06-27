@@ -1,7 +1,7 @@
+const url = 'https://660d2d926ddfa2943b337888.mockapi.io/api/v1/tasks';
 const usernameOrEmail = document.getElementById('js-usernameOrEmail');
 const password = document.getElementById('js-password');
 const loginButton = document.getElementById('js-loginButton');
-const url = 'https://660d2d926ddfa2943b337888.mockapi.io/api/v1/tasks';
 
 loginButton.addEventListener('click', async e => {
   e.preventDefault();
