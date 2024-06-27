@@ -50,15 +50,15 @@ submitButton.addEventListener('click', e => {
   const isRegisteredEmail = Object.values(users).find(value => {
     return value === email.value;
   });
-  if (isRegisteredUsername)
-    validation.showError(username, 'This username is already in use');
-  if (isRegisteredEmail)
-    validation.showError(email, 'This email is already in use');
   if (!isRegisteredUsername && !isRegisteredEmail) {
     users = Object.assign(users, { [username.value]: email.value });
     localStorage.setItem('users', JSON.stringify(users));
     window.location.href = 'has-registered.html';
   }
+  if (isRegisteredUsername)
+    validation.showError(username, 'This username is already in use');
+  if (isRegisteredEmail)
+    validation.showError(email, 'This email is already in use');
 });
 
 function checkboxToBeChecked() {
