@@ -51,7 +51,7 @@ submitButton.addEventListener('click', e => {
     return value === email.value;
   });
   if (!isRegisteredUsername && !isRegisteredEmail) {
-    users = Object.assign(users, { [username.value]: email.value });
+    users = { ...users, [username.value]: email.value };
     localStorage.setItem('users', JSON.stringify(users));
     window.location.href = 'has-registered.html';
   }
