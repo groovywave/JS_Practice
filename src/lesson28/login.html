@@ -31,11 +31,16 @@
           <input
             type="text"
             id="js-usernameOrEmail"
-            class="autocomplete='current-password' w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+            class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
             data-testId="test-usernameOrEmail"
             placeholder="Enter username or email address"
             required
           />
+          <small
+            class="invisible absolute mb-0 ml-0 block pb-2 leading-3 text-errorColor"
+            data-testId="js-usernameOrEmailError"
+            >Error message</small
+          >
         </div>
         <div>
           <div class="mb-5">
@@ -57,7 +62,7 @@
             <input
               type="password"
               id="js-password"
-              class="autocomplete='current-password' w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
+              class="w-full rounded-lg border-2 border-gray-200 p-2 focus:outline-none"
               data-testId="test-password"
               placeholder="Enter password"
               required
