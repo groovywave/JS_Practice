@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const HEADER_TITLE = 'HOT NEWS';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/lesson26/index.html');
+  await page.goto('http://localhost:3000/lesson28/index.html');
 });
 
 test.describe('tab-key navigation', () => {
@@ -141,7 +141,7 @@ test.describe('input for login', () => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Forgot password ?'
+        name: 'Reset Your Password'
       })
     ).toBeVisible();
   });
@@ -193,7 +193,7 @@ test.describe('behavior of local storage', () => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Forgot password ?'
+        name: 'Reset Your Password'
       })
     ).toBeVisible();
   });
@@ -207,6 +207,29 @@ test.describe('behavior of local storage', () => {
       page.getByRole('heading', {
         name: 'Login'
       })
+    ).toBeVisible();
+  });
+});
+
+test.describe('Test each function on the reset your password page', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.getByRole('button', { name: 'Login Page' }).click();
+    await page.getByRole('link', { name: 'Forgot password?' }).click();
+    await page.getByTestId('test-emailForResetPassword').click();
+  });
+  test('Activate the button for resetting the password', async ({ page }) => {
+    await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
+    await expect(
+      page.getByTestId('test-buttonForResetPassword')
+    ).not.toBeDisabled();
+  });
+  test('Show an error message when an unregistered email address is submitted', async ({
+    page
+  }) => {
+    await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
+    await page.getByTestId('test-buttonForResetPassword').click();
+    await expect(
+      page.getByTestId('test-emailForResetPasswordError')
     ).toBeVisible();
   });
 });
