@@ -232,4 +232,17 @@ test.describe('Test each function on the reset your password page', () => {
       page.getByTestId('test-emailForResetPasswordError')
     ).toBeVisible();
   });
+  test('Issue token when a registered email address is submitted', async ({
+    page
+  }) => {
+    await page
+      .getByTestId('test-emailForResetPassword')
+      .fill('Zella_Homenick38@example.net');
+    await page.getByTestId('test-buttonForResetPassword').click();
+    await expect(
+      page.getByRole('heading', {
+        name: 'Reset Password'
+      })
+    ).toBeVisible();
+  });
 });
