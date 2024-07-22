@@ -7,6 +7,8 @@ const emailForResetPassword = document.getElementById(
 const buttonForResetPassword = document.getElementById(
   'js-buttonForResetPassword'
 );
+
+// https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
 const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
 emailForResetPassword.addEventListener('input', () => {
@@ -34,6 +36,7 @@ buttonForResetPassword.addEventListener('click', async e => {
     }
     new Promise((resolve, reject) => {
       if (responseData[0].email === emailForResetPassword.value) {
+        //The following is a temporary token.
         resolve({ token: '482r22fafah', ok: true, code: 200 });
       } else {
         reject({ ok: false, code: 401 });
