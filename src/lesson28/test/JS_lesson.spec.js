@@ -232,7 +232,7 @@ test.describe('Test each function on the reset your password page', () => {
       page.getByTestId('test-emailForResetPasswordError')
     ).toBeVisible();
   });
-  test('Issue token when a registered email address is submitted', async ({
+  test('Go to the password reset page when a registered email address is submitted', async ({
     page
   }) => {
     await page
