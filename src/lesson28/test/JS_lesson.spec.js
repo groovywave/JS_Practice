@@ -219,9 +219,7 @@ test.describe('Test each function on the reset your password page', () => {
   });
   test('Activate the button for resetting the password', async ({ page }) => {
     await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
-    await expect(
-      page.getByTestId('test-buttonForResetPassword')
-    ).not.toBeDisabled();
+    await expect(page.getByTestId('test-buttonForResetPassword')).toBeEnabled();
   });
   test('Show an error message when an unregistered email address is submitted', async ({
     page
