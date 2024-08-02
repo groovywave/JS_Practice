@@ -217,6 +217,14 @@ test.describe('Test each function on the reset your password page', () => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await page.getByTestId('test-emailForResetPassword').click();
   });
+  test('Do not activate the button for resetting the password', async ({
+    page
+  }) => {
+    await page.getByTestId('test-emailForResetPassword').fill('aaa@');
+    await expect(
+      page.getByTestId('test-buttonForResetPassword')
+    ).toBeDisabled();
+  });
   test('Activate the button for resetting the password', async ({ page }) => {
     await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
     await expect(page.getByTestId('test-buttonForResetPassword')).toBeEnabled();
