@@ -5,9 +5,13 @@ const usernameOrEmail = document.getElementById('js-usernameOrEmail');
 const password = document.getElementById('js-password');
 const loginButton = document.getElementById('js-loginButton');
 
+if (localStorage.getItem('token') === 'ae2efaa8fd0255cfafda76a7')
+  window.location.href = './contents.html';
+
 loginButton.addEventListener('click', async e => {
   e.preventDefault();
   const queryString = encodeURIComponent(usernameOrEmail.value);
+  // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
   const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   let response;
   let isEmail = false;
