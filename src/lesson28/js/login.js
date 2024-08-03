@@ -12,10 +12,11 @@ loginButton.addEventListener('click', async e => {
   e.preventDefault();
   const queryString = encodeURIComponent(usernameOrEmail.value);
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
-  const regularExpression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-  let response;
-  let isEmail = false;
   try {
+    const regularExpression =
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    let response;
+    let isEmail = false;
     if (!regularExpression.test(usernameOrEmail.value.trim())) {
       response = await fetch(`${url}?name=${queryString}`);
     } else {
