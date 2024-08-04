@@ -37,25 +37,16 @@ loginButton.addEventListener('click', async e => {
       console.log('no data');
       return;
     }
-    new Promise((resolve, reject) => {
-      if (
-        responseData[0].password === password.value &&
-        (responseData[0].name === usernameOrEmail.value ||
-          responseData[0].email === usernameOrEmail.value)
-      ) {
-        resolve({ token: 'ae2efaa8fd0255cfafda76a7', ok: true, code: 200 });
-      } else {
-        reject({ ok: false, code: 401 });
-      }
-    })
-      .then(object => {
-        localStorage.setItem('token', object.token);
-        window.location.href = './contents.html';
-      })
-      .catch(() => {
-        window.location.href = './login-failed.html';
-      });
+    if (
+      responseData[0].password === password.value &&
+      (responseData[0].name === usernameOrEmail.value ||
+        responseData[0].email === usernameOrEmail.value)
+    ) {
+      localStorage.setItem('token', 'ae2efaa8fd0255cfafda76a7');
+      window.location.href = './contents.html';
+    }
   } catch (error) {
     console.error(error);
+    window.location.href = './login-failed.html';
   }
 });
