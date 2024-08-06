@@ -13,9 +13,7 @@ loginButton.addEventListener('click', async e => {
   const queryStringOfUsernameOrEmail = encodeURIComponent(
     usernameOrEmail.value
   );
-  console.log(usernameOrEmail.value);
   const queryStringOfPassword = encodeURIComponent(password.value);
-  console.log(password.value);
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
   let response;
   try {
