@@ -127,6 +127,7 @@ test.describe('input for login', () => {
       })
     ).toBeVisible();
   });
+
   test('input unregistered items and click login button', async ({ page }) => {
     await page.getByTestId('test-usernameOrEmail').fill('Hoe');
     await page.getByTestId('test-password').fill('HQeB');
@@ -179,18 +180,6 @@ test.describe('behavior of local storage', () => {
     ).toBeVisible();
   });
 
-  test('input the unregistered items and click login button', async ({
-    page
-  }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeg');
-    await page.getByTestId('test-password').fill('HQjeB');
-    await page.getByTestId('test-loginButton').click();
-    await expect(
-      page.getByRole('heading', {
-        name: 'Login failed'
-      })
-    ).toBeVisible();
-  });
   test('click the link named forgot password?', async ({ page }) => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await expect(
