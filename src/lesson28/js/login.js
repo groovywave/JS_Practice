@@ -10,41 +10,42 @@ if (localStorage.getItem('token') === 'ae2efaa8fd0255cfafda76a7')
 
 loginButton.addEventListener('click', async e => {
   e.preventDefault();
-  const queryString = encodeURIComponent(usernameOrEmail.value);
+  const queryStringOfUsernameOrEmail = encodeURIComponent(
+    usernameOrEmail.value
+  );
+  console.log(usernameOrEmail.value);
+  const queryStringOfPassword = encodeURIComponent(password.value);
+  console.log(password.value);
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
+  let response;
   try {
     const regularExpression =
       /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    let response;
-    let isEmail = false;
+    validation.removeErrorMessages([usernameOrEmail, password]);
+    validation.removeErrorColor([usernameOrEmail, password]);
+    if (usernameOrEmail.value === '') {
+      validation.showError(usernameOrEmail, 'No data');
+      return;
+    }
+    if (password.value === '') {
+      validation.showError(password, 'No data');
+      return;
+    }
     if (!regularExpression.test(usernameOrEmail.value.trim())) {
-      response = await fetch(`${url}?name=${queryString}`);
+      response = await fetch(
+        `${url}?name=${queryStringOfUsernameOrEmail}&password=${queryStringOfPassword}`
+      );
     } else {
-      isEmail = true;
-      response = await fetch(`${url}?email=${queryString}`);
+      response = await fetch(
+        `${url}?email=${queryStringOfUsernameOrEmail}&password=${queryStringOfPassword}`
+      );
     }
-    const responseData = await response.json();
     if (!response.ok) {
-      if (isEmail) {
-        validation.showError(usernameOrEmail, 'No matching Email');
-      } else {
-        validation.showError(usernameOrEmail, 'No matching username');
-      }
-      console.error(`${response.status}:${response.statusText}`);
+      window.location.href = './login-failed.html';
       return;
     }
-    if (!responseData.length) {
-      console.log('no data');
-      return;
-    }
-    if (
-      responseData[0].password === password.value &&
-      (responseData[0].name === usernameOrEmail.value ||
-        responseData[0].email === usernameOrEmail.value)
-    ) {
-      localStorage.setItem('token', 'ae2efaa8fd0255cfafda76a7');
-      window.location.href = './contents.html';
-    }
+    localStorage.setItem('token', 'ae2efaa8fd0255cfafda76a7');
+    window.location.href = './contents.html';
   } catch (error) {
     console.error(error);
     window.location.href = './login-failed.html';
