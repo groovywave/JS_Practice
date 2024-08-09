@@ -2,7 +2,7 @@ import { renderCircle, removeCircle } from './modules/renderRemoveCircle.js';
 import { displayInfo } from '../js/modules/displayInfo.js';
 
 let slides = [];
-const url = 'https://mocki.io/v1/179d76a7-4e13-49fe-a195-d98302b13699';
+const url = 'https://mocki.io/v1/65b524d0-ad9f-46e4-baa0-c14e035975a9';
 let currentIndex = 0;
 let dots = [];
 
