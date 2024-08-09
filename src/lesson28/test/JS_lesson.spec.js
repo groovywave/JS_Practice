@@ -117,6 +117,16 @@ test.describe('input for login', () => {
   test('show login form', async ({ page }) => {
     await expect(page.getByText('Username or Email')).toBeVisible();
   });
+
+  test('Show error messages when If you do not input some data and submit it', async ({
+    page
+  }) => {
+    await page.getByTestId('test-loginButton').click();
+    await expect(page.getByTestId('test-usernameOrEmailError')).toBeVisible();
+    await page.getByTestId('test-usernameOrEmail').fill('aaa@gmail.com');
+    await page.getByTestId('test-loginButton').click();
+    await expect(page.getByTestId('test-passwordError')).toBeVisible();
+  });
   test('input required items and click login button', async ({ page }) => {
     await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
     await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
@@ -220,6 +230,7 @@ test.describe('Test each function on the reset your password page', () => {
     await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
     await expect(page.getByTestId('test-buttonForResetPassword')).toBeEnabled();
   });
+
   test('Show an error message when an unregistered email address is submitted', async ({
     page
   }) => {
