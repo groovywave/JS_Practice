@@ -37,6 +37,13 @@ export function removeErrorMessages(inputArr) {
   });
 }
 
+export function removeErrorColor(inputArr) {
+  inputArr.forEach(input => {
+    input.classList.remove('border-errorColor');
+    input.classList.add('border-gray-200');
+  });
+}
+
 export function isValidUsername(input, stateOfItem, min, max) {
   if (isEmpty(input, stateOfItem)) return false;
   if (input.length < min) {

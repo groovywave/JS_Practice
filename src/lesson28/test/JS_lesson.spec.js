@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const HEADER_TITLE = 'HOT NEWS';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/lesson26/index.html');
+  await page.goto('http://localhost:3000/lesson28/index.html');
 });
 
 test.describe('tab-key navigation', () => {
@@ -117,6 +117,16 @@ test.describe('input for login', () => {
   test('show login form', async ({ page }) => {
     await expect(page.getByText('Username or Email')).toBeVisible();
   });
+
+  test('Show error messages when If you do not input some data and submit it', async ({
+    page
+  }) => {
+    await page.getByTestId('test-loginButton').click();
+    await expect(page.getByTestId('test-usernameOrEmailError')).toBeVisible();
+    await page.getByTestId('test-usernameOrEmail').fill('aaa@gmail.com');
+    await page.getByTestId('test-loginButton').click();
+    await expect(page.getByTestId('test-passwordError')).toBeVisible();
+  });
   test('input required items and click login button', async ({ page }) => {
     await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
     await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
@@ -127,9 +137,10 @@ test.describe('input for login', () => {
       })
     ).toBeVisible();
   });
-  test('do not input required items and click login button', async ({
-    page
-  }) => {
+
+  test('input unregistered items and click login button', async ({ page }) => {
+    await page.getByTestId('test-usernameOrEmail').fill('Hoe');
+    await page.getByTestId('test-password').fill('HQeB');
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
@@ -141,7 +152,7 @@ test.describe('input for login', () => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Forgot password ?'
+        name: 'Reset Your Password'
       })
     ).toBeVisible();
   });
@@ -179,21 +190,11 @@ test.describe('behavior of local storage', () => {
     ).toBeVisible();
   });
 
-  test('do not input required items and click login button', async ({
-    page
-  }) => {
-    await page.getByTestId('test-loginButton').click();
-    await expect(
-      page.getByRole('heading', {
-        name: 'Login failed'
-      })
-    ).toBeVisible();
-  });
   test('click the link named forgot password?', async ({ page }) => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Forgot password ?'
+        name: 'Reset Your Password'
       })
     ).toBeVisible();
   });
@@ -206,6 +207,49 @@ test.describe('behavior of local storage', () => {
     await expect(
       page.getByRole('heading', {
         name: 'Login'
+      })
+    ).toBeVisible();
+  });
+});
+
+test.describe('Test each function on the reset your password page', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.getByRole('button', { name: 'Login Page' }).click();
+    await page.getByRole('link', { name: 'Forgot password?' }).click();
+    await page.getByTestId('test-emailForResetPassword').click();
+  });
+  test('Do not activate the button for resetting the password', async ({
+    page
+  }) => {
+    await page.getByTestId('test-emailForResetPassword').fill('aaa@');
+    await expect(
+      page.getByTestId('test-buttonForResetPassword')
+    ).toBeDisabled();
+  });
+  test('Activate the button for resetting the password', async ({ page }) => {
+    await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
+    await expect(page.getByTestId('test-buttonForResetPassword')).toBeEnabled();
+  });
+
+  test('Show an error message when an unregistered email address is submitted', async ({
+    page
+  }) => {
+    await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
+    await page.getByTestId('test-buttonForResetPassword').click();
+    await expect(
+      page.getByTestId('test-emailForResetPasswordError')
+    ).toBeVisible();
+  });
+  test('Go to the password reset page when a registered email address is submitted', async ({
+    page
+  }) => {
+    await page
+      .getByTestId('test-emailForResetPassword')
+      .fill('Zella_Homenick38@example.net');
+    await page.getByTestId('test-buttonForResetPassword').click();
+    await expect(
+      page.getByRole('heading', {
+        name: 'Reset Password'
       })
     ).toBeVisible();
   });
