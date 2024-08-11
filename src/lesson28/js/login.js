@@ -42,30 +42,8 @@ loginButton.addEventListener('click', async e => {
       window.location.href = './login-failed.html';
       return;
     }
-    // Here is a redundant code using a Promise and an if statement,
-    // but they were added to meet the requirements of the assignment.
-    // Only these two lines are needed.
-    // localStorage.setItem('token', 'ae2efaa8fd0255cfafda76a7');
-    // window.location.href = './contents.html';
-    const responseData = await response.json();
-    new Promise((resolve, reject) => {
-      if (
-        responseData[0].password === password.value &&
-        (responseData[0].name === usernameOrEmail.value ||
-          responseData[0].email === usernameOrEmail.value)
-      ) {
-        resolve({ token: 'ae2efaa8fd0255cfafda76a7' });
-      } else {
-        reject();
-      }
-    })
-      .then(object => {
-        localStorage.setItem('token', object.token);
-        window.location.href = './contents.html';
-      })
-      .catch(() => {
-        window.location.href = './login-failed.html';
-      });
+    localStorage.setItem('token', 'ae2efaa8fd0255cfafda76a7');
+    window.location.href = './contents.html';
   } catch (error) {
     console.error(error);
     window.location.href = './login-failed.html';
