@@ -32,18 +32,16 @@ loginButton.addEventListener('click', async e => {
     let isName = true;
     if (regularExpression.test(usernameOrEmail.value.trim())) isName = false;
     const matchedUserData = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve(
-          responseData.find(obj => {
-            return (
-              obj.password === password.value &&
-              (isName
-                ? obj.name === usernameOrEmail.value
-                : obj.email === usernameOrEmail.value)
-            );
-          })
-        );
-      }, 1000);
+      resolve(
+        responseData.find(obj => {
+          return (
+            obj.password === password.value &&
+            (isName
+              ? obj.name === usernameOrEmail.value
+              : obj.email === usernameOrEmail.value)
+          );
+        })
+      );
     });
     if (!matchedUserData) {
       window.location.href = './login-failed.html';
