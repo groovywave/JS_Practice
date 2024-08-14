@@ -1,6 +1,5 @@
 import * as validation from './modules/validation.js';
 
-// const url = 'https://660d2d926ddfa2943b337888.mockapi.io/api/v1/tasks';
 const url = 'https://mocki.io/v1/3b2e42e1-a5bc-4523-8505-8e58e7c6d28d';
 const usernameOrEmail = document.getElementById('js-usernameOrEmail');
 const password = document.getElementById('js-password');
@@ -50,7 +49,7 @@ const usersHandler = (userData, matchedUserData) => {
       ok: true,
       code: 200,
       message: 'Success',
-      token: matchedUserData.id // 4. user.idを利用して割り当てる,
+      token: matchedUserData.id
     };
   return {
     ok: false,
