@@ -128,8 +128,8 @@ test.describe('input for login', () => {
     await expect(page.getByTestId('test-passwordError')).toBeVisible();
   });
   test('input required items and click login button', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
@@ -163,8 +163,8 @@ test.describe('behavior of local storage', () => {
     await page.getByRole('button', { name: 'Login' }).click();
   });
   test('input required items and click login button', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
@@ -173,8 +173,8 @@ test.describe('behavior of local storage', () => {
     ).toBeVisible();
   });
   test('login with local storage', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await page
       .getByRole('heading', {
@@ -199,8 +199,8 @@ test.describe('behavior of local storage', () => {
     ).toBeVisible();
   });
   test('logout and login again', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await page.getByTestId('test-logout').click();
     await page.getByRole('button', { name: 'Login' }).click();
