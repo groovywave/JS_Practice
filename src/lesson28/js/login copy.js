@@ -20,7 +20,7 @@ loginButton.addEventListener('click', async e => {
       validation.showError(password, 'No data');
       return;
     }
-    const response = await fetch(url);
+    const response = await fetch(`${url}`);
     if (!response.ok) {
       window.location.href = './login-failed.html';
       return;
@@ -31,12 +31,16 @@ loginButton.addEventListener('click', async e => {
     // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
     let isName = true;
     if (regularExpression.test(usernameOrEmail.value.trim())) isName = false;
-    const matchedUserData = responseData.find(obj => {
-      return (
-        obj.password === password.value &&
-        (isName
-          ? obj.name === usernameOrEmail.value
-          : obj.email === usernameOrEmail.value)
+    const matchedUserData = await new Promise(resolve => {
+      resolve(
+        responseData.find(obj => {
+          return (
+            obj.password === password.value &&
+            (isName
+              ? obj.name === usernameOrEmail.value
+              : obj.email === usernameOrEmail.value)
+          );
+        })
       );
     });
     if (!matchedUserData) {
