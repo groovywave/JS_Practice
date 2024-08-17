@@ -25,7 +25,7 @@ function findUser(userData) {
   // https://stackoverflow.com/questions/65801147/validate-email-pattern-with-regex
   let isName = true;
   if (regularExpression.test(usernameOrEmail.value.trim())) isName = false;
-  const matchedUserData = userData.find(obj => {
+  const user = userData.find(obj => {
     return (
       obj.password === password.value &&
       (isName
@@ -33,7 +33,7 @@ function findUser(userData) {
         : obj.email === usernameOrEmail.value)
     );
   });
-  return matchedUserData;
+  return user;
 }
 
 const usersHandler = (userData, matchedUserData) => {
@@ -42,20 +42,20 @@ const usersHandler = (userData, matchedUserData) => {
       ok: true,
       code: 200,
       message: 'empty',
-      token: null
+      token: null,
     };
   if (matchedUserData)
     return {
       ok: true,
       code: 200,
       message: 'Success',
-      token: matchedUserData.id
+      token: matchedUserData.id,
     };
   return {
     ok: false,
     code: 401,
     message: 'Not found',
-    token: null
+    token: null,
   };
 };
 
