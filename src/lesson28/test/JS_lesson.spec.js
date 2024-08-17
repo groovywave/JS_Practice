@@ -29,68 +29,68 @@ test.describe('tab-key navigation', () => {
 
 test.describe('form validation', () => {
   test('input less than 3 characters into username and show error message', async ({
-    page
+    page,
   }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByLabel('Username').fill('e');
     await expect(
       page.getByTestId('js-usernameError', {
-        name: 'Username must be at least 3 characters'
+        name: 'Username must be at least 3 characters',
       })
     ).toBeVisible();
   });
 
   test('input more than 15 characters into username and show error message', async ({
-    page
+    page,
   }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByLabel('Username').fill('01234567890123456789');
     await expect(
       page.getByTestId('js-usernameError', {
-        name: 'Username must be less than 15 characters'
+        name: 'Username must be less than 15 characters',
       })
     ).toBeVisible();
   });
 
   test('input invalid mail address into email and show error message', async ({
-    page
+    page,
   }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByLabel('Email').fill('invalid email');
     await expect(
       page.getByTestId('js-emailError', {
-        name: 'Email is not valid'
+        name: 'Email is not valid',
       })
     ).toBeVisible();
   });
 
   test('input less than 8 characters into Password and show error message', async ({
-    page
+    page,
   }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByTestId('js-passwordLabel').fill('abc');
     await expect(
       page.getByTestId('js-passwordError', {
-        name: 'at least 8 characters that include at least one uppercase letter, one lowercase letter, and one digit'
+        name: 'at least 8 characters that include at least one uppercase letter, one lowercase letter, and one digit',
       })
     ).toBeVisible();
   });
 
   test('input wrong password into Confirm Password and show error message', async ({
-    page
+    page,
   }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByTestId('js-passwordLabel').fill('KevinDeBruyne17');
     await page.getByTestId('js-confirmPasswordLabel').fill('KevinDeBruyne7');
     await expect(
       page.getByTestId('js-confirmPasswordError', {
-        name: 'Passwords do not match'
+        name: 'Passwords do not match',
       })
     ).toBeVisible();
   });
 
   test('Show a completion message after the form is successfully submitted', async ({
-    page
+    page,
   }) => {
     await page.getByRole('button', { name: 'Registration' }).click();
     await page.getByRole('link', { name: '利用規約' }).press('Enter');
@@ -104,7 +104,7 @@ test.describe('form validation', () => {
     await page.getByRole('button', { name: 'Submit' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Your Registration Has Been Completed!'
+        name: 'Your Registration Has Been Completed!',
       })
     ).toBeVisible();
   });
@@ -119,7 +119,7 @@ test.describe('input for login', () => {
   });
 
   test('Show error messages when If you do not input some data and submit it', async ({
-    page
+    page,
   }) => {
     await page.getByTestId('test-loginButton').click();
     await expect(page.getByTestId('test-usernameOrEmailError')).toBeVisible();
@@ -128,12 +128,12 @@ test.describe('input for login', () => {
     await expect(page.getByTestId('test-passwordError')).toBeVisible();
   });
   test('input required items and click login button', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: HEADER_TITLE
+        name: HEADER_TITLE,
       })
     ).toBeVisible();
   });
@@ -144,7 +144,7 @@ test.describe('input for login', () => {
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: 'Login failed'
+        name: 'Login failed',
       })
     ).toBeVisible();
   });
@@ -152,7 +152,7 @@ test.describe('input for login', () => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Reset Your Password'
+        name: 'Reset Your Password',
       })
     ).toBeVisible();
   });
@@ -163,29 +163,29 @@ test.describe('behavior of local storage', () => {
     await page.getByRole('button', { name: 'Login' }).click();
   });
   test('input required items and click login button', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await expect(
       page.getByRole('heading', {
-        name: HEADER_TITLE
+        name: HEADER_TITLE,
       })
     ).toBeVisible();
   });
   test('login with local storage', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await page
       .getByRole('heading', {
-        name: HEADER_TITLE
+        name: HEADER_TITLE,
       })
       .waitFor();
     await page.goto('http://localhost:3000/lesson26/index.html');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {
-        name: HEADER_TITLE
+        name: HEADER_TITLE,
       })
     ).toBeVisible();
   });
@@ -194,19 +194,19 @@ test.describe('behavior of local storage', () => {
     await page.getByRole('link', { name: 'Forgot password?' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Reset Your Password'
+        name: 'Reset Your Password',
       })
     ).toBeVisible();
   });
   test('logout and login again', async ({ page }) => {
-    await page.getByTestId('test-usernameOrEmail').fill('Hoeger');
-    await page.getByTestId('test-password').fill('HQnmjPKBWkqzjeB');
+    await page.getByTestId('test-usernameOrEmail').fill('hasegawa');
+    await page.getByTestId('test-password').fill('iO7gPh_eifwiefa');
     await page.getByTestId('test-loginButton').click();
     await page.getByTestId('test-logout').click();
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {
-        name: 'Login'
+        name: 'Login',
       })
     ).toBeVisible();
   });
@@ -219,7 +219,7 @@ test.describe('Test each function on the reset your password page', () => {
     await page.getByTestId('test-emailForResetPassword').click();
   });
   test('Do not activate the button for resetting the password', async ({
-    page
+    page,
   }) => {
     await page.getByTestId('test-emailForResetPassword').fill('aaa@');
     await expect(
@@ -232,7 +232,7 @@ test.describe('Test each function on the reset your password page', () => {
   });
 
   test('Show an error message when an unregistered email address is submitted', async ({
-    page
+    page,
   }) => {
     await page.getByTestId('test-emailForResetPassword').fill('aaa@gmail.com');
     await page.getByTestId('test-buttonForResetPassword').click();
@@ -241,15 +241,15 @@ test.describe('Test each function on the reset your password page', () => {
     ).toBeVisible();
   });
   test('Go to the password reset page when a registered email address is submitted', async ({
-    page
+    page,
   }) => {
     await page
       .getByTestId('test-emailForResetPassword')
-      .fill('Zella_Homenick38@example.net');
+      .fill('hasegawa@example.net');
     await page.getByTestId('test-buttonForResetPassword').click();
     await expect(
       page.getByRole('heading', {
-        name: 'Reset Password'
+        name: 'Reset Password',
       })
     ).toBeVisible();
   });
