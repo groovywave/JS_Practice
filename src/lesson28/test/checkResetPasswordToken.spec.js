@@ -72,7 +72,7 @@ test('The token in localStorage is null, navigate to not-authorized.html.', asyn
   const resetPasswordToken = '482r22fafah';
   await page.addInitScript(token => {
     localStorage.setItem('resetPasswordToken', token);
-  }, '');
+  }, null);
   await page.goto(
     `http://localhost:3000/lesson28/register/password.html?resetPasswordToken=${resetPasswordToken}`
   );
