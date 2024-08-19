@@ -10,30 +10,30 @@ username.focus();
 let baseStateOfItems = {
   isEmpty: true,
   isValid: false,
-  errorMessage: null
+  errorMessage: null,
 };
 
 let stateOfItems = [
   {
     item: username,
     name: 'username',
-    ...baseStateOfItems
+    ...baseStateOfItems,
   },
   {
     item: email,
     name: 'email',
-    ...baseStateOfItems
+    ...baseStateOfItems,
   },
   {
     item: password,
     name: 'password',
-    ...baseStateOfItems
+    ...baseStateOfItems,
   },
   {
     item: confirmPassword,
     name: 'confirmPassword',
-    ...baseStateOfItems
-  }
+    ...baseStateOfItems,
+  },
 ];
 
 function getStateOfItem(input) {
@@ -253,7 +253,7 @@ function readUpToTheLastSentence(entries) {
 
 const options = {
   root: modal,
-  threshold: 1
+  threshold: 1,
 };
 const observer = new IntersectionObserver(readUpToTheLastSentence, options);
 const lastSentence = document.getElementById('js-lastSentence');

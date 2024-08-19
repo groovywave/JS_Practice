@@ -42,8 +42,10 @@ buttonForResetPassword.addEventListener('click', async e => {
       validation.showError(emailForResetPassword, 'Email not registered');
       return;
     }
-    localStorage.setItem('resetPasswordToken', '482r22fafah');
-    window.location.href = './register/password.html';
+    const resetPasswordToken = '482r22fafah';
+    localStorage.setItem('resetPasswordToken', resetPasswordToken);
+
+    window.location.href = `./register/password.html?resetPasswordToken=${resetPasswordToken}`;
   } catch (error) {
     window.location.href = './login-failed.html';
   }
