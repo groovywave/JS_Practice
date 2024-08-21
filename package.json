@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
+    "chance": "^1.1.12",
     "glob": "^10.3.5",
     "path": "^0.12.7",
     "playwright": "^1.41.2"

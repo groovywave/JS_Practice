@@ -1,5 +1,5 @@
 import * as validation from './modules/validation.js';
-
+import Chance from 'chance';
 // const url = 'https://660d2d926ddfa2943b337888.mockapi.io/api/v1/tasks';
 
 const url = 'https://mocki.io/v1/3b2e42e1-a5bc-4523-8505-8e58e7c6d28d';
@@ -42,7 +42,9 @@ buttonForResetPassword.addEventListener('click', async e => {
       validation.showError(emailForResetPassword, 'Email not registered');
       return;
     }
-    const resetPasswordToken = '482r22fafah';
+
+    const chance = new Chance();
+    const resetPasswordToken = chance.guid();
     localStorage.setItem('resetPasswordToken', resetPasswordToken);
     window.location.href = `./register/password.html?resetPasswordToken=${resetPasswordToken}`;
   } catch (error) {

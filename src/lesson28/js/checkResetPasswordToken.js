@@ -1,14 +1,7 @@
-debugger;
 const url = new URL(window.location.href);
-console.log('url', url);
 const resetPasswordTokenFromURL = url.searchParams.get('resetPasswordToken');
 const resetPasswordTokenFromLocalStorage =
   localStorage.getItem('resetPasswordToken');
-console.log('resetPasswordTokenFromURL', resetPasswordTokenFromURL);
-console.log(
-  'resetPasswordTokenFromLocalStorage',
-  resetPasswordTokenFromLocalStorage
-);
 
 try {
   if (
