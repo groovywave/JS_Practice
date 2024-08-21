@@ -44,7 +44,6 @@ buttonForResetPassword.addEventListener('click', async e => {
     }
     const resetPasswordToken = '482r22fafah';
     localStorage.setItem('resetPasswordToken', resetPasswordToken);
-
     window.location.href = `./register/password.html?resetPasswordToken=${resetPasswordToken}`;
   } catch (error) {
     window.location.href = './login-failed.html';

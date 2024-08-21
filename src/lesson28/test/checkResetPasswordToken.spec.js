@@ -12,11 +12,9 @@ test('If submit the registered email, Navigate to password.html.', async ({
     .getByTestId('test-emailForResetPassword')
     .fill('hasegawa@example.net');
   await page.getByTestId('test-buttonForResetPassword').click();
-  await page
-    .getByRole('heading', {
-      name: 'Reset Password',
-    })
-    .waitFor();
+  await page.getByRole('heading', {
+    name: 'Reset Password',
+  });
   await expect(
     page.getByRole('heading', {
       name: 'Reset Password',
@@ -33,11 +31,9 @@ test('Set same resetPasswordToken in localStorage and URL, navigate to password.
   await page.goto(
     `http://localhost:3000/lesson28/register/password.html?resetPasswordToken=${resetPasswordToken}`
   );
-  await page
-    .getByRole('heading', {
-      name: 'Reset Password',
-    })
-    .waitFor();
+  await page.getByRole('heading', {
+    name: 'Reset Password',
+  });
   await expect(
     page.getByRole('heading', {
       name: 'Reset Password',
@@ -55,11 +51,9 @@ test('The token in localStorage does not match the one in the URL, navigate to n
   await page.goto(
     `http://localhost:3000/lesson28/register/password.html?resetPasswordToken=doesNotMatch${resetPasswordToken}`
   );
-  await page
-    .getByRole('heading', {
-      name: 'You do not have permission to access the page.',
-    })
-    .waitFor();
+  await page.getByRole('heading', {
+    name: 'You do not have permission to access the page.',
+  });
   await expect(
     page.getByRole('heading', {
       name: 'You do not have permission to access the page.',

@@ -181,7 +181,7 @@ test.describe('behavior of local storage', () => {
         name: HEADER_TITLE,
       })
       .waitFor();
-    await page.goto('http://localhost:3000/lesson26/index.html');
+    await page.goto('http://localhost:3000/lesson28/index.html');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
       page.getByRole('heading', {
