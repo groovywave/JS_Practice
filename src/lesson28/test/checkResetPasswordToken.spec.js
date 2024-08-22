@@ -12,9 +12,6 @@ test('If submit the registered email, Navigate to password.html.', async ({
     .getByTestId('test-emailForResetPassword')
     .fill('hasegawa@example.net');
   await page.getByTestId('test-buttonForResetPassword').click();
-  await page.getByRole('heading', {
-    name: 'Reset Password',
-  });
   await expect(
     page.getByRole('heading', {
       name: 'Reset Password',
