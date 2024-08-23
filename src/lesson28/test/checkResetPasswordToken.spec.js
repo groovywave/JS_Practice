@@ -46,7 +46,7 @@ test('The token in localStorage does not match the one in the URL, navigate to n
     `http://localhost:3000/lesson28/register/password.html?resetPasswordToken=doesNotMatch${resetPasswordToken}`
   );
   await expect(
-    page.etByRole('heading', {
+    page.getByRole('heading', {
       name: 'You do not have permission to access the page.',
     })
   ).toBeVisible();
