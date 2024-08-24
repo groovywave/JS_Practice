@@ -45,6 +45,7 @@ buttonForResetPassword.addEventListener('click', async e => {
     localStorage.setItem('resetPasswordToken', resetPasswordToken);
     window.location.href = `./register/password.html?resetPasswordToken=${resetPasswordToken}`;
   } catch (error) {
-    window.location.href = './login-failed.html';
+    console.error(error?.message || 'An unknown error occurred.');
+    window.location.replace = './login-failed.html';
   }
 });
