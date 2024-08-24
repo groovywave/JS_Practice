@@ -10,6 +10,7 @@ const { defineConfig, devices } = require('@playwright/test');
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
+  timeout: 10000,
   testDir: './src/lesson28/test',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -28,15 +29,15 @@ module.exports = defineConfig({
     baseURL: 'http://127.0.0.1:3000/lesson28',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
-    }
+      use: { ...devices['Desktop Chrome'] },
+    },
 
     /*  {
       name: 'firefox',
@@ -78,7 +79,7 @@ module.exports = defineConfig({
   webServer: {
     command: 'npm run dev',
     port: 3000,
-    reuseExistingServer: !process.env.CI
+    reuseExistingServer: !process.env.CI,
     // timeout: 6000
-  }
+  },
 });

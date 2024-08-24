@@ -1,6 +1,5 @@
 import * as validation from './modules/validation.js';
-
-// const url = 'https://660d2d926ddfa2943b337888.mockapi.io/api/v1/tasks';
+import Chance from 'chance';
 
 const url = 'https://mocki.io/v1/3b2e42e1-a5bc-4523-8505-8e58e7c6d28d';
 const emailForResetPassword = document.getElementById(
@@ -21,8 +20,6 @@ emailForResetPassword.addEventListener('input', () => {
 buttonForResetPassword.addEventListener('click', async e => {
   e.preventDefault();
   try {
-    // const queryString = encodeURIComponent(emailForResetPassword.value);
-    // const response = await fetch(`${url}?email=${queryString}`);
     const response = await fetch(url);
     const responseData = await response.json();
     if (!response.ok) {
@@ -42,8 +39,11 @@ buttonForResetPassword.addEventListener('click', async e => {
       validation.showError(emailForResetPassword, 'Email not registered');
       return;
     }
-    localStorage.setItem('resetPasswordToken', '482r22fafah');
-    window.location.href = './register/password.html';
+
+    const chance = new Chance();
+    const resetPasswordToken = chance.guid();
+    localStorage.setItem('resetPasswordToken', resetPasswordToken);
+    window.location.href = `./register/password.html?resetPasswordToken=${resetPasswordToken}`;
   } catch (error) {
     window.location.href = './login-failed.html';
   }
