@@ -62,3 +62,13 @@ test('Input password without numbers and show an error message', async ({
     .fill('abcdefgH');
   await expect(page.getByTestId('test-passwordError')).toBeVisible();
 });
+test('ConfirmPassword does not match with Password and show an error message', async ({
+  page,
+}) => {
+  await page
+    .getByPlaceholder('Enter password', { exact: true })
+    .fill('111111Aa');
+  await page.getByPlaceholder('Enter password again').click();
+  await page.getByPlaceholder('Enter password again').fill('111111A');
+  await expect(page.getByTestId('test-confirmPasswordError')).toBeVisible();
+});
