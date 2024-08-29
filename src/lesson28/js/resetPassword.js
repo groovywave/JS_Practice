@@ -37,10 +37,6 @@ submitButton.addEventListener('click', e => {
   window.location.replace(`./password-done.html?token=${token}`);
 });
 
-function toggleSubmitButton() {
-  submitButton.disabled = !submitButton.disabled;
-}
-
 const stateOfPassword = getStateOfItem(password);
 const stateOfConfirmPassword = getStateOfItem(confirmPassword);
 
@@ -83,11 +79,11 @@ function checkAllItems() {
   checkAndShowConfirmPasswordValidation();
 }
 
-function checkAllItemsAndToggleSubmitButton() {
+function checkAllItemsAndEnableSubmitButton() {
   submitButton.disabled = true;
   checkAllItems();
   if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
-  toggleSubmitButton();
+  submitButton.disabled = false;
 }
 
 password.addEventListener('input', () => {
@@ -100,7 +96,7 @@ password.addEventListener('input', () => {
       stateOfConfirmPassword.isValid &&
       !validation.isSomeRequiredItemEmpty(stateOfItems)
     )
-      checkAllItemsAndToggleSubmitButton();
+      checkAllItemsAndEnableSubmitButton();
   });
   if (!confirmPassword.value) return;
   checkAndShowConfirmPasswordValidation();
@@ -108,5 +104,5 @@ password.addEventListener('input', () => {
     stateOfConfirmPassword.isValid &&
     !validation.isSomeRequiredItemEmpty(stateOfItems)
   )
-    checkAllItemsAndToggleSubmitButton();
+    checkAllItemsAndEnableSubmitButton();
 });
