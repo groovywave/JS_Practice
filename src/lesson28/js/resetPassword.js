@@ -86,18 +86,22 @@ function checkAllItemsAndEnableSubmitButton() {
   submitButton.disabled = false;
 }
 
+let isConfirmPasswordAddedEventListener = false;
 password.addEventListener('input', () => {
   submitButton.disabled = true;
   checkAndShowPasswordValidation();
-  confirmPassword.addEventListener('input', () => {
-    submitButton.disabled = true;
-    checkAndShowConfirmPasswordValidation();
-    if (
-      stateOfConfirmPassword.isValid &&
-      !validation.isSomeRequiredItemEmpty(stateOfItems)
-    )
-      checkAllItemsAndEnableSubmitButton();
-  });
+  if (!isConfirmPasswordAddedEventListener) {
+    isConfirmPasswordAddedEventListener = true;
+    confirmPassword.addEventListener('input', () => {
+      submitButton.disabled = true;
+      checkAndShowConfirmPasswordValidation();
+      if (
+        stateOfConfirmPassword.isValid &&
+        !validation.isSomeRequiredItemEmpty(stateOfItems)
+      )
+        checkAllItemsAndEnableSubmitButton();
+    });
+  }
   if (!confirmPassword.value) return;
   checkAndShowConfirmPasswordValidation();
   if (
