@@ -34,7 +34,7 @@ submitButton.addEventListener('click', e => {
   const chance = new Chance();
   const token = chance.guid();
   localStorage.setItem('token', token);
-  window.location.replace(`./password-done.html?token=${token}`);
+  window.location.href(`./password-done.html?token=${token}`);
 });
 
 const stateOfPassword = getStateOfItem(password);
