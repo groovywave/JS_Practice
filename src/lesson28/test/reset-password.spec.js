@@ -21,6 +21,7 @@ test('Input password and confirmPassword correctly and then to be visible the su
     .fill('111111Aa');
   await page.getByPlaceholder('Enter password again').click();
   await page.getByPlaceholder('Enter password again').fill('111111Aa');
+  await page.getByPlaceholder('Enter password again').blur();
   await expect(page.getByRole('button', { name: 'Submit' })).toBeEnabled();
 });
 
@@ -34,6 +35,7 @@ test.describe('Show validation Error', () => {
     await page
       .getByPlaceholder('Enter password', { exact: true })
       .fill('12345Aa');
+    await page.getByPlaceholder('Enter password', { exact: true }).blur();
     await expect(page.getByTestId('test-passwordError')).toBeVisible();
   });
   test('Input password without uppercase and show an error message', async ({
@@ -42,6 +44,7 @@ test.describe('Show validation Error', () => {
     await page
       .getByPlaceholder('Enter password', { exact: true })
       .fill('123456aa');
+    await page.getByPlaceholder('Enter password', { exact: true }).blur();
     await expect(page.getByTestId('test-passwordError')).toBeVisible();
   });
   test('Input password without lowercase and show an error message', async ({
@@ -50,6 +53,7 @@ test.describe('Show validation Error', () => {
     await page
       .getByPlaceholder('Enter password', { exact: true })
       .fill('123456AA');
+    await page.getByPlaceholder('Enter password', { exact: true }).blur();
     await expect(page.getByTestId('test-passwordError')).toBeVisible();
   });
   test('Input password without alphabets and show an error message', async ({
@@ -58,6 +62,7 @@ test.describe('Show validation Error', () => {
     await page
       .getByPlaceholder('Enter password', { exact: true })
       .fill('12345678');
+    await page.getByPlaceholder('Enter password', { exact: true }).blur();
     await expect(page.getByTestId('test-passwordError')).toBeVisible();
   });
   test('Input password without numbers and show an error message', async ({
@@ -66,6 +71,7 @@ test.describe('Show validation Error', () => {
     await page
       .getByPlaceholder('Enter password', { exact: true })
       .fill('abcdefgH');
+    await page.getByPlaceholder('Enter password', { exact: true }).blur();
     await expect(page.getByTestId('test-passwordError')).toBeVisible();
   });
   test('ConfirmPassword does not match with Password and show an error message', async ({
@@ -76,6 +82,7 @@ test.describe('Show validation Error', () => {
       .fill('111111Aa');
     await page.getByPlaceholder('Enter password again').click();
     await page.getByPlaceholder('Enter password again').fill('111111A');
+    await page.getByPlaceholder('Enter password again').blur();
     await expect(page.getByTestId('test-confirmPasswordError')).toBeVisible();
   });
 });

@@ -86,7 +86,7 @@ function checkAllItemsAndEnableSubmitButton() {
   submitButton.disabled = false;
 }
 
-password.addEventListener('input', () => {
+password.addEventListener('blur', () => {
   submitButton.disabled = true;
   checkAndShowPasswordValidation();
   if (!confirmPassword.value.trim()) return;
@@ -98,7 +98,7 @@ password.addEventListener('input', () => {
     checkAllItemsAndEnableSubmitButton();
 });
 
-confirmPassword.addEventListener('input', () => {
+confirmPassword.addEventListener('blur', () => {
   submitButton.disabled = true;
   if (!password.value.trim()) return;
   checkAndShowConfirmPasswordValidation();
