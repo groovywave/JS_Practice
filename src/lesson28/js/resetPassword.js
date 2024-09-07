@@ -74,37 +74,19 @@ function checkAndShowConfirmPasswordValidation() {
   validation.showSuccess(confirmPassword);
 }
 
-function checkAllItems() {
-  checkAndShowPasswordValidation();
-  checkAndShowConfirmPasswordValidation();
-}
-
-function checkAllItemsAndEnableSubmitButton() {
-  submitButton.disabled = true;
-  checkAllItems();
-  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
-  submitButton.disabled = false;
-}
-
 password.addEventListener('blur', () => {
   submitButton.disabled = true;
   checkAndShowPasswordValidation();
   if (!confirmPassword.value.trim()) return;
   checkAndShowConfirmPasswordValidation();
-  if (
-    stateOfConfirmPassword.isValid &&
-    !validation.isSomeRequiredItemEmpty(stateOfItems)
-  )
-    checkAllItemsAndEnableSubmitButton();
+  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
+  submitButton.disabled = false;
 });
 
 confirmPassword.addEventListener('blur', () => {
   submitButton.disabled = true;
   if (!password.value.trim()) return;
   checkAndShowConfirmPasswordValidation();
-  if (
-    stateOfConfirmPassword.isValid &&
-    !validation.isSomeRequiredItemEmpty(stateOfItems)
-  )
-    checkAllItemsAndEnableSubmitButton();
+  if (!validation.isEveryRequiredItemValid(stateOfItems)) return;
+  submitButton.disabled = false;
 });
