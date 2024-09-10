@@ -46,6 +46,6 @@ buttonForResetPassword.addEventListener('click', async e => {
     window.location.href = `./register/password.html?resetPasswordToken=${resetPasswordToken}`;
   } catch (error) {
     // console.error(error?.message || 'An unknown error occurred.');
-    window.location.replace = './login-failed.html';
+    window.location.href = './login-failed.html';
   }
 });
